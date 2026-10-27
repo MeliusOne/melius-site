@@ -1,0 +1,861 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M2SXL2Y84K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-M2SXL2Y84K', { page_title: 'Melius Money app', page_path: '/app/', send_page_view: window.self === window.top });
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Melius Money: make every dollar better. A free app for your spending plan, debt payoff and freedom number, by Melius One Consulting.">
+<link rel="manifest" href="manifest-v3.webmanifest">
+<link rel="icon" href="icon-m1-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon-m1.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Melius Money">
+<meta name="theme-color" content="#14213D">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
+<title>Melius Money</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one phone-width column, a hero "safe to spend" card, and a fixed bottom tab bar. Melius One brand: navy ink, gold accent. */
+:root{
+  --bg:#F4F2EC; --surface:#FFFFFF; --band:#F9F7F2; --ink:#14213D; --muted:#5A6474; --line:#E3DED3;
+  --accent:#1D3557; --accent-ink:#FFFFFF; --gold:#A8803F; --gold-soft:#F3EBDC;
+  --good:#2E7D5B; --good-soft:#E3F2EA; --warn:#A86A12; --warn-soft:#FBEFD9; --bad:#A3332A; --bad-soft:#F8E3E0;
+  --c1:#1D3557; --c2:#A8803F; --c3:#2E7D5B; --c4:#8FA3BF;
+  --display:'Newsreader',Georgia,'Times New Roman',serif;
+  --body:'Manrope','Segoe UI',Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0B1220; --surface:#142036; --band:#111B2E; --ink:#EEF1F6; --muted:#A9B3C4; --line:#26344D;
+  --accent:#C9A76B; --accent-ink:#0E1626; --gold:#C9A76B; --gold-soft:#2A2A2A;
+  --good:#6CC79C; --good-soft:#15302A; --warn:#E2AE5A; --warn-soft:#33281A; --bad:#E5776C; --bad-soft:#3A1E1E;
+  --c1:#8FB0DA; --c2:#C9A76B; --c3:#6CC79C; --c4:#56657E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1220; --surface:#142036; --band:#111B2E; --ink:#EEF1F6; --muted:#A9B3C4; --line:#26344D;
+  --accent:#C9A76B; --accent-ink:#0E1626; --gold:#C9A76B; --gold-soft:#2A2A2A;
+  --good:#6CC79C; --good-soft:#15302A; --warn:#E2AE5A; --warn-soft:#33281A; --bad:#E5776C; --bad-soft:#3A1E1E;
+  --c1:#8FB0DA; --c2:#C9A76B; --c3:#6CC79C; --c4:#56657E; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+.scroller{position:fixed;inset:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+.app{max-width:480px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px calc(96px + env(safe-area-inset-bottom,0px))}
+h1,h2,h3{margin:0;text-wrap:balance}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.brand{display:flex;align-items:center;gap:10px}
+.seal{width:38px;height:38px;flex:none;display:block}
+.brand b{font-family:var(--display);font-size:20px;font-weight:600;display:block;line-height:1}
+.brand b{white-space:nowrap}
+@media (max-width:360px){.top-tags{display:flex;align-items:center;gap:8px}
+.saved{font-size:12px;font-weight:700;color:var(--good);opacity:0;transition:opacity .3s}
+.saved.on{opacity:1}
+.ex{font-size:11px;padding:3px 8px}.brand b{font-size:18px}}
+.brand small{font-size:12px;color:var(--muted)}
+.ex{font-size:12px;font-weight:700;color:var(--gold);background:var(--gold-soft);border-radius:99px;padding:4px 10px;white-space:nowrap}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.stack{display:flex;flex-direction:column;gap:14px}
+.lbl{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0}
+.muted{color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+.hero{background:var(--accent);color:var(--accent-ink);border:0;padding:22px}
+.hero .lbl{color:inherit;opacity:.75}
+.big{font-family:var(--display);font-size:56px;font-weight:500;line-height:1;letter-spacing:-.01em}
+.hero-sub{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:14px;opacity:.9}
+.meter{height:10px;border-radius:99px;background:color-mix(in srgb,var(--accent-ink) 22%,transparent);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--accent-ink);border-radius:99px;transition:width .4s}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;border-radius:99px;padding:4px 10px;align-self:flex-start}
+.pill.good{background:var(--good-soft);color:var(--good)} .pill.warn{background:var(--warn-soft);color:var(--warn)} .pill.bad{background:var(--bad-soft);color:var(--bad)}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.btn{font:inherit;font-weight:700;border:0;border-radius:14px;padding:14px 18px;cursor:pointer;background:var(--gold);color:#fff;font-size:16px}
+.hero .btn{background:var(--accent-ink);color:var(--accent)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn.sm{white-space:nowrap;padding:9px 14px;font-size:14px;border-radius:11px}
+.btn.danger{background:transparent;color:var(--bad);border:1.5px solid var(--bad)}
+.btn:focus-visible,.chip:focus-visible,.tab:focus-visible,input:focus-visible,select:focus-visible,.chk:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.split{display:flex;height:14px;border-radius:99px;overflow:hidden;gap:2px}
+.split i{display:block;height:100%}
+.rows{display:flex;flex-direction:column}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);min-width:0}
+.row:last-child{border-bottom:0}
+.row .l{display:flex;align-items:center;gap:10px;min-width:0}
+.row .l span{overflow:hidden;text-overflow:ellipsis}
+.row small{display:block;color:var(--muted);font-size:13px}
+.row b{white-space:nowrap}
+.key{width:10px;height:10px;border-radius:3px;flex:none}
+.chk{width:26px;height:26px;border-radius:8px;border:1.5px solid var(--line);background:var(--surface);display:grid;place-items:center;cursor:pointer;flex:none;color:var(--accent-ink);font-size:15px;padding:0}
+.chk[aria-pressed="true"]{background:var(--good);border-color:var(--good)}
+.paid span,.paid b{color:var(--muted);text-decoration:line-through}
+.note{font-size:13px;color:var(--muted);margin:0}
+.ts-steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:15px}
+.step-badge{font:inherit;font-size:12px;font-weight:700;color:var(--gold);background:var(--gold-soft);border:0;border-radius:99px;padding:5px 11px;white-space:nowrap;cursor:pointer}
+.fs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.fs li{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:12px;align-items:start;padding:12px 0;border-bottom:1px solid var(--line)}
+.fs li:last-child{border-bottom:0}
+.fs-n{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:14px;border:1.5px solid var(--line);color:var(--muted)}
+.fs-t b{display:block}.fs-t small{display:block;color:var(--muted);font-size:13px}
+.fs-t .fs-d{color:var(--ink);margin-top:2px}
+.fs-t .fs-v{font-family:var(--display);font-style:italic;font-size:15px;line-height:1.45;color:var(--gold);margin-top:8px;padding-left:10px;border-left:2px solid var(--gold)}
+.fs-t .fs-vr{display:block;margin-top:3px;font-family:var(--body);font-style:normal;font-weight:700;font-size:12px;letter-spacing:.02em}
+.word{border-left:4px solid var(--gold)}
+.word-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.word-top .chip{padding:5px 12px;font-size:13px}
+.word blockquote{margin:10px 0 6px;font-family:var(--display);font-size:19px;line-height:1.45;color:var(--ink)}
+.word .word-ref{font-size:13px;font-weight:700;color:var(--gold);margin:0}
+.word .word-l{margin-top:8px;color:var(--ink)}
+.fs-w{font-size:13px;font-weight:700;color:var(--muted);text-align:right;white-space:nowrap;display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.fs li[data-fs]{cursor:pointer;margin:0 -18px;padding-left:18px;padding-right:18px;border-radius:12px;transition:background .15s}
+.fs li[data-fs]:hover{background:var(--band)}
+.fs li[data-fs]:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.fs-chev{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;color:var(--muted);transition:transform .2s ease}
+.fs-open .fs-chev{transform:rotate(180deg);color:var(--gold)}
+.fs-done .fs-n{background:var(--good);border-color:var(--good);color:var(--surface)}
+.fs-done b{color:var(--muted)}
+.fs-now .fs-n{background:var(--gold);border-color:var(--gold);color:#fff}
+.fs-t .fs-here{color:var(--gold);font-weight:700;margin-bottom:2px}
+.fs-now{background:var(--gold-soft);margin:0 -18px;padding-left:18px!important;padding-right:18px!important;border-radius:12px}
+.home-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--muted);text-decoration:none;margin-bottom:10px}
+.home-link:hover{color:var(--gold)}
+.home-link:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:6px}
+.d-only{display:none}
+.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px);z-index:5}
+.tabs-in{display:flex;width:100%;max-width:480px}
+.tab{flex:1;font:inherit;font-size:12px;font-weight:700;color:var(--muted);background:none;border:0;padding:10px 4px 12px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
+.tab svg{width:22px;height:22px}
+.tab[aria-selected="true"]{color:var(--gold)}
+.view[hidden]{display:none}
+.field{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:var(--muted);min-width:0}
+.field input,.field select{font:inherit;font-size:16px;font-weight:600;color:var(--ink);background:var(--band);border:1px solid var(--line);border-radius:11px;padding:10px 12px;width:100%;min-width:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.edit{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,.7fr) 34px;gap:8px;align-items:end}
+.edit.debt{grid-template-columns:repeat(3,minmax(0,1fr)) 34px;grid-template-areas:'n n n x' 'b r m .' 'd a a .';padding-bottom:12px;border-bottom:1px solid var(--line)}
+.f-n{grid-area:n}.f-b{grid-area:b}.f-r{grid-area:r}.f-m{grid-area:m}.f-d{grid-area:d}.f-a{grid-area:a}.f-x{grid-area:x}
+.edit select{font:inherit;font-size:15px;font-weight:600;color:var(--ink);background:var(--band);border:1px solid var(--line);border-radius:11px;padding:9px 8px;width:100%}
+.edit.inc{grid-template-columns:repeat(2,minmax(0,1fr)) 34px;grid-template-areas:'n n x' 'a f .' 'd d .';padding-bottom:12px;border-bottom:1px solid var(--line)}
+.i-n{grid-area:n}.i-a{grid-area:a}.i-f{grid-area:f}.i-d{grid-area:d}.i-x{grid-area:x}
+.edit.card-r{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) 34px}
+.setup{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:15px}
+.setup li{display:flex;gap:10px;align-items:center}
+.setup span{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-size:13px;flex:none;background:var(--surface)}
+.setup li.ok{color:var(--muted);text-decoration:line-through}
+.setup li.ok span{background:var(--good);border-color:var(--good);color:var(--surface)}
+.edit.plan{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) 34px}
+.edit.bill{grid-template-columns:repeat(2,minmax(0,1fr)) 34px;grid-template-areas:'n n x' 'a d .';padding-bottom:12px;border-bottom:1px solid var(--line)}
+.edit.bill .b-n{grid-area:n}.edit.bill .b-a{grid-area:a}.edit.bill .b-d{grid-area:d}.edit.bill .x{grid-area:x}
+.sp-row{display:flex;flex-direction:column;gap:6px;padding:11px 0;border-bottom:1px solid var(--line)}
+.sp-row:last-child{border-bottom:0}
+.sp-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.sp-top small{display:block;font-size:13px;color:var(--muted)}
+.sp-r{display:flex;align-items:center;gap:10px}
+.sp-add{padding:5px 10px;font-size:13px}
+.rv-over{padding:0 0 10px}
+.edit .field select{font:inherit;font-size:15px;font-weight:600;color:var(--ink);background:var(--band);border:1px solid var(--line);border-radius:11px;padding:9px 8px;width:100%;min-width:0}
+.edit .field input{padding:9px 8px;font-size:15px}
+.x{width:34px;height:40px;border:0;background:none;color:var(--muted);font-size:20px;cursor:pointer;border-radius:8px}
+.x:hover{color:var(--bad)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;font-size:14px;font-weight:600;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:8px 13px;cursor:pointer}
+.chip[aria-pressed="true"]{border-color:var(--gold);background:var(--gold-soft);color:var(--ink)}
+.sheet-bg{position:fixed;inset:0;background:color-mix(in srgb,#000 45%,transparent);z-index:10;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:var(--surface);width:100%;max-width:480px;border-radius:22px 22px 0 0;padding:20px max(18px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:14px;animation:up .25s ease}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+.amt{display:flex;align-items:center;gap:6px;border-bottom:2px solid var(--gold);padding-bottom:4px}
+.amt span{font-family:var(--display);font-size:40px;color:var(--muted)}
+.amt input{font-family:var(--display);font-size:48px;border:0;background:none;color:var(--ink);width:100%;min-width:0;outline:none}
+.bar{height:8px;border-radius:99px;background:var(--band);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--c1);border-radius:99px}
+.tile{display:flex;flex-direction:column;gap:2px}
+.tile b{font-family:var(--display);font-size:30px;font-weight:500;line-height:1.1}
+textarea{font:inherit;font-size:13px;width:100%;min-height:150px;border:1px solid var(--line);border-radius:11px;padding:10px;background:var(--band);color:var(--ink)}
+.toast .undo{font:inherit;font-weight:700;color:inherit;text-decoration:underline;background:none;border:0;margin-left:8px;cursor:pointer;padding:0}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--surface);padding:10px 16px;border-radius:99px;font-weight:700;font-size:14px;z-index:20}
+.confirm{background:var(--bad-soft);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.cta{background:var(--gold-soft);border:0}
+.cta a{color:var(--ink);font-weight:700}
+.cta .btn{align-self:flex-start}
+@media (min-width:900px){
+  .app{max-width:1180px;padding-left:max(276px,calc(env(safe-area-inset-left,0px) + 276px));padding-right:max(40px,env(safe-area-inset-right,0px));padding-block:32px 48px}
+  .top{margin-bottom:24px}
+  .tabs{top:0;bottom:0;right:auto;width:236px;border-top:0;border-right:1px solid var(--line);align-items:flex-start;padding:0}
+  .tabs-in{flex-direction:column;gap:4px;padding:112px 14px 24px;max-width:none}
+  .m-only{display:none}
+  .home-link.d-only{display:flex;position:absolute;left:28px;bottom:calc(28px + env(safe-area-inset-bottom,0px));margin:0}
+  .tabs-in::after{content:"Make every dollar better\A Dum vivas, fac melius";white-space:pre;position:absolute;top:60px;left:24px;font-size:12px;line-height:1.5;color:var(--muted)}
+  .tabs-in::before{content:"Melius Money";position:absolute;top:30px;left:24px;font-family:var(--display);font-size:22px;font-weight:600;color:var(--ink)}
+  .tab{flex:none;flex-direction:row;justify-content:flex-start;gap:12px;font-size:15px;padding:12px 14px;border-radius:12px;color:var(--muted)}
+  .tab:hover{background:var(--band)}
+  .tab[aria-selected="true"]{background:var(--gold-soft);color:var(--ink)}
+  .tab[aria-selected="true"] svg{color:var(--gold)}
+  .brand{display:none}
+  .top{justify-content:flex-end;min-height:0}
+  .view.stack{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+  .view .wide{grid-column:1/-1}
+  .edit.inc{grid-template-columns:minmax(0,1.3fr) minmax(0,.9fr) minmax(0,1.3fr) minmax(0,1fr) 34px;grid-template-areas:'n a f d x';border-bottom:0;padding-bottom:0}
+  .edit.bill{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,.7fr) 34px;grid-template-areas:'n a d x';border-bottom:0;padding-bottom:0}
+  .edit.debt{grid-template-columns:minmax(0,1.4fr) repeat(4,minmax(0,.8fr)) minmax(0,1.1fr) 34px;grid-template-areas:'n b r m d a x';border-bottom:0;padding-bottom:0}
+  .big{font-size:64px}
+  .sheet-bg{align-items:center}
+  .sheet{border-radius:22px;padding:24px}
+  .toast{bottom:32px;left:calc(50% + 118px)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<form name="plus-waitlist" data-netlify="true" netlify-honeypot="company" hidden><input name="email" type="email"><input name="company"></form>
+
+
+<div class="scroller" id="scroller"><div class="app">
+  <a class="home-link m-only" href="https://meliusoneconsulting.com/" data-track="app_back_to_site">← Back to Melius One</a>
+  <header class="top">
+    <div class="brand"><svg class="seal" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#14213D"/><circle cx="50" cy="50" r="42" fill="none" stroke="#C9A35E" stroke-width="2"/><text x="44" y="69" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-size="54" font-weight="500" fill="#FFFFFF">M</text><text x="73" y="44" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-size="24" font-weight="600" fill="#C9A35E">1</text></svg><span><b>Melius Money</b><small>Make every dollar better</small></span></div>
+    <span class="top-tags"><span class="saved" id="savedTag" aria-live="polite"></span><span class="ex" id="exTag">Example household</span></span>
+  </header>
+
+  <main>
+    <section class="view stack" id="v-today" aria-label="Today"></section>
+    <section class="view stack" id="v-spend" aria-label="Spending" hidden></section>
+    <section class="view stack" id="v-goals" aria-label="Goals" hidden></section>
+    <section class="view stack" id="v-plan" aria-label="Plan" hidden></section>
+  </main>
+</div></div>
+
+<nav class="tabs" aria-label="Sections"><div class="tabs-in" role="tablist">
+  <button class="tab" role="tab" data-v="today" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Today</button>
+  <button class="tab" role="tab" data-v="spend" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16v12H4z"/><path d="M16 13h2M4 7l2-3h12l2 3"/></svg>Spending</button>
+  <button class="tab" role="tab" data-v="goals" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Goals</button>
+  <button class="tab" role="tab" data-v="plan" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg>Plan</button>
+</div><a class="home-link d-only" href="https://meliusoneconsulting.com/" data-track="app_back_to_site">← Back to Melius One</a></nav>
+
+<div id="sheet" hidden></div>
+<div id="toast" class="toast" hidden></div>
+
+<script>
+(function(){
+'use strict';
+var KEY='melius-payday-v1';
+var APPV='Oct 26, 2026 · 11:45 PM';
+/* ---------- daily Bible passage (Berean Standard Bible, public domain) ---------- */
+var WORD=[["m", "Proverbs 21:5", "The plans of the diligent bring plenty, as surely as haste leads to poverty.", "Slow and steady beats get-rich-quick. A plan followed every payday is how plenty is built.", "The plans of the diligent bring plenty, as surely as haste leads to poverty."], ["w", "Proverbs 6:6–8", "Walk in the manner of the ant, O slacker; observe its ways and become wise. Without a commander, without an overseer or ruler, it prepares its provisions in summer; it gathers its food at harvest.", "The ant has no boss and still prepares. Work and save in the good season for the lean one.", "Walk in the manner of the ant, O slacker; observe its ways and become wise.…"], ["c", "John 3:16", "For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not perish but have eternal life.", "The greatest gift was given, not earned. Everything else we hold is on loan.", "For God so loved the world that He gave His one and only Son…"], ["l", "Ecclesiastes 1:2–3", "“Futility of futilities,” says the Teacher, “futility of futilities! Everything is futile!” What does a man gain from all his labor, at which he toils under the sun?", "Wealth without God is chasing the wind. Money is a tool, never the goal.", "…What does a man gain from all his labor, at which he toils under the sun?"], ["m", "Proverbs 22:7", "The rich rule over the poor, and the borrower is slave to the lender.", "Debt makes you a slave. That is why we attack expensive debt before we invest.", "The rich rule over the poor, and the borrower is slave to the lender."], ["w", "Colossians 3:23–24", "Whatever you do, work at it with your whole being, as for the Lord and not for men, because you know that you will receive an inheritance from the Lord as your reward. It is the Lord Christ you are serving.", "Whatever your job is today, do it as if Christ were the one you work for, because He is.", "Whatever you do, work at it with your whole being, as for the Lord and not for men…"], ["c", "Romans 5:8", "But God proves His love for us in this: While we were still sinners, Christ died for us.", "You were loved before you got anything right, your money included.", "But God proves His love for us in this: While we were still sinners, Christ died for us."], ["l", "Ecclesiastes 5:10", "He who loves money is never satisfied by money, and he who loves wealth is never satisfied by income. This too is futile.", "There is always a bigger number. Decide what is enough.", "He who loves money is never satisfied by money…"], ["m", "Proverbs 13:11", "Dishonest wealth will dwindle, but what is earned through hard work will be multiplied.", "Shortcuts dwindle. Money earned through steady work grows.", "Dishonest wealth will dwindle, but what is earned through hard work will be multiplied."], ["w", "2 Thessalonians 3:10", "For even while we were with you, we gave you this command: “If anyone is unwilling to work, he shall not eat.”", "Work is God's design, not a punishment. Provide with your own hands.", "…If anyone is unwilling to work, he shall not eat.…"], ["c", "Romans 8:38–39", "For I am convinced that neither death nor life, neither angels nor principalities, neither the present nor the future, nor any powers, neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God that is in Christ Jesus our Lord.", "No debt, job loss or market crash can separate you from His love.", "…neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God…"], ["l", "Ecclesiastes 5:15", "As a man came from his mother’s womb, so he will depart again, naked as he arrived. He takes nothing for his labor to carry in his hands.", "You can't take it with you. Use it well while you are here.", "As a man came from his mother’s womb, so he will depart again, naked as he arrived.…"], ["m", "Luke 14:28", "Which of you, wishing to build a tower, does not first sit down and count the cost to see if he has the resources to complete it?", "Count the cost before you build. That is all a spending plan is.", "Which of you, wishing to build a tower, does not first sit down and count the cost…"], ["w", "Proverbs 10:4", "Idle hands make one poor, but diligent hands bring wealth.", "Diligence, not luck, is what builds wealth.", "Idle hands make one poor, but diligent hands bring wealth."], ["c", "John 15:13", "Greater love has no one than this, that he lay down his life for his friends.", "Love gives itself away. Let generosity mark how you handle money.", "Greater love has no one than this, that he lay down his life for his friends."], ["l", "Ecclesiastes 2:11", "Yet when I considered all the works that my hands had accomplished and what I had toiled to achieve, I found everything to be futile, a pursuit of the wind; there was nothing to be gained under the sun.", "Even Solomon, the richest of kings, found that achievement alone leaves you empty.", "…I found everything to be futile, a pursuit of the wind; there was nothing to be gained under the sun."], ["m", "Proverbs 27:23–24", "Be sure to know the state of your flocks, and pay close attention to your herds; for riches are not forever, nor does a crown endure to every generation.", "Know your numbers. Check your balance now and then, because riches are not forever.", "Be sure to know the state of your flocks, and pay close attention to your herds…"], ["w", "Proverbs 14:23", "There is profit in all labor, but mere talk leads only to poverty.", "Talking about a plan is not a plan. Do the work.", "There is profit in all labor, but mere talk leads only to poverty."], ["c", "Ephesians 3:19", "…to know this love that surpasses knowledge, that you may be filled with all the fullness of God.", "The love of Christ is the one wealth no one can measure.", "…to know this love that surpasses knowledge, that you may be filled with all the fullness of God."], ["l", "James 4:14", "You do not even know what will happen tomorrow! What is your life? You are a mist that appears for a little while and then vanishes.", "Plan for tomorrow, but hold your plans loosely.", "…What is your life? You are a mist that appears for a little while and then vanishes."], ["m", "Romans 13:8", "Be indebted to no one, except to one another in love. For he who loves his neighbor has fulfilled the law.", "The only debt worth carrying is love.", "Be indebted to no one, except to one another in love.…"], ["w", "Ecclesiastes 9:10", "Whatever you find to do with your hands, do it with all your might, for in Sheol, where you are going, there is no work or planning or knowledge or wisdom.", "Sheol is the grave. Your time to work is now, so give it your full strength.", "Whatever you find to do with your hands, do it with all your might…"], ["c", "1 John 4:19", "We love because He first loved us.", "We give and serve in answer to His love, not to earn it.", "We love because He first loved us."], ["l", "Psalm 39:6", "Surely every man goes about like a phantom; surely he bustles in vain; he heaps up riches not knowing who will haul them away.", "Don't just heap it up. Know what your money is for.", "…he heaps up riches not knowing who will haul them away."], ["m", "Proverbs 21:20", "Precious treasures and oil are in the dwelling of the wise, but a foolish man consumes them.", "The wise keep something in store. The foolish spend it all. Build your cushion.", "Precious treasures and oil are in the dwelling of the wise, but a foolish man consumes them."], ["w", "Proverbs 22:29", "Do you see a man skilled in his work? He will be stationed in the presence of kings; he will not stand before obscure men.", "Get excellent at what you do. Skill opens doors that money can't.", "Do you see a man skilled in his work? He will be stationed in the presence of kings…"], ["c", "Matthew 11:28–29", "Come to Me, all you who are weary and burdened, and I will give you rest. Take My yoke upon you and learn from Me, for I am gentle and humble in heart, and you will find rest for your souls.", "If money worries weigh on you, bring them to Him first.", "Come to Me, all you who are weary and burdened, and I will give you rest.…"], ["l", "Luke 12:15", "And He said to them, “Watch out! Guard yourselves against every form of greed, for one’s life does not consist in the abundance of his possessions.”", "Your life is more than what you own.", "…one’s life does not consist in the abundance of his possessions.…"], ["m", "Proverbs 22:3", "The prudent see danger and take cover, but the simple keep going and suffer the consequences.", "A cushion is not fear. It is prudence: seeing trouble coming and getting ready.", "The prudent see danger and take cover, but the simple keep going and suffer the consequences."], ["w", "Proverbs 12:24", "The hand of the diligent will rule, but laziness ends in forced labor.", "The diligent lead. The lazy end up working for someone else.", "The hand of the diligent will rule, but laziness ends in forced labor."], ["c", "Philippians 4:19", "And my God will supply all your needs according to His glorious riches in Christ Jesus.", "Need, not greed. He supplies what you need.", "And my God will supply all your needs according to His glorious riches in Christ Jesus."], ["l", "Luke 12:20–21", "But God said to him, “You fool! This very night your life will be required of you. Then who will own what you have accumulated?” This is how it will be for anyone who stores up treasure for himself but is not rich toward God.", "Saving is wise. Hoarding for yourself alone is foolish. Be rich toward God.", "…This very night your life will be required of you. Then who will own what you have accumulated?…"], ["m", "Luke 16:10", "Whoever is faithful with very little will also be faithful with much, and whoever is dishonest with very little will also be dishonest with much.", "Handle $20 well and you will handle $20,000 well. Faithfulness starts small.", "Whoever is faithful with very little will also be faithful with much…"], ["w", "Galatians 6:9", "Let us not grow weary in well-doing, for in due time we will reap a harvest if we do not give up.", "Results come in due time. Keep going when progress feels slow.", "Let us not grow weary in well-doing, for in due time we will reap a harvest if we do not give up."], ["c", "Matthew 6:33", "But seek first the kingdom of God and His righteousness, and all these things will be added unto you.", "Get the order right: God first, then the plan.", "But seek first the kingdom of God and His righteousness…"], ["l", "Mark 8:36", "What does it profit a man to gain the whole world, yet forfeit his soul?", "No freedom number is worth your soul.", "What does it profit a man to gain the whole world, yet forfeit his soul?"], ["m", "1 Timothy 6:10", "For the love of money is the root of all kinds of evil. By craving it, some have wandered away from the faith and pierced themselves with many sorrows.", "Money is not evil. Loving it is. Make money serve you, and never serve it.", "For the love of money is the root of all kinds of evil.…"], ["w", "1 Timothy 5:8", "If anyone does not provide for his own, and especially his own household, he has denied the faith and is worse than an unbeliever.", "Providing for your family is part of your faith, not separate from it.", "If anyone does not provide for his own, and especially his own household, he has denied the faith…"], ["c", "2 Corinthians 8:9", "For you know the grace of our Lord Jesus Christ, that though He was rich, yet for your sake He became poor, so that you through His poverty might become rich.", "Christ gave up riches for us. Our truest wealth is in Him.", "…though He was rich, yet for your sake He became poor…"], ["l", "Psalm 90:12", "So teach us to number our days, that we may present a heart of wisdom.", "We count our dollars carefully. Count your days even more carefully.", "So teach us to number our days, that we may present a heart of wisdom."], ["m", "Hebrews 13:5", "Keep your lives free from the love of money and be content with what you have, for God has said: “Never will I leave you, never will I forsake you.”", "Contentment is the cheapest way to be rich, and you are never alone in the lean months.", "Keep your lives free from the love of money and be content with what you have…"], ["w", "Proverbs 13:4", "The slacker craves yet has nothing, but the soul of the diligent is fully satisfied.", "Wanting is not working. Desire without effort leaves you with nothing.", "The slacker craves yet has nothing, but the soul of the diligent is fully satisfied."], ["c", "Philippians 4:11–13", "I am not saying this out of need, for I have learned to be content regardless of my circumstances. I know how to live humbly, and I know how to abound. I am accustomed to any and every situation—to being filled and being hungry, to having plenty and having need. I can do all things through Christ who gives me strength.", "Contentment is learned, in lean months and good ones, through Christ.", "…I have learned to be content regardless of my circumstances.…"], ["l", "1 Timothy 6:7–8", "For we brought nothing into the world, so we cannot carry anything out of it. But if we have food and clothing, we will be content with these.", "We arrive with nothing and leave with nothing. Everything in between is stewardship.", "For we brought nothing into the world, so we cannot carry anything out of it.…"], ["m", "Matthew 6:19–21", "Do not store up for yourselves treasures on earth, where moth and rust destroy, and where thieves break in and steal. But store up for yourselves treasures in heaven, where moth and rust do not destroy, and where thieves do not break in and steal. For where your treasure is, there your heart will be also.", "Build wealth, but never let it own your heart.", "…For where your treasure is, there your heart will be also."], ["w", "Proverbs 12:11", "The one who works his land will have plenty of food, but whoever chases fantasies lacks judgment.", "Tend your own field. Chasing get-rich schemes leaves you empty.", "The one who works his land will have plenty of food, but whoever chases fantasies lacks judgment."], ["c", "Galatians 2:20", "I have been crucified with Christ, and I no longer live, but Christ lives in me. The life I live in the body, I live by faith in the Son of God, who loved me and gave Himself up for me.", "He loved me and gave Himself for me. Everything else grows from that.", "…I live by faith in the Son of God, who loved me and gave Himself up for me."], ["l", "Ecclesiastes 12:13", "When all has been heard, the conclusion of the matter is this: Fear God and keep His commandments, because this is the whole duty of man.", "After all the searching, this is what matters.", "…Fear God and keep His commandments, because this is the whole duty of man."], ["m", "Proverbs 13:22", "A good man leaves an inheritance to his children’s children, but the sinner’s wealth is passed to the righteous.", "Think past yourself. What you invest today can bless your grandchildren.", "A good man leaves an inheritance to his children’s children…"], ["l", "Proverbs 23:4–5", "Do not wear yourself out to get rich; be wise enough to restrain yourself. When you glance at wealth, it disappears, for it makes wings for itself and flies like an eagle to the sky.", "Work hard, but don't wear yourself out chasing riches. They can fly away overnight.", "Do not wear yourself out to get rich; be wise enough to restrain yourself.…"], ["m", "Proverbs 3:9–10", "Honor the LORD with your wealth and with the firstfruits of all your crops; then your barns will be filled with plenty, and your vats will overflow with new wine.", "Give first, not last. Put giving in your spending plan before the extras.", "Honor the LORD with your wealth and with the firstfruits of all your crops…"], ["m", "2 Corinthians 9:7", "Each one should give what he has decided in his heart to give, not out of regret or compulsion. For God loves a cheerful giver.", "Give on purpose, and give gladly.", "…For God loves a cheerful giver."], ["m", "Matthew 25:21", "His master replied, “Well done, good and faithful servant! You have been faithful with a few things; I will put you in charge of many things. Enter into the joy of your master!”", "The servants who put their money to work were praised. Money buried in the ground does nothing.", "…Well done, good and faithful servant! You have been faithful with a few things…"], ["m", "Matthew 25:27", "Then you should have deposited my money with the bankers, and on my return I would have received it back with interest.", "Even the master said it: at the very least, put your money where it earns. Don't let it sit idle.", "…you should have deposited my money with the bankers, and on my return I would have received it back with interest."]];
+var WORD_T={m:'Money',w:'Hard work',c:'The love of Christ',l:'Life is short'};
+function wordIdx(d){d=d||new Date();var n=Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5);return ((n%WORD.length)+WORD.length)%WORD.length}
+var wordOff=0,stepOpen={};
+var STEPV=[["Which of you, wishing to build a tower, does not first sit down and count the cost to see if he has the resources to complete it?", "Luke 14:28"], ["The prudent see danger and take cover, but the simple keep going and suffer the consequences.", "Proverbs 22:3"], ["The rich rule over the poor, and the borrower is slave to the lender.", "Proverbs 22:7"], ["Precious treasures and oil are in the dwelling of the wise, but a foolish man consumes them.", "Proverbs 21:20"], ["Dishonest wealth will dwindle, but what is earned through hard work will be multiplied.", "Proverbs 13:11"], ["A good man leaves an inheritance to his children’s children, but the sinner’s wealth is passed to the righteous.", "Proverbs 13:22"]];
+function faithOn(){return S.faith!==false}
+function wordCard(){var p=WORD[(wordIdx()+wordOff)%WORD.length];return '<div class="card word"><div class="word-top"><p class="lbl">'+(wordOff?'A word':'Today’s word')+' · '+WORD_T[p[0]]+'</p><button class="chip" data-act="word-next" aria-label="Show another passage">Another</button></div><blockquote>“'+esc(p[2])+'”</blockquote><p class="word-ref">'+esc(p[1])+' · BSB</p><p class="note word-l">'+esc(p[3])+'</p></div>'}
+var EMBED=false;try{EMBED=window.self!==window.top}catch(e){EMBED=true}
+function track(name,params){if(EMBED&&name!=='app_preview_view')return;try{if(typeof gtag==='function')gtag('event',name,params||{})}catch(e){}}
+var BILLS=['Rent','Mortgage','Property tax','Condo fees','Hydro (electricity)','Gas (heating)','Water','Water heater rental','Home insurance','Tenant insurance','Car insurance','Life insurance','Phone','Internet','Childcare','Transit pass','Subscriptions','Gym'];
+var DEBTS=['Credit card','Store card','Line of credit','Car loan','Student loan','Personal loan','Buy now, pay later','Payday loan','Tax owing (CRA)','Loan from family'];
+var CATS=['Groceries','Gas & transit','Eating out','Kids & school','Household supplies','Personal care','Clothing','Health & pharmacy','Entertainment','Gifts','Giving & tithe','Sending money home','Pets','Fun money','Buffer'];
+var FREQ={weekly:'Every week',biweekly:'Every two weeks',semimonthly:'Twice a month (15th and last day)',monthly:'Once a month'};
+var PPM={weekly:52/12,biweekly:26/12,semimonthly:2,monthly:1};
+
+/* ---------- dates (local, at noon to dodge DST) ---------- */
+function d0(x){var d=x?new Date(x):new Date();d.setHours(12,0,0,0);return d}
+function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function parse(s){var p=String(s).split('-');return new Date(+p[0],+p[1]-1,+p[2],12)}
+function addD(d,n){var x=new Date(d);x.setDate(x.getDate()+n);return x}
+function days(a,b){return Math.round((b-a)/864e5)}
+function dim(y,m){return new Date(y,m+1,0).getDate()}
+function onDay(y,m,day){var mm=((m%12)+12)%12,yy=y+Math.floor(m/12);return new Date(yy,mm,Math.min(day,dim(yy,mm)),12)}
+function fd(d,o){return d.toLocaleDateString('en-CA',o||{weekday:'short',month:'short',day:'numeric'})}
+function money(v,c){var n=Math.abs(v)<.005?0:v;return (n<0?'−':'')+'$'+Math.abs(n).toLocaleString('en-CA',{minimumFractionDigits:c?2:0,maximumFractionDigits:c?2:0})}
+
+/* ---------- example household ---------- */
+function example(){
+  var t=d0(),fri=addD(t,-((t.getDay()+2)%7));
+  return {example:true,
+    incomes:[{n:'Main pay',a:3400,freq:'biweekly',last:iso(fri)},{n:'Canada Child Benefit',a:620,freq:'monthly',last:iso(onDay(t.getFullYear(),t.getMonth()-1,20))}],
+    received:[],
+    push:450, cushion:2500, kids:true, method:'avalanche',
+    bills:[{n:'Rent or mortgage',a:1850,d:1},{n:'Car insurance',a:210,d:5},{n:'Phone and internet',a:165,d:12},{n:'Childcare',a:600,d:15},{n:'Hydro and gas',a:190,d:20},{n:'Streaming',a:35,d:28}],
+    debts:[{n:'Credit card',b:4200,r:21,m:120,d:18},{n:'Line of credit',b:8000,r:9.5,m:160,d:25},{n:'Car loan',b:14000,r:6.4,m:390,d:10}],
+    spend:[{id:1,dt:iso(fri),a:142.6,c:'Groceries'},{id:2,dt:iso(addD(fri,1)),a:60,c:'Gas & transit'},{id:3,dt:iso(addD(fri,1)),a:38.5,c:'Eating out'},{id:4,dt:iso(addD(fri,2)),a:24,c:'Kids & school',note:'School trip'}],
+    paid:{},moved:{},review:{},bal:{a:2975,dt:iso(t),ts:Date.now()},
+    planSince:'2026-01-01',planMode:'month',plan:[{c:'Groceries',a:760},{c:'Gas & transit',a:260},{c:'Kids & school',a:175},{c:'Eating out',a:130},{c:'Giving & tithe',a:110},{c:'Buffer',a:70}],
+    goal:{need:6000,invested:25000,rate:18,growth:12}
+  };
+}
+function blank(){var t=d0();return {example:false,incomes:[{n:'Main pay',a:0,freq:'biweekly',last:iso(t)}],received:[],push:0,cushion:0,kids:false,method:'avalanche',bills:[],debts:[],spend:[],paid:{},moved:{},review:{},planMode:'month',plan:[],goal:{need:0,invested:0,rate:18,growth:12}}}
+var S;
+if(!EMBED){try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}}
+if(EMBED)S=example();
+else if(!S||!(S.pay||S.incomes)){S=blank();S.fresh=true}
+function migrate(){
+  if(!S.incomes){var p=S.pay||{amount:0,freq:'biweekly',last:iso(d0())};S.incomes=[{n:'Main pay',a:+p.amount||0,freq:p.freq,last:p.last}]}
+  if(!S.incomes.length)S.incomes=[{n:'Main pay',a:0,freq:'biweekly',last:iso(d0())}];
+  S.pay=S.incomes[0];S.pay.amount=+S.pay.a||0;
+  if(!S.received)S.received=[];
+if(S.push==null){S.push=(+S.save||0)+(+S.extra||0);delete S.save;delete S.extra}
+if(S.cushion==null)S.cushion=0;
+if(!S.method)S.method='avalanche';
+if(!S.card)S.card={on:false,n:'Credit card',due:15};
+if(!S.cards||!S.cards.length)S.cards=[{n:S.card.n||'Credit card',due:Math.min(31,Math.max(1,+S.card.due||15))}];
+S.cards.forEach(function(c){c.due=Math.min(31,Math.max(1,Math.round(+c.due||15)))});
+if(!S.plan)S.plan=[];
+if(!S.view)S.view=(S.card&&S.card.on)?'month':'pay';
+if(!S.planMode)S.planMode=S.example?'pay':'month';
+if(!S.planSince&&(S.plan||[]).length)S.planSince=S.example?'2026-01-01':iso(d0());if(!S.moved)S.moved={};if(!S.review)S.review={};
+}
+migrate();
+function save(){if(EMBED)return;if(S&&!S.planSince&&(S.plan||[]).length)S.planSince=iso(d0());if(S.incomes&&S.incomes[0]){S.pay=S.incomes[0];S.pay.amount=+S.pay.a||0}try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+/* ---------- pay periods ---------- */
+function period(ref){
+  var t=ref||d0(),f=S.pay.freq,a=parse(S.pay.last),prev,next;
+  if(f==='weekly'||f==='biweekly'){var st=f==='weekly'?7:14,k=Math.floor(days(a,t)/st);prev=addD(a,k*st);next=addD(prev,st)}
+  else if(f==='semimonthly'){var c=[];for(var m=t.getMonth()-1;m<=t.getMonth()+1;m++){c.push(onDay(t.getFullYear(),m,15),onDay(t.getFullYear(),m,31))}
+    c.sort(function(x,y){return x-y});prev=c.filter(function(x){return x<=t}).pop();next=c.filter(function(x){return x>t})[0]}
+  else{var day=a.getDate(),here=onDay(t.getFullYear(),t.getMonth(),day);prev=here<=t?here:onDay(t.getFullYear(),t.getMonth()-1,day);next=onDay(prev.getFullYear(),prev.getMonth()+1,day)}
+  return {prev:prev,next:next,len:days(prev,next)};
+}
+function depDates(inc,P){
+  var out=[],a=parse(inc.last||iso(d0())),f=inc.freq;
+  if(f==='weekly'||f==='biweekly'){var st=f==='weekly'?7:14,k=Math.ceil(days(a,P.prev)/st),d=addD(a,k*st);while(d<P.next){if(d>=P.prev)out.push(d);d=addD(d,st)}}
+  else for(var m=P.prev.getMonth()-1;m<=P.prev.getMonth()+2;m++){var ds=f==='semimonthly'?[onDay(P.prev.getFullYear(),m,15),onDay(P.prev.getFullYear(),m,31)]:[onDay(P.prev.getFullYear(),m,a.getDate())];ds.forEach(function(d){if(d>=P.prev&&d<P.next)out.push(d)})}
+  return out;
+}
+function depositsIn(P){var out=[];S.incomes.forEach(function(inc,i){if(!(+inc.a>0))return;depDates(inc,P).forEach(function(d){out.push({n:inc.n||('Income '+(i+1)),a:+inc.a,dt:d,main:i===0})})});return out.sort(function(x,y){return x.dt-y.dt})}
+function incomeM(){return S.incomes.reduce(function(s,i){return s+(+i.a||0)*PPM[i.freq||'monthly']},0)}
+function receivedIn(P){return (S.received||[]).filter(function(e){var d=parse(e.dt);return d>=P.prev&&d<P.next})}
+function dueIn(P){
+  var out=[],items=S.bills.map(function(b,i){return {n:b.n,a:+b.a||0,d:+b.d||1,k:'b'+i}}).concat(S.debts.map(function(b,i){return {n:b.n+' (minimum)',a:+b.m||0,d:+b.d||1,k:'d'+i,debt:true,bal:+b.b||0}}).filter(function(b){return b.bal>0}));
+  items.forEach(function(b){for(var m=P.prev.getMonth();m<=P.prev.getMonth()+2;m++){var dt=onDay(P.prev.getFullYear(),m,b.d);if(dt>=P.prev&&dt<P.next)out.push({n:b.n,a:b.a,dt:dt,id:b.k+'@'+iso(dt),debt:b.debt})}});
+  return out.sort(function(x,y){return x.dt-y.dt});
+}
+function calc(P){
+  P=P||period();
+  var due=dueIn(P),bills=due.reduce(function(s,b){return s+b.a},0),deps=depositsIn(P),pay=deps.reduce(function(s,d){return s+d.a},0),push=+S.push||0,recv=receivedIn(P).reduce(function(s,e){return s+(+e.a||0)},0);
+  var spendable=pay-bills-push,spent=S.spend.filter(function(e){var d=parse(e.dt);return d>=P.prev&&d<P.next}).reduce(function(s,e){return s+(+e.a||0)},0);
+  return {P:P,due:due,bills:bills,pay:pay,deps:deps,recv:recv,push:push,spendable:spendable,spent:spent,left:spendable-spent};
+}
+
+/* ---------- the Freedom Steps ---------- */
+var ATK_RATE=7;
+function isAtk(d){return d.atk!=null?!!d.atk:(+d.r||0)>=ATK_RATE}
+function needM(){return (+S.goal.need||0)||S.bills.reduce(function(s,b){return s+(+b.a||0)},0)}
+function targets(){var need=needM();return {starter:S.kids?2000:1000,full:need*3,goal:(+S.goal.need||0)*12/((+S.goal.rate||18)/100)}}
+function sortFn(m){return m==='snowball'?function(a,b){return a.b-b.b}:function(a,b){return b.r-a.r}}
+function step(){
+  var T=targets();
+  if(!((+S.pay.amount||0)>0&&S.bills.length))return 1;
+  if((+S.cushion||0)<T.starter)return 2;
+  if(S.debts.some(function(d){return isAtk(d)&&(+d.b||0)>0}))return 3;
+  if((+S.cushion||0)<T.full)return 4;
+  if(T.goal>0&&(+S.goal.invested||0)>=T.goal)return 6;
+  return 5;
+}
+function attackTarget(){var a=S.debts.map(function(d){return {n:d.n,b:+d.b||0,r:(+d.r||0)/100,atk:isAtk(d)}}).filter(function(d){return d.atk&&d.b>0}).sort(sortFn(S.method));return a[0]}
+/* month-by-month projection of the whole plan */
+function sim(method){
+  method=method||S.method;
+  var T=targets(),pushM=(+S.push||0)*PPM[S.pay.freq],g=Math.pow(1+(+S.goal.growth||12)/100,1/12)-1;
+  var c=+S.cushion||0,inv=+S.goal.invested||0,interest=0;
+  var ds=S.debts.map(function(d){return {n:d.n,b:+d.b||0,r:(+d.r||0)/100,m:+d.m||0,atk:isAtk(d),done:(+d.b||0)>0?null:0}});
+  var st={};
+  function mark(mo){
+    var atkLeft=ds.some(function(d){return d.atk&&d.b>0.005});
+    if(st[2]==null&&c>=T.starter)st[2]=mo;
+    if(st[2]!=null&&st[3]==null&&!atkLeft)st[3]=mo;
+    if(st[3]!=null&&st[4]==null&&c>=T.full)st[4]=mo;
+    if(st[4]!=null&&st[6]==null&&T.goal>0&&inv>=T.goal)st[6]=mo;
+  }
+  mark(0);
+  for(var mo=1;mo<=600&&st[6]==null;mo++){
+    var pool=pushM;
+    inv*=1+g;
+    ds.forEach(function(d){if(d.b<=0)return;var i=d.b*d.r/12;d.b+=i;if(d.atk)interest+=i});
+    ds.forEach(function(d){if(d.b<=0){if(d.done>0)pool+=d.m;return}var p=Math.min(d.m,d.b);d.b-=p;pool+=d.m-p});
+    if(c<T.starter){var a=Math.min(pool,T.starter-c);c+=a;pool-=a}
+    if(pool>0){ds.filter(function(d){return d.atk&&d.b>0}).sort(sortFn(method)).forEach(function(d){if(pool<=0)return;var p=Math.min(pool,d.b);d.b-=p;pool-=p})}
+    if(pool>0&&!ds.some(function(d){return d.atk&&d.b>0.005})&&c<T.full){var a2=Math.min(pool,T.full-c);c+=a2;pool-=a2}
+    if(pool>0&&c>=T.full)inv+=pool;
+    ds.forEach(function(d){if(d.b<=0.005&&d.done==null){d.b=0;d.done=mo}});
+    mark(mo);
+  }
+  return {st:st,debts:ds,interest:interest,stuck:st[3]==null&&ds.some(function(d){return d.atk&&d.b>0})&&mo>600};
+}
+
+/* ---------- spending plan and paycheque flow ---------- */
+function catPay(c){return (+c.a||0)/(S.planMode==='pay'?1:PPM[S.pay.freq])}
+function planT(){return (S.plan||[]).reduce(function(s,c){return s+catPay(c)},0)}
+function planMonth(){return planT()*PPM[S.pay.freq]}
+function pkey(P){return iso(P.prev)}
+function cats(){var c=(S.plan||[]).map(function(x){return x.c}).filter(Boolean);if(c.indexOf('Other')<0)c.push('Other');return c}
+/* what happens to this paycheque once the spending plan is funded */
+function flow(P){
+  P=P||period();
+  var C=calc(P);
+  if(!(S.plan||[]).length)return {C:C,P:P,plan:0,heldIn:0,holdOut:0,toStep:C.recv,short:0,spendMoney:Math.max(0,C.spendable),noPlan:true};
+  var pt=planT(),pc=calc(period(addD(P.prev,-1))),nc=calc(period(P.next));
+  var heldIn=Math.min(Math.max(0,pc.spendable-pt),Math.max(0,pt-C.spendable));
+  var avail=C.spendable+heldIn,left=avail-pt;
+  var holdOut=Math.min(Math.max(0,left),Math.max(0,pt-nc.spendable));
+  var toStep=Math.max(0,left-holdOut);if(toStep<5)toStep=0;if(holdOut<5)holdOut=0;toStep+=C.recv;
+  return {C:C,P:P,plan:pt,heldIn:heldIn,holdOut:holdOut,toStep:toStep,short:(pt-avail)>=5?pt-avail:0,spendMoney:Math.min(pt,Math.max(0,avail))};
+}
+function balanceView(F){
+  var b=S.bal;if(!b)return null;var bd=parse(b.dt);if(bd<F.P.prev||bd>=F.P.next)return null;
+  var k=pkey(F.P),mv=S.moved||{};
+  var coming=F.C.due.filter(function(x){return x.dt>bd&&!S.paid[x.id]}).reduce(function(s,x){return s+x.a},0);
+  var incoming=F.C.deps.filter(function(x){return x.dt>bd}).reduce(function(s,x){return s+x.a},0);
+  incoming+=receivedIn(F.P).filter(function(e){return b.ts?e.id>b.ts:parse(e.dt)>bd}).reduce(function(s,e){return s+(+e.a||0)},0);
+  var gone=function(x){var v=mv[k+':'+x];return v&&(v===1||!b.ts||v<b.ts)};
+  var safe=(+b.a||0)-(S.card.on?(+b.card||0):0)+incoming-coming-(gone('push')?0:F.C.push)-(gone('extra')?0:F.toStep)-F.holdOut;
+  return {safe:safe,bal:+b.a||0,card:S.card.on?(+b.card||0):0,dt:bd,coming:coming};
+}
+
+/* card users: spending is tracked by card cycle, not by paycheque */
+function nextDue(day){var t=d0(),d=onDay(t.getFullYear(),t.getMonth(),day);return d>=t?d:onDay(t.getFullYear(),t.getMonth()+1,day)}
+function cardOwing(ci){var b=S.bal;if(!b||!S.card.on)return null;var v=b.cards&&b.cards[ci]!=null?+b.cards[ci]:(ci===0&&S.cards.length===1&&b.card!=null?+b.card:null);if(v==null)return null;
+  var cd=S.cards[ci],nd=nextDue(+cd.due||15),pd=onDay(nd.getFullYear(),nd.getMonth()-1,+cd.due||15);return parse(b.dt)>=pd?{a:v,dt:parse(b.dt)}:null}
+function reviewTarget(){
+  var CV=cardView();
+  if(CV){var pv=CV.card?{prev:onDay(CV.prev.getFullYear(),CV.prev.getMonth()-1,+S.cards[0].due||15),next:CV.prev}:{prev:new Date(CV.prev.getFullYear(),CV.prev.getMonth()-1,1,12),next:CV.prev};
+    return {key:'m'+iso(pv.prev),P:pv,title:'How did last month go?',amt:function(c){return catPay(c)*PPM[S.pay.freq]}}}
+  var LP=period(addD(period().prev,-1));return {key:pkey(LP),P:LP,title:'How did last paycheque go?',amt:catPay};
+}
+function cardName(){return S.cards.length>1?'your cards':esc(S.cards[0].n||'your card')}
+function cardView(){
+  if(S.view!=='month')return null;
+  var card=!!(S.card&&S.card.on),t=d0(),prev,next;
+  if(card){var due=+S.cards[0].due||15,d1=onDay(t.getFullYear(),t.getMonth(),due);if(d1<=t){prev=d1;next=onDay(t.getFullYear(),t.getMonth()+1,due)}else{prev=onDay(t.getFullYear(),t.getMonth()-1,due);next=d1}}
+  else{prev=new Date(t.getFullYear(),t.getMonth(),1,12);next=new Date(t.getFullYear(),t.getMonth()+1,1,12)}
+  var pm=planMonth(),b=S.bal,owing=null;
+  if(b&&parse(b.dt)>=prev){if(card&&b.card!=null)owing=+b.card||0;else if(!card&&b.spent!=null)owing=+b.spent||0}
+  var logged=S.spend.filter(function(e){var d=parse(e.dt);return d>=prev&&d<next}).reduce(function(s,e){return s+(+e.a||0)},0);
+  var on=owing!=null?owing:(logged||null),frac=Math.min(1,Math.max(0,days(prev,t)/Math.max(1,days(prev,next))));
+  var cls='',txt='';if(on!=null&&pm>0){var u=on/pm;if(on>pm){cls='bad';txt='Over plan by '+money(on-pm)}else if(u<=frac*1.1+0.05){cls='good';txt='On track'}else if(u<=frac*1.3+0.1){cls='warn';txt='Slow down a little'}else{cls='bad';txt='Spending fast'}}
+  return {card:card,prev:prev,next:next,pm:pm,owing:owing,on:on,left:pm-(on||0),frac:frac,cls:cls,txt:txt,dl:Math.max(1,days(t,next)),logged:logged};
+}
+/* card users: will chequing cover the card and the bills by the time the card is due? */
+function cardCash(CV){
+  var b=S.bal;if(!CV||!b||(CV.card?b.card==null:b.spent==null))return null;var bd=parse(b.dt);if(bd<CV.prev)return null;
+  var W={prev:addD(bd,1),next:addD(CV.next,1)},inc=0,pays=0;
+  S.incomes.forEach(function(i,ix){if(!(+i.a>0))return;depDates(i,W).forEach(function(d){inc+=+i.a;if(ix===0)pays++})});
+  inc+=(S.received||[]).filter(function(e){return b.ts?e.id>b.ts:parse(e.dt)>bd}).reduce(function(s,e){return s+(+e.a||0)},0);
+  var bills=dueIn(W).filter(function(x){return !S.paid[x.id]}).reduce(function(s,x){return s+x.a},0);
+  var k=pkey(period()),mv=S.moved||{},thisPush=(mv[k+':push']&&(mv[k+':push']===1||mv[k+':push']<b.ts))?0:(+S.push||0);
+  var push=thisPush+pays*(+S.push||0);
+  var remain=CV.card?null:Math.max(0,CV.pm-(+b.spent||0));
+  var end=(+b.a||0)+inc-bills-push-(CV.card?(+b.card||0):remain);
+  return {remain:remain,end:end,inc:inc,bills:bills,push:push,card:CV.card?(+b.card||0):0,bal:+b.a||0,dt:bd,due:CV.next};
+}
+/* ---------- views ---------- */
+var $=function(id){return document.getElementById(id)};
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+var STEPS=[
+  ['Know your number','Every dollar of your paycheque gets a job.'],
+  ['Starter cushion','A small cash buffer, so a surprise never goes on a card.'],
+  ['Attack expensive debt','Pay off every debt at 7% or more.'],
+  ['Income cushion','Three months of expenses, invested in a stable fund that pays you monthly.'],
+  ['Invest for freedom','All your freedom money is invested every payday.'],
+  ['Freedom','Your investments’ payouts cover your monthly number.']
+];
+function moveTo(sn){var t=attackTarget();return sn<=2?'Move to your starter cushion':sn===4?'Invest in your income cushion':sn===3?'Pay extra on '+(t?esc(t.n):'your debt'):'Move to investing'}
+function bucket(sn){var t=attackTarget();return sn<=2?'Step 2 · Starter cushion':sn===3?'Step 3 · Attack '+(t?esc(t.n):'debt'):sn===4?'Step 4 · Income cushion':'Step 5 · Invest'}
+function renderToday(){
+  var F=flow(),C=F.C,t=d0(),dl=Math.max(1,days(t,C.P.next)),sn=step(),k=pkey(C.P),mv=S.moved||{};
+  var B=balanceView(F),timeLeft=dl/C.P.len,cls='',txt='';
+  var logged=C.spent,hasLog=S.spend.some(function(e){var d=parse(e.dt);return d>=C.P.prev&&d<C.P.next});
+  var heroN,heroL,heroSub;
+  if(B){heroN=B.safe;heroL='Safe to spend until '+fd(C.P.next);heroSub='From your balance of '+money(B.bal)+(B.card?', minus '+money(B.card)+' owing on your card,':'')+' on '+fd(B.dt);
+    var exp=F.spendMoney*timeLeft;if(B.safe<0){cls='bad';txt='Over by '+money(-B.safe)}else if(B.safe>=exp*.9){cls='good';txt='On track'}else if(B.safe>=exp*.6){cls='warn';txt='Slow down a little'}else{cls='bad';txt='Spending fast'}}
+  else{heroN=F.spendMoney-(hasLog?logged:0);heroL=(hasLog?'Left in your spending plan':'Your spending plan')+' until '+fd(C.P.next);heroSub=hasLog?money(logged)+' logged so far':'Update your balance any time to see what’s really left'}
+  var CV=cardView();
+  if(CV){heroL='Left to spend this month'+(CV.card?' · card due '+fd(CV.next,{month:'short',day:'numeric'}):'');heroN=CV.left;dl=CV.dl;cls=CV.cls;txt=CV.txt;
+    var CC=cardCash(CV);heroSub=(CV.on!=null?money(CV.on)+(CV.card?' on '+cardName():' spent')+' of your '+money(CV.pm)+' monthly plan':(CV.card?'Tap Update my balance and enter what’s on your card':'Tap Update my balance and enter what you’ve spent this month'))+(CC?(CV.card?'. Chequing after paying the card and your bills by '+fd(CV.next,{month:'short',day:'numeric'})+': ':'. Chequing at month end, after bills and the rest of your plan: ')+money(CC.end)+(CC.end<0?' (short, so top it up)':''):'');}
+  var h='';
+  if(S.example)h+='<div class="card cta wide"><b>This is an example household</b><p class="note">Look around, then set it up with your own pay and bills. It takes about 10 minutes, and your numbers stay on this device.</p><button class="btn sm" data-act="do-fresh">Clear it and set up mine</button></div>';
+  if(!C.pay&&!S.example){h+='<div class="card cta wide"><b>Start with your plan</b><p class="note">Add your take-home pay, your bills and a spending plan on the Plan tab. It takes about 10 minutes, then this screen shows what you can spend and where every dollar goes.</p><div class="chips"><button class="btn sm" data-go="plan">Set up my plan</button><button class="btn ghost sm" data-act="do-example">See an example first</button></div></div>';$('v-today').innerHTML=h;return}
+  /* review of the last paycheque (or last month, for card users) */
+  var RT=reviewTarget(),rv='';
+  if((S.plan||[]).length&&!(S.review||{})[RT.key]&&S.planSince&&parse(S.planSince)<=RT.P.prev){
+    rv+='<div class="card cta wide" id="rev"><b>'+RT.title+'</b><p class="note">'+fd(RT.P.prev)+' to '+fd(RT.P.next)+'. Tap any category that went over.</p><div class="rows">'+
+      S.plan.map(function(c,i){return '<div class="row"><span class="l"><span>'+esc(c.c)+'<small>Plan '+money(Math.round(RT.amt(c)/5)*5)+'</small></span></span><span class="l"><button class="chip" data-rv="'+i+'" aria-pressed="false">Went over</button></span></div><div class="rv-over" id="rvo-'+i+'" hidden><label class="field">Over by<input type="number" inputmode="decimal" min="0" step="5" id="rva-'+i+'" placeholder="0"></label></div>'}).join('')+
+      '</div><button class="btn sm" data-act="review-save">Save review</button></div>';
+  }
+  var roll=S.debts.filter(function(d){return (+d.b||0)<=0&&(+d.m||0)>0&&!d.rolled});
+  if(roll.length){var r0=roll[0];h+='<div class="card cta wide"><b>'+esc(r0.n)+' is paid off. Well done.</b><p class="note">Keep the momentum: add its '+money(+r0.m)+' monthly payment to your freedom money, so it keeps working for you instead of going to spending.</p><button class="btn sm" data-roll="'+S.debts.indexOf(r0)+'">Roll it in</button></div>'}
+  h+='<div class="card hero"><p class="lbl">'+heroL+'</p><div class="big num">'+money(heroN)+'</div>'+
+     '<div class="hero-sub"><span>'+(heroN>0?'About '+money(heroN/dl)+' a day':'Nothing left to spend')+'</span><span>'+dl+' day'+(dl>1?'s':'')+(CV?(CV.card?' until the card is due':' left this month'):' to payday')+'</span></div>'+
+     '<span class="note" style="color:inherit;opacity:.8">'+heroSub+'</span>'+
+     (txt?'<span class="pill '+cls+'">'+txt+'</span>':'')+
+     '<button class="btn" data-act="bal">Update my balance</button></div>';
+  if(faithOn())h+=wordCard();
+  /* payday checklist */
+  var it=[];
+  it.push('<div class="row"><span class="l"><i class="key" style="background:var(--c1)"></i><span>Keep for bills and minimums<small>Paid as they come due, from chequing</small></span></span><b class="num">'+money(C.bills)+'</b></div>');
+  it.push('<div class="row'+(mv[k+':push']?' paid':'')+'"><span class="l"><button class="chk" aria-pressed="'+!!mv[k+':push']+'" aria-label="Mark freedom money moved" data-mv="push">'+(mv[k+':push']?'✓':'')+'</button><span>'+moveTo(sn)+'<small>Freedom money'+(sn>=5?' · invested':sn===3?' · paying down debt first':sn===4?' · building your income cushion':' · building your starter cushion')+'</small></span></span><b class="num">'+money(C.push)+'</b></div>');
+  if(F.heldIn>0)it.push('<div class="row"><span class="l"><i class="key" style="background:var(--c3)"></i><span>Use what you held last paycheque<small>Covers this paycheque’s heavier bills</small></span></span><b class="num">+'+money(F.heldIn)+'</b></div>');
+  if(F.holdOut>0)it.push('<div class="row"><span class="l"><i class="key" style="background:var(--c3)"></i><span>Hold for next paycheque<small>Next payday has heavier bills, so leave this in chequing</small></span></span><b class="num">'+money(F.holdOut)+'</b></div>');
+  if(F.toStep>0)it.push('<div class="row'+(mv[k+':extra']?' paid':'')+'"><span class="l"><button class="chk" aria-pressed="'+!!mv[k+':extra']+'" aria-label="Mark extra moved" data-mv="extra">'+(mv[k+':extra']?'✓':'')+'</button><span>'+moveTo(sn).replace(/^Move to /,'Also move to ').replace(/^Pay extra on /,'Also pay on ')+'<small>'+(C.recv?'Includes '+money(C.recv)+' of extra income. ':'')+'Left over after your plan. Give it a job.</small></span></span><b class="num">'+money(F.toStep)+'</b></div>');
+  it.push('<div class="row"><span class="l"><i class="key" style="background:var(--c4)"></i><span>'+(S.card.on?'Set aside for your card':'Spending money')+'<small>'+(S.card.on?'This paycheque’s share of your '+money(planMonth())+' monthly plan. Leave it in chequing':'Your plan, by category')+'</small></span></span><b class="num">'+money(F.spendMoney)+'</b></div>');
+  h+='<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px"><div><h2 style="font-family:var(--display);font-size:22px">Payday checklist</h2><p class="note">'+(C.deps.length>1?'Income this paycheque: '+money(C.pay+C.recv)+' ('+C.deps.map(function(d){return esc(d.n)+' '+money(d.a)+' '+fd(d.dt,{month:'short',day:'numeric'})}).join(', ')+(C.recv?', extra '+money(C.recv):'')+')':money(C.pay+C.recv)+' paid '+fd(C.P.prev))+'. Every dollar has a job.</p></div><button class="step-badge" data-go="goals" aria-label="You are on step '+sn+'. See all steps">Step '+sn+' of 6</button></div><div class="rows">'+it.join('')+'</div>'+
+     '<button class="btn ghost sm" data-act="recv">+ Money came in</button><p class="note">Side income, a bonus or a tax refund? Add it, and it goes straight to your step.</p>'+
+     (F.short>0&&!CV?'<p class="note" style="color:var(--bad)">This paycheque is '+money(F.short)+' short of your spending plan. Spend less in one or two categories until next payday.</p>':'')+'</div>';
+  h+=rv;
+  /* the plan itself */
+  h+='<div class="card"><h2 style="font-family:var(--display);font-size:22px">'+(CV?'Spending plan this month':'Spending plan this paycheque')+'</h2>'+((S.plan||[]).length?'<div class="rows">'+S.plan.map(function(c){var a0=CV?CV.prev:C.P.prev,a1=CV?CV.next:C.P.next,sp=S.spend.filter(function(e){var d=parse(e.dt);return e.c===c.c&&d>=a0&&d<a1}).reduce(function(s,e){return s+(+e.a||0)},0);return '<div class="row"><span class="l"><span>'+esc(c.c)+(sp?'<small>'+money(sp)+' logged</small>':'')+'</span></span><b class="num">'+money(CV?catPay(c)*PPM[S.pay.freq]:catPay(c))+'</b></div>'}).join('')+'<div class="row"><b>Total</b><b class="num">'+money(CV?CV.pm:planT())+'</b></div></div><p class="note">'+(CV&&CV.card?'Spend it on '+cardName()+' as planned, and pay the full balance when it’s due. Your card balance shows how much is used.':CV?'Spread it through the month. Your banking app shows how much you’ve spent.':'Some people take this out in cash, or move it to a separate spending account. When it’s gone, it’s gone.')+'</p>':'<p class="note">Add your categories on the Plan tab: groceries, gas, kids, eating out and so on.</p>')+'</div>';
+  var stmts=[];if(S.card.on)S.cards.forEach(function(cd,ci){for(var mm=C.P.prev.getMonth();mm<=C.P.prev.getMonth()+1;mm++){var sd=onDay(C.P.prev.getFullYear(),mm,+cd.due||15);if(sd>=C.P.prev&&sd<C.P.next)stmts.push({dt:sd,id:'card'+ci+'@'+iso(sd),n:cd.n||'your card',ci:ci})}});stmts.sort(function(a,b){return a.dt-b.dt});var stmt=stmts.length?stmts[0]:null;
+  var stmtRow=stmts.map(function(st){return '<div class="row'+(S.paid[st.id]?' paid':'')+'"><span class="l"><button class="chk" aria-pressed="'+!!S.paid[st.id]+'" aria-label="Mark '+esc(st.n)+' paid in full" data-paid="'+st.id+'">'+(S.paid[st.id]?'✓':'')+'</button><span>Pay '+esc(st.n)+' in full<small>Due '+fd(st.dt)+(cardOwing(st.ci)?' · '+money(cardOwing(st.ci).a)+' at last check, '+fd(cardOwing(st.ci).dt,{month:'short',day:'numeric'}):' · update your balance to see the amount')+'</small></span></span><b class="num">'+(cardOwing(st.ci)?money(cardOwing(st.ci).a):'Full balance')+'</b></div>'}).join('');
+  h+='<div class="card"><h2 style="font-family:var(--display);font-size:22px">Bills before next payday</h2><div class="rows">'+stmtRow+
+     (C.due.length?C.due.map(function(b){var p=!!S.paid[b.id];return '<div class="row'+(p?' paid':'')+'"><span class="l"><button class="chk" aria-pressed="'+p+'" aria-label="Mark '+esc(b.n)+' paid" data-paid="'+b.id+'">'+(p?'✓':'')+'</button><span>'+esc(b.n)+'<small>Due '+fd(b.dt)+'</small></span></span><b class="num">'+money(b.a)+'</b></div>'}).join(''):(stmt?'':'<p class="note">No bills due this pay period.</p>'))+
+     '</div></div>';
+  $('v-today').innerHTML=h;
+}
+function openRecv(){
+  $('sheet').innerHTML='<div class="sheet-bg" id="sbg"><form class="sheet" id="recvf" aria-label="Money came in"><div style="display:flex;justify-content:space-between;align-items:center"><h2 style="font-family:var(--display);font-size:24px">Money came in</h2><button type="button" class="x" data-act="close" aria-label="Close">×</button></div>'+
+    '<p class="note">Side income, a bonus, a tax refund or a gift. Your bills and spending are already covered, so all of it goes to <b>'+bucket(step())+'</b>.</p>'+
+    '<label class="amt"><span aria-hidden="true">$</span><input id="r-amt" type="number" inputmode="decimal" step="0.01" min="0" placeholder="0" aria-label="Amount received"></label>'+
+    '<div class="grid2"><label class="field">What was it?<input id="r-note" maxlength="40" placeholder="Side job"></label><label class="field">Date<input id="r-dt" type="date" value="'+iso(d0())+'"></label></div>'+
+    '<p class="note" id="r-err" style="color:var(--bad)"></p><button class="btn" type="submit">Add it</button></form></div>';
+  $('sheet').hidden=false;setTimeout(function(){try{$('r-amt').focus()}catch(e){}},50);
+  $('sbg').addEventListener('click',function(e){if(e.target.id==='sbg')closeLog()});
+  $('recvf').addEventListener('submit',function(e){e.preventDefault();var a=+$('r-amt').value;if(!(a>0)){$('r-err').textContent='Enter how much came in.';return}
+    S.received.push({id:Date.now(),dt:$('r-dt').value||iso(d0()),a:Math.round(a*100)/100,n:$('r-note').value.trim()});track('money_received');changed();closeLog();show('today');toast(money(a)+' sent to step '+Math.min(step(),5))});
+}
+function openBal(){
+  $('sheet').innerHTML='<div class="sheet-bg" id="sbg"><form class="sheet" id="balf" aria-label="Update my balance"><div style="display:flex;justify-content:space-between;align-items:center"><h2 style="font-family:var(--display);font-size:24px">Update my balance</h2><button type="button" class="x" data-act="close" aria-label="Close">×</button></div>'+
+    '<p class="note">Open your banking app and type what’s in your chequing account right now'+(S.card.on?', and what you owe on '+(S.cards.length>1?'each card':'your card'):'')+'. The app takes out '+(S.card.on?'the card balance, ':'')+'the bills still to come and your freedom money, and shows what’s safe to spend.</p>'+
+    (S.card.on?'<p class="lbl">In chequing</p>':'')+'<label class="amt"><span aria-hidden="true">$</span><input id="b-amt" type="number" inputmode="decimal" step="0.01" placeholder="0" aria-label="Chequing balance"></label>'+
+    (!S.card.on&&S.view==='month'?'<p class="lbl">Spent so far this month</p><label class="amt"><span aria-hidden="true">$</span><input id="b-spent" type="number" inputmode="decimal" step="0.01" placeholder="0" aria-label="Spent so far this month"></label><p class="note">Most banking apps show this on the main screen.</p>':'')+
+    (S.card.on?S.cards.map(function(cd,ci){return '<p class="lbl">Owing on '+esc(cd.n||'your card')+' right now</p><label class="amt"><span aria-hidden="true">$</span><input id="b-card-'+ci+'" class="b-card" type="number" inputmode="decimal" step="0.01" placeholder="0" aria-label="Balance owing on '+esc(cd.n||'card')+'"></label>'}).join(''):'')+
+    '<p class="note" id="b-err" style="color:var(--bad)"></p><button class="btn" type="submit">See what’s safe to spend</button></form></div>';
+  $('sheet').hidden=false;setTimeout(function(){try{$('b-amt').focus()}catch(e){}},50);
+  $('sbg').addEventListener('click',function(e){if(e.target.id==='sbg')closeLog()});
+  $('balf').addEventListener('submit',function(e){e.preventDefault();var v=$('b-amt').value;if(v===''||isNaN(+v)){$('b-err').textContent='Type your chequing balance.';return}
+    var cl=[].map.call(document.querySelectorAll('.b-card'),function(x){return +x.value||0});S.bal={a:+v,spent:(!S.card.on&&S.view==='month'&&$('b-spent'))?(+$('b-spent').value||0):null,cards:cl,card:S.card.on?cl.reduce(function(t,x){return t+x},0):0,dt:iso(d0()),ts:Date.now()};track('balance_updated');changed();closeLog();show('today');toast('Balance updated')});
+}
+
+function renderSpend(){
+  var F=flow(),C=F.C,P=C.P,t=d0(),dl=Math.max(1,days(t,P.next)),wk=Math.max(1,C.P.len/7),B=balanceView(F);
+  var list=S.spend.filter(function(e){var d=parse(e.dt);return d>=P.prev&&d<P.next}).sort(function(a,b){return b.dt<a.dt?-1:b.dt>a.dt?1:b.id-a.id});
+  var by={};list.forEach(function(e){by[e.c]=(by[e.c]||0)+(+e.a||0)});
+  var hasLog=list.length>0,h='';
+  var CV=cardView();
+  if(CV){
+    h+='<div class="card wide"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><h2 style="font-family:var(--display);font-size:24px">This month’s spending</h2><span class="note">'+fd(CV.prev,{month:'short',day:'numeric'})+' to '+fd(CV.next,{month:'short',day:'numeric'})+(CV.card?' · card due '+fd(CV.next,{month:'short',day:'numeric'}):'')+' · '+CV.dl+' day'+(CV.dl>1?'s':'')+' left</span></div>';
+    if(CV.on!=null)h+='<div><div style="display:flex;justify-content:space-between;font-size:15px"><span>'+(CV.card?'On '+cardName()+' so far':'Spent so far this month')+'</span><b class="num">'+money(CV.on)+' <span class="muted" style="font-weight:500">of '+money(CV.pm)+'</span></b></div><div class="bar" style="height:12px"><i style="width:'+Math.min(100,CV.pm?CV.on/CV.pm*100:0)+'%'+(CV.on>CV.pm?';background:var(--bad)':'')+'"></i></div><p class="note" style="margin-top:6px">'+(CV.left>=0?money(CV.left)+' left to spend before '+fd(CV.next,{month:'short',day:'numeric'})+'. ':'Over your plan by '+money(-CV.left)+'. ')+Math.round(CV.frac*100)+'% of the month has gone.</p>'+(!CV.card?'':S.cards.length>1?'<div class="rows" style="margin-top:6px">'+S.cards.map(function(cd,ci){var o=cardOwing(ci),nd=nextDue(+cd.due||15);return '<div class="row"><span class="l"><span>'+esc(cd.n||'Card')+'<small>Due '+fd(nd,{weekday:'short',month:'short',day:'numeric'})+'</small></span></span><b class="num">'+(o?money(o.a):'—')+'</b></div>'}).sort(function(){return 0}).join('')+'</div>':'<p class="note">Due '+fd(nextDue(+S.cards[0].due||15),{weekday:'short',month:'short',day:'numeric'})+'.</p>')+'<p class="note">'+(CV.card?'Balances':'Figures')+' from your last update on '+fd(parse(S.bal.dt),{month:'short',day:'numeric'})+''+(CV.card?'. Update the day before a card is due so the amount is current.':'. Update it now and then so the numbers stay current.')+'</p></div>';
+    else h+='<p class="note">Tap <b>Update my balance</b> and enter '+(CV.card?'what’s on your card':'what you’ve spent so far this month (most banking apps show this)')+'. The app compares it with your monthly plan, with no logging needed.</p>';
+    var byc={};S.spend.forEach(function(e){var d=parse(e.dt);if(d>=CV.prev&&d<CV.next)byc[e.c]=(byc[e.c]||0)+(+e.a||0)});var hl=Object.keys(byc).length>0;
+    h+='<div class="rows">'+(S.plan||[]).map(function(c){var a=catPay(c)*PPM[S.pay.freq],sp=byc[c.c]||0;return '<div class="sp-row"><div class="sp-top"><span><b>'+esc(c.c)+'</b><small>'+(hl&&sp?money(sp)+' logged · '+money(a-sp)+' left':'About '+money(a/4.33)+' a week')+'</small></span><span class="sp-r"><b class="num">'+money(a)+'</b><button class="chip sp-add" data-logc="'+esc(c.c)+'" aria-label="Log a '+esc(c.c)+' purchase">+ Log</button></span></div></div>'}).join('')+'</div>';
+    h+='<div class="row" style="border-top:1px solid var(--line)"><b>Monthly plan</b><b class="num">'+money(CV.pm)+'</b></div><p class="note">'+(CV.card?'Your card balance already shows what you’ve spent, so there’s nothing to log.':'Your banking app already shows what you’ve spent, so there’s nothing to log.')+' Use “+ Log” only if you want to see one category in detail.</p></div>';
+    var CC=cardCash(CV);
+    h+='<div class="card"><p class="lbl">Reality check</p>'+(CC?'<div class="tile"><b class="num"'+(CC.end<0?' style="color:var(--bad)"':'')+'>'+money(CC.end)+'</b><span class="note">left in chequing on '+fd(CV.card?CC.due:addD(CC.due,-1),{month:'short',day:'numeric'})+', '+(CV.card?'after paying your '+money(CC.card)+' card balance and your bills':'after your bills and the rest of this month’s plan')+'</span></div><div class="rows"><div class="row"><span>Chequing on '+fd(CC.dt,{month:'short',day:'numeric'})+'</span><span class="num">'+money(CC.bal)+'</span></div><div class="row"><span>Income coming in</span><span class="num">+'+money(CC.inc)+'</span></div><div class="row"><span>Bills and minimums</span><span class="num">−'+money(CC.bills)+'</span></div>'+(CC.push?'<div class="row"><span>Freedom money</span><span class="num">−'+money(CC.push)+'</span></div>':'')+''+(CV.card?'<div class="row"><span>Card balance</span><span class="num">−'+money(CC.card)+'</span></div>':'<div class="row"><span>Rest of this month’s spending plan</span><span class="num">−'+money(CC.remain)+'</span></div>')+'</div>'+(CC.end<0?'<p class="note" style="color:var(--bad)">Not enough to cover everything by the time the card is due. Spend less on the card this month, or move money in.</p>':''):'<p class="note">Enter your chequing balance and '+(CV.card?'what’s on your card. The app checks there’s enough to pay the card and your bills.':'what you’ve spent this month. The app checks there’s enough for your bills and the rest of your plan.')+'</p>')+'<button class="btn sm" data-act="bal">Update my balance</button></div>';
+  }else{
+  /* 1. this paycheque's plan */
+  h+='<div class="card wide"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><h2 style="font-family:var(--display);font-size:24px">This paycheque’s spending</h2><span class="note">'+fd(P.prev,{month:'short',day:'numeric'})+' to '+fd(P.next,{month:'short',day:'numeric'})+' · '+dl+' day'+(dl>1?'s':'')+' left</span></div>';
+  if(!(S.plan||[]).length){
+    h+='<p>You haven’t made a spending plan yet. Give each category an amount, like groceries, gas and kids, and this page shows how much each one has for this paycheque.</p><button class="btn sm" data-go="plan">Make my spending plan</button>';
+  }else{
+    h+='<div class="rows">'+S.plan.map(function(c){var a=catPay(c),sp=by[c.c]||0,left=a-sp,pct=a?Math.min(100,sp/a*100):0;
+      return '<div class="sp-row"><div class="sp-top"><span><b>'+esc(c.c)+'</b><small>'+(hasLog?money(sp)+' spent · '+(left>=0?money(left)+' left':'<span style="color:var(--bad)">'+money(-left)+' over</span>'):'About '+money(a/wk)+' a week')+'</small></span><span class="sp-r"><b class="num">'+money(a)+'</b><button class="chip sp-add" data-logc="'+esc(c.c)+'" aria-label="Log a '+esc(c.c)+' purchase">+ Log</button></span></div>'+(hasLog?'<div class="bar"><i style="width:'+pct+'%'+(left<0?';background:var(--bad)':'')+'"></i></div>':'')+'</div>'}).join('')+'</div>';
+    h+='<div class="row" style="border-top:1px solid var(--line)"><b>Total</b><b class="num">'+money(planT())+(hasLog?' <span class="muted" style="font-weight:500">· '+money(C.spent)+' spent</span>':'')+'</b></div>';
+    if(F.short>0)h+='<p class="note" style="color:var(--bad)">This paycheque is '+money(F.short)+' short of your plan, so trim one or two categories until '+fd(P.next)+'.</p>';
+    h+='<p class="note">'+(hasLog?'Logging is optional. ':S.card.on?'No need to log every purchase. Spend on your card as planned, and tap Update my balance now and then. ':'No need to log every purchase. Move this money to a spending account or take it out in cash on payday, and tap Update my balance now and then. ')+'Tap “+ Log” on a category if you want to track it closely.</p>';
+  }
+  h+='</div>';
+  /* 2. reality check */
+  h+='<div class="card"><p class="lbl">Reality check</p>'+(B?'<div class="tile"><b class="num">'+money(B.safe)+'</b><span class="note">safe to spend, from your balance of '+money(B.bal)+' on '+fd(B.dt)+'</span></div>':'<p class="note">Type your chequing balance and the app works out what’s really left after the bills still to come.</p>')+'<button class="btn sm" data-act="bal">Update my balance</button></div>';
+  }
+  /* 3. review history */
+  var rv=S.review||{},keys=Object.keys(rv).sort().slice(-6);
+  h+='<div class="card"><p class="lbl">'+(keys.length>1?'Your last '+keys.length+' paycheques':'Your track record')+'</p>';
+  if(!keys.length)h+='<p class="note">'+(cardView()?'After each card cycle you’ll get a 30-second review on the Today tab: did each category stay within the plan? Your first one appears after '+fd(cardView().next)+'.':'After each payday you’ll get a 30-second review on the Today tab: did each category stay within the plan? Your first one appears on '+fd(P.next)+'.')+'</p>';
+  else{var tally={},overAmt={};keys.forEach(function(k){Object.keys(rv[k]).forEach(function(c){tally[c]=(tally[c]||0)+1;overAmt[c]=(overAmt[c]||0)+(+rv[k][c]||0)})});
+    var within=keys.filter(function(k){return !Object.keys(rv[k]).length}).length;
+    h+='<div class="tile"><b class="num">'+within+' of '+keys.length+'</b><span class="note">'+(cardView()?'reviews':'paycheques')+' fully within the plan</span></div>';
+    var cs=Object.keys(tally).sort(function(a,b){return tally[b]-tally[a]});
+    h+=cs.length?'<div class="rows">'+cs.map(function(c){return '<div class="row"><span class="l"><span>'+esc(c)+'<small>Over '+tally[c]+' time'+(tally[c]>1?'s':'')+'</small></span></span><b class="num" style="color:var(--bad)">+'+money(overAmt[c])+'</b></div>'}).join('')+'</div><p class="note">A category that keeps going over needs a bigger amount, or a closer eye.</p>':'<p class="note">Every category stayed within the plan. That’s delayed gratification at work.</p>';
+  }
+  h+='</div>';
+  h+=monthCard();
+  /* 4. purchases, only if any */
+  if(hasLog)h+='<div class="card wide"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><h2 style="font-family:var(--display);font-size:22px">Logged purchases</h2><button class="btn sm" data-act="log">+ Log</button></div><div class="rows">'+list.map(function(e){return '<div class="row"><span class="l"><span>'+esc(e.c)+(e.note?' · '+esc(e.note):'')+'<small>'+fd(parse(e.dt))+'</small></span></span><span class="l"><b class="num">'+money(e.a,1)+'</b><button class="x" aria-label="Delete" data-del="'+e.id+'">×</button></span></div>'}).join('')+'</div></div>';
+  $('v-spend').innerHTML=h;
+}
+
+function monthsOut(n){var t=d0();return fd(onDay(t.getFullYear(),t.getMonth()+n,1),{month:'short',year:'numeric'})}
+function yrs(mo){var y=Math.round(mo/12*2)/2;return y<1?'under a year':(String(y).replace('.5','½'))+' years'}
+
+function payCard(){
+  var g=S.goal,B=+g.invested||0,rate=+g.rate||18,gr=+g.growth||12,need=+g.need||0,sn=step();
+  var pay=B*rate/100/12,keep=B*(Math.pow((1+gr/100)/1.025,1/12)-1),take=Math.max(0,Math.min(pay,keep)),re=Math.max(0,pay-take);
+  var h='<div class="card wide"><p class="lbl">What your investments pay you</p>';
+  if(B<=0)return h+'<p class="note">Add what you have invested now, in the freedom number card above, to see what it pays you each month and how much to reinvest.</p></div>';
+  h+='<div><span class="note">At '+rate+'% a year, your '+money(B)+' pays about</span><div class="big num">'+money(pay)+'<span style="font-size:22px"> a month</span></div></div>';
+  h+='<div class="grid2"><div class="tile"><span class="note">Reinvest to keep it growing</span><b class="num">'+money(re)+'</b><span class="note">'+(pay?Math.round(re/pay*100):0)+'% of each payout</span></div><div class="tile"><span class="note">You could take</span><b class="num" style="color:var(--good)">'+money(take)+'</b><span class="note">'+(need?'covers '+Math.round(take/need*100)+'% of your '+money(need)+' a month':'a month')+'</span></div></div>';
+  h+='<p class="note">'+(re>1?'At '+gr+'% growth, your balance only earns enough to keep up with inflation if you put '+money(re)+' back in each month. Spend the whole payout and the balance slowly shrinks. ':'Your growth covers the whole payout, so you could take all of it and the balance still keeps up with inflation. ')+(sn<6?'<b>For now, reinvest it all.</b> You’re still building, and every reinvested dollar brings your freedom date closer.':'You’ve reached freedom: live on what you can take, and reinvest the rest.')+'</p>';
+  return h+'<p class="note">Assumes '+gr+'% a year total growth and 2.5% inflation, before tax. Change the rates in the freedom number card.</p></div>';
+}
+function renderGoals(){
+  var sn=step(),T=targets(),X=sim(),m=S.method,alt=sim(m==='snowball'?'avalanche':'snowball'),g=S.goal;
+  var cush=+S.cushion||0,pushM=(+S.push||0)*PPM[S.pay.freq],payM=incomeM();
+  var inc0g=(+S.incomes[0].a||0)>0;
+  var detail=[
+    (S.bills.length&&inc0g?'Your pay and '+S.bills.length+' bill'+(S.bills.length>1?'s are':' is')+' in the plan.':'Add your pay and bills on the Plan tab.'),
+    money(Math.min(cush,T.starter))+' of '+money(T.starter)+(S.kids?' (with kids)':''),
+    '',
+    (needM()>0?money(Math.min(cush,T.full))+' of '+money(T.full)+' (3 × '+money(needM())+')':'Add your monthly need in the freedom number card below.'),
+    'Freedom money is '+(payM?Math.round(pushM/payM*100):0)+'% of your income. Aim for 20%.',
+    money(Math.min(+g.invested||0,T.goal))+' of '+money(T.goal)+' invested'
+  ];
+  var atk=X.debts.filter(function(d){return d.atk&&(d.done==null||d.done>0)}).sort(function(a,b){return (a.done==null?1e9:a.done)-(b.done==null?1e9:b.done)});
+  var sched=X.debts.filter(function(d){return !d.atk&&(d.done==null||d.done>0)});
+  detail[2]=atk.length?atk.length+' debt'+(atk.length>1?'s':'')+' to clear, '+(m==='snowball'?'smallest first':'highest interest first')+'.':'No debts at 7% or more.';
+  var h='<div class="card wide"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><h2 style="font-family:var(--display);font-size:26px">The Freedom Steps</h2><span class="note">You’re on step '+sn+'</span></div><ol class="fs">';
+  STEPS.forEach(function(s,i){var n=i+1,state=n<sn?'done':n===sn?'now':'next',when='';
+    if(state==='done')when='Done';else if(n===5)when=state==='now'?'You’re here':'';else if(state==='now')when='You’re here'+(X.st[n]!=null&&X.st[n]>0?' · done by '+monthsOut(X.st[n]):'');else if(X.st[n]!=null)when='About '+monthsOut(X.st[n]);
+    var now=state==='now',open=now||!!stepOpen[i];
+    h+='<li class="fs-'+state+(open?' fs-open':'')+'"'+(now?'':' data-fs="'+i+'" tabindex="0" role="button" aria-expanded="'+open+'" aria-label="'+s[0]+(open?', tap to close':', tap to see more')+'"')+'><span class="fs-n">'+(state==='done'?'✓':n)+'</span><span class="fs-t"><b>'+s[0]+'</b>'+(now?'<small class="fs-here">'+when+'</small>':'')+'<small>'+s[1]+'</small>'+((state!=='done'||open)&&detail[i]?'<small class="fs-d">'+detail[i]+'</small>':'')+(faithOn()&&open?'<small class="fs-v">“'+STEPV[i][0]+'”<span class="fs-vr">'+STEPV[i][1]+' · BSB</span></small>':'')+'</span><span class="fs-w">'+(now?'':when+'<span class="fs-chev" aria-hidden="true"><svg viewBox="0 0 12 8" width="12" height="8"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>')+'</span></li>'});
+  h+='</ol><p class="note">Never refuse free money: even on step 3, take a full employer RRSP or pension match.</p></div>';
+
+  h+='<div class="card"><p class="lbl">Step 3 · Attack expensive debt</p>';
+  h+='<div class="chips" role="group" aria-label="Debt payoff method"><button class="chip" data-method="avalanche" aria-pressed="'+(m==='avalanche')+'">Avalanche</button><button class="chip" data-method="snowball" aria-pressed="'+(m==='snowball')+'">Snowball</button></div>';
+  h+='<p class="note">'+(m==='avalanche'?'<b>Avalanche:</b> highest interest first. It costs you the least.':'<b>Snowball:</b> smallest balance first. Quick wins keep you going.')+'</p>';
+  if(!atk.length)h+='<p><b>No expensive debt.</b> Nothing at 7% or more, so your freedom money skips straight past this step.</p>';
+  else if(X.st[3]==null)h+='<div class="big" style="font-size:36px">Not yet</div><p class="note">Your payments don’t cover the interest. Raise your freedom money on the Plan tab.</p>';
+  else{
+    var t1=atk[0],t2=atk[1];
+    h+='<div><span class="note">Expensive debt gone by</span><div class="big">'+monthsOut(X.st[3])+'</div></div>';
+    h+='<ol class="ts-steps"><li>Pay the minimum on every debt, every month.</li><li>Every extra dollar, <b>'+money(+S.push||0)+' each payday</b>, goes to <b>'+esc(t1.n)+'</b> until it’s gone.</li>'+(t2?'<li>Then all you were paying on it rolls onto <b>'+esc(t2.n)+'</b>. The payment grows as each debt falls.</li>':'')+'<li>Spend less until it’s done. Delayed gratification is the whole game.</li></ol>';
+    h+='<div class="rows">'+atk.map(function(d,i){var o=S.debts.filter(function(x){return x.n===d.n})[0]||{};return '<div class="row"><span class="l"><span class="key" style="background:'+(i?'var(--c4)':'var(--c2)')+'"></span><span>'+(i+1)+'. '+esc(d.n)+'<small>'+money(+o.b||0)+' at '+(+o.r||0).toFixed(1)+'%'+(i===0?' · attack this now':'')+'</small></span></span><b class="num">'+(d.done?monthsOut(d.done):'—')+'</b></div>'}).join('')+'</div>';
+    if(alt.st[3]!=null){var diff=alt.interest-X.interest,dm=alt.st[3]-X.st[3];h+='<p class="note">Interest along the way: about <b>'+money(X.interest)+'</b>. The '+(m==='avalanche'?'snowball':'avalanche')+' would cost '+(Math.abs(diff)<50?'about the same':money(Math.abs(diff))+(diff>0?' more':' less'))+' and finish '+(dm===0?'in the same month':Math.abs(dm)+' month'+(Math.abs(dm)>1?'s':'')+(dm>0?' later':' sooner'))+'.</p>'}
+  }
+  if(sched.length)h+='<p class="lbl" style="margin-top:4px">On schedule</p><div class="rows">'+sched.map(function(d){var o=S.debts.filter(function(x){return x.n===d.n})[0]||{};return '<div class="row"><span class="l"><span class="key" style="background:var(--line)"></span><span>'+esc(d.n)+'<small>'+(+o.r||0).toFixed(1)+'% · '+money(+o.m||0)+' a month, paid like a bill</small></span></span><b class="num">'+(d.done?monthsOut(d.done):'—')+'</b></div>'}).join('')+'</div><p class="note">Loans under 7% stay on their normal schedule while the payment fits your budget comfortably. When one finishes, its payment rolls into your plan.</p>';
+  h+='</div>';
+
+  h+='<div class="card"><p class="lbl">Step 6 · Your freedom number</p>'+
+     '<div class="big num" data-live="gGoal">'+money(T.goal)+'</div>'+
+     '<p class="note" data-live="gGoalNote">Invested so that the payouts alone cover '+money(+g.need||0)+' a month.</p>'+
+     '<div class="grid2"><label class="field">Monthly need<input id="g-need" type="number" inputmode="numeric" min="0" step="100" value="'+(+g.need||0)+'"></label><label class="field">Invested now<input id="g-inv" type="number" inputmode="numeric" min="0" step="1000" value="'+(+g.invested||0)+'"></label></div>'+
+     '<div class="field">If it pays each year<div class="chips" data-set="rate">'+[12,18,25].map(function(r){return '<button class="chip" aria-pressed="'+(+g.rate===r)+'" data-v="'+r+'">'+r+'%</button>'}).join('')+'</div></div>'+
+     '<div class="field">If it grows each year<div class="chips" data-set="growth">'+[8,12,15].map(function(r){return '<button class="chip" aria-pressed="'+(+g.growth===r)+'" data-v="'+r+'">'+r+'%</button>'}).join('')+'</div></div>'+
+     '<div class="card" data-live="gRes" style="background:var(--band)"><span class="note">With '+money(+S.push||0)+' of freedom money each payday, plus each debt payment as it frees up</span><b style="font-family:var(--display);font-size:30px;font-weight:500">'+(T.goal<=0?'Add your monthly need':sn===6?'You’re there':X.st[6]==null?'Over 50 years':'About '+yrs(X.st[6]))+'</b>'+(X.st[6]?'<span class="note">Around '+monthsOut(X.st[6])+'</span>':'')+'</div></div>';
+  h+=payCard();
+  h+='<div class="card" id="plusCard"><p class="lbl">Coming soon</p><h2 style="font-family:var(--display);font-size:22px">Melius Money Plus</h2><ul class="note" style="margin:0;padding-left:18px"><li>Your numbers backed up and on every phone</li><li>Share one plan with your partner</li><li>Bank transactions added for you</li><li>Your coach sees your progress before check-ins</li></ul>'+
+     (S.waitlist?'<p class="pill good">You’re on the waitlist</p>':'<form id="wlForm" class="stack" style="gap:8px" novalidate><label class="field">Email<input id="wl-email" type="email" autocomplete="email" placeholder="you@example.com"></label><button class="btn sm" type="submit">Join the waitlist</button><p class="note" id="wl-msg"></p></form>')+
+     '<p class="note">We only use your email to tell you when Plus is ready. Your app numbers are never sent.</p></div>';
+  h+='<div class="card cta"><b>Want help moving through the steps faster?</b><p class="note">That’s what the coaching is for. <a href="https://meliusoneconsulting.com/#book" target="_blank" rel="noopener" data-track="app_book_click">Book a free 30-minute intro session</a>.</p></div>';
+  $('v-goals').innerHTML=h;
+  var f=$('wlForm');if(f)f.addEventListener('submit',function(e){e.preventDefault();var em=$('wl-email').value.trim(),msg=$('wl-msg');
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){msg.textContent='Enter an email like name@example.com.';msg.style.color='var(--bad)';return}
+    msg.style.color='';msg.textContent='Sending…';
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'form-name=plus-waitlist&email='+encodeURIComponent(em)})
+      .then(function(r){if(!r.ok)throw 0;S.waitlist=1;save();track('plus_waitlist_joined');renderGoals();toast('You’re on the list')})
+      .catch(function(){msg.textContent='That didn’t go through. Check your connection and try again.';msg.style.color='var(--bad)'})});
+}
+
+function catSelect(v,L,k){var list=(L||CATS).slice();if(v&&list.indexOf(v)<0)list.push(v);
+  return '<select data-k="'+(k||'c')+'">'+list.map(function(c){return '<option'+(c===v?' selected':'')+'>'+esc(c)+'</option>'}).join('')+'<option value="__other">Other (type your own)…</option></select>'}
+function ord(n){n=+n||0;var v=n%100;return n+((v>10&&v<14)?'th':({1:'st',2:'nd',3:'rd'}[n%10]||'th'))}
+function pushNote(){
+  var T=targets(),c=+S.cushion||0,t=attackTarget(),jobs=[];
+  if(c<T.starter)jobs.push('your starter cushion');
+  if(t)jobs.push('paying off '+esc(t.n)+(S.debts.filter(function(d){return isAtk(d)&&(+d.b||0)>0}).length>1?' and your other expensive debt':''));
+  if(c<T.full)jobs.push('your income cushion, invested in a stable fund that pays you monthly');
+  var h='What’s left after all your expenses. ';
+  if(!jobs.length)return h+'<b>Every dollar is invested.</b>';
+  h+='<b>Right now it goes to '+jobs[0]+'.</b> ';
+  if(jobs.length>1)h+='Then '+jobs.slice(1).join(', then ')+'. ';
+  return h+'After that, every dollar goes into your income investments.';
+}
+function monthCard(){
+  var ppm=PPM[S.pay.freq],inc=incomeM(),bills=S.bills.reduce(function(t,b){return t+(+b.a||0)},0),mins=S.debts.filter(function(d){return (+d.b||0)>0}).reduce(function(t,d){return t+(+d.m||0)},0);
+  var sp=planMonth(),fm=(+S.push||0)*ppm,left=inc-bills-mins-sp-fm,sn=step();
+  var rows=[['Bills',bills,'var(--c1)'],['Minimum debt payments',mins,'var(--c1)'],['Spending plan',sp,'var(--c4)'],['Freedom money',fm,'var(--c2)']];
+  var out=bills+mins+sp,tot=Math.max(inc,out+fm)||1;
+  var h='<div class="card wide"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><h2 style="font-family:var(--display);font-size:22px">Your month at a glance</h2><span class="note">Monthly averages</span></div>';
+  h+='<div class="split" aria-hidden="true">'+rows.concat(left>0?[['',left,'var(--c3)']]:[]).map(function(r){return r[1]>0?'<i style="flex:'+r[1]/tot+';background:'+r[2]+'"></i>':''}).join('')+'</div>';
+  h+='<div class="rows"><div class="row"><b>Income</b><b class="num">'+money(inc)+'</b></div>'+
+    rows.map(function(r){return r[1]?'<div class="row"><span class="l"><i class="key" style="background:'+r[2]+'"></i><span>'+r[0]+'</span></span><span class="num">'+money(r[1])+'</span></div>':''}).join('')+
+    '<div class="row"><b>All bills and spending</b><b class="num">'+money(out)+'</b></div>'+
+    '<div class="row"><span class="l"><i class="key" style="background:var(--c3)"></i><span>'+(left>=0?'Left over<small>Goes to '+(sn>=5?'investing':sn===3?'paying off '+esc((attackTarget()||{n:'your debt'}).n):sn===4?'your income cushion':'your starter cushion')+' automatically, in lighter paycheques</small>':'Short<small>Your plan spends more than you earn. Trim the spending plan or freedom money.</small>')+'</span></span><b class="num"'+(left<0?' style="color:var(--bad)"':'')+'>'+money(left)+'</b></div></div>';
+  if(S.card.on&&sp)h+='<p class="note">About '+money(sp)+' a month goes on '+cardName()+' and is paid off in full.</p>';
+  return h+'</div>';
+}
+function renderPlan(){
+  var T=targets(),sn=step(),inc0=(+S.incomes[0].a||0)>0;
+  var todo=[['Add your take-home pay',inc0],['Add your monthly bills',S.bills.length>0],['Make your spending plan',(S.plan||[]).length>0],['Add any debts (skip this if you have none)',S.debts.length>0,true],['Set your freedom money',(+S.push||0)>0]];
+  var setupDone=todo.filter(function(t){return !t[2]}).every(function(t){return t[1]});
+  var h=setupDone?'':'<div class="card wide cta"><b>Get set up in about 10 minutes</b><ol class="setup">'+todo.map(function(t){return '<li class="'+(t[1]?'ok':'')+'"><span aria-hidden="true">'+(t[1]?'✓':'')+'</span>'+t[0]+'</li>'}).join('')+'</ol><p class="note">Fill in the cards below, top to bottom. Everything saves as you type.</p></div>';
+  h+=(inc0?monthCard():'')+'<div class="card wide"><h2 style="font-family:var(--display);font-size:22px">Your income</h2><p class="note">Add every regular source: your pay, your partner’s, the Canada Child Benefit. The first one sets your paydays; anything else is counted in the paycheque it lands in.</p><div class="stack" style="gap:14px">'+
+    S.incomes.map(function(inc,i){return '<div class="edit inc" data-row="incomes" data-i="'+i+'"><label class="field i-n">'+(i===0?'Main income · sets your paydays':'Income')+'<input data-k="n" value="'+esc(inc.n)+'"></label><label class="field i-a">Take-home amount<input data-k="a" type="number" inputmode="decimal" min="0" step="50" value="'+(+inc.a||0)+'"></label><label class="field i-f">How often<select data-k="freq">'+Object.keys(FREQ).map(function(k){return '<option value="'+k+'"'+(k===inc.freq?' selected':'')+'>'+FREQ[k]+'</option>'}).join('')+'</select></label><label class="field i-d"'+(inc.freq==='semimonthly'?' hidden':'')+'>A recent pay date<input data-k="last" type="date" value="'+(inc.last||'')+'"></label>'+(i?'<button class="x i-x" aria-label="Remove '+esc(inc.n)+'" data-rm="incomes" data-i="'+i+'">×</button>':'')+'</div>'}).join('')+
+    '</div><button class="btn ghost sm" data-add="incomes">+ Add income</button><p class="note">Side gigs, bonuses or refunds that don’t come on a schedule? Don’t add them here. Use “Money came in” on the Today tab when they arrive.</p></div>';
+  h+='<div class="card"><h2 style="font-family:var(--display);font-size:22px">Freedom money</h2>'+
+    '<label class="field">Freedom money, each payday<input id="p-push" type="number" inputmode="decimal" min="0" step="25" value="'+(+S.push||0)+'"></label>'+
+    '<p class="note" data-live="pushNote">'+pushNote()+'</p></div>';
+  h+='<div class="card"><h2 style="font-family:var(--display);font-size:22px">Your cushion</h2>'+
+    '<label class="field">Cushion now (cash plus your income cushion)<input id="p-cush" type="number" inputmode="decimal" min="0" step="100" value="'+(+S.cushion||0)+'"></label>'+
+    '<div class="field">Kids at home?<div class="chips"><button class="chip" data-kids="1" aria-pressed="'+!!S.kids+'">Yes</button><button class="chip" data-kids="0" aria-pressed="'+!S.kids+'">No</button></div></div>'+
+    '<p class="note" data-live="cushNote">Starter cushion: <b>'+money(T.starter)+'</b>, kept in cash for true emergencies. Income cushion: <b>'+money(T.full)+'</b>, three months of your monthly need. Don’t leave it in savings: invest it in a high-interest savings ETF or money market fund in your TFSA. It pays you every month, barely moves when markets fall, and comes out tax-free if you need it.</p></div>';
+  var F=flow(),nf=flow(period(F.P.next));
+  h+='<div class="card wide"><h2 style="font-family:var(--display);font-size:22px">Spending plan</h2><p class="note">Decide ahead of time what each category gets, and stick to it.</p>'+
+    '<div class="field">How do you pay for everyday spending?<div class="chips"><button class="chip" data-card="0" aria-pressed="'+!S.card.on+'">Debit or cash</button><button class="chip" data-card="1" aria-pressed="'+!!S.card.on+'">Credit card, paid in full every month</button></div></div>'+
+    (S.card.on?'<div class="stack" style="gap:12px">'+S.cards.map(function(cd,ci){return '<div class="edit card-r" data-row="cards" data-i="'+ci+'"><label class="field">Card name<input data-k="n" value="'+esc(cd.n||'')+'"></label><label class="field">Payment due day (1 to 31)<input data-k="due" type="number" inputmode="numeric" min="1" max="31" value="'+(+cd.due||15)+'"></label>'+(ci?'<button class="x" aria-label="Remove '+esc(cd.n||'card')+'" data-rm="cards" data-i="'+ci+'">×</button>':'<span></span>')+'</div>'}).join('')+'</div><button class="btn ghost sm" data-add="cards">+ Add another card</button><p class="note">Spend on the card as planned and leave the money in chequing. Pay the <b>full</b> statement every month. If you ever can’t, the unpaid part is debt: add it under Debts below.</p>':'<p class="note">On payday, take your spending money out in cash or move it to a separate spending account.</p>')+
+    '<div class="field">Track my spending by<div class="chips"><button class="chip" data-view="month" aria-pressed="'+(S.view==='month')+'">Month</button><button class="chip" data-view="pay" aria-pressed="'+(S.view!=='month')+'">Paycheque</button></div></div><p class="note">'+(S.view==='month'?(S.card.on?'Your month runs from one card due date to the next.':'Your month runs from the 1st to the end of the month.'):'Each paycheque has to last until the next one. Good when money is tight.')+'</p>'+
+    '<div class="field">Amounts are<div class="chips"><button class="chip" data-pm="month" aria-pressed="'+(S.planMode!=='pay')+'">Per month</button><button class="chip" data-pm="pay" aria-pressed="'+(S.planMode==='pay')+'">Per paycheque</button></div></div>'+
+    '<div class="stack" style="gap:10px">'+
+    S.plan.map(function(c,i){return '<div class="edit plan" data-row="plan" data-i="'+i+'"><label class="field">Category'+(c.custom?'<input data-k="c" value="'+esc(c.c)+'" placeholder="Name your category">':catSelect(c.c))+'</label><label class="field">'+(S.planMode==='pay'?'Per paycheque':'Per month')+'<input data-k="a" type="number" inputmode="decimal" value="'+(+c.a||0)+'"></label><button class="x" aria-label="Remove '+esc(c.c)+'" data-rm="plan" data-i="'+i+'">×</button></div>'}).join('')+
+    '</div><button class="btn ghost sm" data-add="plan">+ Add a category</button><p class="note" data-live="planNote">Plan total: <b>'+(S.planMode==='pay'?money(planT())+' per paycheque</b> (about '+money(planMonth())+' a month)':money(planMonth())+' a month</b> (about '+money(planT())+' per paycheque)')+'. Spending money available after bills: '+money(F.C.spendable)+' this paycheque, '+money(nf.C.spendable)+' next. Anything left over goes to your step.</p></div>';
+  h+='<div class="card wide"><h2 style="font-family:var(--display);font-size:22px">Monthly bills</h2><div class="stack" style="gap:10px">'+
+    S.bills.map(function(b,i){return '<div class="edit bill" data-row="bills" data-i="'+i+'"><label class="field b-n">Bill'+(b.custom?'<input data-k="n" value="'+esc(b.n)+'" placeholder="Name your bill">':catSelect(b.n,BILLS,'n'))+'</label><label class="field b-a">Amount<input data-k="a" type="number" inputmode="decimal" value="'+(+b.a||0)+'"></label><label class="field b-d">Due day<input data-k="d" type="number" inputmode="numeric" min="1" max="31" value="'+(+b.d||1)+'"></label><button class="x" aria-label="Remove '+esc(b.n)+'" data-rm="bills" data-i="'+i+'">×</button></div>'}).join('')+
+    '</div><button class="btn ghost sm" data-add="bills">+ Add a bill</button></div>';
+  h+='<div class="card wide"><h2 style="font-family:var(--display);font-size:22px">Debts</h2><p class="note">Minimum payments count as bills on their due day. Debts at 7% or more are set to <b>Attack</b>. Lower-rate loans stay <b>On schedule</b> while the payment fits your budget comfortably; switch any debt if that changes.</p><div class="stack" style="gap:14px">'+
+    S.debts.map(function(b,i){var a=isAtk(b);return '<div class="edit debt" data-row="debts" data-i="'+i+'"><label class="field f-n">Debt'+(b.custom?'<input data-k="n" value="'+esc(b.n)+'" placeholder="Name your debt">':catSelect(b.n,DEBTS,'n'))+'</label><label class="field f-b">Owing<input data-k="b" type="number" inputmode="decimal" value="'+(+b.b||0)+'"></label><label class="field f-r">Rate %<input data-k="r" type="number" inputmode="decimal" step="0.1" value="'+(+b.r||0)+'"></label><label class="field f-m">Minimum<input data-k="m" type="number" inputmode="decimal" value="'+(+b.m||0)+'"></label><label class="field f-d">Due day<input data-k="d" type="number" inputmode="numeric" min="1" max="31" value="'+(+b.d||1)+'"></label><label class="field f-a">Plan<select data-k="atk"><option value="1"'+(a?' selected':'')+'>Attack</option><option value="0"'+(a?'':' selected')+'>On schedule</option></select></label><button class="x f-x" aria-label="Remove '+esc(b.n)+'" data-rm="debts" data-i="'+i+'">×</button></div>'}).join('')+
+    '</div><button class="btn ghost sm" data-add="debts">+ Add a debt</button></div>';
+  h+='<div class="card"><h2 style="font-family:var(--display);font-size:22px">Check-in summary</h2><p class="note">A one-page snapshot to send your coach before a check-in.</p><textarea id="sum" readonly aria-label="Check-in summary">'+esc(summary())+'</textarea><button class="btn sm" data-act="copy" data-t="sum">Copy summary</button></div>';
+  h+='<div class="card"><h2 style="font-family:var(--display);font-size:22px">Backup</h2><p class="note">Your numbers live only on this device. Copy a backup and keep it in your notes or email. Automatic backup is coming in <button class="chip" style="padding:2px 10px;font-size:13px" data-go="goals">Melius Money Plus</button>.</p><div class="chips"><button class="btn ghost sm" data-act="backup">Copy backup</button><button class="btn ghost sm" data-act="restore">Restore</button></div><div id="restoreBox" hidden class="stack" style="gap:8px"><textarea id="restoreTxt" aria-label="Paste your backup here" placeholder="Paste your backup here"></textarea><button class="btn sm" data-act="restore-go">Restore this backup</button><p class="note" id="restoreMsg"></p></div></div>';
+  h+='<div class="card"><h2 style="font-family:var(--display);font-size:22px">Daily Bible passage</h2><p class="note">A short passage from the Berean Standard Bible on the Today tab, about money, hard work, the love of Christ and the shortness of life.</p><div class="chips" role="group" aria-label="Daily Bible passage"><button class="chip" data-faith="1" aria-pressed="'+faithOn()+'">Show it</button><button class="chip" data-faith="0" aria-pressed="'+!faithOn()+'">Hide it</button></div></div>';
+  h+='<div class="card"><h2 style="font-family:var(--display);font-size:22px">Start over</h2><div class="chips"><button class="btn danger sm" data-act="ask-fresh">Clear and start fresh</button><button class="btn ghost sm" data-act="ask-example">Load the example</button></div><div id="confirmBox"></div><p class="note">App version '+APPV+'</p></div>';
+  $('v-plan').innerHTML=h;
+}
+
+function summary(){
+  var C=calc(),X=sim(),T=targets(),sn=step(),total=S.debts.reduce(function(s,d){return s+(+d.b||0)},0);
+  var atkTotal=S.debts.filter(isAtk).reduce(function(s,d){return s+(+d.b||0)},0);
+  var by={};S.spend.forEach(function(e){var d=parse(e.dt);if(d>=C.P.prev&&d<C.P.next)by[e.c]=(by[e.c]||0)+(+e.a||0)});
+  var top=Object.keys(by).sort(function(a,b){return by[b]-by[a]}).slice(0,3).map(function(c){return c+' '+money(by[c])}).join(', ');
+  return ['Melius Money check-in · '+fd(d0(),{month:'long',day:'numeric',year:'numeric'}),'',
+    'Freedom Step: '+sn+' of 6 ('+STEPS[sn-1][0]+')',
+    'Income: '+S.incomes.filter(function(i){return +i.a>0}).map(function(i){return (i.n||'Income')+' '+money(+i.a)+' '+FREQ[i.freq].toLowerCase()}).join('; ')+' (about '+money(incomeM())+' a month)'+(C.recv?' · extra this paycheque '+money(C.recv):''),
+    'This paycheque ('+fd(C.P.prev)+' to '+fd(C.P.next)+'):',
+    '  Bills and minimums '+money(C.bills)+' · Freedom money '+money(C.push)+' ('+bucket(sn).replace(/&amp;/g,'&')+')',
+    (function(){var F=flow(),B=balanceView(F);return '  Spending money '+money(F.spendMoney)+(F.toStep?' · Extra to step '+money(F.toStep):'')+(F.holdOut?' · Held for next payday '+money(F.holdOut):'')+(B?' · Safe to spend '+money(B.safe)+' (balance '+money(B.bal)+' on '+fd(B.dt)+')':'')})(),
+    '  Spending plan '+money(planT())+(Object.keys(S.review||{}).length?' · last reviews: '+Object.keys(S.review).sort().slice(-3).map(function(k){var o=S.review[k],c=Object.keys(o);return c.length?c.map(function(x){return x+' +'+money(o[x])}).join(', '):'all within'}).join(' | '):''),
+    top?'  Logged spending: '+top:'  No purchases logged',
+    (S.card.on?'Everyday spending on '+S.cards.map(function(c){return c.n+' (due the '+ord(c.due)+')'}).join(', ')+', paid in full monthly'+(S.bal&&S.bal.card?' · owing '+money(S.bal.card)+' at last check':''):'Everyday spending: debit or cash'),
+    'Cushion: '+money(+S.cushion||0)+' (starter '+money(T.starter)+' in cash, income cushion '+money(T.full)+' invested)',
+    'Debts: '+(total?money(total)+' owing, '+money(atkTotal)+' at 7%+ · method: '+S.method+' · expensive debt gone around '+(X.st[3]==null?'not yet':X.st[3]===0?'now':monthsOut(X.st[3])):'none'),
+    'Freedom number: '+money(T.goal)+' at '+S.goal.rate+'% · invested '+money(+S.goal.invested||0)+' · '+(X.st[6]==null?'over 50 years':X.st[6]===0?'reached':'about '+yrs(X.st[6])+' to go')].join('\n');
+}
+
+/* ---------- shell ---------- */
+var cur='today';
+var R={today:renderToday,spend:renderSpend,goals:renderGoals,plan:renderPlan};
+function show(v){cur=v;track('app_tab',{tab:v});[].forEach.call(document.querySelectorAll('.tab'),function(t){t.setAttribute('aria-selected',t.dataset.v===v)});
+  Object.keys(R).forEach(function(k){$('v-'+k).hidden=k!==v});R[v]();$('exTag').hidden=!S.example;try{$('scroller').scrollTop=0}catch(e){}}
+function changed(mine){if(mine)S.example=false;save();flashSaved();$('exTag').hidden=!S.example}
+var undoBuf=null;
+function toast(t,undo){var el=$('toast');el.innerHTML=esc(t)+(undo?' <button class="undo" data-act="undo">Undo</button>':'');el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(function(){el.hidden=true;if(undo)undoBuf=null},undo?6000:1800)}
+function copy(text,ta){
+  function fb(){if(ta){ta.hidden=false;ta.focus();ta.select()}toast('Select and copy the text')}
+  try{navigator.clipboard.writeText(text).then(function(){toast('Copied')},fb)}catch(e){fb()}
+}
+
+function openLog(pre){
+  var CL=cats(),sel=pre&&CL.indexOf(pre)>-1?pre:CL[0];
+  $('sheet').innerHTML='<div class="sheet-bg" id="sbg"><form class="sheet" id="logf" aria-label="Log spending"><div style="display:flex;justify-content:space-between;align-items:center"><h2 style="font-family:var(--display);font-size:24px">Log spending</h2><button type="button" class="x" data-act="close" aria-label="Close">×</button></div>'+
+    '<label class="amt"><span aria-hidden="true">$</span><input id="l-amt" type="number" inputmode="decimal" step="0.01" min="0" placeholder="0" aria-label="Amount"></label>'+
+    '<div class="chips" id="l-cats">'+CL.map(function(c,i){return '<button type="button" class="chip" data-c="'+esc(c)+'" aria-pressed="'+(c===sel)+'">'+esc(c)+'</button>'}).join('')+'</div>'+
+    '<div class="grid2"><label class="field">Note (optional)<input id="l-note" maxlength="40"></label><label class="field">Date<input id="l-dt" type="date" value="'+iso(d0())+'"></label></div>'+
+    '<p class="note" id="l-err" style="color:var(--bad)"></p><button class="btn" type="submit">Save</button></form></div>';
+  $('sheet').hidden=false;setTimeout(function(){try{$('l-amt').focus()}catch(e){}},50);
+  $('l-cats').addEventListener('click',function(e){var b=e.target.closest('[data-c]');if(!b)return;sel=b.dataset.c;[].forEach.call(this.children,function(x){x.setAttribute('aria-pressed',x===b)})});
+  $('sbg').addEventListener('click',function(e){if(e.target.id==='sbg')closeLog()});
+  $('logf').addEventListener('submit',function(e){e.preventDefault();var a=+$('l-amt').value;if(!(a>0)){$('l-err').textContent='Enter how much you spent.';return}
+    track('spend_logged',{category:sel});S.spend.push({id:Date.now(),dt:$('l-dt').value||iso(d0()),a:Math.round(a*100)/100,c:sel,note:$('l-note').value.trim()});changed();closeLog();R[cur]();toast('Logged '+money(a,1))});
+}
+function closeLog(){$('sheet').hidden=true;$('sheet').innerHTML=''}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('sheet').hidden)closeLog();if((e.key==='Enter'||e.key===' ')&&e.target.dataset&&e.target.dataset.fs!=null){e.preventDefault();e.target.click()}});
+
+document.addEventListener('click',function(e){
+  var fr=e.target.closest('[data-fs]');if(fr){var fk=+fr.dataset.fs;stepOpen[fk]=!stepOpen[fk];track('step_open',{step:fk+1});renderGoals();try{document.querySelector('[data-fs="'+fk+'"]').focus({preventScroll:true})}catch(x){}return}
+  var tr=e.target.closest('[data-track]');if(tr)track(tr.dataset.track);
+  var t=e.target.closest('button');if(!t)return;
+  if(t.classList.contains('tab'))return show(t.dataset.v);
+  if(t.dataset.go)return show(t.dataset.go);
+  if(t.dataset.paid){var id=t.dataset.paid;if(S.paid[id])delete S.paid[id];else{S.paid[id]=1;track('bill_paid')}changed();return renderToday()}
+  if(t.dataset.del){var di=S.spend.findIndex(function(x){return String(x.id)===t.dataset.del});if(di>-1){undoBuf={l:'spend',i:di,v:S.spend.splice(di,1)[0]}}changed();renderSpend();return toast('Purchase deleted',true)}
+  if(t.dataset.add){S[t.dataset.add].push(t.dataset.add==='bills'?{n:BILLS.filter(function(c){return !S.bills.some(function(x){return x.n===c})})[0]||'Other bill',a:0,d:1}:t.dataset.add==='plan'?{c:CATS.filter(function(c){return !S.plan.some(function(x){return x.c===c})})[0]||'Other',a:0}:t.dataset.add==='incomes'?{n:'Other income',a:0,freq:'monthly',last:iso(d0())}:t.dataset.add==='cards'?{n:'Another card',due:1}:{n:DEBTS.filter(function(c){return !S.debts.some(function(x){return x.n===c})})[0]||'Other debt',b:0,r:0,m:0,d:1});changed();return renderPlan()}
+  if(t.dataset.rm){var lst=t.dataset.rm,ix=+t.dataset.i,gone=S[lst].splice(ix,1)[0];undoBuf={l:lst,i:ix,v:gone};changed();renderPlan();return toast('Removed '+(gone&&(gone.n||gone.c)||'item'),true)}
+  if(t.dataset.act==='undo'&&undoBuf){S[undoBuf.l].splice(undoBuf.i,0,undoBuf.v);undoBuf=null;$('toast').hidden=true;changed();return show(cur)}
+  if(t.dataset.mv){var mk=pkey(period())+':'+t.dataset.mv;S.moved=S.moved||{};if(S.moved[mk])delete S.moved[mk];else{S.moved[mk]=Date.now();track('payday_moved',{what:t.dataset.mv})}changed();return renderToday()}
+  if(t.dataset.rv!=null){var on=t.getAttribute('aria-pressed')!=='true';t.setAttribute('aria-pressed',on);$('rvo-'+t.dataset.rv).hidden=!on;if(on)try{$('rva-'+t.dataset.rv).focus()}catch(e){}return}
+  if(t.dataset.method){S.method=t.dataset.method;track('debt_method',{method:S.method});changed(true);return renderGoals()}
+  if(t.dataset.kids!=null){S.kids=t.dataset.kids==='1';changed(true);return renderPlan()}
+  if(t.dataset.roll!=null){var dd=S.debts[+t.dataset.roll];if(dd){S.push=Math.round(((+S.push||0)+(+dd.m||0)/PPM[S.pay.freq])*100)/100;dd.rolled=true;track('debt_rolled');changed(true);toast('Rolled in. Freedom money is now '+money(S.push))}return renderToday()}
+  if(t.dataset.pm){S.planMode=t.dataset.pm;track('plan_mode',{mode:S.planMode});changed(true);return renderPlan()}
+  if(t.dataset.view){S.view=t.dataset.view;track('view_mode',{view:S.view});changed(true);return renderPlan()}
+  if(t.dataset.card!=null){S.card.on=t.dataset.card==='1';if(S.card.on)S.view='month';track('pay_method',{card:S.card.on});changed(true);return renderPlan()}
+  if(t.dataset.faith!=null){S.faith=t.dataset.faith==='1';track('faith_toggle',{on:S.faith});changed(true);return renderPlan()}
+  if(t.dataset.act==='word-next'){wordOff=(wordOff+1)%WORD.length;track('word_next');var wc=t.closest('.word');if(wc){var d=document.createElement('div');d.innerHTML=wordCard();wc.replaceWith(d.firstChild)}return}
+  if(t.dataset.logc)return openLog(t.dataset.logc);
+  var ch=t.closest('[data-set]');if(ch&&t.dataset.v){S.goal[ch.dataset.set]=+t.dataset.v;changed();return renderGoals()}
+  switch(t.dataset.act){
+    case 'log':return openLog();
+    case 'bal':return openBal();
+    case 'recv':return openRecv();
+
+    case 'review-save':var lk=reviewTarget().key,o={},n=0;S.plan.forEach(function(c,i){var b=document.querySelector('[data-rv="'+i+'"]');if(b&&b.getAttribute('aria-pressed')==='true'){o[c.c]=+$('rva-'+i).value||0;n++}});S.review=S.review||{};S.review[lk]=o;track('review_done',{over:n});changed();toast(n?'Saved. '+n+' categor'+(n>1?'ies':'y')+' went over':'Saved. All within plan');return renderToday();
+    case 'close':return closeLog();
+    case 'copy':track('summary_copied');return copy($(t.dataset.t).value,$(t.dataset.t));
+    case 'backup':track('backup_copied');var s=JSON.stringify(S);return copy(s,null);
+    case 'restore':$('restoreBox').hidden=!$('restoreBox').hidden;return;
+    case 'restore-go':try{var o=JSON.parse($('restoreTxt').value);if(!o||!(o.pay||o.incomes)||!Array.isArray(o.bills))throw 0;S=o;migrate();save();toast('Backup restored');return show('today')}catch(err){$('restoreMsg').textContent='That doesn’t look like a Melius Money backup. Copy it again and paste the whole thing.';return}
+    case 'ask-fresh':case 'ask-example':var fresh=t.dataset.act==='ask-fresh';
+      $('confirmBox').innerHTML='<div class="confirm"><b>'+(fresh?'Clear everything on this device?':'Replace your numbers with the example?')+'</b><span class="note">This can’t be undone. Copy a backup first if you want to keep your numbers.</span><div class="chips"><button class="btn danger sm" data-act="'+(fresh?'do-fresh':'do-example')+'">Yes, '+(fresh?'clear it':'load example')+'</button><button class="btn ghost sm" data-act="cancel">Cancel</button></div></div>';return;
+    case 'cancel':$('confirmBox').innerHTML='';return;
+    case 'do-fresh':track('setup_started');S=blank();migrate();save();toast('Cleared');return show('plan');
+    case 'do-example':track('example_loaded');S=example();migrate();save();toast('Example loaded');return show('today');
+  }
+});
+
+
+/* live updates while typing: apply the value, save, and refresh every card except the one being typed in */
+function applyLive(el){
+  var id=el.id,v=el.value;
+  if(id==='p-push')S.push=+v||0;else if(id==='p-cush')S.cushion=+v||0;
+  else if(id==='g-need')S.goal.need=+v||0;else if(id==='g-inv')S.goal.invested=+v||0;
+  else if(el.dataset.k){var row=el.closest('[data-row]');if(!row)return false;var it=S[row.dataset.row][+row.dataset.i],k=el.dataset.k;if(!it)return false;
+    it[k]=(k==='n'||k==='c'||k==='freq'||k==='last')?v:(+v||0);}
+  else return false;
+  if(S.incomes[0]){S.pay=S.incomes[0];S.pay.amount=+S.pay.a||0}
+  return true;
+}
+function livePatch(){
+  var real=$('v-'+cur),act=document.activeElement,card=act&&act.closest('#v-'+cur+' > *');if(!real)return;
+  var kids=[].slice.call(real.children),fi=kids.indexOf(card);
+  real.id='v-live-tmp';var tmp=document.createElement('section');tmp.id='v-'+cur;tmp.hidden=true;document.body.appendChild(tmp);
+  try{R[cur]();var nk=[].slice.call(tmp.children);if(nk.length===kids.length)nk.forEach(function(n,j){if(j!==fi)kids[j].replaceWith(n);else [].forEach.call(n.querySelectorAll('[data-live]'),function(x){var o=kids[j].querySelector('[data-live="'+x.dataset.live+'"]');if(o)o.innerHTML=x.innerHTML})})}catch(e){}
+  tmp.remove();real.id='v-'+cur;
+}
+function flashSaved(){var t=$('savedTag');if(!t)return;t.textContent='Saved ✓';t.classList.add('on');clearTimeout(flashSaved.t);flashSaved.t=setTimeout(function(){t.classList.remove('on')},1400)}
+document.addEventListener('input',function(e){
+  var el=e.target;if(el.tagName==='SELECT'||!el.closest('#v-plan,#v-goals'))return;
+  if(!applyLive(el))return;
+  if(S.example)S.example=false;save();$('exTag').hidden=!S.example;flashSaved();
+  clearTimeout(livePatch.t);livePatch.t=setTimeout(livePatch,250);
+});
+document.addEventListener('change',function(e){
+  var el=e.target,id=el.id;
+  if(id==='p-push')S.push=+el.value||0;
+  else if(id==='p-cush')S.cushion=+el.value||0;
+  else if(id==='g-need')S.goal.need=+el.value||0;
+  else if(id==='g-inv')S.goal.invested=+el.value||0;
+  else if(el.dataset.k){var row=el.closest('[data-row]');if(!row)return;var it=S[row.dataset.row][+row.dataset.i],k=el.dataset.k;if(el.value==='__other'&&el.tagName==='SELECT'){it.custom=true;it[k]='';changed(true);renderPlan();try{document.querySelector('[data-row="'+row.dataset.row+'"][data-i="'+row.dataset.i+'"] input[data-k='+k+']').focus()}catch(e){}return}
+  it[k]=(k==='n'||k==='c'||k==='freq'||k==='last')?el.value:k==='atk'?el.value==='1':(+el.value||0);if(k==='due'){it.due=Math.min(31,Math.max(1,Math.round(+el.value||1)));el.value=it.due}
+  if(k==='atk'||k==='freq'){changed(true);return renderPlan()}if(k==='d')it[k]=Math.min(31,Math.max(1,Math.round(it[k]||1)))}
+  else return;
+  if(S.incomes[0]){S.pay=S.incomes[0];S.pay.amount=+S.pay.a||0}
+  if(!S.setupDone&&(+S.pay.amount>0)&&S.bills.length){S.setupDone=true;track('setup_completed',{bills:S.bills.length,frequency:S.pay.freq})}
+  changed(true);flashSaved();if(cur==='plan'&&$('sum'))$('sum').value=summary();
+});
+
+if(EMBED)track('app_preview_view');else{track('app_open',{own_numbers:!S.example,returning:!!S.seen});if(!S.seen){S.seen=1;save()}}
+show('today');
+})();
+</script>
+
+</body>
+</html>

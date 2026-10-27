@@ -1,0 +1,207 @@
+{
+ "asOf": null,
+ "seed": true,
+ "source": "Fund websites",
+ "funds": {
+  "ZWB": {
+   "y": 6.85,
+   "ya": "Sep 30, 2026"
+  },
+  "HMAX": {
+   "y": 11.87,
+   "ya": "Sep 30, 2026"
+  },
+  "ZWC": {
+   "y": 5.78,
+   "ya": "Aug 28, 2026, trailing 12 months"
+  },
+  "ZWU": {
+   "y": 7.09,
+   "ya": "Jun 9, 2026"
+  },
+  "HHIS": {
+   "y": 29.06,
+   "ya": "Oct 23, 2026"
+  },
+  "HHL": {
+   "y": 9.44,
+   "ya": "Oct 23, 2026"
+  },
+  "HDIV": {
+   "y": 10.13,
+   "ya": "Sep 30, 2026"
+  },
+  "UMAX": {
+   "y": 13.77,
+   "ya": "Sep 30, 2026"
+  },
+  "BANK": {
+   "y": 13.93,
+   "ya": "Sep 30, 2026, trailing 12 months"
+  },
+  "HYLD": {
+   "y": 12.47,
+   "ya": "Sep 30, 2026"
+  },
+  "ZWH": {
+   "y": 6.01,
+   "ya": "Oct 16, 2026, trailing 12 months"
+  },
+  "SMAX": {
+   "y": 10.51,
+   "ya": "Sep 30, 2026"
+  },
+  "ZWP": {
+   "y": 6.38,
+   "ya": "Oct 9, 2026, trailing 12 months"
+  },
+  "QMAX": {
+   "y": 10.38,
+   "ya": "Sep 30, 2026"
+  },
+  "HTA": {
+   "y": 8.95,
+   "ya": "Oct 23, 2026"
+  },
+  "QQCC": {
+   "y": 10.64,
+   "ya": "Oct 2, 2026, trailing 12 months"
+  },
+  "HBF": {
+   "y": 8.33,
+   "ya": "Oct 16, 2026"
+  },
+  "EMAX": {
+   "y": 10.16,
+   "ya": "Sep 30, 2026"
+  },
+  "AMAX": {
+   "y": 10.61,
+   "ya": "Sep 30, 2026"
+  },
+  "CDAY": {
+   "y": 19.35,
+   "ya": "Sep 30, 2026"
+  },
+  "HUTL": {
+   "y": 8.41,
+   "ya": "Oct 21, 2026"
+  },
+  "MSTE": {
+   "y": 42.35,
+   "ya": "Oct 23, 2026"
+  },
+  "QDAY": {
+   "y": 18.43,
+   "ya": "Sep 30, 2026"
+  },
+  "USCC": {
+   "y": 10.51,
+   "ya": "Apr 2, 2026"
+  },
+  "ESPX": {
+   "y": 10.53,
+   "ya": "Sep 30, 2026, trailing 12 months"
+  },
+  "SDAY": {
+   "y": 18.96,
+   "ya": "Sep 30, 2026"
+  },
+  "BIGY": {
+   "y": 30.2,
+   "ya": "Oct 22, 2026, latest payout annualized"
+  },
+  "ZWG": {
+   "y": 6.13,
+   "ya": "Oct 2026, latest payout annualized"
+  },
+  "ZWK": {
+   "y": 7.15,
+   "ya": "Oct 2026, latest payout annualized"
+  },
+  "HHIC": {
+   "y": 17.6,
+   "ya": "Oct 23, 2026, latest payout annualized"
+  },
+  "LMAX": {
+   "y": 12.15,
+   "ya": "Sep 30, 2026"
+  },
+  "HLIF": {
+   "y": 6.59,
+   "ya": "Oct 21, 2026"
+  },
+  "ZWT": {
+   "y": 5.96,
+   "ya": "Sep 30, 2026"
+  },
+  "ZWA": {
+   "y": 6.39,
+   "ya": "Oct 2026, latest payout annualized"
+  },
+  "FMAX": {
+   "y": 12.4,
+   "ya": "Sep 30, 2026"
+  },
+  "CNCC": {
+   "y": 7.19,
+   "ya": "Apr 2, 2026"
+  },
+  "RMAX": {
+   "y": 11.34,
+   "ya": "Sep 30, 2026"
+  },
+  "HBND": {
+   "y": 10.31,
+   "ya": "Sep 30, 2026"
+  },
+  "SIXY": {
+   "y": 22,
+   "ya": "Oct 22, 2026, latest payout annualized"
+  },
+  "QQQY": {
+   "y": 12.54,
+   "ya": "Sep 30, 2026, trailing 12 months"
+  },
+  "NXF": {
+   "y": 8.3,
+   "ya": "Sep 30, 2026, trailing 12 months"
+  },
+  "CANY": {
+   "y": 20.87,
+   "ya": "Sep 30, 2026, trailing 12 months"
+  },
+  "EASY": {
+   "y": 27.4,
+   "ya": "Oct 22, 2026, latest payout annualized"
+  },
+  "TXF.B": {
+   "y": 11.2,
+   "ya": "Sep 30, 2026, trailing 12 months"
+  },
+  "INTY": {
+   "y": 30.3,
+   "ya": "Oct 22, 2026, latest payout annualized"
+  },
+  "BDAY": {
+   "y": 16.6,
+   "ya": "Oct 21, 2026, latest payout annualized"
+  },
+  "HONE": {
+   "y": 20.9,
+   "ya": "Oct 23, 2026, first payout annualized"
+  },
+  "VFV": {
+   "y": 0.86,
+   "ya": "Oct 23, 2026, trailing 12 months"
+  },
+  "QQC": {
+   "y": 0.31,
+   "ya": "Oct 16, 2026, trailing 12 months"
+  },
+  "XEQT": {
+   "y": 1.61,
+   "ya": "Oct 23, 2026, trailing 12 months"
+  }
+ }
+}

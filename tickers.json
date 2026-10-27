@@ -1,0 +1,252 @@
+[
+ {
+  "t": "ZWB",
+  "y": "ZWB.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "HMAX",
+  "y": "HMAX.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "ZWC",
+  "y": "ZWC.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "ZWU",
+  "y": "ZWU.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "HHIS",
+  "y": "HHIS.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "HHL",
+  "y": "HHL.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "HDIV",
+  "y": "HDIV.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "UMAX",
+  "y": "UMAX.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "BANK",
+  "y": "BANK.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "HYLD",
+  "y": "HYLD.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "ZWH",
+  "y": "ZWH.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "SMAX",
+  "y": "SMAX.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "ZWP",
+  "y": "ZWP.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "QMAX",
+  "y": "QMAX.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "HTA",
+  "y": "HTA.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "QQCC",
+  "y": "QQCC.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "HBF",
+  "y": "HBF.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "EMAX",
+  "y": "EMAX.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "AMAX",
+  "y": "AMAX.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "CDAY",
+  "y": "CDAY.TO",
+  "f": "Twice a month"
+ },
+ {
+  "t": "HUTL",
+  "y": "HUTL.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "MSTE",
+  "y": "MSTE.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "QDAY",
+  "y": "QDAY.TO",
+  "f": "Twice a month"
+ },
+ {
+  "t": "USCC",
+  "y": "USCC.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "ESPX",
+  "y": "ESPX.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "SDAY",
+  "y": "SDAY.TO",
+  "f": "Twice a month"
+ },
+ {
+  "t": "BIGY",
+  "y": "BIGY.TO",
+  "f": "Twice a month"
+ },
+ {
+  "t": "ZWG",
+  "y": "ZWG.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "ZWK",
+  "y": "ZWK.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "HHIC",
+  "y": "HHIC.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "LMAX",
+  "y": "LMAX.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "HLIF",
+  "y": "HLIF.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "ZWT",
+  "y": "ZWT.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "ZWA",
+  "y": "ZWA.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "FMAX",
+  "y": "FMAX.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "CNCC",
+  "y": "CNCC.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "RMAX",
+  "y": "RMAX.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "HBND",
+  "y": "HBND.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "SIXY",
+  "y": "SIXY.TO",
+  "f": "Twice a month"
+ },
+ {
+  "t": "QQQY",
+  "y": "QQQY.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "NXF",
+  "y": "NXF.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "CANY",
+  "y": "CANY.TO",
+  "f": "Twice a month"
+ },
+ {
+  "t": "EASY",
+  "y": "EASY.TO",
+  "f": "Twice a month"
+ },
+ {
+  "t": "TXF.B",
+  "y": "TXF-B.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "INTY",
+  "y": "INTY.TO",
+  "f": "Twice a month"
+ },
+ {
+  "t": "BDAY",
+  "y": "BDAY.TO",
+  "f": "Twice a month"
+ },
+ {
+  "t": "HONE",
+  "y": "HONE.TO",
+  "f": "Monthly"
+ },
+ {
+  "t": "VFV",
+  "y": "VFV.TO",
+  "f": "Quarterly"
+ },
+ {
+  "t": "QQC",
+  "y": "QQC.TO",
+  "f": "Quarterly"
+ },
+ {
+  "t": "XEQT",
+  "y": "XEQT.TO",
+  "f": "Quarterly"
+ }
+]

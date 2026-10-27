@@ -1,0 +1,938 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M2SXL2Y84K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-M2SXL2Y84K', { send_page_view: false });
+</script>
+<meta name="color-scheme" content="light dark">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Melius One Consulting, founded by Obi Oji: one-on-one financial education on income ETFs, the tax advantage of return of capital, options and building passive income. Kitchener, Ontario. Book a free intro session.">
+<!--
+  Put your photo in the same folder as this file, named headshot.jpg.
+  Sign-ups are handled by Netlify Forms. In Netlify: Site configuration > Forms > enable form detection,
+  then Forms > Form notifications > Email notification to send each sign-up to your inbox.
+-->
+<script>document.documentElement.classList.add("js")</script>
+<title>Melius One Consulting | Obi Oji, Financial Education Coach in Kitchener, Ontario</title>
+<link rel="canonical" href="https://meliusoneconsulting.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Melius One Consulting">
+<meta property="og:title" content="Melius One Consulting | Obi Oji, financial education coach">
+<meta property="og:description" content="One-on-one coaching on income ETFs, the tax advantage of return of capital, and building passive income. Kitchener, Ontario. Book a free intro session.">
+<meta property="og:url" content="https://meliusoneconsulting.com/">
+<meta property="og:image" content="https://meliusoneconsulting.com/share.jpg?v=2">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"ProfessionalService","@id":"https://meliusoneconsulting.com/#business","name":"Melius One Consulting","url":"https://meliusoneconsulting.com/","logo":"https://meliusoneconsulting.com/seal.png","image":"https://meliusoneconsulting.com/headshot.jpg","description":"One-on-one financial education on income ETFs, options and building passive income.","email":"obi@meliusoneconsulting.com","areaServed":"Canada","address":{"@type":"PostalAddress","addressLocality":"Kitchener","addressRegion":"ON","addressCountry":"CA"},"founder":{"@id":"https://meliusoneconsulting.com/#obi"}},
+ {"@type":"Person","@id":"https://meliusoneconsulting.com/#obi","name":"Obi Oji","jobTitle":"Founder, financial education coach","worksFor":{"@id":"https://meliusoneconsulting.com/#business"},"image":"https://meliusoneconsulting.com/headshot.jpg","url":"https://meliusoneconsulting.com/"}
+]}
+</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%2314213D'/%3E%3Ccircle cx='50' cy='50' r='42' fill='none' stroke='%23C9A35E' stroke-width='2'/%3E%3Ctext x='44' y='69' text-anchor='middle' font-family='Georgia,serif' font-size='54' fill='white'%3EM%3C/text%3E%3Ctext x='73' y='44' text-anchor='middle' font-family='Georgia,serif' font-size='24' font-weight='bold' fill='%23C9A35E'%3E1%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+body{margin:0}
+.hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+/* Layout: a single editorial column with full-width bands; a ledger-style strip of fund yields under the hero; cards only for the strategies and the form. */
+:root{
+  --bg:#FFFFFF; --surface:#FFFFFF; --band:#F7F5F0; --ink:#14213D; --muted:#5A6474; --line:#E6E1D7;
+  --accent:#1D3557; --accent-ink:#FFFFFF; --amber:#A8803F; --soft:#EEF1F6; --danger:#A3332A;
+  --seal:#14213D; --seal-ring:#C9A35E; --seal-m:#FFFFFF; --seal-1:#C9A35E;
+  --logo-gold:#C9A35E;
+  --display:'Newsreader', Georgia, 'Times New Roman', serif;
+  --body:'Manrope', 'Segoe UI', Arial, sans-serif;
+  --mono:'Manrope', 'Segoe UI', Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1626; --surface:#142036; --band:#111B2E; --ink:#EEF1F6; --muted:#A9B3C4; --line:#26344D;
+  --accent:#C9A76B; --accent-ink:#0E1626; --amber:#C9A76B; --soft:#1C2A44; --danger:#E5776C; --logo-gold:#C9A35E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1626; --surface:#142036; --band:#111B2E; --ink:#EEF1F6; --muted:#A9B3C4; --line:#26344D;
+  --accent:#C9A76B; --accent-ink:#0E1626; --amber:#C9A76B; --soft:#1C2A44; --danger:#E5776C; --logo-gold:#C9A35E; color-scheme:dark}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--seal:#C9A35E;--seal-ring:#0E1626;--seal-m:#0E1626;--seal-1:#FFFFFF}}
+:root[data-theme="dark"]{--seal:#C9A35E;--seal-ring:#0E1626;--seal-m:#0E1626;--seal-1:#FFFFFF}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.65;font-variant-numeric:tabular-nums}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.band{background:var(--band)}
+section{padding-block:72px}
+h1,h2,h3{font-family:var(--display);line-height:1.12;text-wrap:balance;margin:0}
+h1{font-size:clamp(38px,6vw,64px);font-weight:500;letter-spacing:-0.015em}
+h2{font-size:clamp(30px,4vw,42px);font-weight:500;letter-spacing:-0.01em}
+h3{font-size:22px;font-weight:600}
+p{margin:0}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
+.lede{font-size:20px;color:var(--muted);max-width:60ch}
+.stack{display:flex;flex-direction:column;gap:16px}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+/* nav */
+header.top{position:sticky;top:env(safe-area-inset-top, 0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:10;background:var(--bg)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:600;font-size:21px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo-mark{width:42px;height:42px;flex:none}
+.logo-mark.sm{width:30px;height:30px}
+.wordmark{display:flex;flex-direction:column;line-height:1}
+.wm1{font-family:var(--display);font-weight:500;font-size:24px;letter-spacing:.005em;color:var(--ink)}
+.wm2{font-family:var(--body);font-weight:600;font-size:9.5px;letter-spacing:.42em;color:var(--muted);margin-top:4px;padding-left:1px}
+.mark{width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-family:var(--display);font-size:16px;font-weight:600}
+.nav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+.nav ul a{color:var(--muted);text-decoration:none;font-weight:500}
+.nav ul a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);font-weight:600;text-decoration:none;border:0;font:inherit;font-weight:600;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+/* hero */
+.hero{padding-block:72px 56px;display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.promise{border-left:3px solid var(--amber);padding-left:18px;color:var(--muted)}
+.promise-sig{display:block;margin-top:14px;font-family:var(--display);font-style:italic;font-size:17px;color:var(--amber)}
+.promise b{color:var(--ink);font-family:var(--display);font-size:24px;font-weight:600;display:block;margin-bottom:4px}
+/* ledger strip */
+.ledger{background:var(--band);padding-block:64px;border-block:1px solid var(--line)}
+.ledger-head{margin-bottom:24px;display:flex;flex-direction:column;gap:8px}
+.ledger-scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:16px}
+.ledger table{border-collapse:collapse;width:100%;min-width:640px;font-size:15px}
+.ledger th,.ledger td{padding:13px 18px;text-align:left;white-space:nowrap;border-bottom:1px solid var(--line)}
+.ledger tbody tr:last-child td{border-bottom:0}
+.ledger td:nth-child(2){white-space:normal;color:var(--muted)}
+.ledger td:nth-child(4){font-weight:700;color:var(--accent)}
+.ledger th{font-weight:700;color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:var(--band)}
+.ledger caption{caption-side:bottom;text-align:left;padding:14px 18px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+.kind{font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--soft);color:var(--accent)}
+.kind.dividend,.kind.growth{background:transparent;border:1px solid var(--line);color:var(--muted)}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:32px}
+.step{display:flex;flex-direction:column;gap:10px;padding:28px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+.step .n{font-family:var(--mono);font-size:13px;color:var(--amber)}
+.price{font-size:15px;font-weight:700;color:var(--accent)}
+.price .was{color:var(--muted);font-weight:500;margin-right:2px}
+.founding{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:24px;color:var(--muted);font-size:15px}
+/* modules */
+.modules{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin-top:28px;border-top:1px solid var(--line)}
+.mod{display:grid;grid-template-columns:56px 1fr;gap:12px;padding:18px 0;border-bottom:1px solid var(--line)}
+.mod:nth-child(odd){padding-right:24px}
+.mod .k{font-family:var(--display);color:var(--amber);font-size:20px;font-weight:600}
+.mod p{color:var(--muted);font-size:16px}
+/* strategies */
+.strats{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:28px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px;box-shadow:0 1px 2px rgba(20,33,61,.04),0 8px 24px rgba(20,33,61,.05);display:flex;flex-direction:column;gap:12px;min-width:0}
+.tag{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:999px;background:var(--soft);color:var(--accent);align-self:flex-start}
+.tag.amber{color:var(--amber)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:15px}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0}
+.desk{margin-top:12px}
+/* calculator */
+.calc{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;margin-top:28px;align-items:start}
+.field{display:flex;flex-direction:column;gap:6px}
+label{font-weight:600;font-size:15px}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%}
+textarea{min-height:90px;resize:vertical}
+.seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{flex:1;padding:10px;border:0;background:var(--surface);color:var(--muted);font:inherit;font-weight:600;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.results{overflow-x:auto}
+.results table{width:100%;border-collapse:collapse;font-size:15px;min-width:520px}
+.results th,.results td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
+.results th:first-child,.results td:first-child{text-align:left}
+.results th{font-size:13px;color:var(--muted);font-weight:600}
+.bar{height:8px;border-radius:4px;background:var(--accent);opacity:.85}
+.note{font-size:14px;color:var(--muted)}
+/* portfolio */
+.port{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:28px;align-items:start}
+.alloc{display:flex;flex-direction:column;gap:14px}
+.arow{display:grid;grid-template-columns:210px 1fr 52px;gap:12px;align-items:center;font-size:15px}
+.arow .track{height:12px;background:var(--soft);border-radius:6px;overflow:hidden}
+.arow .fill{height:100%;background:var(--accent)}
+.arow .fill.amber{background:var(--amber)}
+.arow .pct{font-family:var(--mono);text-align:right}
+.timeline{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px}
+.timeline li{display:grid;grid-template-columns:110px 1fr;gap:14px}
+.timeline .when{font-family:var(--mono);font-size:14px;color:var(--amber)}
+/* story */
+.story{display:grid;grid-template-columns:1.35fr .65fr;gap:48px;margin-top:32px;align-items:start}
+.journey{list-style:none;margin:0;padding:0;position:relative}
+.journey::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.journey li{position:relative;padding:0 0 30px 40px}
+.journey li:last-child{padding-bottom:0}
+.journey li::before{content:"";position:absolute;left:0;top:6px;width:16px;height:16px;border-radius:50%;background:var(--surface);border:2px solid var(--amber)}
+.journey li.now::before{background:var(--amber)}
+.journey .when{font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--amber)}
+.journey h3{margin:4px 0 6px}
+.journey p{color:var(--muted);margin:0}
+.family{position:sticky;top:96px}
+.family blockquote{margin:0;font-family:var(--display);font-size:24px;line-height:1.3;color:var(--ink)}
+@media (max-width:820px){.story{grid-template-columns:1fr;gap:32px}.family{position:static}}
+/* form */
+.signup{display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;margin-top:8px;align-items:start}
+form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.status{font-size:15px;min-height:1.6em}
+.status.ok{color:var(--accent)} .status.err{color:var(--danger)}
+.owner{margin-top:24px}
+.owner table{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
+.owner th,.owner td{padding:8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.owner .scroll{overflow-x:auto}
+/* about */
+.about{display:grid;grid-template-columns:340px 1fr;gap:56px;align-items:start;margin-top:8px}
+.photo{position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:var(--soft);border:1px solid var(--line)}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:50% 0%;display:block}
+.photo .initials{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-size:72px;color:var(--accent)}
+.photo img + .initials{display:none}
+.photo.noimg .initials{display:grid}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-block:1px solid var(--line);margin-block:8px}
+.stat{padding:20px 14px}
+.stat:first-child{padding-left:0}
+.stat + .stat{border-left:1px solid var(--line)}
+.stat b{display:block;font-family:var(--display);font-size:clamp(28px,3.4vw,38px);font-weight:500;color:var(--accent);line-height:1.1}
+.stat span{display:block;margin-top:6px;font-size:14px;line-height:1.4;color:var(--muted)}
+.creds{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.creds li{padding-left:22px;position:relative}
+.creds li::before{content:"";position:absolute;left:0;top:.7em;width:10px;height:2px;background:var(--amber)}
+/* projection */
+.pj{display:grid;grid-template-columns:1.35fr 1fr;gap:32px;margin-top:28px;align-items:start}
+.pj-chart{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 12px 8px}
+.pj-cards{display:flex;flex-direction:column;gap:12px}
+.pj-card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px 16px 30px}
+.pj-card h3{font-size:19px}
+.pj-card .kv{margin-top:8px;font-size:14px}
+.pj-key{position:absolute;left:14px;top:20px;width:6px;height:calc(100% - 40px);border-radius:3px}
+/* tax */
+.taxgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:28px}
+.taxgrid .card p{color:var(--muted);font-size:15px}
+.taxcompare{margin-top:24px;display:grid;grid-template-columns:.7fr 1.3fr;gap:24px;align-items:center;background:var(--band);border:1px solid var(--line);border-radius:16px;padding:24px 28px}
+.taxcompare table{width:100%;border-collapse:collapse;font-size:15px}
+.taxcompare th,.taxcompare td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.taxcompare tr:last-child td{border-bottom:0}
+.taxcompare th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.taxcompare td:last-child{color:var(--accent);font-weight:600}
+.taxcompare tr.keep td{font-size:17px;font-weight:700;border-top:2px solid var(--line)}
+.refer{background:var(--band);border:1px solid var(--line);border-radius:20px;padding:36px 40px;max-width:820px}
+@media (max-width:520px){.refer{padding:24px 20px}}
+.pj-ctl{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:24px}
+.pj-ctl-l{font-weight:700;font-size:15px}
+.pj-ctl .seg{min-width:280px}
+.pj-msg{margin-top:20px;font-size:16px;color:var(--muted)}
+.pj-variant[hidden]{display:none}
+.navref{color:var(--accent)!important;font-weight:700}
+.refband{padding-block:8px 72px}
+.refrow{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:var(--band);border:1px solid var(--line);border-radius:20px;padding:28px 32px}
+.refrow h3{margin-top:6px;font-family:var(--display);font-size:28px;font-weight:500}
+.refrow .note{margin-top:6px;max-width:56ch}
+
+/* growth sections */
+.who{padding-block:24px 40px}
+.wgrid,.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.wgrid .card p,.acard p{color:var(--muted);font-size:15px}
+.quote{margin:0}.quote p{font-family:var(--display);font-size:22px;line-height:1.4}.quote footer{font-size:14px;color:var(--muted);padding:0;border:0}
+.guide{padding-block:40px}
+.guiderow{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;background:var(--band);border:1px solid var(--line);border-radius:20px;padding:40px}
+.gform{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px}
+.accounts{padding-block:24px 72px}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.acard{text-decoration:none;color:var(--ink)}
+.brand-row{display:flex;align-items:center;gap:14px}
+.blogo{width:56px;height:56px;object-fit:contain;flex:none}
+.blogo-sq{border-radius:14px}
+.brand-name{font-family:var(--display);font-size:30px;font-weight:600;color:var(--ink)}
+.arts{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+.art summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center}
+.art summary::-webkit-details-marker{display:none}
+.art summary h3{font-size:22px}
+.art[open] .tlink{opacity:.5}
+.art p{color:var(--muted);font-size:16px;max-width:70ch}
+.art p+p{margin-top:10px}
+.art[open] summary{margin-bottom:14px}
+.faq{margin-top:24px;border-top:1px solid var(--line);max-width:860px}
+.faq-q{border-bottom:1px solid var(--line);padding:18px 0}
+.faq-q summary{cursor:pointer;font-weight:700;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq-q summary::-webkit-details-marker{display:none}
+.faq-q summary::after{content:"+";color:var(--amber);font-size:24px;line-height:1}
+.faq-q[open] summary::after{content:"–"}
+.faq-q p{margin-top:10px;color:var(--muted);max-width:70ch}
+.policy{max-width:780px;display:flex;flex-direction:column;gap:14px}
+.policy h3{margin-top:18px}
+.policy p{color:var(--muted)}
+@media (max-width:820px){.wgrid,.sgrid,.agrid,.guiderow{grid-template-columns:1fr}.guiderow{padding:24px}.art summary{grid-template-columns:1fr}.art summary .tlink{display:none}}
+footer{padding-block:40px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-direction:column;gap:10px}
+@media (max-width:820px){
+  .arow{grid-template-columns:1fr 70px 44px!important}
+  .hero,.calc,.port,.signup,.about,.pj,.taxcompare{grid-template-columns:1fr}
+  .taxgrid{grid-template-columns:1fr 1fr}
+  .about .photo{max-width:300px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat{padding:18px 14px!important}
+  .stat:nth-child(odd){border-left:0;padding-left:0!important}
+  .stat:nth-child(n+3){border-top:1px solid var(--line)}
+  .steps,.strats,.modules{grid-template-columns:1fr}
+  .mod:nth-child(odd){padding-right:0}
+  form .row{grid-template-columns:1fr}
+  section{padding-block:52px}
+}
+@media (min-width:821px){.taxcompare tr.keep td{white-space:nowrap}}
+@media (max-width:520px){.taxgrid{grid-template-columns:1fr}.taxcompare{padding:18px 14px}.taxcompare th,.taxcompare td{padding:8px 4px;font-size:14px}.taxcompare .note{display:block}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* motion */
+html{scroll-behavior:smooth}
+section,[id]{scroll-margin-top:84px}
+.progress{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--amber);z-index:20}
+html.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+html.js .reveal.in{opacity:1;transform:none}
+.card,.step,.pj-card{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.card:hover,.step:hover,.pj-card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(20,33,61,.10);border-color:var(--amber)}
+.nav ul a{position:relative;transition:color .2s}
+.nav ul a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--amber);transform:scaleX(0);transition:transform .25s ease}
+.nav ul a:hover::after,.nav ul a.active::after{transform:scaleX(1)}
+.nav ul a.active{color:var(--ink)}
+.btn{transition:transform .2s ease,box-shadow .2s ease,background .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(20,33,61,.18)}
+html.js .pj-chart polyline{stroke-dasharray:var(--len,none);stroke-dashoffset:var(--len,0);transition:stroke-dashoffset 1.8s ease}
+html.js .pj-chart.in polyline{stroke-dashoffset:0}
+.arow .fill{transition:width 1.2s ease}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}html.js .reveal{opacity:1;transform:none;transition:none}.card:hover,.step:hover,.pj-card:hover,.btn:hover{transform:none}html.js .pj-chart polyline{stroke-dasharray:none;stroke-dashoffset:0}}
+
+/* pages */
+html.js .page{display:none}
+html.js .page.on{display:block;animation:pagein .45s ease}
+@keyframes pagein{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+main{min-height:calc(100vh - 260px)}
+.teasers{padding-top:8px}
+.tgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.tcard{text-decoration:none;color:var(--ink)}
+.tcard p{color:var(--muted);font-size:15px}
+.tlink{margin-top:auto;font-weight:700;color:var(--accent);font-size:15px}
+.next-wrap{padding-block:8px 64px}
+.next{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 16px;text-decoration:none;color:var(--ink);background:var(--band);border:1px solid var(--line);border-radius:18px;padding:24px 28px;transition:transform .25s ease,border-color .25s ease}
+.next:hover{transform:translateY(-3px);border-color:var(--amber)}
+.next .eyebrow{grid-column:1}
+.next-t{grid-column:1;font-family:var(--display);font-size:clamp(22px,3vw,30px)}
+.next-arrow{grid-column:2;grid-row:1/3;font-size:30px;color:var(--amber)}
+.navbtn{padding:9px 16px;font-size:15px;color:var(--accent-ink)!important}
+.navbtn::after{display:none}
+@media (max-width:980px){.tgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.tgrid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){html.js .page.on{animation:none}}
+
+/* hamburger */
+.burger{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:12px;background:var(--surface);cursor:pointer;position:relative;padding:0}
+.burger span{position:absolute;left:12px;right:12px;height:2px;border-radius:2px;background:var(--ink);transition:transform .25s ease,opacity .2s ease,top .25s ease}
+.burger span:nth-child(1){top:15px}.burger span:nth-child(2){top:21px}.burger span:nth-child(3){top:27px}
+.burger[aria-expanded="true"] span:nth-child(1){top:21px;transform:rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){top:21px;transform:rotate(-45deg)}
+@media (max-width:820px){
+  .nav{flex-wrap:nowrap}
+  .burger{display:block;flex:none}
+  #mainnav{position:absolute;top:100%;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 16px 30px rgba(20,33,61,.12);max-height:0;overflow:hidden;transition:max-height .35s ease;visibility:hidden}
+  #mainnav.open{max-height:420px;visibility:visible}
+  #mainnav ul{flex-direction:column;gap:0;padding:8px max(16px, env(safe-area-inset-left, 0px)) 20px}
+  #mainnav li a{display:block;padding:14px 4px;font-size:18px;border-bottom:1px solid var(--line)}
+  #mainnav li a::after{display:none}
+  #mainnav li a.active{color:var(--amber)}
+  #mainnav li:last-child a{border-bottom:0;margin-top:14px;text-align:center;padding:14px}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="wrap nav">
+    <a class="brand" href="#home" aria-label="Melius One Consulting, home"><svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="var(--seal)"/><circle cx="50" cy="50" r="42" fill="none" stroke="var(--seal-ring)" stroke-width="1.5"/><text x="44" y="69" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-size="54" font-weight="500" fill="var(--seal-m)">M</text><text x="73" y="44" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-size="24" font-weight="600" fill="var(--seal-1)">1</text></svg><span class="wordmark"><span class="wm1">Melius One</span><span class="wm2">CONSULTING</span></span></a>
+    <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mainnav"><span></span><span></span><span></span></button>
+    <nav aria-label="Main" id="mainnav"><ul>
+      <li><a href="#about" data-nav="about">About</a></li>
+      <li><a href="#coaching" data-nav="coaching">Coaching</a></li>
+      <li><a href="#learn" data-nav="learn">Learn</a></li>
+      <li><a href="#accounts" class="navref">Open an account</a></li>
+      <li><a class="btn navbtn" href="#book" data-nav="book">Book a free session</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<main id="top">
+<div class="page" id="home" data-page="home">
+  <div class="wrap">
+    <div class="hero">
+      <div class="stack">
+        <p class="eyebrow">Financial education services · Kitchener, Ontario</p>
+        <h1>Build income from your investments, one clear step at a time.</h1>
+        <p class="lede">One-on-one coaching for families who came to Canada to build something. Learn how passive income investing and options actually work, at your pace, with your own accounts in front of you.</p>
+        <div class="cta">
+          <a class="btn" href="#book">Book a free intro session</a>
+          <a class="btn ghost" href="#learn">Explore strategies</a>
+        </div>
+      </div>
+      <div class="promise">
+        <b>Order before ambition.</b>
+        Money obeys sequence. Debt comes first, because interest compounds against you as faithfully as returns compound for you. Then a cushion, because a calm mind decides better than a clever one. Then the right accounts. Only then do we invest, and options come last, once you have the patience they demand.
+        <span class="promise-sig">Melius is Latin for “better.” Not rich overnight. Better every year.</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="teasers"><div class="wrap">
+    <div class="tgrid">
+      <a class="card tcard" href="#about"><span class="tag">About</span><h3>Meet your coach</h3><p>My story, my own portfolio, and where it could be by 2036.</p><span class="tlink">Read more →</span></a>
+      <a class="card tcard" href="#coaching"><span class="tag">Coaching</span><h3>How it works</h3><p>A free intro, six one-on-one sessions, then monthly check-ins.</p><span class="tlink">See the plan →</span></a>
+      <a class="card tcard" href="#learn"><span class="tag">Learn</span><h3>Funds, strategies and tax</h3><p>Income ETFs, growth funds, the tax advantage, and a calculator.</p><span class="tlink">Start learning →</span></a>
+      <a class="card tcard" href="#book"><span class="tag amber">Book</span><h3>Free intro session</h3><p>Sixty minutes, no pressure. Pick a time that suits you.</p><span class="tlink">Book now →</span></a>
+    </div>
+  </div></section>
+  <section class="who"><div class="wrap">
+    <p class="eyebrow">Who this is for</p>
+    <h2>Coaching for families building from here</h2>
+    <div class="wgrid">
+      <article class="card"><span class="tag">Starting out</span><h3>New to Canada, building from scratch</h3><p>You want to understand TFSAs, RRSPs and investing before you put your savings to work.</p></article>
+      <article class="card"><span class="tag">Saving</span><h3>Savings in the bank, but no plan</h3><p>Your money sits in a chequing account and you know it should be doing more.</p></article>
+      <article class="card"><span class="tag amber">Ready</span><h3>Ready to replace a paycheque</h3><p>You want income from your investments, and to understand the risks before you rely on it.</p></article>
+    </div>
+  </div></section>
+
+  <!-- STORIES: add real client quotes below, then remove the word hidden from the next line -->
+  <section class="stories" id="stories" hidden><div class="wrap">
+    <p class="eyebrow">In their words</p>
+    <h2>What clients say</h2>
+    <div class="sgrid">
+      <blockquote class="card quote"><p>[Client quote]</p><footer>[First name, city]</footer></blockquote>
+      <blockquote class="card quote"><p>[Client quote]</p><footer>[First name, city]</footer></blockquote>
+      <blockquote class="card quote"><p>[Client quote]</p><footer>[First name, city]</footer></blockquote>
+    </div>
+  </div></section>
+
+  <section class="guide" id="guide"><div class="wrap"><div class="guiderow">
+    <div class="stack">
+      <p class="eyebrow">Free guide</p>
+      <h2>The Income ETF Starter Guide</h2>
+      <p class="lede">Seven things to understand before you buy your first income ETF: yield versus total return, return of capital, leverage, and which account to use.</p>
+    </div>
+    <form class="stack gform" id="gform" name="guide" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
+      <input type="hidden" name="form-name" value="guide">
+      <p class="hp"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+      <div class="field"><label for="g-name">First name</label><input id="g-name" name="name" autocomplete="given-name" required></div>
+      <div class="field"><label for="g-email">Email</label><input id="g-email" name="email" type="email" autocomplete="email" required></div>
+      <div><button class="btn" id="g-submit" type="submit">Send me the guide</button></div>
+      <p class="status" id="g-status" role="status"></p>
+      <p class="note">You’ll also get a short monthly note on income investing. Unsubscribe any time.</p>
+    </form>
+  </div></div></section>
+
+  <section class="accounts" id="accounts"><div class="wrap">
+    <p class="eyebrow">Open an account</p>
+    <h2>Where I invest, and where I connect</h2>
+    <p class="lede" style="margin-top:12px">For investing, any Canadian brokerage works; I use Wealthsimple. For community, I use Blossom. Both are referral links, and signing up through them may give us both a bonus.</p>
+    <div class="agrid">
+      <a class="card acard" href="https://wealthsimple.com/invite/JHWVAG" target="_blank" rel="noopener sponsored"><span class="brand-row"><img src="wealthsimple.png" alt="" width="56" height="56" class="blogo blogo-sq"><span class="brand-name">Wealthsimple</span></span><p>Where I hold my own TFSA and investment accounts. Low fees and a simple app.</p><span class="tlink">Open a Wealthsimple account ↗</span></a>
+      <a class="card acard" href="https://link.blossomsocial.com/7uYa/ogse4c4w" target="_blank" rel="noopener sponsored"><span class="brand-row"><img src="blossom.png" alt="" width="56" height="56" class="blogo"><span class="brand-name">Blossom</span></span><p>A social platform for investors, not a brokerage. Connect with like-minded people, see how they invest and share ideas.</p><span class="tlink">Join Blossom ↗</span></a>
+    </div>
+  </div></section>
+</div>
+<div class="page" id="about" data-page="about">
+  <section id="coach">
+    <div class="wrap">
+      <div class="about">
+        <div class="photo" id="photo">
+          <img src="headshot.jpg" alt="Obi Oji, founder of Melius One Consulting" onerror="this.remove();document.getElementById('photo').classList.add('noimg')">
+          <span class="initials" aria-hidden="true">OO</span>
+        </div>
+        <div class="stack">
+          <p class="eyebrow">About your coach</p>
+          <h2>Obi Oji, founder</h2>
+          <p class="lede">I came to Canada to build a better life for my family, and learned the hard way that a salary alone rarely gets you there. Today my family lives on income from our own investments. I started Melius One to teach other families how to do the same, clearly and honestly.</p>
+          <div class="stats">
+            <div class="stat"><b>~$850K</b><span>Family portfolio</span></div>
+            <div class="stat"><b>$16K+</b><span>Monthly distributions</span></div>
+            <div class="stat"><b>4+ yrs</b><span>Delivery leadership in Canadian banking</span></div>
+            <div class="stat"><b>1:1</b><span>Every session one-on-one, never a group class</span></div>
+          </div>
+          <ul class="creds">
+            <li>Release Train Engineer, leading large technology programmes at a major Canadian bank</li>
+            <li>Board member, Octopus VC</li>
+            <li>I live on income ETFs, and have traded the wheel and LEAPS with my own money</li>
+            <li>Based in Kitchener, Ontario · Sessions online or in person</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="story" class="band">
+    <div class="wrap">
+      <p class="eyebrow">My story</p>
+      <h2>How I got here</h2>
+      <p class="lede" style="margin-top:12px">It wasn’t a straight line. Every wrong turn taught me something I now teach.</p>
+      <div class="story">
+        <ol class="journey">
+          <li><span class="when">In Nigeria</span><h3>Building a real estate business</h3><p>Before Canada, I ran my own real estate business. It taught me how money really moves: cash flow, debt and patience.</p></li>
+          <li><span class="when">The move</span><h3>Starting over in Canada</h3><p>We moved to Canada for our children’s future. New country, new rules, and a lot to learn about how money works here.</p></li>
+          <li><span class="when">The hard lessons</span><h3>Chasing returns</h3><p>I tried different investment strategies, crypto included, and lost real money. The lesson stuck: without a plan and rules, a strategy is just a gamble.</p></li>
+          <li><span class="when">Until 2022</span><h3>A transportation company</h3><p>I started a transportation company. It didn’t go the way I hoped, and I sold it in 2022. Knowing when to stop is a skill too.</p></li>
+          <li><span class="when">2022</span><h3>Rebuilding, with rules this time</h3><p>The same year, I joined one of Canada’s big banks and rebuilt our portfolio with the proceeds from my real estate and other businesses. Some of it was luck, honestly: Nvidia, Palantir and Bitcoin all paid off, and I still hold Bitcoin through Strategy (MSTR). The rest was discipline: income funds and clear rules, which is the part I teach.</p></li>
+          <!-- AFTER RESIGNING: you can change the step below to "Retiring to live on our investments". -->
+          <li class="now"><span class="when">Today</span><h3>Living on what we built</h3><p>Our investments now pay our family’s bills. Melius One is how I share the path, mistakes included, so you can skip the expensive ones.</p></li>
+        </ol>
+        <aside class="card family">
+          <p class="eyebrow">Why I do this</p>
+          <blockquote>“My family is my everything, and my driving force.”</blockquote>
+          <p>My wife is going back to school to become a psychotherapist. Our four children are doing well in school: a young teen, a pair of twins, and the baby of the house.</p>
+          <p class="note">They’re the reason I do any of this, and the reason I want other families to get it right sooner than I did.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="projection">
+    <div class="wrap">
+      <p class="eyebrow">Ten-year projection</p>
+      <h2>Where my portfolio could be by 2036</h2>
+      <p class="lede" style="margin-top:12px">The portfolio pays about $16,000 a month in distributions. How fast it grows depends on two things: the market, and how much of each payout goes back in.</p>
+      <div class="pj-ctl">
+        <span id="pj-lbl" class="pj-ctl-l">Share of distributions reinvested</span>
+        <div class="seg" role="group" aria-labelledby="pj-lbl">
+          <button type="button" data-f="100" aria-pressed="true">100%</button>
+          <button type="button" data-f="75" aria-pressed="false">75%</button>
+          <button type="button" data-f="50" aria-pressed="false">50%</button>
+        </div>
+      </div>
+      <div class="pj-variant" data-f="100">
+        <p class="pj-msg">Every distribution goes back into the portfolio. The household lives on other income.</p>
+        <div class="pj">
+          <div class="pj-chart"><svg viewBox="0 0 760 340" role="img" aria-label="Ten-year projection at 100% reinvestment" style="width:100%;height:auto;display:block"><line x1="64" x2="610" y1="300.0" y2="300.0" stroke="var(--line)" stroke-width="1"/><text x="54" y="304.0" text-anchor="end" font-size="12" fill="var(--muted)">$0</text><line x1="64" x2="610" y1="244.0" y2="244.0" stroke="var(--line)" stroke-width="1"/><text x="54" y="248.0" text-anchor="end" font-size="12" fill="var(--muted)">$1M</text><line x1="64" x2="610" y1="188.0" y2="188.0" stroke="var(--line)" stroke-width="1"/><text x="54" y="192.0" text-anchor="end" font-size="12" fill="var(--muted)">$2M</text><line x1="64" x2="610" y1="132.0" y2="132.0" stroke="var(--line)" stroke-width="1"/><text x="54" y="136.0" text-anchor="end" font-size="12" fill="var(--muted)">$3M</text><line x1="64" x2="610" y1="76.0" y2="76.0" stroke="var(--line)" stroke-width="1"/><text x="54" y="80.0" text-anchor="end" font-size="12" fill="var(--muted)">$4M</text><line x1="64" x2="610" y1="20.0" y2="20.0" stroke="var(--line)" stroke-width="1"/><text x="54" y="24.0" text-anchor="end" font-size="12" fill="var(--muted)">$5M</text><text x="64.0" y="326" text-anchor="middle" font-size="12" fill="var(--muted)">2026</text><text x="173.2" y="326" text-anchor="middle" font-size="12" fill="var(--muted)">2028</text><text x="282.4" y="326" text-anchor="middle" font-size="12" fill="var(--muted)">2030</text><text x="391.6" y="326" text-anchor="middle" font-size="12" fill="var(--muted)">2032</text><text x="500.8" y="326" text-anchor="middle" font-size="12" fill="var(--muted)">2034</text><text x="610.0" y="326" text-anchor="middle" font-size="12" fill="var(--muted)">2036</text><polyline points="64.0,252.4 118.6,246.7 173.2,240.3 227.8,233.1 282.4,225.1 337.0,216.1 391.6,206.0 446.2,194.8 500.8,182.1 555.4,168.0 610.0,152.2" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="610.0" cy="152.2" r="4.5" fill="var(--muted)"/><text x="620.0" y="156.2" font-size="13" font-weight="700" fill="var(--muted)">$2.6M</text><polyline points="64.0,252.4 118.6,244.9 173.2,236.2 227.8,226.2 282.4,214.6 337.0,201.1 391.6,185.5 446.2,167.5 500.8,146.6 555.4,122.5 610.0,94.5" fill="none" stroke="var(--amber)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="610.0" cy="94.5" r="4.5" fill="var(--amber)"/><text x="620.0" y="98.5" font-size="13" font-weight="700" fill="var(--amber)">$3.7M</text><polyline points="64.0,252.4 118.6,243.4 173.2,232.6 227.8,219.8 282.4,204.5 337.0,186.4 391.6,164.8 446.2,139.1 500.8,108.6 555.4,72.2 610.0,28.9" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><circle cx="610.0" cy="28.9" r="4.5" fill="var(--accent)"/><text x="620.0" y="32.9" font-size="13" font-weight="700" fill="var(--accent)">$4.8M</text><circle cx="64.0" cy="252.4" r="4.5" fill="var(--ink)"/><text x="64.0" y="274.4" font-size="12" fill="var(--ink)">$850K today</text></svg></div>
+          <div class="pj-cards"><div class="pj-card"><span class="pj-key" style="background:var(--muted)"></span><h3>Steady markets</h3><p class="note">12% a year</p><dl class="kv"><dt>Portfolio, 2031</dt><dd>$1.5M</dd><dt>Portfolio, 2036</dt><dd><b>$2.6M</b></dd><dt>Distributions, 2036</dt><dd><b>$49,700</b> a month</dd><dt>Cash to us, 2036</dt><dd>$0, all reinvested</dd></dl></div><div class="pj-card"><span class="pj-key" style="background:var(--amber)"></span><h3>Strong markets</h3><p class="note">15% a year</p><dl class="kv"><dt>Portfolio, 2031</dt><dd>$1.8M</dd><dt>Portfolio, 2036</dt><dd><b>$3.7M</b></dd><dt>Distributions, 2036</dt><dd><b>$69,100</b> a month</dd><dt>Cash to us, 2036</dt><dd>$0, all reinvested</dd></dl></div><div class="pj-card"><span class="pj-key" style="background:var(--accent)"></span><h3>A repeat of the 2010s</h3><p class="note">17.6% a year, as 2010–2019</p><dl class="kv"><dt>Portfolio, 2031</dt><dd>$2.0M</dd><dt>Portfolio, 2036</dt><dd><b>$4.8M</b></dd><dt>Distributions, 2036</dt><dd><b>$91,100</b> a month</dd><dt>Cash to us, 2036</dt><dd>$0, all reinvested</dd></dl></div></div>
+        </div>
+      </div>
+      <div class="pj-variant" data-f="75" hidden>
+        <p class="pj-msg">Three quarters of each distribution is reinvested; the rest is ours to spend. About $4,000 a month comes to us today.</p>
+        <div class="pj">
+          <div class="pj-chart"><svg viewBox="0 0 760 340" role="img" aria-label="Ten-year projection at 75% reinvestment" style="width:100%;height:auto;display:block"><line x1="64" x2="610" y1="300.0" y2="300.0" stroke="var(--line)" stroke-width="1"/><text x="54" y="304.0" text-anchor="end" font-size="12" fill="var(--muted)">$0</text><line x1="64" x2="610" y1="244.0" y2="244.0" stroke="var(--line)" stroke-width="1"/><text x="54" y="248.0" text-anchor="end" font-size="12" fill="var(--muted)">$1M</text><line x1="64" x2="610" y1="188.0" y2="188.0" stroke="var(--line)" stroke-width="1"/><text x="54" y="192.0" text-anchor="end" font-size="12" fill="var(--muted)">$2M</text><line x1="64" x2="610" y1="132.0" y2="132.0" stroke="var(--line)" stroke-width="1"/><text x="54" y="136.0" text-anchor="end" font-size="12" fill="var(--muted)">$3M</text><line x1="64" x2="610" y1="76.0" y2="76.0" stroke="var(--line)" stroke-width="1"/><text x="54" y="80.0" text-anchor="end" font-size="12" fill="var(--muted)">$4M</text><line x1="64" x2="610" y1="20.0" y2="20.0" stroke="var(--line)" stroke-width="1"/><text x="54" y="24.0" text-anchor="end" font-size="12" fill="var(--muted)">$5M</text><text x="64.0" y="326" text-anchor="middle" font-size="12" fill="var(--muted)">2026</text><text x="173.2" y="326" text-anchor="middle" font-size="12" fill="var(--muted)">2028</text><text x="282.4" y="326" text-anchor="middle" font-size="12" fill="var(--muted)">2030</text><text x="391.6" y="326" text-anchor="middle" font-size="12" fill="var(--muted)">2032</text><text x="500.8" y="326" text-anchor="middle" font-size="12" fill="var(--muted)">2034</text><text x="610.0" y="326" text-anchor="middle" font-size="12" fill="var(--muted)">2036</text><polyline points="64.0,252.4 118.6,249.4 173.2,246.2 227.8,242.7 282.4,239.1 337.0,235.2 391.6,231.1 446.2,226.7 500.8,222.1 555.4,217.1 610.0,211.9" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="610.0" cy="211.9" r="4.5" fill="var(--muted)"/><text x="620.0" y="215.9" font-size="13" font-weight="700" fill="var(--muted)">$1.6M</text><polyline points="64.0,252.4 118.6,247.6 173.2,242.3 227.8,236.5 282.4,230.0 337.0,223.0 391.6,215.2 446.2,206.6 500.8,197.2 555.4,186.8 610.0,175.4" fill="none" stroke="var(--amber)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="610.0" cy="175.4" r="4.5" fill="var(--amber)"/><text x="620.0" y="179.4" font-size="13" font-weight="700" fill="var(--amber)">$2.2M</text><polyline points="64.0,252.4 118.6,246.0 173.2,238.8 227.8,230.7 282.4,221.4 337.0,210.9 391.6,199.0 446.2,185.5 500.8,170.3 555.4,152.9 610.0,133.3" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><circle cx="610.0" cy="133.3" r="4.5" fill="var(--accent)"/><text x="620.0" y="137.3" font-size="13" font-weight="700" fill="var(--accent)">$3.0M</text><circle cx="64.0" cy="252.4" r="4.5" fill="var(--ink)"/><text x="64.0" y="274.4" font-size="12" fill="var(--ink)">$850K today</text></svg></div>
+          <div class="pj-cards"><div class="pj-card"><span class="pj-key" style="background:var(--muted)"></span><h3>Steady markets</h3><p class="note">12% a year</p><dl class="kv"><dt>Portfolio, 2031</dt><dd>$1.2M</dd><dt>Portfolio, 2036</dt><dd><b>$1.6M</b></dd><dt>Distributions, 2036</dt><dd><b>$29,600</b> a month</dd><dt>Cash to us, 2036</dt><dd><b>$7,400</b> a month</dd></dl></div><div class="pj-card"><span class="pj-key" style="background:var(--amber)"></span><h3>Strong markets</h3><p class="note">15% a year</p><dl class="kv"><dt>Portfolio, 2031</dt><dd>$1.4M</dd><dt>Portfolio, 2036</dt><dd><b>$2.2M</b></dd><dt>Distributions, 2036</dt><dd><b>$41,900</b> a month</dd><dt>Cash to us, 2036</dt><dd><b>$10,500</b> a month</dd></dl></div><div class="pj-card"><span class="pj-key" style="background:var(--accent)"></span><h3>A repeat of the 2010s</h3><p class="note">17.6% a year, as 2010–2019</p><dl class="kv"><dt>Portfolio, 2031</dt><dd>$1.6M</dd><dt>Portfolio, 2036</dt><dd><b>$3.0M</b></dd><dt>Distributions, 2036</dt><dd><b>$56,000</b> a month</dd><dt>Cash to us, 2036</dt><dd><b>$14,000</b> a month</dd></dl></div></div>
+        </div>
+      </div>
+      <div class="pj-variant" data-f="50" hidden>
+        <p class="pj-msg">Half of each distribution is reinvested; half is ours to spend. About $8,000 a month comes to us today.</p>
+        <div class="pj">
+          <div class="pj-chart"><svg viewBox="0 0 760 340" role="img" aria-label="Ten-year projection at 50% reinvestment" style="width:100%;height:auto;display:block"><line x1="64" x2="610" y1="300.0" y2="300.0" stroke="var(--line)" stroke-width="1"/><text x="54" y="304.0" text-anchor="end" font-size="12" fill="var(--muted)">$0</text><line x1="64" x2="610" y1="244.0" y2="244.0" stroke="var(--line)" stroke-width="1"/><text x="54" y="248.0" text-anchor="end" font-size="12" fill="var(--muted)">$1M</text><line x1="64" x2="610" y1="188.0" y2="188.0" stroke="var(--line)" stroke-width="1"/><text x="54" y="192.0" text-anchor="end" font-size="12" fill="var(--muted)">$2M</text><line x1="64" x2="610" y1="132.0" y2="132.0" stroke="var(--line)" stroke-width="1"/><text x="54" y="136.0" text-anchor="end" font-size="12" fill="var(--muted)">$3M</text><line x1="64" x2="610" y1="76.0" y2="76.0" stroke="var(--line)" stroke-width="1"/><text x="54" y="80.0" text-anchor="end" font-size="12" fill="var(--muted)">$4M</text><line x1="64" x2="610" y1="20.0" y2="20.0" stroke="var(--line)" stroke-width="1"/><text x="54" y="24.0" text-anchor="end" font-size="12" fill="var(--muted)">$5M</text><text x="64.0" y="326" text-anchor="middle" font-size="12" fill="var(--muted)">2026</text><text x="173.2" y="326" text-anchor="middle" font-size="12" fill="var(--muted)">2028</text><text x="282.4" y="326" text-anchor="middle" font-size="12" fill="var(--muted)">2030</text><text x="391.6" y="326" text-anchor="middle" font-size="12" fill="var(--muted)">2032</text><text x="500.8" y="326" text-anchor="middle" font-size="12" fill="var(--muted)">2034</text><text x="610.0" y="326" text-anchor="middle" font-size="12" fill="var(--muted)">2036</text><polyline points="64.0,252.4 118.6,252.1 173.2,251.7 227.8,251.4 282.4,251.0 337.0,250.7 391.6,250.3 446.2,250.0 500.8,249.6 555.4,249.3 610.0,248.9" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="610.0" cy="248.9" r="4.5" fill="var(--muted)"/><text x="620.0" y="252.9" font-size="13" font-weight="700" fill="var(--muted)">$912K</text><polyline points="64.0,252.4 118.6,250.3 173.2,248.1 227.8,245.7 282.4,243.3 337.0,240.8 391.6,238.2 446.2,235.4 500.8,232.5 555.4,229.5 610.0,226.4" fill="none" stroke="var(--amber)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="610.0" cy="226.4" r="4.5" fill="var(--amber)"/><text x="620.0" y="230.4" font-size="13" font-weight="700" fill="var(--amber)">$1.3M</text><polyline points="64.0,252.4 118.6,248.7 173.2,244.8 227.8,240.5 282.4,235.9 337.0,231.0 391.6,225.7 446.2,220.0 500.8,213.8 555.4,207.2 610.0,200.0" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><circle cx="610.0" cy="200.0" r="4.5" fill="var(--accent)"/><text x="620.0" y="204.0" font-size="13" font-weight="700" fill="var(--accent)">$1.8M</text><circle cx="64.0" cy="252.4" r="4.5" fill="var(--ink)"/><text x="64.0" y="274.4" font-size="12" fill="var(--ink)">$850K today</text></svg></div>
+          <div class="pj-cards"><div class="pj-card"><span class="pj-key" style="background:var(--muted)"></span><h3>Steady markets</h3><p class="note">12% a year</p><dl class="kv"><dt>Portfolio, 2031</dt><dd>$880K</dd><dt>Portfolio, 2036</dt><dd><b>$912K</b></dd><dt>Distributions, 2036</dt><dd><b>$17,200</b> a month</dd><dt>Cash to us, 2036</dt><dd><b>$8,600</b> a month</dd></dl></div><div class="pj-card"><span class="pj-key" style="background:var(--amber)"></span><h3>Strong markets</h3><p class="note">15% a year</p><dl class="kv"><dt>Portfolio, 2031</dt><dd>$1.1M</dd><dt>Portfolio, 2036</dt><dd><b>$1.3M</b></dd><dt>Distributions, 2036</dt><dd><b>$24,700</b> a month</dd><dt>Cash to us, 2036</dt><dd><b>$12,400</b> a month</dd></dl></div><div class="pj-card"><span class="pj-key" style="background:var(--accent)"></span><h3>A repeat of the 2010s</h3><p class="note">17.6% a year, as 2010–2019</p><dl class="kv"><dt>Portfolio, 2031</dt><dd>$1.2M</dd><dt>Portfolio, 2036</dt><dd><b>$1.8M</b></dd><dt>Distributions, 2036</dt><dd><b>$33,600</b> a month</dd><dt>Cash to us, 2036</dt><dd><b>$16,800</b> a month</dd></dl></div></div>
+        </div>
+      </div>
+      <p class="note" style="margin-top:20px">How this is worked out: starts at about $850,000; the income funds are assumed to return 1.25 times the market less 3% a year in costs; distributions are about 23% of the portfolio’s value a year, as they are today; the share not reinvested is spent. Before tax. An illustration of possible paths, not a forecast or a promise. Markets can do worse than all three.</p>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <div class="wrap">
+      <!-- PORTFOLIO NUMBERS: edit the two percentages and the "Updated" month below, then re-upload. -->
+      <p class="eyebrow">My portfolio · Updated October 2026</p>
+      <h2>How I invest my own money</h2>
+      <div class="port">
+        <div class="stack">
+          <p>I teach what I do with my own family’s money: a <b>four-fund income strategy</b> that pays us every month, plus a long-term position in Bitcoin.</p>
+          <div class="alloc" aria-label="Allocation">
+            <div class="arow"><span>Four income funds<br><small style="color:var(--muted)">HHIS · CDAY · SDAY · QDAY, equal parts</small></span><span class="track"><span class="fill" style="width:80%;display:block"></span></span><span class="pct">~80%</span></div>
+            <div class="arow"><span>Bitcoin, through Strategy<br><small style="color:var(--muted)">MSTR · MSTE</small></span><span class="track"><span class="fill amber" style="width:20%;display:block"></span></span><span class="pct">~20%</span></div>
+          </div>
+          <p class="note">I’ve also sold options, mainly puts and covered calls on TQQQ, in a separate, smaller account. It’s covered in the options modules.</p>
+        </div>
+        <div class="stack">
+          <h3>My rules</h3>
+          <ul class="timeline">
+            <li><span class="when">Income</span><span>Live on the payouts. Every dollar beyond what the family spends is reinvested.</span></li>
+            <li><span class="when">Check-ups</span><span>Every quarter, compare each fund’s total return with what it paid. Stop adding to any fund that falls short four quarters in a row.</span></li>
+            <li><span class="when">Borrowing</span><span>Keep any margin loan small, and repay it from the payout on the units it bought.</span></li>
+            <li><span class="when">Bitcoin</span><span>Hold for the long run, and keep it to about a fifth of the portfolio.</span></li>
+            <li><span class="when">Cash</span><span>Keep a reserve so a bad month never forces a sale.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="next-wrap"><div class="wrap"><a class="next" href="#coaching"><span class="eyebrow">Next</span><span class="next-t">How the coaching works</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section>
+</div>
+<div class="page" id="coaching" data-page="coaching">
+  <section id="how">
+    <div class="wrap">
+      <p class="eyebrow">How it works</p>
+      <h2>Three steps, no pressure</h2>
+      <div class="steps">
+        <div class="step"><span class="n">Step 1</span><h3>Free intro session</h3><p>Sixty minutes, just you and me. What passive income is, what it isn’t, and whether coaching fits you.</p><span class="price">Free</span></div>
+        <div class="step"><span class="n">Step 2</span><h3>One-on-one coaching</h3><p>Six private sessions working through the curriculum with your own accounts, numbers and goals.</p><span class="price"><s class="was">$594</s> <b>$294</b> · six sessions at $49 each</span></div>
+        <div class="step"><span class="n">Step 3</span><h3>Check-ins</h3><p>Monthly reviews once you’re investing: what your funds paid, what changed, and what to watch.</p><span class="price"><s class="was">$75</s> <b>$37</b> a month</span></div>
+      </div>
+      <p class="founding"><span class="tag amber">Founding rate</span> Half price for my first 10 clients, locked in for as long as you stay. Regular prices are shown crossed out.</p>
+    </div>
+  </section>
+
+  <section id="curriculum" class="band">
+    <div class="wrap">
+      <p class="eyebrow">Curriculum</p>
+      <h2>From your first budget to LEAPS</h2>
+      <div class="modules">
+        <div class="mod"><span class="k">M1</span><div><h3>Money foundations</h3><p>Pay down high-interest debt, build an emergency fund, and set a monthly number you can live on.</p></div></div>
+        <div class="mod"><span class="k">M2</span><div><h3>The right accounts</h3><p>TFSA, RRSP, FHSA and non-registered accounts: what goes where, and why it changes your tax.</p></div></div>
+        <div class="mod"><span class="k">M3</span><div><h3>Income ETFs</h3><p>How covered-call funds pay 15–30%, what return of capital means, and why prices can drift down.</p></div></div>
+        <div class="mod"><span class="k">M4</span><div><h3>Growth investing</h3><p>Index funds like XEQT and VFV: low cost, full market upside, small payouts.</p></div></div>
+        <div class="mod"><span class="k">M5</span><div><h3>Options basics</h3><p>Calls, puts, strike, expiry, premium and the Greeks, explained with real option chains.</p></div></div>
+        <div class="mod"><span class="k">M6</span><div><h3>The wheel strategy</h3><p>Cash-secured puts and covered calls on stocks you’d be happy to own.</p></div></div>
+        <div class="mod"><span class="k">M7</span><div><h3>LEAPS</h3><p>Long-dated options as a lower-cost way to hold a stock, and the risks that come with them.</p></div></div>
+        <div class="mod"><span class="k">M8</span><div><h3>Your plan</h3><p>Putting it together: how much to hold where, when to reinvest, and the rules you follow when markets fall.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <p class="eyebrow">Questions</p>
+      <h2>Frequently asked</h2>
+      <div class="faq">
+        <details class="faq-q"><summary>Is this financial advice?</summary><p>No. I teach how investing works so you can make your own decisions. I don’t manage money, trade for clients or tell you what to buy.</p></details>
+        <details class="faq-q"><summary>Will you tell me which funds to buy?</summary><p>No. I’ll show you how to compare funds, read their documents and judge the trade-offs. The choices, and the accounts, stay yours.</p></details>
+        <details class="faq-q"><summary>Do I need a lot of money to start?</summary><p>No. Module 1 starts with your monthly number, debt and savings. Many clients begin with nothing invested yet.</p></details>
+        <details class="faq-q"><summary>Are sessions online or in person?</summary><p>Online on Google Meet, with your own accounts on screen. In person in Kitchener–Waterloo can be arranged.</p></details>
+        <details class="faq-q"><summary>How long is each session?</summary><p>About 60 minutes. The six coaching sessions are usually spaced one to two weeks apart.</p></details>
+        <details class="faq-q"><summary>Do you teach options?</summary><p>Yes, in Modules 5 to 7: calls and puts, the wheel strategy and LEAPS. We get there only after the foundations are in place.</p></details>
+        <details class="faq-q"><summary>What if I need to reschedule or cancel?</summary><p>Reschedule free with 24 hours’ notice. See the full <a href="#policies">cancellation and refund policy</a>.</p></details>
+        <details class="faq-q"><summary>Which brokerage should I use?</summary><p>Any Canadian brokerage works. I use Wealthsimple. To connect with other investors, I also like Blossom, a social investing community. <a href="#accounts">Open an account</a>.</p></details>
+      </div>
+    </div>
+  </section>
+  <section class="next-wrap"><div class="wrap"><a class="next" href="#learn"><span class="eyebrow">Next</span><span class="next-t">Learn the funds, strategies and tax</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section>
+</div>
+<div class="page" id="learn" data-page="learn">
+  <div class="ledger" aria-label="Funds covered in coaching">
+    <div class="wrap ledger-head"><p class="eyebrow">Funds we cover</p><h2>Income and growth ETFs</h2></div>
+    <div class="wrap"><div class="ledger-scroll"><table>
+      <caption>Approximate yields from issuer and market data, mid-October 2026. *HONE’s first payout is November 2026; EASY launched in March 2026 and has little payout history. Payouts are set by each fund and change often. For education, not a recommendation.</caption>
+      <thead><tr><th>Fund</th><th>What it holds</th><th>Type</th><th>Yield</th><th>Pays</th></tr></thead>
+      <tbody>
+        <tr><td><b>MSTE</b></td><td>Strategy (MSTR) shares, covered calls, leverage</td><td><span class="kind income">Income</span></td><td>~45%</td><td>Monthly</td></tr>
+        <tr><td><b>HHIS</b></td><td>US large-cap shares, covered calls</td><td><span class="kind income">Income</span></td><td>~29%</td><td>Monthly</td></tr>
+        <tr><td><b>HONE</b></td><td>All-in-one: HHIS, HHIC and HHII</td><td><span class="kind income">Income</span></td><td>~21%*</td><td>Monthly</td></tr>
+        <tr><td><b>EASY</b></td><td>Global shares, covered calls, modest leverage</td><td><span class="kind income">Income</span></td><td>New fund</td><td>Twice a month</td></tr>
+        <tr><td><b>CDAY</b></td><td>Canadian shares, covered calls</td><td><span class="kind income">Income</span></td><td>~19%</td><td>Twice a month</td></tr>
+        <tr><td><b>SDAY</b></td><td>US dividend shares, covered calls</td><td><span class="kind income">Income</span></td><td>~19%</td><td>Twice a month</td></tr>
+        <tr><td><b>QDAY</b></td><td>Nasdaq-100, covered calls</td><td><span class="kind income">Income</span></td><td>~18%</td><td>Twice a month</td></tr>
+        <tr><td><b>BDAY</b></td><td>Bitcoin, covered calls</td><td><span class="kind income">Income</span></td><td>~15%</td><td>Twice a month</td></tr>
+        <tr><td><b>HDIV</b></td><td>Canadian sector funds, covered calls</td><td><span class="kind income">Income</span></td><td>~10%</td><td>Monthly</td></tr>
+        <tr><td><b>XEQT</b></td><td>Global shares, all-in-one</td><td><span class="kind growth">Growth</span></td><td>~1.6%</td><td>Quarterly</td></tr>
+        <tr><td><b>VFV</b></td><td>S&amp;P 500</td><td><span class="kind growth">Growth</span></td><td>~0.8%</td><td>Quarterly</td></tr>
+        <tr><td><b>QQC</b></td><td>Nasdaq-100</td><td><span class="kind growth">Growth</span></td><td>~0.3%</td><td>Quarterly</td></tr>
+      </tbody>
+    </table></div></div>
+  </div>
+
+  <section id="strategies">
+    <div class="wrap">
+      <p class="eyebrow">Strategies</p>
+      <h2>Growth, income, or both</h2>
+      <p class="lede" style="margin-top:12px">Every strategy trades something away. Here is what each one gives you, and what it costs.</p>
+      <div class="strats">
+        <article class="card"><span class="tag">Growth</span><h3>Index ETFs</h3>
+          <dl class="kv"><dt>Examples</dt><dd>XEQT, VFV, QQC</dd><dt>Payout</dt><dd>under 2% a year</dd><dt>Gives you</dt><dd>The full market return at very low cost</dd><dt>Costs you</dt><dd>Little income now; you sell units to spend</dd><dt>Best for</dt><dd>Long horizons, TFSAs, people still earning a salary</dd></dl></article>
+        <article class="card"><span class="tag">Income</span><h3>Covered-call income ETFs</h3>
+          <dl class="kv"><dt>Examples</dt><dd>HHIS, HONE, EASY, CDAY, SDAY, QDAY, BDAY, HDIV</dd><dt>Payout</dt><dd>about 10–29% a year</dd><dt>Gives you</dt><dd>Large monthly or twice-monthly cash, mostly return of capital</dd><dt>Costs you</dt><dd>Capped upside; the price drifts down when payouts exceed returns</dd><dt>Best for</dt><dd>Living off a portfolio, with the surplus reinvested</dd></dl></article>
+        <article class="card"><span class="tag">Hybrid</span><h3>Income first, then rotate</h3>
+          <dl class="kv"><dt>How</dt><dd>Start in a high-payout fund; reinvest every surplus dollar into other funds</dd><dt>Gives you</dt><dd>Income now, diversification within three to five years</dd><dt>Costs you</dt><dd>Concentration in the early years</dd><dt>Best for</dt><dd>Leaving a job while still building wealth</dd></dl></article>
+        <article class="card"><span class="tag amber">Options</span><h3>The wheel and LEAPS</h3>
+          <dl class="kv"><dt>How</dt><dd>Sell cash-secured puts, then covered calls; LEAPS for long-term exposure</dd><dt>Gives you</dt><dd>Premium income on stocks you choose, more control</dd><dt>Costs you</dt><dd>Time, discipline, and real losses when a stock falls hard</dd><dt>Best for</dt><dd>People willing to learn and manage trades every week</dd></dl></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="tax">
+    <div class="wrap">
+      <p class="eyebrow">The tax advantage</p>
+      <h2>Why most of this income isn’t taxed yet</h2>
+      <p class="lede" style="margin-top:12px">Most of what these funds pay is <b>return of capital</b>, not income. Canada doesn’t tax it when you receive it. Compared with a salary of the same size, far more of each payout stays in your pocket.</p>
+      <div class="taxgrid">
+        <article class="card"><span class="tag">1 · Return of capital</span><h3>Not taxed when paid</h3><p>In 2025, about 85–100% of the payouts from HHIS and the DayMAX funds (CDAY, SDAY, QDAY) were return of capital. You don’t report it as income in the year you receive it.</p></article>
+        <article class="card"><span class="tag">2 · Deferral</span><h3>Taxed later, at half</h3><p>Instead, each payout lowers your cost base. Tax comes when you sell, or once the cost base reaches zero, and then as a capital gain: only half of it is taxable.</p></article>
+        <article class="card"><span class="tag">3 · Accounts</span><h3>TFSA: never taxed</h3><p>Hold these funds in a TFSA and every payout and every gain is tax-free, for good. A non-registered account comes next, and an RRSP defers everything until you withdraw.</p></article>
+        <article class="card"><span class="tag amber">4 · Family bonus</span><h3>Lower taxable income</h3><p>Because return of capital isn’t income, your reported income can stay low. That can help with income-tested benefits such as the Canada Child Benefit.</p></article>
+      </div>
+      <div class="taxcompare">
+        <div><p class="eyebrow" style="color:var(--muted)">Example · Ontario, 2026</p><h3>$100,000 a year: salary vs. income funds</h3><p class="note" style="margin-top:8px">The same $100,000 leaves about <b>$26,000 more</b> in your pocket this year, and more again once workplace deductions come off a paycheque.</p></div>
+        <table>
+          <thead><tr><th></th><th>Salary</th><th>Income-fund payouts</th></tr></thead>
+          <tbody>
+            <tr><td>Received</td><td>$100,000</td><td>$100,000</td></tr>
+            <tr><td>Taxable this year</td><td>$100,000</td><td>about $10,000 <span class="note">(if 90% is return of capital)</span></td></tr>
+            <tr><td>Income tax this year</td><td>about $20,500</td><td><b>$0</b> <span class="note">(under the basic personal amount)</span></td></tr>
+            <tr><td>CPP and EI</td><td>about $5,800</td><td>$0</td></tr>
+            <tr class="keep"><td>You keep this year</td><td>about $74,000*</td><td>about $100,000</td></tr>
+          </tbody>
+        </table>
+        <p class="note" style="grid-column:1/-1;margin-top:-8px">*Before workplace pension, benefits premiums and other payroll deductions, which lower a real paycheque further.</p>
+      </div>
+      <p class="note" style="margin-top:16px">The fine print: return of capital is partly your own money coming back, so it isn’t free. It defers tax rather than cancelling it. The mix changes every year and is confirmed on each fund’s T3 slip, so keep track of your cost base. Figures are rounded and simplified, and this is general education, not tax advice. Check your own situation with an accountant. Coaching covers how to track all of this.</p>
+    </div>
+  </section>
+
+  <section id="calculator" class="band">
+    <div class="wrap">
+      <p class="eyebrow">Try it</p>
+      <h2>What could $100,000 do?</h2>
+      <div class="calc">
+        <div class="stack">
+          <div class="field"><label for="amt">Amount invested ($)</label><input id="amt" type="number" min="1000" step="1000" value="100000" inputmode="numeric"></div>
+          <div class="field"><label for="mkt">Stock market return per year</label>
+            <select id="mkt"><option value="0.12" selected>12%: a steady decade</option><option value="0.15">15%: a strong decade</option></select></div>
+          <div class="field"><span id="modelbl" style="font-weight:600;font-size:15px">What happens to the payouts</span>
+            <div class="seg" role="group" aria-labelledby="modelbl"><button type="button" id="m-re" aria-pressed="true">Reinvest 100%</button><button type="button" id="m-sp" aria-pressed="false">Reinvest 50%</button></div></div>
+          <p class="note">Assumptions: index ETFs earn the market return less 0.2% and pay 2.4%; income ETFs earn 1.25× the market less 2–3% in costs and pay 19–28%. At 50%, the other half of each payout is spent. Illustration only, before tax, not a forecast.</p>
+        </div>
+        <div class="results">
+          <table aria-live="polite">
+            <thead><tr><th>Strategy</th><th>Income, month 1</th><th>Value after 10 years</th><th>Cash taken over 10 years</th><th style="width:22%"></th></tr></thead>
+            <tbody id="calc-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="articles" class="band">
+    <div class="wrap">
+      <p class="eyebrow">Articles</p>
+      <h2>Plain-language reads</h2>
+      <div class="arts">
+        <details class="card art"><summary><span class="tag">Tax</span><h3>What is return of capital, and why it matters</h3><span class="tlink">Read →</span></summary>
+          <p>When an income ETF pays you, part of the payout can be classed as <b>return of capital</b>. For tax purposes it is treated as some of your own money coming back, so it isn’t taxed in the year you receive it.</p>
+          <p>Instead, it lowers your <b>adjusted cost base</b>, the price you’re considered to have paid. Buy at $10, receive $1 of return of capital, and your cost base becomes $9. When you sell, the gain is measured from $9, and only half of a capital gain is taxable. If the cost base ever reaches zero, further return of capital is taxed as a capital gain right away.</p>
+          <p>The result: tax is <b>deferred</b>, not cancelled, and it’s taxed at a lower rate when it comes. The mix changes every year, so keep your T3 slips and track your cost base.</p>
+        </details>
+        <details class="card art"><summary><span class="tag">Strategy</span><h3>Income or growth? HHIS versus XEQT</h3><span class="tlink">Read →</span></summary>
+          <p><b>HHIS</b> holds large US companies, adds modest leverage and sells covered calls. Recently it has paid out close to 29% a year, monthly. <b>XEQT</b> holds thousands of companies worldwide and pays under 2% a year, quarterly.</p>
+          <p>The difference is what you give up. Covered calls cap the upside, so in strong markets a fund like HHIS usually grows less than the index. When payouts exceed the fund’s return, its unit price drifts down. XEQT keeps all of the market’s growth but gives you little cash along the way.</p>
+          <p>A useful test: compare each fund’s <b>total return</b>, the price change plus payouts, not its yield. Income funds suit people who need cash flow now; growth funds suit long horizons. Many investors hold both.</p>
+        </details>
+        <details class="card art"><summary><span class="tag">Accounts</span><h3>TFSA or RRSP first?</h3><span class="tlink">Read →</span></summary>
+          <p>A <b>TFSA</b> grows tax-free, and withdrawals are never taxed and don’t count as income, so they don’t affect benefits like the Canada Child Benefit. You can take money out any time and get the room back the next year.</p>
+          <p>An <b>RRSP</b> gives you a deduction now and taxes withdrawals later. It works best when your income today is higher than you expect it to be when you withdraw.</p>
+          <p>For most families starting out, and for income investors, the TFSA comes first. Higher earners often benefit from the RRSP deduction too. Check your contribution room in CRA My Account before you contribute to either.</p>
+        </details>
+      </div>
+      <p class="note" style="margin-top:20px">General education, not financial or tax advice. Yields change; check each fund’s own documents.</p>
+    </div>
+  </section>
+
+  <section class="next-wrap"><div class="wrap"><a class="next" href="#book"><span class="eyebrow">Ready?</span><span class="next-t">Book your free intro session</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section>
+</div>
+<div class="page" id="policies" data-page="policies">
+  <section><div class="wrap policy">
+    <p class="eyebrow">Policies</p>
+    <h2>Privacy, cancellation and refunds</h2>
+    <h3>Privacy</h3>
+    <p>Melius One Consulting collects only what you choose to send: your name, email, phone number and anything you write in a form or share in a session. It is used only to arrange and run your sessions and to send the guide and monthly notes you asked for.</p>
+    <p>Your information is never sold or shared for marketing. Forms are processed by Netlify, bookings by Google Calendar and email by Zoho Mail. The site uses Google Analytics to count visits and see which pages are useful. It records things like pages viewed, time on the site and approximate location (city or region), never your name or email. Session notes are kept private. You can ask to see, correct or delete your information at any time by emailing <a href="mailto:obi@meliusoneconsulting.com">obi@meliusoneconsulting.com</a>, and you can unsubscribe from emails with one click.</p>
+    <h3>Cancellation and rescheduling</h3>
+    <p>You can reschedule any session for free with at least 24 hours’ notice. A session missed without notice, or cancelled with less than 24 hours’ notice, counts as used, unless it’s an emergency.</p>
+    <h3>Refunds</h3>
+    <p>If coaching isn’t right for you, unused sessions in a package are refunded in full when you ask within 30 days of purchase. Monthly check-ins can be cancelled at any time and stop at the end of the month already paid.</p>
+    <h3>Education only</h3>
+    <p>Everything on this site and in sessions is general financial education, not investment, tax or legal advice. Melius One Consulting does not manage money or trade for clients. Investing involves risk, including the loss of money; options and leveraged funds can lose value quickly. Past payouts and returns do not guarantee future results. Some links on this site are referral links, which may earn a bonus for both of us.</p>
+    <p class="note">Last updated October 2026.</p>
+  </div></section>
+</div>
+<div class="page" id="book" data-page="book">
+  <section id="signup" class="band">
+    <div class="wrap">
+      <div class="signup">
+        <div class="stack">
+          <p class="eyebrow">Sign up</p>
+          <h2>Book your free intro session</h2>
+          <p class="lede">Tell me a little about where you are. I’ll reply within two business days with session times.</p>
+          <p class="note">Prefer to pick a time yourself?</p>
+          <div><a class="btn ghost" href="https://calendar.app.google/Njkvmqf26i2frhhg9" target="_blank" rel="noopener">Pick a time on my calendar</a></div>
+          <p class="note" id="privacy"><strong>Privacy.</strong> Your name, email, phone and notes are used only to arrange and run your sessions. They are never sold or shared for marketing. Ask at any time and your details will be deleted. <a href="#policies">Privacy policy</a>. Questions: <a href="mailto:info@meliusoneconsulting.com">info@meliusoneconsulting.com</a>.</p>
+        </div>
+        <form id="form" class="stack" name="intro-signup" method="POST" action="/thanks" data-netlify="true" netlify-honeypot="company" novalidate>
+          <input type="hidden" name="form-name" value="intro-signup">
+          <p class="hp"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+          <div class="row">
+            <div class="field"><label for="f-name">Full name</label><input id="f-name" name="name" autocomplete="name" required></div>
+            <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+          </div>
+          <div class="row">
+            <div class="field"><label for="f-phone">Phone (optional)</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
+            <div class="field"><label for="f-topic">Most interested in</label>
+              <select id="f-topic" name="interest"><option>The free intro session</option><option>Income ETFs</option><option>Options: the wheel and LEAPS</option><option>All of it</option></select></div>
+          </div>
+          <div class="field"><label for="f-stage">Where you are now</label>
+            <select id="f-stage" name="stage"><option>Paying off debt</option><option>Saving, not investing yet</option><option>Investing, want income</option><option>Already trading options</option></select></div>
+          <div class="field"><label for="f-note">Anything I should know? (optional)</label><textarea id="f-note" name="note"></textarea></div>
+          <div><button class="btn" id="f-submit" type="submit">Request my intro session</button></div>
+          <p class="status" id="f-status" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div style="display:flex;align-items:center;gap:10px"><svg class="logo-mark sm" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="var(--seal)"/><circle cx="50" cy="50" r="42" fill="none" stroke="var(--seal-ring)" stroke-width="1.5"/><text x="44" y="69" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-size="54" font-weight="500" fill="var(--seal-m)">M</text><text x="73" y="44" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-size="24" font-weight="600" fill="var(--seal-1)">1</text></svg><strong style="color:var(--ink)">Melius One Consulting</strong></div>
+    <p>Financial education only. Nothing on this site or in a session is a recommendation to buy or sell any security, and Melius One Consulting does not manage money or trade for clients. Options and leveraged funds can lose money quickly. Past payouts and returns do not guarantee future results.</p>
+    <p><a href="mailto:obi@meliusoneconsulting.com">obi@meliusoneconsulting.com</a> · <a href="https://calendar.app.google/Njkvmqf26i2frhhg9" target="_blank" rel="noopener">Book a free intro session</a> · <a href="https://wealthsimple.com/invite/JHWVAG" target="_blank" rel="noopener sponsored">Wealthsimple</a> · <a href="https://link.blossomsocial.com/7uYa/ogse4c4w" target="_blank" rel="noopener sponsored">Blossom</a> (referral links) · <a href="#policies">Privacy and policies</a></p>
+    <p>© 2026 Melius One Consulting · Kitchener, Ontario</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ---------- calculator ----------
+  const S=[
+    {name:'Index ETFs (XEQT/VFV)', lev:1, drag:0.002, y:0.024},
+    {name:'Income ETFs (CDAY/SDAY/QDAY)', lev:1.25, drag:0.02, y:0.19},
+    {name:'HHIS', lev:1.25, drag:0.03, y:0.28},
+  ];
+  let share=1;
+  const $=id=>document.getElementById(id);
+  const fmt=n=>'$'+Math.round(n).toLocaleString('en-CA');
+  function calc(){
+    const A=Math.max(0, +$('amt').value||0), m=+$('mkt').value;
+    const rows=S.map(s=>{
+      const tr=m*s.lev-s.drag;
+      const mt=Math.pow(1+tr,1/12)-1, my=s.y/12;
+      let units=1, price=1, kept=0; // value tracked as units*price, starting at A
+      for(let i=0;i<120;i++){
+        const pay=units*price*my; kept+=(1-share)*pay;
+        price=price*(1+mt-my);
+        units+=share*pay/price;
+      }
+      return {name:s.name, inc:A*my, val:A*units*price, kept:A*kept};
+    });
+    const max=Math.max(...rows.map(r=>r.val),1);
+    $('calc-body').innerHTML=rows.map(r=>`<tr><td>${r.name}</td><td>${fmt(r.inc)}</td><td>${fmt(r.val)}</td><td>${fmt(r.kept)}</td><td><div class="bar" style="width:${(r.val/max*100).toFixed(1)}%"></div></td></tr>`).join('');
+  }
+  $('amt').addEventListener('input',calc); $('mkt').addEventListener('change',calc);
+  $('m-re').addEventListener('click',()=>{share=1;$('m-re').setAttribute('aria-pressed','true');$('m-sp').setAttribute('aria-pressed','false');calc();});
+  $('m-sp').addEventListener('click',()=>{share=0.5;$('m-sp').setAttribute('aria-pressed','true');$('m-re').setAttribute('aria-pressed','false');calc();});
+  calc();
+
+  // ---------- sign-up (Netlify Forms) ----------
+  const form=$('form'), status=$('f-status'), submit=$('f-submit');
+  const setStatus=(t,c)=>{status.textContent=t;status.className='status'+(c?' '+c:'');};
+  form.addEventListener('submit',async ev=>{
+    ev.preventDefault();
+    const name=$('f-name').value.trim(), email=$('f-email').value.trim();
+    if(!name){setStatus('Please enter your name.','err');$('f-name').focus();return;}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){setStatus('Please enter a valid email address, like name@example.com.','err');$('f-email').focus();return;}
+    submit.disabled=true; setStatus('Sending…');
+    try{
+      const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()});
+      if(!r.ok) throw new Error(r.status);
+      form.reset();
+      setStatus('Thank you, '+name.split(' ')[0]+'. Your request is in, and you’ll hear back within two business days.','ok');
+    }catch(e){
+      setStatus('Your request didn’t go through. Check your connection and send it again, or email Melius One Consulting directly.','err');
+    }finally{ submit.disabled=false; }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var bar=document.getElementById('progress');
+  function onScroll(){var h=document.documentElement;var max=h.scrollHeight-h.clientHeight;bar.style.transform='scaleX('+(max>0?h.scrollTop/max:0)+')';}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  var sel='section .wrap > *, .ledger .wrap > *, .card, .step, .pj-card, .stat, .mod, .arow, .timeline li, .journey li, .taxcompare';
+  var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('header')&&!e.closest('form');});
+  // stagger siblings
+  els.forEach(function(e){var p=e.parentElement,i=[].indexOf.call(p.children,e);e.classList.add('reveal');e.style.transitionDelay=Math.min(i,6)*70+'ms';});
+  // chart line lengths
+  [].forEach.call(document.querySelectorAll('.pj-chart polyline'),function(l){try{l.style.setProperty('--len',Math.ceil(l.getTotalLength()));}catch(e){}});
+  // allocation bars start empty
+  var fills=[].slice.call(document.querySelectorAll('.arow .fill'));
+  fills.forEach(function(f){f.dataset.w=f.style.width;if(!reduce)f.style.width='0';});
+  // count-up stats
+  function countUp(b){var t=b.textContent,m=t.match(/^(\D*)([\d.]+)(.*)$/);if(!m||reduce)return;var end=parseFloat(m[2]),dec=(m[2].split('.')[1]||'').length,t0=null;
+    function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/1200,1),v=end*(1-Math.pow(1-p,3));b.textContent=m[1]+v.toFixed(dec)+m[3];if(p<1)requestAnimationFrame(step);}
+    requestAnimationFrame(step);}
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});fills.forEach(function(f){f.style.width=f.dataset.w});document.querySelectorAll('.pj-chart').forEach(function(c){c.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(!en.isIntersecting)return;var e=en.target;e.classList.add('in');
+      if(e.classList.contains('stat')){var b=e.querySelector('b');if(b)countUp(b);}
+      if(e.classList.contains('arow')){var f=e.querySelector('.fill');if(f)f.style.width=f.dataset.w;}
+      io.unobserve(e);});},{threshold:.15,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(e){io.observe(e)});
+  var cio=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');cio.unobserve(x.target);}});},{threshold:.3});
+  [].forEach.call(document.querySelectorAll('.pj-chart'),function(c){cio.observe(c);});
+  // page router
+  var pagesEls=[].slice.call(document.querySelectorAll('.page'));
+  var navLinks=[].slice.call(document.querySelectorAll('[data-nav]'));
+  function fixCharts(pg){[].forEach.call(pg.querySelectorAll('.pj-chart polyline'),function(l){try{var n=Math.ceil(l.getTotalLength());if(n>0)l.style.setProperty('--len',n);}catch(e){}});}
+  function route(){
+    var h=decodeURIComponent((location.hash||'#home').slice(1))||'home';
+    var target=document.getElementById(h), pg=null;
+    if(target&&target.classList.contains('page')) pg=target;
+    else if(target) pg=target.closest('.page');
+    if(!pg){pg=document.getElementById('home');target=null;}
+    pagesEls.forEach(function(p){p.classList.toggle('on',p===pg);});
+    navLinks.forEach(function(a){a.classList.toggle('active',a.getAttribute('data-nav')===pg.id);});
+    fixCharts(pg);
+    if(target&&target!==pg){setTimeout(function(){target.scrollIntoView({behavior:reduce?'auto':'smooth'});},60);} else {window.scrollTo(0,0);}
+    onScroll();
+    var names={home:'',about:'About · ',coaching:'Coaching · ',learn:'Learn · ',book:'Book a session · ',policies:'Policies · '}; document.title=pg.id==='home'?'Melius One Consulting | Obi Oji, Financial Education Coach in Kitchener, Ontario':(names[pg.id]||'')+'Melius One Consulting';
+    if(pg.id!==lastPg){lastPg=pg.id;try{gtag('event','page_view',{page_title:document.title,page_location:location.origin+'/'+(pg.id==='home'?'':pg.id)});}catch(e){}}
+  }
+  var lastPg=null;
+  addEventListener('hashchange',route); route();
+})();
+</script>
+
+<script>
+(function(){
+  var b=document.getElementById('burger'),n=document.getElementById('mainnav');if(!b||!n)return;
+  function set(o){n.classList.toggle('open',o);b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Close menu':'Open menu');}
+  b.addEventListener('click',function(){set(!n.classList.contains('open'));});
+  n.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});
+  addEventListener('hashchange',function(){set(false);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
+  document.addEventListener('click',function(e){if(n.classList.contains('open')&&!e.target.closest('#mainnav')&&!e.target.closest('#burger'))set(false);});
+})();
+</script>
+
+<script>
+(function(){
+  var btns=[].slice.call(document.querySelectorAll('.pj-ctl button'));
+  var vars=[].slice.call(document.querySelectorAll('.pj-variant'));
+  btns.forEach(function(b){b.addEventListener('click',function(){
+    var f=b.getAttribute('data-f');
+    btns.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
+    vars.forEach(function(v){var on=v.getAttribute('data-f')===f;v.hidden=!on;
+      if(on){[].forEach.call(v.querySelectorAll('.reveal'),function(e){e.classList.add('in');});
+        var c=v.querySelector('.pj-chart');if(c){[].forEach.call(c.querySelectorAll('polyline'),function(l){try{l.style.setProperty('--len',Math.ceil(l.getTotalLength()));}catch(e){}});c.classList.remove('in');void c.offsetWidth;c.classList.add('in');}}
+    });
+  });});
+})();
+</script>
+
+<script>
+(function(){
+  var f=document.getElementById('gform');if(!f)return;
+  var st=document.getElementById('g-status'),bt=document.getElementById('g-submit');
+  f.addEventListener('submit',function(ev){ev.preventDefault();
+    var n=document.getElementById('g-name').value.trim(),e=document.getElementById('g-email').value.trim();
+    if(!n){st.textContent='Please enter your first name.';st.className='status err';return;}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)){st.textContent='Please enter a valid email address.';st.className='status err';return;}
+    bt.disabled=true;st.textContent='Sending…';st.className='status';
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(f)).toString()})
+    .then(function(r){if(!r.ok)throw 0;f.reset();try{gtag('event','generate_lead',{form:'guide'});}catch(e){}st.innerHTML='Thank you, '+n.replace(/[<>&]/g,'')+'. <a href="guide.pdf" target="_blank" rel="noopener">Download your guide (PDF)</a>.';st.className='status ok';})
+    .catch(function(){st.innerHTML='Here’s your guide: <a href="guide.pdf" target="_blank" rel="noopener">Download the guide (PDF)</a>. We couldn’t save your email just now, so write to obi@meliusoneconsulting.com if you’d like the monthly note.';st.className='status ok';})
+    .finally(function(){bt.disabled=false;});
+  });
+})();
+</script>
+</body>
+</html>

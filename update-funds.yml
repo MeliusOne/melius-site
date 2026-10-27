@@ -1,0 +1,30 @@
+name: Update fund data
+
+on:
+  schedule:
+    # 10:30 pm UTC on weekdays: 6:30 pm Toronto in summer, 5:30 pm in winter, after the TSX closes
+    - cron: "30 22 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install --upgrade yfinance pandas
+      - name: Refresh fund data
+        run: python scripts/update_funds.py
+      - name: Save the new data
+        run: |
+          git config user.name "fund-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/funds-live.json
+          if git diff --cached --quiet; then echo "No changes"; else git commit -m "Update fund data" && git push; fi
