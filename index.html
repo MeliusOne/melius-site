@@ -2021,7 +2021,9 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   $('icMix').addEventListener('click',function(e){var b=e.target.closest('[data-rm]');if(!b)return;var t=b.dataset.rm;delete st.sel[t];st.order=st.order.filter(function(x){return x!==t});save();all()});
   $('icSplit').addEventListener('submit',function(e){e.preventDefault();var v=+$('icTotal').value||0;if(!st.order.length||v<=0)return;var each=Math.floor(v/st.order.length*100)/100;st.order.forEach(function(t){st.sel[t]=each});save();mix();calc();try{gtag('event','income_split')}catch(x){}});
   all();
-  fetch('/data/funds-live.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){meta=d;L=(d&&d.funds)||{};all()}).catch(function(){});
+  /* nightly data lives on GitHub (no Netlify deploy needed); fall back to the copy on this site */
+  var SRC=['https://raw.githubusercontent.com/MeliusOne/melius-site/main/data/funds-live.json','/data/funds-live.json'];
+  (function load(k){if(k>=SRC.length)return;fetch(SRC[k],{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){if(!d||!d.funds)throw 0;meta=d;L=d.funds;all()}).catch(function(){load(k+1)})})(0);
 })();
 </script>
 </body>
