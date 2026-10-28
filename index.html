@@ -736,8 +736,8 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .ic-split .fd-f{flex:1 1 160px}
 .ic-splitbtn{height:44px;padding:0 18px}
 .ic-rows{display:flex;flex-direction:column;border-top:1px solid var(--line)}
-.ic-row{display:grid;grid-template-columns:minmax(0,1fr) 132px minmax(0,auto) 34px;grid-template-areas:'n a p x' 'd d d .';column-gap:14px;row-gap:4px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
-.ic-rn{grid-area:n;min-width:0}.ic-amt{grid-area:a}.ic-rp{grid-area:p;text-align:right}.ic-row .ic-x{grid-area:x}.ic-rd{grid-area:d;font-size:12.5px;color:var(--muted)}
+.ic-row{display:grid;grid-template-columns:206px minmax(0,1fr) 34px;grid-template-areas:'n n x' 'a p .' 'd d .';column-gap:14px;row-gap:4px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.ic-rn{grid-area:n;min-width:0}.ic-in{grid-area:a;display:flex;gap:8px;min-width:0}.ic-in .ic-amt{flex:1 1 auto;min-width:0}.ic-rp{grid-area:p;text-align:right}.ic-row .ic-x{grid-area:x}.ic-rd{grid-area:d;font-size:12.5px;color:var(--muted)}
 .ic-rn b{font-size:16px}
 .ic-rn small{display:block;font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ic-rp b{display:block;font-size:17px;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -746,6 +746,13 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .ic-amt{position:relative}
 .ic-amt span{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-weight:600}
 .ic-amt input{width:100%;box-sizing:border-box;height:44px;font:inherit;font-size:15px;font-weight:600;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 10px 10px 24px}
+.ic-pct{position:relative;flex:0 0 74px}
+.ic-pct span{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-weight:600}
+.ic-pct input{width:100%;box-sizing:border-box;height:44px;font:inherit;font-size:15px;font-weight:600;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 24px 10px 10px}
+.ic-pct input:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.ic-pct input::-webkit-inner-spin-button,.ic-pct input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.ic-pct input{-moz-appearance:textfield}
+.ic-alloc{margin:0;padding:10px 14px;border-radius:10px;font-size:14px;background:var(--band);color:var(--ink)}
+.ic-alloc.ok{border-left:3px solid #2E7D5B}.ic-alloc.warn{border-left:3px solid var(--amber)}.ic-alloc.over{border-left:3px solid var(--danger)}
 .ic-amt input:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 .ic-x{width:34px;height:34px;border-radius:50%;border:0;background:none;color:var(--muted);font-size:22px;cursor:pointer}
 .ic-x:hover{background:var(--band);color:var(--ink)}
@@ -769,7 +776,7 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .fd-live{margin:0;font-size:14px;color:var(--muted);display:flex;align-items:baseline;gap:10px}
 .fd-live .ic-dot{position:relative;top:-1px;width:8px;height:8px;border-radius:50%;flex:none;background:#2E7D5B;box-shadow:0 0 0 4px rgba(46,125,91,.15)}
 @media (max-width:980px){.ic-res{grid-template-columns:1fr}.ic-grid{grid-template-columns:1fr}.ic-pick{position:static}.ic-list{max-height:380px}}
-@media (max-width:620px){.ic-rn small{white-space:normal}.ic-top{padding-block:30px 28px}.ic-main,.ic-keep{padding:20px}.ic-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.ic-row{grid-template-columns:minmax(0,1fr) 112px 30px;grid-template-areas:'n a x' 'p p .' 'd d .'}.ic-rp{text-align:left;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}.ic-seg button{padding:8px 11px}}
+@media (max-width:620px){.ic-rn small{white-space:normal}.ic-top{padding-block:30px 28px}.ic-main,.ic-keep{padding:20px}.ic-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.ic-row{grid-template-columns:minmax(0,1fr) 30px;grid-template-areas:'n x' 'a a' 'p p' 'd d'}.ic-rp{text-align:left;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}.ic-seg button{padding:8px 11px}}
 .faith-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:36px;margin-top:22px;align-items:start}
 .faith-txt p{margin:0 0 14px;font-size:17px;color:var(--muted);max-width:62ch}
 .faith-txt p:first-child{color:var(--ink)}
@@ -1532,6 +1539,7 @@ main{min-height:calc(100vh - 260px)}
       <div class="card ic-mix">
         <div class="ic-h"><h2>Your mix</h2><span class="ic-count" id="icCount"></span></div>
         <form class="ic-split" id="icSplit"><label class="fd-f"><span>Total to invest</span><input type="number" inputmode="decimal" min="0" step="100" id="icTotal" placeholder="30000"></label><button class="btn ghost ic-splitbtn" type="submit">Split evenly</button></form>
+        <p class="ic-alloc" id="icAlloc" aria-live="polite" hidden></p>
         <div class="ic-rows" id="icMix"></div>
         <p class="ic-empty" id="icEmpty" hidden>Add one or more funds to start. Pick them from the list.</p>
       </div>
@@ -2069,9 +2077,9 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
 /* Income calculator: reads /data/funds-live.json (refreshed nightly), falls back to the FUNDS yields */
 (function(){
   if(typeof FUNDS==='undefined'||!document.getElementById('income'))return;
-  var KEY='melius-income-v2',BY={},L={},meta=null,st={sel:{},order:[],per:'bi'},INFL=2.5;
+  var KEY='melius-income-v2',BY={},L={},meta=null,st={sel:{},order:[],per:'bi',total:0,pct:{}},INFL=2.5;
   FUNDS.forEach(function(f){BY[f.t]=f});
-  try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.sel&&s.order){st=s;st.order=st.order.filter(function(t){return BY[t]})}}catch(e){}
+  try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.sel&&s.order){st=s;st.order=st.order.filter(function(t){return BY[t]});st.pct=st.pct||{};st.total=+st.total||0}}catch(e){}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
   var $=function(id){return document.getElementById(id)};
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -2098,11 +2106,27 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   function mix(){
     $('icMix').innerHTML=st.order.map(function(t){var f=BY[t],i=info(t),a=+st.sel[t]||0,r=rowHtml(t);
       return '<div class="ic-row"><span class="ic-rn"><b>'+t+'</b>'+(f.lev?'<span class="ic-lev">Leverage</span>':'')+'<small>'+i.y.toFixed(2)+'% · pays '+(FREQ[i.n]||'')+'</small></span>'+
-        '<label class="ic-amt"><span>$</span><input type="number" inputmode="decimal" min="0" step="100" data-amt="'+t+'" value="'+(a||'')+'" placeholder="0" aria-label="Amount in '+t+'"></label>'+
+        '<span class="ic-in"><label class="ic-amt"><span>$</span><input type="number" inputmode="decimal" min="0" step="100" data-amt="'+t+'" value="'+(a?r2(a):'')+'" placeholder="0" aria-label="Amount in '+t+'"></label>'+
+        '<label class="ic-pct"><input type="number" inputmode="decimal" min="0" max="100" step="1" data-pct="'+t+'" value="'+pctStr(t)+'" placeholder="0" aria-label="Percent of total in '+t+'"><span>%</span></label></span>'+
         '<span class="ic-rp" data-rp="'+t+'">'+r.pay+'</span>'+
         '<button type="button" class="ic-x" data-rm="'+t+'" aria-label="Remove '+t+'">×</button>'+
         '<span class="ic-rd" data-rd="'+t+'">'+r.det+'</span></div>'}).join('');
-    var n=st.order.length;$('icEmpty').hidden=n>0;$('icCount').textContent=n?n+' fund'+(n>1?'s':''):'';
+    var n=st.order.length;$('icEmpty').hidden=n>0;$('icCount').textContent=n?n+' fund'+(n>1?'s':''):'';if($('icTotal')&&document.activeElement!==$('icTotal'))$('icTotal').value=st.total||'';alloc();
+  }
+  function r2(v){return Math.round(v*100)/100}
+  function sum(){var x=0;st.order.forEach(function(t){x+=+st.sel[t]||0});return x}
+  function base(){return st.total>0?st.total:sum()}
+  function pctOf(t){var b=base();if(st.total>0&&st.pct[t]!=null)return +st.pct[t];return b>0?(+st.sel[t]||0)/b*100:(st.pct[t]!=null?+st.pct[t]:0)}
+  function pctStr(t){var v=pctOf(t);if(!v)return '';return String(Math.round(v*10)/10)}
+  function syncPct(){var ae=document.activeElement;document.querySelectorAll('[data-pct]').forEach(function(el){if(el!==ae)el.value=pctStr(el.dataset.pct)});
+    document.querySelectorAll('[data-amt]').forEach(function(el){if(el!==ae){var a=+st.sel[el.dataset.amt]||0;el.value=a?r2(a):''}});alloc()}
+  function alloc(){var el=$('icAlloc');if(!st.order.length){el.hidden=true;return}
+    var tp=0;st.order.forEach(function(t){tp+=pctOf(t)});tp=Math.round(tp*10)/10;var T=st.total,S=sum();
+    if(!(T>0)){if(tp>0&&S===0){el.hidden=false;el.className='ic-alloc warn';el.innerHTML='<b>'+tp+'%</b> allocated. Enter a <b>total to invest</b> to turn the percentages into dollars.';}else el.hidden=true;return}
+    el.hidden=false;var left=r2(T-S);
+    if(Math.abs(tp-100)<0.05||Math.abs(left)<1){el.className='ic-alloc ok';el.innerHTML='<b>100%</b> of '+money(T)+' allocated.'}
+    else if(tp<100){el.className='ic-alloc warn';el.innerHTML='<b>'+tp+'%</b> allocated · <b>'+money(left)+'</b> ('+(Math.round((100-tp)*10)/10)+'%) still to place.'}
+    else{el.className='ic-alloc over';el.innerHTML='<b>'+tp+'%</b> allocated · over your total by <b>'+money(-left)+'</b>.'}
   }
   function rowUpdate(t){var el=document.querySelector('[data-rp="'+t+'"]');if(!el)return;var r=rowHtml(t);el.innerHTML=r.pay;var d=document.querySelector('[data-rd="'+t+'"]');if(d)d.textContent=r.det}
   /* headline unit: the funds' shared schedule if they all pay monthly or all twice a month, otherwise a monthly total */
@@ -2135,11 +2159,17 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   function all(){list();mix();calc();fresh()}
   $('icQ').addEventListener('input',list);
   $('icList').addEventListener('click',function(e){var b=e.target.closest('[data-ic]');if(!b)return;var t=b.dataset.ic;
-    if(st.sel[t]!=null){delete st.sel[t];st.order=st.order.filter(function(x){return x!==t})}else{st.sel[t]=0;st.order.push(t);try{gtag('event','income_add_fund',{fund:t})}catch(x){}}
+    if(st.sel[t]!=null){delete st.sel[t];delete st.pct[t];st.order=st.order.filter(function(x){return x!==t})}else{st.sel[t]=0;st.order.push(t);try{gtag('event','income_add_fund',{fund:t})}catch(x){}}
     save();list();mix();calc();if(st.sel[t]!=null){var inp=document.querySelector('[data-amt="'+t+'"]');if(inp&&matchMedia('(min-width:981px)').matches)inp.focus()}});
-  $('icMix').addEventListener('input',function(e){var t=e.target.dataset.amt;if(!t)return;st.sel[t]=Math.max(0,+e.target.value||0);save();rowUpdate(t);calc()});
-  $('icMix').addEventListener('click',function(e){var b=e.target.closest('[data-rm]');if(!b)return;var t=b.dataset.rm;delete st.sel[t];st.order=st.order.filter(function(x){return x!==t});save();all()});
-  $('icSplit').addEventListener('submit',function(e){e.preventDefault();var v=+$('icTotal').value||0;if(!st.order.length||v<=0)return;var each=Math.floor(v/st.order.length*100)/100;st.order.forEach(function(t){st.sel[t]=each});save();mix();calc();try{gtag('event','income_split')}catch(x){}});
+  $('icMix').addEventListener('input',function(e){var t=e.target.dataset.amt,q=e.target.dataset.pct;
+    if(t){st.sel[t]=Math.max(0,+e.target.value||0);if(st.total>0)st.pct[t]=st.sel[t]/st.total*100;else delete st.pct[t];save();rowUpdate(t);syncPct();calc();return}
+    if(q){var v=Math.max(0,Math.min(100,+e.target.value||0));if(!(st.total>0)){var S=sum();if(S>0){st.total=S;st.order.forEach(function(x){st.pct[x]=(+st.sel[x]||0)/S*100})}}
+      st.pct[q]=v;if(st.total>0)st.sel[q]=st.total*v/100;save();rowUpdate(q);syncPct();calc()}});
+  $('icTotal').addEventListener('input',function(){var v=Math.max(0,+$('icTotal').value||0),old=st.total;
+    if(v>0){st.order.forEach(function(t){if(st.pct[t]==null&&!(old>0)){var S=sum();st.pct[t]=S>0?(+st.sel[t]||0)/S*100:null}if(st.pct[t]!=null)st.sel[t]=v*st.pct[t]/100;else st.pct[t]=(+st.sel[t]||0)/v*100})}
+    st.total=v;save();st.order.forEach(rowUpdate);syncPct();calc()});
+  $('icMix').addEventListener('click',function(e){var b=e.target.closest('[data-rm]');if(!b)return;var t=b.dataset.rm;delete st.sel[t];delete st.pct[t];st.order=st.order.filter(function(x){return x!==t});save();all()});
+  $('icSplit').addEventListener('submit',function(e){e.preventDefault();var v=+$('icTotal').value||0;if(!st.order.length||v<=0)return;st.total=v;var pc=100/st.order.length;st.order.forEach(function(t){st.pct[t]=pc;st.sel[t]=v*pc/100});save();mix();calc();try{gtag('event','income_split')}catch(x){}});
   all();
   if(window.MELIUS_LIVE)window.MELIUS_LIVE.then(function(d){if(d&&d.funds){meta=d;L=d.funds;all()}});
 })();
