@@ -714,6 +714,8 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .ic-keep p{margin:0;font-size:14.5px;line-height:1.5;color:var(--ic-mute)}
 .ic-keep p b{color:var(--ic-ink)}
 .ic-kn{font-size:12.5px!important;opacity:.9}
+.ic-mk{margin:2px 0 0;flex-wrap:wrap}.ic-mk button{padding:7px 12px;font-size:13px}
+.ic-keep .ic-mkn{margin:0;font-size:12.5px;opacity:.85}
 .ic-two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
 .ic-two div{background:rgba(20,33,61,.35);border:1px solid var(--ic-line);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
 .ic-two span{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
@@ -1551,7 +1553,7 @@ main{min-height:calc(100vh - 260px)}
     </div>
     <div class="wrap ic-foot">
       <p><b>How this works.</b> Each fund’s yield is its latest regular payout per unit, times the number of payouts in a year, divided by its latest closing price. Your amount times that yield gives a yearly payout. Each fund is shown on its own schedule: most pay monthly, some twice a month, a few quarterly. When your mix has more than one schedule, the total is shown per month. The two-week paycheque figure is the yearly total spread over 26 paydays, for comparing with a biweekly paycheque.</p>
-      <p><b>Withdraw and reinvest.</b> A fund grows by its total return: the change in its unit price plus its payouts. If you withdraw less than that total return, minus about 2.5% for inflation, the balance keeps growing in real terms. Recent returns come mostly from a strong market, so the withdraw limit uses a normal-market return instead: the long-run average of the fund’s market (about 8% for Canadian stocks, 9% for U.S. stocks, 11% for tech), times 1.25 for funds that borrow, minus borrowing costs, the upside its options give away, and fees. When a fund pays out far more than that, most of the payout is your own money coming back, and it should be reinvested to keep your income from shrinking.</p>
+      <p><b>Withdraw and reinvest.</b> A fund grows by its total return: the change in its unit price plus its payouts. If you withdraw less than that total return, minus about 2.5% for inflation, the balance keeps growing in real terms. By default we use each fund’s longest record (10, 5 or 3 years, or since launch), its 1-year return for newer funds, and 8% when there’s no record yet. Switch the market to see a strong year (+30%, like 2025), an ordinary one (+12%) or a bear year (−25%). Past returns don’t promise future ones, so check again each year.</p>
       <p><b>Payouts are not guaranteed.</b> Funds change their payouts often, and very high yields usually include some of your own money paid back (return of capital) and can wear down the unit price over time. Funds marked “Leverage” borrow to invest, so they can fall faster. Figures are before tax.</p>
       <p>This calculator is financial education, not investment advice or a recommendation to buy any fund. Compare funds side by side in the <a href="#funds">fund directory</a><span data-pl="hide">, or <a href="#book">book a free intro session</a> to build a plan that fits your family</span>.</p>
     </div>
@@ -2077,9 +2079,9 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
 /* Income calculator: reads /data/funds-live.json (refreshed nightly), falls back to the FUNDS yields */
 (function(){
   if(typeof FUNDS==='undefined'||!document.getElementById('income'))return;
-  var KEY='melius-income-v2',BY={},L={},meta=null,st={sel:{},order:[],per:'bi',total:0,pct:{}},INFL=2.5;
+  var KEY='melius-income-v2',BY={},L={},meta=null,st={sel:{},order:[],per:'bi',total:0,pct:{},mkt:'rec'},INFL=2.5;
   FUNDS.forEach(function(f){BY[f.t]=f});
-  try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.sel&&s.order){st=s;st.order=st.order.filter(function(t){return BY[t]});st.pct=st.pct||{};st.total=+st.total||0}}catch(e){}
+  try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.sel&&s.order){st=s;st.order=st.order.filter(function(t){return BY[t]});st.pct=st.pct||{};st.total=+st.total||0;st.mkt=st.mkt||'rec'}}catch(e){}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
   var $=function(id){return document.getElementById(id)};
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -2091,11 +2093,9 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     return {y:+f.y,n:{Monthly:12,'Twice a month':24,Quarterly:4}[f.f]||12};
   }
   function longRun(f){var r=f.r||{};var c=[['y10','10-year'],['y5','5-year'],['y3','3-year']];for(var i=0;i<c.length;i++)if(r[c[i][0]]!=null)return [r[c[i][0]],c[i][1]];if(r.si!=null&&f.inc&&(+f.inc)<=2024)return [r.si,'since '+f.inc];if(r.y1!=null)return [r.y1,'1-year'];return [8,'assumed']}
-  /* normal-market return: the long-run average of the fund's market, x1.25 when it borrows, minus borrowing cost, option drag and fees */
-  var NORM={'Canadian equity':[8,'Canadian stocks'],'U.S. equity':[9,'U.S. stocks'],'Technology':[11,'tech stocks'],'Banks and financials':[8,'financial stocks'],'Utilities':[7,'utilities'],'Healthcare':[8,'healthcare stocks'],'Global and international':[7.5,'global stocks'],'Energy':[7,'energy stocks'],'Gold and materials':[6,'gold stocks'],'Real estate (REITs)':[7,'REITs'],'Bonds':[4,'bonds'],'Multi-asset, all-in-one':[8.5,'a stock mix'],'Single stock':[8,'a single stock (no reliable average, so 8% is assumed)'],'Bitcoin':[8,'Bitcoin (no reliable average, so 8% is assumed)']};
-  var DRAG={'Covered calls':1,'High coverage':2,'Daily options':0.5};
-  function fwd(f){var b=NORM[f.x]||[8,'stocks'],fee=(f.m!=null?+f.m:(f.mf!=null?+f.mf:0.6))||0.6;
-    var r=b[0]*(f.lev?1.25:1)-(f.lev?1.25:0)-(DRAG[f.s]||0)-fee;return [Math.round(r*10)/10,b[0],b[1]]}
+  /* market conditions: each fund's own record, or one return for every fund */
+  var MK={bull:[30,'Bull','a strong year like 2025'],base:[12,'Base','a solid, ordinary year'],bear:[-25,'Bear','a bear-market year']};
+  function rate(t){var m=MK[st.mkt];return m?[m[0],m[1]]:longRun(BY[t])}
   function keepYr(a,rate,payYr){if(rate<=INFL)return 0;var m=Math.pow((1+rate/100)/(1+INFL/100),1/12)-1;return Math.min(a*m*12,payYr)}
   function provName(f){try{return (FD_PROV[f.p]&&FD_PROV[f.p].name)||f.p}catch(e){return f.p}}
   function list(){var q=($('icQ').value||'').trim().toLowerCase();
@@ -2104,9 +2104,9 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
       return '<button type="button" class="ic-opt" data-ic="'+f.t+'" aria-pressed="'+on+'"><span class="ic-box" aria-hidden="true">'+(on?'✓':'')+'</span><span><b>'+f.t+'</b>'+(f.lev?'<span class="ic-lev">Leverage</span>':'')+'<small>'+esc(f.n)+'</small></span><span class="ic-y">'+i.y.toFixed(2)+'%<small>'+(FREQ[i.n]||'')+'</small></span></button>'}).join(''):'<p class="ic-empty" style="padding:14px 4px">No funds match.</p>';
   }
   var FQ={52:'a week',26:'every two weeks',24:'twice a month',12:'a month',4:'a quarter',2:'twice a year',1:'a year'};
-  function rowHtml(t){var f=BY[t],i=info(t),a=+st.sel[t]||0,y=a*i.y/100,Lr=longRun(f),Fw=fwd(f),k=keepYr(a,Fw[0],y),n=i.n||12,det='';
+  function rowHtml(t){var f=BY[t],i=info(t),a=+st.sel[t]||0,y=a*i.y/100,Lr=longRun(f),Mk=MK[st.mkt],k=keepYr(a,rate(t)[0],y),n=i.n||12,det='';
     if(i.p&&i.d&&a>0){var u=a/i.p;det=Math.floor(u).toLocaleString('en-CA')+' units × '+money(i.d,1)+' a payout · '}
-    det+='Withdraw limit assumes a normal market: '+Fw[0].toFixed(1)+'% a year, from '+Fw[2]+' averaging about '+Fw[1]+'%'+(f.lev?', with its 25% borrowing':'')+', after fees'+(Lr[1]==='assumed'?'':'. Its '+Lr[1]+' return was '+(+Lr[0]).toFixed(1)+'%')+'.';
+    det+=Mk?'Withdraw limit assumes a '+Mk[1].toLowerCase()+' market: '+(Mk[0]>0?'+':'')+Mk[0]+'% this year. Its '+(Lr[1]==='assumed'?'record is too short to use':Lr[1]+' return was '+(+Lr[0]).toFixed(1)+'%'):'Withdraw limit uses its '+(Lr[1]==='assumed'?'assumed 8% a year':Lr[1]+' return of '+(+Lr[0]).toFixed(1)+'%');
     return {pay:'<b>'+money(y/n,1)+' <span style="font-weight:500;font-size:13px;color:var(--muted)">'+(FQ[n]||'')+'</span></b><small><span class="w">withdraw '+money(k/n,1)+'</span> · <span class="r">reinvest '+money(Math.max(0,y-k)/n,1)+'</span></small>',det:det}}
   function mix(){
     $('icMix').innerHTML=st.order.map(function(t){var f=BY[t],i=info(t),a=+st.sel[t]||0,r=rowHtml(t);
@@ -2140,20 +2140,22 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     if(keys.length===1&&keys[0]===24)return {dv:24,u:'twice a month',mixed:false,cnt:cnt};
     return {dv:12,u:keys.length>1||(keys.length===1&&keys[0]!==12)?'a month in total':'a month',mixed:keys.length>1||(keys.length===1&&keys[0]!==12),cnt:cnt}}
   function calc(){var U=unit(),tot=0,yr=0,keep=0,keep8=0;
-    st.order.forEach(function(t){var a=+st.sel[t]||0,i=info(t),y=a*i.y/100;tot+=a;yr+=y;keep+=keepYr(a,fwd(BY[t])[0],y);keep8+=keepYr(a,longRun(BY[t])[0],y)});
+    st.order.forEach(function(t){var a=+st.sel[t]||0,i=info(t),y=a*i.y/100;tot+=a;yr+=y;keep+=keepYr(a,rate(t)[0],y);keep8+=keepYr(a,8,y)});
     $('icBig').innerHTML=money(yr/U.dv)+'<small>'+U.u+'</small>';
     var parts=[],nf=0;[[12,'monthly'],[24,'twice-a-month'],[4,'quarterly'],[52,'weekly'],[26,'two-week'],[2,'twice-a-year'],[1,'yearly']].forEach(function(x){var c=U.cnt[x[0]];if(c){parts.push(c+' '+x[1]);nf+=c}});
     var plist=parts.length>1?parts.slice(0,-1).join(', ')+' and '+parts[parts.length-1]:parts.join('');
     $('icFrom').innerHTML=tot>0?'From <b>'+money(tot)+'</b> invested'+(U.dv===24?' · '+money(yr/12)+' a month':'')+(U.mixed?' · '+plist+' fund'+(nf>1?'s':'')+', each paid on its own schedule':'')+'.':'Add funds and amounts below to see what they could pay you.';
     var tiles=tot>0?[['Per month',money(yr/12)],['Per year',money(yr)],['Per 2-week paycheque',money(yr/26)],['Yield',(yr/tot*100).toFixed(2)+'%']]:[['Per month','–'],['Per year','–'],['Per 2-week paycheque','–'],['Yield','–']];
     $('icStats').innerHTML=tiles.map(function(x){return '<div class="ic-stat"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>'}).join('');
-    var head='<p class="ic-kl">To keep your balance growing</p>';
+    var Mk=MK[st.mkt];
+    var head='<p class="ic-kl">To keep your balance growing</p><div class="ic-seg ic-mk" role="group" aria-label="Market conditions">'+[['rec','Fund records'],['bull','Bull'],['base','Base'],['bear','Bear']].map(function(x){return '<button type="button" data-mk="'+x[0]+'" aria-pressed="'+(st.mkt===x[0])+'">'+x[1]+'</button>'}).join('')+'</div>'+
+      '<p class="ic-mkn">'+(Mk?(Mk[0]>0?'+':'')+Mk[0]+'% for every fund this year: '+Mk[2]+' (price change plus payouts).':'Each fund’s own long-run return: 10, 5 or 3 years, or its 1-year return when that’s all it has.')+'</p>';
     if(tot>0&&yr>0){var rest=Math.max(0,yr-keep),pct=Math.round(rest/yr*100),sp=100-pct;
       $('icKeep').innerHTML=head+'<div class="ic-two"><div class="w"><span>You can withdraw</span><b>'+money(keep/U.dv)+'</b><small>'+U.u+'</small></div><div class="r"><span>Reinvest</span><b>'+money(rest/U.dv)+'</b><small>'+U.u+'</small></div></div>'+
         '<div class="ic-bar" role="img" aria-label="Withdraw '+sp+'%, reinvest '+pct+'% of the payouts"><i class="sp" style="width:'+sp+'%"></i><i class="re" style="width:'+pct+'%"></i></div>'+
         '<div class="ic-leg"><span style="--c:var(--ic-gold)">Withdraw '+sp+'% of the payouts</span><span style="--c:#5BC08F">Reinvest '+pct+'%</span></div>'+
-        '<p>'+(rest<1?'You can withdraw all of it. In a normal market these funds earn enough that your balance keeps growing even if you spend every payout.':'Take out up to <b>'+money(keep/U.dv)+'</b> '+U.u+' and put the other <b>'+money(rest/U.dv)+'</b> back into your funds. Your balance then keeps growing faster than inflation.')+'</p>'+
-        '<p class="ic-kn">Based on a normal-market return for each fund (its market’s long-run average, after leverage and fees), minus '+INFL+'% for inflation. If these funds kept repeating their recent returns, you could withdraw '+money(keep8/U.dv)+' '+U.u+', but recent returns come from a strong market and rarely last.</p>';
+        (st.mkt==='bear'?'<p>In a bear year, prices fall, so nothing you take out keeps your balance growing. Bear markets usually don’t last long, and payouts usually keep coming, though some funds trim them. <b>This is the time to load up:</b> reinvesting '+money(yr/U.dv)+' '+U.u+' at prices about 25% lower buys about a third more units than today, and that extra income stays with you when prices recover.</p>':'<p>'+(rest<1?'You can withdraw all of it. These funds’ long-run returns are high enough that your balance keeps growing even if you spend every payout.':'Take out up to <b>'+money(keep/U.dv)+'</b> '+U.u+' and put the other <b>'+money(rest/U.dv)+'</b> back into your funds. Your balance then keeps growing faster than inflation.')+'</p>')+
+        '<p class="ic-kn">'+(Mk?'Based on a '+(Mk[0]>0?'+':'')+Mk[0]+'% return for every fund, minus '+INFL+'% for inflation. Switch to Fund records to use each fund’s own history.':'Based on each fund’s long-run total return (price plus payouts), minus '+INFL+'% for inflation. If every fund returned a steady 8% a year, you could withdraw '+money(keep8/U.dv)+' '+U.u+'.')+'</p>';
     }else $('icKeep').innerHTML=head+'<div class="ic-two"><div class="w"><span>You can withdraw</span><b>$0</b><small>a month</small></div><div class="r"><span>Reinvest</span><b>$0</b><small>a month</small></div></div><p>Add funds and amounts below, and this splits each payout into what you can spend and what to put back so your balance keeps growing.</p>';
   }
   function fresh(){var el=$('icFresh');
@@ -2163,6 +2165,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   }
   function all(){list();mix();calc();fresh()}
   $('icQ').addEventListener('input',list);
+  $('icKeep').addEventListener('click',function(e){var b=e.target.closest('[data-mk]');if(!b)return;st.mkt=b.dataset.mk;save();st.order.forEach(rowUpdate);calc();try{gtag('event','income_market',{market:st.mkt})}catch(x){}});
   $('icList').addEventListener('click',function(e){var b=e.target.closest('[data-ic]');if(!b)return;var t=b.dataset.ic;
     if(st.sel[t]!=null){delete st.sel[t];delete st.pct[t];st.order=st.order.filter(function(x){return x!==t})}else{st.sel[t]=0;st.order.push(t);try{gtag('event','income_add_fund',{fund:t})}catch(x){}}
     save();list();mix();calc();if(st.sel[t]!=null){var inp=document.querySelector('[data-amt="'+t+'"]');if(inp&&matchMedia('(min-width:981px)').matches)inp.focus()}});
