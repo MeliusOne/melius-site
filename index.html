@@ -1003,6 +1003,7 @@ main{min-height:calc(100vh - 260px)}
 .ic-builder .ic-rn{display:flex;align-items:baseline;gap:0 8px;flex-wrap:wrap}
 .ic-builder .ic-rn small{display:inline;font-size:12.5px}
 .ic-builder .ic-rn .ic-lev{margin-left:0}
+.ic-optu{padding-left:28px}.ic-optu b{font-size:14px}
 .ic-lev.ic-us{border-color:var(--ic-mute,#9aa6b8);color:var(--ic-mute,#9aa6b8)}
 .ic-cur{display:inline-flex;gap:2px;border:1px solid var(--line);border-radius:999px;padding:2px;margin-left:4px;vertical-align:middle}
 .ic-cur button{font:inherit;font-size:11px;font-weight:700;border:0;background:none;color:var(--muted);padding:2px 7px;border-radius:999px;cursor:pointer}
@@ -2357,7 +2358,9 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   if(typeof FUNDS==='undefined'||!document.getElementById('income'))return;
   var KEY='melius-income-v2',BY={},L={},meta=null,st={sel:{},order:[],per:'bi',total:0,pct:{},mkt:'rec',yrs:10,take:'safe',flt:'all',cur:{},acct:'tfsa'},INFL=2.5;
   FUNDS.forEach(function(f){BY[f.t]=f});
-  try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.sel&&s.order){st=s;st.order=st.order.filter(function(t){return BY[t]});st.pct=st.pct||{};st.total=+st.total||0;st.mkt=st.mkt||'rec';st.yrs=st.yrs||10;st.take=st.take||'safe';st.flt=st.flt||'all';st.tab=st.tab||'';st.cur=st.cur||{};st.acct=st.acct||'tfsa'}}catch(e){}
+  try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.sel&&s.order){st=s;st.order=st.order.filter(function(t){return BY[t]||(/\.U$/.test(t)&&BY[t.slice(0,-2)])});st.pct=st.pct||{};st.total=+st.total||0;st.mkt=st.mkt||'rec';st.yrs=st.yrs||10;st.take=st.take||'safe';st.flt=st.flt||'all';st.tab=st.tab||'';st.cur=st.cur||{};st.acct=st.acct||'tfsa';
+    Object.keys(st.cur).forEach(function(b){if(st.cur[b]!=='USD'||st.sel[b]==null)return;var k=b+'.U',ix=st.order.indexOf(b);if(st.sel[k]==null){st.sel[k]=st.sel[b];if(st.pct[b]!=null)st.pct[k]=st.pct[b];if(ix>-1)st.order[ix]=k}else if(ix>-1){st.sel[k]=(+st.sel[k]||0)+(+st.sel[b]||0);st.order.splice(ix,1)}delete st.sel[b];delete st.pct[b]});st.cur={};
+    st.order.forEach(function(t){if(/\.U$/.test(t))mkU(t.slice(0,-2))})}}catch(e){}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
   var $=function(id){return document.getElementById(id)};
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -2367,8 +2370,11 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   /* U.S. dollars: amounts are kept in C$ inside, and shown in US$ for U.S.-listed funds and for U.S.-dollar units */
   function fx(){var v=meta&&meta.fx&&+meta.fx.usdcad;return v>1&&v<2?v:1.38}
   function usL(t){return BY[t]&&BY[t].lst==='US'}
-  function hasU(t){return !!(L[t]&&L[t].u)}
-  function isUSD(t){return usL(t)||(st.cur[t]==='USD'&&hasU(t))}
+  function hasU(t){return !!(L[t]&&L[t].u&&!(BY[t]&&BY[t].base))}
+  function isUSD(t){return usL(t)||!!(BY[t]&&BY[t].base)}
+  /* HYLD.U: the same fund as HYLD, held in U.S. dollars, as its own line in the mix */
+  function mkU(b){var k=b+'.U';if(!BY[b])return;if(!BY[k])BY[k]=Object.assign({},BY[b],{t:k,base:b,n:BY[b].n+', U.S.-dollar units'});
+    if(L[b]&&L[b].u&&L[b].p){L[k]=Object.assign({},L[b],{p:+L[b].u.p,pd:L[b].u.pd,d:L[b].d*L[b].u.p/L[b].p,u:null})}}
   function wh(t){return usL(t)&&st.acct!=='rrsp'?0.85:1}
   function cm(v,t,c){return isUSD(t)?'US'+money(v/fx(),c):money(v,c)}
   function info(t){var f=BY[t],l=L[t],o;
@@ -2382,22 +2388,22 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   function keepYr(a,rate,payYr){if(rate<=INFL)return 0;var m=Math.pow((1+rate/100)/(1+INFL/100),1/12)-1;return Math.min(a*m*12,payYr)}
   function provName(f){try{return (FD_PROV[f.p]&&FD_PROV[f.p].name)||f.p}catch(e){return f.p}}
   var FLT=[['all','All'],['m','Pays monthly'],['tm','Twice a month'],['ca','Canadian'],['us','U.S.'],['tech','Tech'],['nolev','No leverage'],['uslist','U.S.-listed'],['usd','Has .U'],['mine','In my mix']];
-  function fltOk(f){var k=st.flt;if(k==='m')return f.f==='Monthly';if(k==='tm')return f.f==='Twice a month';if(k==='ca')return f.lst!=='US'&&/Canad|Banks/.test(f.x||'');if(k==='us')return /U\.S\./.test(f.x||'');if(k==='tech')return f.x==='Technology';if(k==='nolev')return !f.lev;if(k==='uslist')return f.lst==='US';if(k==='usd')return hasU(f.t);if(k==='mine')return st.sel[f.t]!=null;return true}
+  function fltOk(f){var k=st.flt;if(k==='m')return f.f==='Monthly';if(k==='tm')return f.f==='Twice a month';if(k==='ca')return f.lst!=='US'&&/Canad|Banks/.test(f.x||'');if(k==='us')return /U\.S\./.test(f.x||'');if(k==='tech')return f.x==='Technology';if(k==='nolev')return !f.lev;if(k==='uslist')return f.lst==='US';if(k==='usd')return hasU(f.t);if(k==='mine')return st.sel[f.t]!=null||st.sel[f.t+'.U']!=null;return true}
   function list(){var q=($('icQ').value||'').trim().toLowerCase().replace(/[.\-\s]u$/,'');
     $('icFlt').innerHTML=FLT.map(function(x){return '<button type="button" data-flt="'+x[0]+'" aria-pressed="'+(st.flt===x[0])+'">'+x[1]+'</button>'}).join('');
     var rows=FUNDS.filter(function(f){return fltOk(f)&&(!q||(f.t+' '+f.n+' '+provName(f)+' '+(f.x||'')).toLowerCase().indexOf(q)>=0)});
     $('icList').innerHTML=rows.length?rows.map(function(f){var on=st.sel[f.t]!=null,i=info(f.t);
-      return '<button type="button" class="ic-opt" data-ic="'+f.t+'" aria-pressed="'+on+'"><span class="ic-box" aria-hidden="true">'+(on?'✓':'')+'</span><span><b>'+f.t+'</b>'+(f.lst==='US'?'<span class="ic-lev ic-us">U.S.</span>':'')+(hasU(f.t)?'<span class="ic-lev ic-us">+ '+f.t+'.U</span>':'')+(f.lev?'<span class="ic-lev">Leverage</span>':'')+'<small>'+esc(f.n)+'</small></span><span class="ic-y">'+i.yg.toFixed(2)+'%<small>'+(FREQ[i.n]||'')+'</small></span></button>'}).join(''):'<p class="ic-empty" style="padding:14px 4px">No funds match.</p>';
+      return '<button type="button" class="ic-opt" data-ic="'+f.t+'" aria-pressed="'+on+'"><span class="ic-box" aria-hidden="true">'+(on?'✓':'')+'</span><span><b>'+f.t+'</b>'+(f.lst==='US'?'<span class="ic-lev ic-us">U.S.</span>':'')+(f.lev?'<span class="ic-lev">Leverage</span>':'')+'<small>'+esc(f.n)+'</small></span><span class="ic-y">'+i.yg.toFixed(2)+'%<small>'+(FREQ[i.n]||'')+'</small></span></button>'+(hasU(f.t)?(function(){var k=f.t+'.U',uo=st.sel[k]!=null;return '<button type="button" class="ic-opt ic-optu" data-ic="'+k+'" aria-pressed="'+uo+'"><span class="ic-box" aria-hidden="true">'+(uo?'✓':'')+'</span><span><b>'+k+'</b><span class="ic-lev ic-us">US$</span><small>'+esc(f.t)+' in U.S. dollars, same fund</small></span><span class="ic-y">'+i.yg.toFixed(2)+'%<small>'+(FREQ[i.n]||'')+'</small></span></button>'})():'')}).join(''):'<p class="ic-empty" style="padding:14px 4px">No funds match.</p>';
   }
   var FQ={52:'a week',26:'every two weeks',24:'twice a month',12:'a month',4:'a quarter',2:'twice a year',1:'a year'};
   function rowHtml(t){var f=BY[t],i=info(t),a=+st.sel[t]||0,y=a*i.y/100,Lr=longRun(f),Mk=MK[st.mkt],k=keepYr(a,rate(t)[0],y),n=i.n||12,det='';
-    if(i.p&&i.d&&a>0){var up=isUSD(t)&&!usL(t)?L[t].u.p:i.p,u=(isUSD(t)?a/fx():a)/up,dd=isUSD(t)&&!usL(t)?i.d*up/i.p:i.d;det=Math.floor(u).toLocaleString('en-CA')+' units × '+(isUSD(t)?'US':'')+money(dd,1)+' a payout · '}
+    if(i.p&&i.d&&a>0){var up=i.p,u=(isUSD(t)?a/fx():a)/up,dd=i.d;det=Math.floor(u).toLocaleString('en-CA')+' units × '+(isUSD(t)?'US':'')+money(dd,1)+' a payout · '}
     if(usL(t))det+=(st.acct==='rrsp'?'In an RRSP, no U.S. tax is taken off. ':'After the 15% U.S. tax on each payout'+(st.acct==='nonreg'?' (usually claimable as a foreign tax credit)':'')+'. ');
     det+=Mk?'Withdraw limit assumes a '+Mk[1].toLowerCase()+' market: '+(Mk[0]>0?'+':'')+Mk[0]+'% this year. Its '+(Lr[1]==='assumed'?'record is too short to use':Lr[1]+' return was '+(+Lr[0]).toFixed(1)+'%'):'Withdraw limit uses its '+(Lr[1]==='assumed'?'assumed 8% a year':Lr[1]+' return of '+(+Lr[0]).toFixed(1)+'%');
     return {pay:'<b>'+cm(y/n,t,1)+' <span style="font-weight:500;font-size:13px;color:var(--muted)">'+(FQ[n]||'')+'</span></b><small><span class="w">withdraw '+cm(k/n,t,1)+'</span> · <span class="r">reinvest '+cm(Math.max(0,y-k)/n,t,1)+'</span></small>',det:det}}
   function mix(){
     $('icMix').innerHTML=st.order.map(function(t){var f=BY[t],i=info(t),a=+st.sel[t]||0,r=rowHtml(t);
-      return '<div class="ic-row"><span class="ic-rn"><span class="ic-sw" data-sw="'+t+'"></span><b>'+t+'</b>'+(f.lst==='US'?'<span class="ic-lev ic-us">U.S.</span>':'')+(f.lev?'<span class="ic-lev">Leverage</span>':'')+(hasU(t)?'<span class="ic-cur" role="group" aria-label="Currency for '+t+'"><button type="button" data-cur="'+t+'" data-c="CAD" aria-pressed="'+!isUSD(t)+'" title="'+t+', in Canadian dollars">'+t+'</button><button type="button" data-cur="'+t+'" data-c="USD" aria-pressed="'+isUSD(t)+'" title="'+t+'.U, in U.S. dollars">'+t+'.U</button></span>':'')+'<small>'+i.yg.toFixed(2)+'%'+(usL(t)&&wh(t)<1?' ('+i.y.toFixed(2)+'% after U.S. tax)':'')+' · pays '+(FREQ[i.n]||'')+'</small></span>'+
+      return '<div class="ic-row"><span class="ic-rn"><span class="ic-sw" data-sw="'+t+'"></span><b>'+t+'</b>'+(f.lst==='US'?'<span class="ic-lev ic-us">U.S.</span>':f.base?'<span class="ic-lev ic-us">US$</span>':'')+(f.lev?'<span class="ic-lev">Leverage</span>':'')+'<small>'+i.yg.toFixed(2)+'%'+(usL(t)&&wh(t)<1?' ('+i.y.toFixed(2)+'% after U.S. tax)':'')+' · pays '+(FREQ[i.n]||'')+'</small></span>'+
         '<span class="ic-in"><label class="ic-amt'+(isUSD(t)?' usd':'')+'"><span>'+(isUSD(t)?'US$':'$')+'</span><input type="number" inputmode="decimal" min="0" step="100" data-amt="'+t+'" value="'+(a?r2(shown(t,a)):'')+'" placeholder="0" aria-label="Amount in '+t+'"></label>'+
         '<label class="ic-pct"><input type="number" inputmode="decimal" min="0" max="100" step="1" data-pct="'+t+'" value="'+pctStr(t)+'" placeholder="0" aria-label="Percent of total in '+t+'"><span>%</span></label></span>'+
         '<span class="ic-rp" data-rp="'+t+'">'+r.pay+'</span>'+
@@ -2522,7 +2528,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   $('icProj').addEventListener('click',function(e){var b=e.target.closest('[data-yrs],[data-take]');if(!b)return;if(b.dataset.yrs)st.yrs=+b.dataset.yrs;if(b.dataset.take)st.take=b.dataset.take;save();proj();try{gtag('event','income_projection',{years:st.yrs,take:st.take})}catch(x){}});
   $('icMkt').addEventListener('click',function(e){var ac=e.target.closest('[data-acct]');if(ac){st.acct=ac.dataset.acct;save();mix();calc();try{gtag('event','income_account',{account:st.acct})}catch(x){}return}
     var b=e.target.closest('[data-mk]');if(!b)return;st.mkt=b.dataset.mk;save();st.order.forEach(rowUpdate);calc();try{gtag('event','income_market',{market:st.mkt})}catch(x){}});
-  $('icList').addEventListener('click',function(e){var b=e.target.closest('[data-ic]');if(!b)return;var t=b.dataset.ic;
+  $('icList').addEventListener('click',function(e){var b=e.target.closest('[data-ic]');if(!b)return;var t=b.dataset.ic;if(/\.U$/.test(t))mkU(t.slice(0,-2));
     if(st.sel[t]!=null){delete st.sel[t];delete st.pct[t];st.order=st.order.filter(function(x){return x!==t})}else{st.sel[t]=0;st.order.push(t);try{gtag('event','income_add_fund',{fund:t})}catch(x){}}
     save();list();mix();calc();if(st.sel[t]!=null){var inp=document.querySelector('[data-amt="'+t+'"]');if(inp&&matchMedia('(min-width:1101px)').matches)inp.focus()}});
   $('icMix').addEventListener('input',function(e){var t=e.target.dataset.amt,q=e.target.dataset.pct;
@@ -2532,7 +2538,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   $('icTotal').addEventListener('input',function(){var v=Math.max(0,+$('icTotal').value||0),old=st.total;
     if(v>0){st.order.forEach(function(t){if(st.pct[t]==null&&!(old>0)){var S=sum();st.pct[t]=S>0?(+st.sel[t]||0)/S*100:null}if(st.pct[t]!=null)st.sel[t]=v*st.pct[t]/100;else st.pct[t]=(+st.sel[t]||0)/v*100})}
     st.total=v;save();st.order.forEach(rowUpdate);syncPct();calc()});
-  $('icMix').addEventListener('click',function(e){var c=e.target.closest('[data-cur]');if(c){var t=c.dataset.cur;if(c.dataset.c==='USD')st.cur[t]='USD';else delete st.cur[t];save();mix();calc();try{gtag('event','income_currency',{fund:t,cur:c.dataset.c})}catch(x){}return}
+  $('icMix').addEventListener('click',function(e){
     var b=e.target.closest('[data-rm]');if(!b)return;var t=b.dataset.rm;delete st.sel[t];delete st.pct[t];st.order=st.order.filter(function(x){return x!==t});save();all()});
   $('icSplit').addEventListener('submit',function(e){e.preventDefault();var v=+$('icTotal').value||0;if(!st.order.length||v<=0)return;st.total=v;var pc=100/st.order.length;st.order.forEach(function(t){st.pct[t]=pc;st.sel[t]=v*pc/100});save();mix();calc();try{gtag('event','income_split')}catch(x){}});
   /* coming from the Melius Money app: ?total=200000 sets the amount to invest, keeping the mix's percentages */
@@ -2541,7 +2547,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     st.order.forEach(function(t){if(st.pct[t]!=null)st.sel[t]=tv*st.pct[t]/100});st.total=tv;save();try{gtag('event','income_from_app',{total:tv})}catch(x){}
     history.replaceState(null,'',location.pathname+location.hash)}}catch(e){}
   all();
-  if(window.MELIUS_LIVE)window.MELIUS_LIVE.then(function(d){if(d&&d.funds){meta=d;L=d.funds;all()}});
+  if(window.MELIUS_LIVE)window.MELIUS_LIVE.then(function(d){if(d&&d.funds){meta=d;L=d.funds;Object.keys(L).forEach(function(t){if(L[t]&&L[t].u&&BY[t])mkU(t)});st.order=st.order.filter(function(t){return BY[t]});all()}});
 })();
 </script>
 <script>
