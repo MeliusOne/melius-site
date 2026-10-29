@@ -248,5 +248,65 @@
   "t": "XEQT",
   "y": "XEQT.TO",
   "f": "Quarterly"
+ },
+ {
+  "t": "JEPI",
+  "y": "JEPI",
+  "f": "Monthly",
+  "lst": "US"
+ },
+ {
+  "t": "JEPQ",
+  "y": "JEPQ",
+  "f": "Monthly",
+  "lst": "US"
+ },
+ {
+  "t": "QQQI",
+  "y": "QQQI",
+  "f": "Monthly",
+  "lst": "US"
+ },
+ {
+  "t": "SPYI",
+  "y": "SPYI",
+  "f": "Monthly",
+  "lst": "US"
+ },
+ {
+  "t": "QYLD",
+  "y": "QYLD",
+  "f": "Monthly",
+  "lst": "US"
+ },
+ {
+  "t": "DIVO",
+  "y": "DIVO",
+  "f": "Monthly",
+  "lst": "US"
+ },
+ {
+  "t": "GPIQ",
+  "y": "GPIQ",
+  "f": "Monthly",
+  "lst": "US"
+ },
+ {
+  "t": "GPIX",
+  "y": "GPIX",
+  "f": "Monthly",
+  "lst": "US"
+ },
+ {
+  "t": "XYLD",
+  "y": "XYLD",
+  "f": "Monthly",
+  "lst": "US"
+ },
+ {
+  "t": "RYLD",
+  "y": "RYLD",
+  "f": "Monthly",
+  "lst": "US"
  }
 ]

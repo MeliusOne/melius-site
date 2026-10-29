@@ -52,6 +52,42 @@ def fetch(symbol):
     return price, price_date, div
 
 
+def returns(symbol):
+    """Total returns with payouts reinvested (Yahoo's adjusted close): ytd, 1y, and 3y/5y/since-start a year."""
+    h = yf.Ticker(symbol).history(period="max", auto_adjust=True)
+    c = h["Close"].dropna() if "Close" in h else pd.Series(dtype=float)
+    if len(c) < 30:
+        return None
+    end, last = c.index[-1], float(c.iloc[-1])
+    out = {}
+
+    def at(days):
+        s = c[c.index <= end - pd.Timedelta(days=days)]
+        return float(s.iloc[-1]) if len(s) else None
+
+    jan = c[c.index < pd.Timestamp(year=end.year, month=1, day=1, tz=end.tz)]
+    if len(jan):
+        out["ytd"] = round((last / float(jan.iloc[-1]) - 1) * 100, 2)
+    for key, yrs in (("y1", 1), ("y3", 3), ("y5", 5), ("y10", 10)):
+        v = at(int(365.25 * yrs))
+        if v:
+            out[key] = round(((last / v) ** (1 / yrs) - 1) * 100, 2)
+    span = (end - c.index[0]).days / 365.25
+    if span >= 1:
+        out["si"] = round(((last / float(c.iloc[0])) ** (1 / span) - 1) * 100, 2)
+    out["asof"] = end.date().isoformat()
+    out["start"] = c.index[0].date().isoformat()
+    return out
+
+
+def last_price(symbol):
+    h = yf.Ticker(symbol).history(period="10d", auto_adjust=False)
+    c = h["Close"].dropna() if "Close" in h else pd.Series(dtype=float)
+    if c.empty:
+        return None
+    return {"p": round(float(c.iloc[-1]), 4), "pd": c.index[-1].date().isoformat(), "sym": symbol}
+
+
 def summarize(t, price, price_date, div, freq_label):
     amounts = list(div.values)
     dates = [d.to_pydatetime() for d in div.index]
@@ -97,6 +133,26 @@ for row in TICKERS:
             err = str(e)
         time.sleep(0.6)
     if got:
+        # total returns, from the full price history
+        try:
+            r = returns(got["sym"])
+            if r:
+                got["r"] = r
+        except Exception:
+            if t in prev and prev[t].get("r"):
+                got["r"] = prev[t]["r"]
+        # Canadian funds: is there a U.S.-dollar unit (like HYLD.U)?
+        if row.get("lst") != "US":
+            try:
+                u = last_price(t.replace(".", "-") + "-U.TO")
+            except Exception:
+                u = None
+            if u:
+                got["u"] = u
+            elif t in prev and prev[t].get("u"):
+                got["u"] = prev[t]["u"]
+        if row.get("lst") == "US":
+            got["cur"] = "USD"
         funds[t] = got
     else:
         failed.append(t)
@@ -111,7 +167,19 @@ if ok == 0:
     print("No funds could be fetched; leaving the existing file untouched.")
     sys.exit(0)
 
+fx = None
+try:
+    fx = last_price("CAD=X")
+except Exception:
+    fx = None
+if not fx:
+    try:
+        fx = json.loads(OUT.read_text()).get("fx")
+    except Exception:
+        fx = None
+
 data = {
+    "fx": {"usdcad": fx["p"], "d": fx["pd"]} if fx and "p" in fx else fx,
     "asOf": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ"),
     "seed": False,
     "source": "Yahoo Finance",
