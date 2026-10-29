@@ -607,6 +607,7 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .f-motto{font-family:var(--display);font-style:italic}
 .fs-sec{padding-block:72px;border-bottom:1px solid var(--line)}
 .fsteps{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (min-width:1101px){.fsteps{grid-template-columns:repeat(5,minmax(0,1fr))}}
 .fstep{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px;min-width:0}
 .fstep h3{font-size:20px;margin:0}
 .fstep p{margin:0;color:var(--muted);font-size:15px}
@@ -1177,7 +1178,7 @@ html.no-verses .ws,html.no-verses .fs-verse,html.no-verses [data-verse]{display:
       <div class="stack">
         <p class="eyebrow">Financial education services · Kitchener, Ontario</p>
         <h1>Get your money in order. Then make it pay you.</h1>
-        <p class="lede">One-on-one coaching for families in Canada, whether you’re new here or just tired of money running out before the month does. Plan every dollar, clear expensive debt, build a cushion, then learn how income investing works, one clear step at a time, with your own accounts in front of you.</p>
+        <p class="lede">One-on-one coaching for families in Canada, whether you’re new here or just tired of money running out before the month does. Plan every dollar, keep a one-month emergency fund, clear expensive debt, then learn how income investing works, one clear step at a time, with your own accounts in front of you.</p>
         <div class="cta">
           <a class="btn solid" href="#book">Book a free intro session</a>
           <a class="btn ghost" href="#steps">See the Freedom Steps</a>
@@ -1189,8 +1190,8 @@ html.no-verses .ws,html.no-verses .fs-verse,html.no-verses [data-verse]{display:
   <div class="wrap promise-row">
       <div class="promise">
         <b>Order before ambition.</b>
-        Money obeys sequence. Debt comes first, because interest compounds against you as faithfully as returns compound for you. Then a cushion, because a calm mind decides better than a clever one. Then the right accounts. Only then do we invest, and options come last, once you have the patience they demand.
-        <a class="promise-link" href="#steps">See the six Freedom Steps →</a>
+        Money obeys sequence. First a small emergency fund, because a calm mind decides better than a clever one. Then debt, because interest compounds against you as faithfully as returns compound for you. Then the right accounts. Only then do we invest, and options come last, once you have the patience they demand.
+        <a class="promise-link" href="#steps">See the five Freedom Steps →</a>
         <span class="promise-motto" lang="la">Dum vivas, fac melius.</span>
         <span class="promise-sig">As long as you live, do better. <i>Melius</i> is Latin for “better.” Not rich overnight. Better every year.</span>
       </div>
@@ -1248,10 +1249,10 @@ html.no-verses .ws,html.no-verses .fs-verse,html.no-verses [data-verse]{display:
         <div class="stack">
           <p class="eyebrow">About your coach</p>
           <h2>Obi Oji, founder</h2>
-          <p class="lede">I came to Canada to build a better life for my family, and learned the hard way that a salary alone rarely gets you there. Today my family lives on income from our own investments. I started Melius One to teach other families how to do the same, clearly and honestly.</p>
+          <p class="lede">I came to Canada to build a better life for my family, and learned the hard way that a salary alone rarely gets you there. Today our investments pay us every month, and we’re building toward the day they cover all of our family’s bills. I started Melius One to teach other families how to do the same, clearly and honestly.</p>
           <div class="stats">
             <div class="stat"><b>24</b><span>Paydays a year from our investments</span></div>
-            <div class="stat"><b>6</b><span>A family of six living on what our money earns</span></div>
+            <div class="stat"><b>6</b><span>A family of six, investing for freedom</span></div>
             <div class="stat"><b>4+ yrs</b><span>Leading delivery in Canadian banking</span></div>
             <div class="stat"><b>1:1</b><span>Every session, just you and me</span></div>
           </div>
@@ -1259,7 +1260,7 @@ html.no-verses .ws,html.no-verses .fs-verse,html.no-verses [data-verse]{display:
             <!-- After passing the CSC, add as the first credential: <li>Canadian Securities Course (CSC®), Canadian Securities Institute</li> -->
             <li>Release Train Engineer, leading large technology programmes at a major Canadian bank</li>
             <li>Board member, Octopus VC</li>
-            <li>I live on income ETFs, and run my own options desk using the wheel and LEAPS</li>
+            <li>I invest in income ETFs, and run my own options desk using the wheel and LEAPS</li>
             <li>Based in Kitchener, Ontario · Sessions online or in person</li>
           </ul>
         </div>
@@ -1274,13 +1275,13 @@ html.no-verses .ws,html.no-verses .fs-verse,html.no-verses [data-verse]{display:
       <p class="lede" style="margin-top:12px">It wasn’t a straight line. Every wrong turn taught me something I now teach.</p>
       <div class="story">
         <ol class="journey">
-          <li><span class="when">In Nigeria</span><h3>Building a real estate business</h3><p>Before Canada, I ran my own real estate business. It taught me how money really moves: cash flow, debt and patience.</p></li>
+          <li><span class="when">Before Canada</span><h3>Building a real estate business</h3><p>I ran my own real estate business. It taught me how money really moves: cash flow, debt and patience.</p></li>
           <li><span class="when">The move</span><h3>Starting over in Canada</h3><p>We moved to Canada for our children’s future. New country, new rules, and a lot to learn about how money works here.</p></li>
           <li><span class="when">The hard lessons</span><h3>Chasing returns</h3><p>I tried different investment strategies, crypto included, and lost real money. The lesson stuck: without a plan and rules, a strategy is just a gamble.</p></li>
           <li><span class="when">Until 2022</span><h3>A transportation company</h3><p>I started a transportation company. It didn’t go the way I hoped, and I sold it in 2022. Knowing when to stop is a skill too.</p></li>
           <li><span class="when">2022</span><h3>Rebuilding, with rules this time</h3><p>The same year, I joined one of Canada’s big banks and rebuilt our portfolio with the proceeds from my real estate and other businesses. Some of it was luck, honestly: Nvidia, Palantir and Bitcoin all paid off, and I still hold Bitcoin through Strategy (MSTR). The rest was discipline: income funds and clear rules, which is the part I teach.</p></li>
-          <!-- AFTER RESIGNING: you can change the step below to "Retiring to live on our investments". -->
-          <li class="now"><span class="when">Today</span><h3>Living on what we built</h3><p>Our investments now pay our family’s bills. Melius One is how I share the path, mistakes included, so you can skip the expensive ones.</p></li>
+          <!-- AFTER RESIGNING: change this step back to "Living on what we built" / "Our investments now pay our family’s bills." -->
+          <li class="now"><span class="when">Today</span><h3>Building toward freedom</h3><p>Our investments pay us every month, and we’re working toward the day they cover all of our family’s bills. Melius One is how I share the path, mistakes included, so you can skip the expensive ones.</p></li>
         </ol>
         <aside class="card family">
           <p class="eyebrow">Why I do this</p>
@@ -1411,7 +1412,7 @@ html.no-verses .ws,html.no-verses .fs-verse,html.no-verses [data-verse]{display:
           <div class="ap-head"><span class="tag">Small group</span><h3>Apply for the next cohort</h3><p>Three minutes. $399 by card or 3 payments of $133, or $369 by e-Transfer.</p></div>
           <div class="ap-two"><div class="field"><label for="ac-name">First name</label><input id="ac-name" name="name" autocomplete="given-name" required></div>
           <div class="field"><label for="ac-email">Email</label><input id="ac-email" name="email" type="email" autocomplete="email" required></div></div>
-          <fieldset class="aq"><legend>Your main money goal for the next 12 months</legend><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="goal" value="Get out of debt" required><span>Get out of debt</span></label><label class="opt"><input type="radio" name="goal" value="Build a cushion"><span>Build a cushion</span></label><label class="opt"><input type="radio" name="goal" value="Start investing"><span>Start investing</span></label><label class="opt"><input type="radio" name="goal" value="Build income"><span>Build income</span></label></div></fieldset>
+          <fieldset class="aq"><legend>Your main money goal for the next 12 months</legend><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="goal" value="Get out of debt" required><span>Get out of debt</span></label><label class="opt"><input type="radio" name="goal" value="Build an emergency fund"><span>Build an emergency fund</span></label><label class="opt"><input type="radio" name="goal" value="Start investing"><span>Start investing</span></label><label class="opt"><input type="radio" name="goal" value="Build income"><span>Build income</span></label></div></fieldset>
           <fieldset class="aq"><legend>Do you have debt at 7% interest or more?</legend><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="expensive_debt" value="Yes" required><span>Yes</span></label><label class="opt"><input type="radio" name="expensive_debt" value="No"><span>No</span></label></div></fieldset>
           <fieldset class="aq"><legend>Do you have at least one month of expenses saved?</legend><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="one_month_saved" value="Yes" required><span>Yes</span></label><label class="opt"><input type="radio" name="one_month_saved" value="No"><span>No</span></label></div></fieldset>
           <fieldset class="aq"><legend>Can you give 1 to 2 hours a week for 8 weeks?</legend><p class="aq-h">Reading a lesson, doing the worksheet and joining most of the four group calls.</p><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="time" value="Yes" required><span>Yes</span></label><label class="opt"><input type="radio" name="time" value="Not sure"><span>Not sure</span></label><label class="opt"><input type="radio" name="time" value="No"><span>No</span></label></div></fieldset>
@@ -1429,7 +1430,7 @@ html.no-verses .ws,html.no-verses .fs-verse,html.no-verses [data-verse]{display:
           <div class="ap-two"><div class="field"><label for="ap-name">First name</label><input id="ap-name" name="name" autocomplete="given-name" required></div>
           <div class="field"><label for="ap-email">Email</label><input id="ap-email" name="email" type="email" autocomplete="email" required></div></div>
           <div class="field"><label for="ap-phone">WhatsApp or phone <span class="opt-l">(optional)</span></label><input id="ap-phone" name="phone" type="tel" autocomplete="tel"></div>
-          <fieldset class="aq"><legend>Your main money goal</legend><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="goal" value="Get out of debt" required><span>Get out of debt</span></label><label class="opt"><input type="radio" name="goal" value="Build a cushion"><span>Build a cushion</span></label><label class="opt"><input type="radio" name="goal" value="Start investing"><span>Start investing</span></label><label class="opt"><input type="radio" name="goal" value="Build income"><span>Build income</span></label><label class="opt"><input type="radio" name="goal" value="Replace a paycheque"><span>Replace a paycheque</span></label></div></fieldset>
+          <fieldset class="aq"><legend>Your main money goal</legend><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="goal" value="Get out of debt" required><span>Get out of debt</span></label><label class="opt"><input type="radio" name="goal" value="Build an emergency fund"><span>Build an emergency fund</span></label><label class="opt"><input type="radio" name="goal" value="Start investing"><span>Start investing</span></label><label class="opt"><input type="radio" name="goal" value="Build income"><span>Build income</span></label><label class="opt"><input type="radio" name="goal" value="Replace a paycheque"><span>Replace a paycheque</span></label></div></fieldset>
           <fieldset class="aq"><legend>Roughly how much do you have saved or invested today?</legend><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="savings" value="Under $10k" required><span>Under $10k</span></label><label class="opt"><input type="radio" name="savings" value="$10k–$50k"><span>$10k–$50k</span></label><label class="opt"><input type="radio" name="savings" value="$50k–$250k"><span>$50k–$250k</span></label><label class="opt"><input type="radio" name="savings" value="Over $250k"><span>Over $250k</span></label><label class="opt"><input type="radio" name="savings" value="Prefer not to say"><span>Prefer not to say</span></label></div></fieldset>
           <fieldset class="aq"><legend>Which of these apply to you?</legend><p class="aq-h">Tick any that apply.</p><div class="opts"><label class="opt"><input type="checkbox" name="situation" value="Debt at 7% or more"><span>Debt at 7% or more</span></label><label class="opt"><input type="checkbox" name="situation" value="Self-employed or own a business"><span>Self-employed or own a business</span></label><label class="opt"><input type="checkbox" name="situation" value="Rental property"><span>Rental property</span></label><label class="opt"><input type="checkbox" name="situation" value="New to Canada in the last 5 years"><span>New to Canada in the last 5 years</span></label><label class="opt"><input type="checkbox" name="situation" value="Employer RRSP or pension match"><span>Employer RRSP or pension match</span></label></div></fieldset>
           <fieldset class="aq"><legend>When would you like to start?</legend><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="start" value="This month" required><span>This month</span></label><label class="opt"><input type="radio" name="start" value="In 1–3 months"><span>In 1–3 months</span></label><label class="opt"><input type="radio" name="start" value="Just exploring"><span>Just exploring</span></label></div></fieldset>
@@ -1477,7 +1478,7 @@ html.no-verses .ws,html.no-verses .fs-verse,html.no-verses [data-verse]{display:
         <li><span class="k">M1</span>Money foundations</li><li><span class="k">M2</span>The right accounts</li><li><span class="k">M3</span>Income ETFs</li><li><span class="k">M4</span>Growth investing</li>
         <li><span class="k">M5</span>Options basics</li><li><span class="k">M6</span>The wheel strategy</li><li><span class="k">M7</span>LEAPS</li><li><span class="k">M8</span>Your plan</li>
       </ol>
-      <p style="margin:18px 0 0"><a class="lv-link" href="#steps">The modules follow the six Freedom Steps →</a> <a class="lv-link" href="#modules">See what you’ll learn in each module, and what it’s worth →</a></p>
+      <p style="margin:18px 0 0"><a class="lv-link" href="#steps">The modules follow the five Freedom Steps →</a> <a class="lv-link" href="#modules">See what you’ll learn in each module, and what it’s worth →</a></p>
     </div>
   </section>
 
@@ -1525,10 +1526,10 @@ html.no-verses .ws,html.no-verses .fs-verse,html.no-verses [data-verse]{display:
   <section id="steps" class="fs-sec"><div class="wrap">
     <p class="eyebrow">The method</p>
     <h2>The Freedom Steps</h2>
-    <p class="lede" style="margin-top:12px;max-width:62ch">Six steps, in order. Every client starts wherever they are today, and the coaching modules walk you through each one.</p>
-    <ol class="fsteps"><li class="fstep"><span class="fs-num">1</span><h3>Know your number</h3><p>Give every dollar of your paycheque a job, and find what your household truly needs each month.</p><span class="fs-verse">“Which of you, wishing to build a tower, does not first sit down and count the cost to see if he has the resources to complete it?”<small>Luke 14:28 · BSB</small></span><span class="fs-mod">Covered in M1</span></li><li class="fstep"><span class="fs-num">2</span><h3>Starter cushion</h3><p>$1,000, or $2,000 with kids, in cash, so a surprise never goes on a card.</p><span class="fs-verse">“The prudent see danger and take cover, but the simple keep going and suffer the consequences.”<small>Proverbs 22:3 · BSB</small></span><span class="fs-mod">Covered in M1</span></li><li class="fstep"><span class="fs-num">3</span><h3>Attack expensive debt</h3><p>Pay off every debt at 7% or more, snowball or avalanche. Cheaper loans stay on schedule.</p><span class="fs-verse">“The rich rule over the poor, and the borrower is slave to the lender.”<small>Proverbs 22:7 · BSB</small></span><span class="fs-mod">Covered in M1</span></li><li class="fstep"><span class="fs-num">4</span><h3>Income cushion</h3><p>Three months of expenses, invested in a stable fund that pays you monthly, not left in savings.</p><span class="fs-verse">“Precious treasures and oil are in the dwelling of the wise, but a foolish man consumes them.”<small>Proverbs 21:20 · BSB</small></span><span class="fs-mod">Covered in M2 · M3</span></li><li class="fstep"><span class="fs-num">5</span><h3>Invest for freedom</h3><p>Every freedom dollar goes into income and growth investments, in the right accounts.</p><span class="fs-verse">“Dishonest wealth will dwindle, but what is earned through hard work will be multiplied.”<small>Proverbs 13:11 · BSB</small></span><span class="fs-mod">Covered in M3 to M7</span></li><li class="fstep"><span class="fs-num">6</span><h3>Freedom</h3><p>Your investments’ payouts cover your monthly number. Work becomes optional.</p><span class="fs-verse">“A good man leaves an inheritance to his children’s children, but the sinner’s wealth is passed to the righteous.”<small>Proverbs 13:22 · BSB</small></span><span class="fs-mod">Covered in M8</span></li></ol>
+    <p class="lede" style="margin-top:12px;max-width:62ch">Five steps, in order. Every client starts wherever they are today, and the coaching modules walk you through each one.</p>
+    <ol class="fsteps"><li class="fstep"><span class="fs-num">1</span><h3>Know your number</h3><p>Give every dollar of your income a job, and find what your household truly needs each month.</p><span class="fs-verse">“Which of you, wishing to build a tower, does not first sit down and count the cost to see if he has the resources to complete it?”<small>Luke 14:28 · BSB</small></span><span class="fs-mod">Covered in M1</span></li><li class="fstep"><span class="fs-num">2</span><h3>Emergency fund</h3><p>One month of your monthly budget, kept in cash, so a surprise never goes on a card. It’s the only cash you hold.</p><span class="fs-verse">“The prudent see danger and take cover, but the simple keep going and suffer the consequences.”<small>Proverbs 22:3 · BSB</small></span><span class="fs-mod">Covered in M1</span></li><li class="fstep"><span class="fs-num">3</span><h3>Attack expensive debt</h3><p>Pay off every debt at 7% or more, snowball or avalanche. Cheaper loans stay on schedule.</p><span class="fs-verse">“The rich rule over the poor, and the borrower is slave to the lender.”<small>Proverbs 22:7 · BSB</small></span><span class="fs-mod">Covered in M1</span></li><li class="fstep"><span class="fs-num">4</span><h3>Invest for freedom</h3><p>Every freedom dollar is invested, in the right accounts, in funds that pay you monthly. The yield is your cushion.</p><span class="fs-verse">“Dishonest wealth will dwindle, but what is earned through hard work will be multiplied.”<small>Proverbs 13:11 · BSB</small></span><span class="fs-mod">Covered in M2 to M7</span></li><li class="fstep"><span class="fs-num">5</span><h3>Freedom</h3><p>Your investments’ payouts cover your monthly number. Work becomes optional.</p><span class="fs-verse">“A good man leaves an inheritance to his children’s children, but the sinner’s wealth is passed to the righteous.”<small>Proverbs 13:22 · BSB</small></span><span class="fs-mod">Covered in M8</span></li></ol>
     <div class="fs-foot">
-      <p><b>One rule overrides the order: never refuse free money.</b> Even on step 3, take a full employer RRSP or pension match.</p>
+      <p><b>One rule overrides the order: never refuse free money.</b> Even while you pay off debt, take a full employer RRSP or pension match.</p>
       <a class="btn" href="#tools">Track your steps in Melius Money</a>
     </div>
   </div></section>
@@ -1539,7 +1540,7 @@ html.no-verses .ws,html.no-verses .fs-verse,html.no-verses [data-verse]{display:
       <h2>What you’ll be able to do, and what it can be worth</h2>
       <p class="lede" style="margin-top:12px">Each module ends with something real you keep. The dollar examples are illustrations of the kind of difference one good decision makes, not promises.</p>
       <div class="lv-mods">
-        <article class="lv-mod"><span class="lv-k">M1</span><h3>Money foundations</h3><p class="lv-do">Build a spending plan where every dollar has a job, rank your debts, and build your starter cushion: the first three Freedom Steps.</p><p class="lv-keep"><b>You keep:</b> your spending plan, debt plan and monthly number, set up in the free <a href="#tools">Melius Money app</a> (or the <a href="#budget">budget template</a>).</p><p class="lv-worth"><b>Worth it because:</b> paying off a $4,200 credit card at 21% saves about <b>$880 a year</b> in interest.</p></article>
+        <article class="lv-mod"><span class="lv-k">M1</span><h3>Money foundations</h3><p class="lv-do">Build a spending plan where every dollar has a job, rank your debts, and set up your one-month emergency fund: the first three Freedom Steps.</p><p class="lv-keep"><b>You keep:</b> your spending plan, debt plan and monthly number, set up in the free <a href="#tools">Melius Money app</a> (or the <a href="#budget">budget template</a>).</p><p class="lv-worth"><b>Worth it because:</b> paying off a $4,200 credit card at 21% saves about <b>$880 a year</b> in interest.</p></article>
         <article class="lv-mod"><span class="lv-k">M2</span><h3>The right accounts</h3><p class="lv-do">Know what belongs in your TFSA, RRSP, FHSA and RESP, and in what order to fill them.</p><p class="lv-keep"><b>You keep:</b> your account map.</p><p class="lv-worth"><b>Worth it because:</b> $8,000 a year of investment income in a TFSA is tax-free; outside it, at a 30% tax rate, up to <b>$2,400 a year</b> could go to tax.</p></article>
         <article class="lv-mod"><span class="lv-k">M3</span><h3>Income ETFs</h3><p class="lv-do">Read a fund like a professional: yield versus total return, return of capital, leverage and fees.</p><p class="lv-keep"><b>You keep:</b> a fund scorecard you can use for life.</p><p class="lv-worth"><b>Worth it because:</b> over the last year, one big-yield fund lost 61% while another returned 26%. Knowing the difference protects your savings.</p></article>
         <article class="lv-mod"><span class="lv-k">M4</span><h3>Growth investing</h3><p class="lv-do">Use low-cost index funds like XEQT and VFV, and know when growth beats income.</p><p class="lv-keep"><b>You keep:</b> your growth and income mix.</p><p class="lv-worth"><b>Worth it because:</b> a 0.2% fund instead of a 2% fund on $100,000 keeps about <b>$1,800 a year</b> more in your pocket.</p></article>
@@ -1663,10 +1664,10 @@ html.no-verses .ws,html.no-verses .fs-verse,html.no-verses [data-verse]{display:
       <div class="stack ap-copy">
         <p class="eyebrow">Free app · Melius Money</p>
         <h1 class="tl-title">Make every dollar better.</h1>
-        <p class="lede"><i>Melius</i> is Latin for “better.” Melius Money shows what you can spend, and walks you through the Freedom Steps, the six steps I teach every client: know your number, build a starter cushion, attack expensive debt, build an income cushion, invest, and reach freedom.</p>
+        <p class="lede"><i>Melius</i> is Latin for “better.” Melius Money shows what you can spend, and walks you through the Freedom Steps, the five steps I teach every client: know your number, keep a one-month emergency fund, attack expensive debt, invest everything, and reach freedom.</p>
         <ul class="ticks ap-ticks">
-          <li><b>Know what’s left:</b> for this month or until payday, from one quick balance check. No logging every purchase.</li>
-          <li><b>Every dollar gets a job:</b> expenses first, then your freedom money clears expensive debt, builds an income cushion, and gets invested for income.</li>
+          <li><b>Know what’s left:</b> for the rest of the month, from one quick balance check. No logging every purchase.</li>
+          <li><b>Every dollar gets a job:</b> expenses first, then your freedom money fills a one-month emergency fund, clears expensive debt, and gets invested for income.</li>
           <li><b>Attack expensive debt:</b> snowball or avalanche, with the date each debt at 7% or more is gone.</li>
           <li><b>Your freedom number:</b> what you need invested, and roughly how long it will take.</li>
         </ul>
