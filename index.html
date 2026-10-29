@@ -967,6 +967,58 @@ main{min-height:calc(100vh - 260px)}
 .ic-pn,.ic-pe{margin:0;font-size:13px;color:var(--muted)}
 @media (max-width:860px){.ic-ptiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:520px){.ic-proj{padding:20px}.ic-pt b{font-size:20px}}
+
+/* income workspace layout */
+#income{--ic-bg:#14213D;--ic-ink:#F7F5F0;--ic-mute:#C3CBD8;--ic-gold:#C9A35E;--ic-line:rgba(247,245,240,.14)}
+.ic-app{padding-block:28px 56px;background:var(--band)}
+.ic-shell{max-width:1480px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:flex;flex-direction:column;gap:20px}
+.ic-hd{display:flex;justify-content:space-between;align-items:flex-end;gap:12px 24px;flex-wrap:wrap}
+.ic-hd .eyebrow{margin:0 0 6px}
+.ic-hd .ic-title{color:var(--ink);font-size:clamp(26px,3vw,36px);margin:0}
+.ic-hd .ic-fresh{color:var(--muted);max-width:60ch;font-size:13.5px}
+.ic-layout{display:grid;grid-template-columns:minmax(360px,420px) minmax(0,1fr);gap:20px;align-items:start}
+.ic-builder{position:sticky;top:136px;max-height:calc(100vh - 152px);overflow:auto;display:flex;flex-direction:column;gap:14px;padding:22px;min-width:0;overscroll-behavior:contain}
+.ic-builder .ic-h h2{font-size:22px}
+.ic-results{display:flex;flex-direction:column;gap:20px;min-width:0}
+.ic-hero.ic-top{border-radius:22px;padding:22px}
+.ic-hero .ic-res{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.ic-hero .ic-big{font-size:clamp(44px,5vw,64px)}
+.ic-hero .ic-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+.ic-proj{margin-top:0}
+.ic-allocbar{display:flex;height:10px;border-radius:999px;overflow:hidden;background:var(--line)}
+.ic-allocbar:empty{display:none}
+.ic-allocbar i{display:block;height:100%;min-width:2px}
+.ic-allocbar i+i{border-left:2px solid var(--surface)}
+.ic-c0{background:#1D3557}.ic-c1{background:#A8803F}.ic-c2{background:#4F7CAC}.ic-c3{background:#2E7D5B}.ic-c4{background:#9B5C8F}.ic-c5{background:#C46B3D}
+.ic-sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:7px;vertical-align:0}
+.ic-builder .ic-row{grid-template-columns:196px minmax(0,1fr) 28px;grid-template-areas:'n n x' 'a p p' 'd d d';padding:10px 0;row-gap:6px;column-gap:12px}
+.ic-builder .ic-rn{display:flex;align-items:baseline;gap:0 8px;flex-wrap:wrap}
+.ic-builder .ic-rn small{display:inline;font-size:12.5px}
+.ic-builder .ic-rn .ic-lev{margin-left:0}
+.ic-builder .ic-in .ic-amt input,.ic-builder .ic-pct input{height:40px;font-size:14.5px}
+.ic-builder .ic-pct{flex-basis:66px}
+.ic-builder .ic-rp{text-align:right}
+.ic-builder .ic-rp b{font-size:15.5px}
+.ic-builder .ic-rp b span{font-size:12px!important}
+.ic-builder .ic-rp small{font-size:12px;white-space:normal;line-height:1.35}
+.ic-builder .ic-rd{font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ic-builder .ic-x{width:28px;height:28px;font-size:20px}
+.ic-hero .ic-big small{display:block;margin:6px 0 0;font-size:16px}
+.ic-hero .ic-main,.ic-hero .ic-keep{padding:20px 22px}
+.ic-hero .ic-keep p{font-size:14px}
+.ic-add{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line);padding-top:14px;margin-top:2px}
+.ic-add h3{margin:0;font-size:17px}
+.ic-search input{width:100%;box-sizing:border-box;height:44px;border-radius:999px;padding:10px 16px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ic-flt{display:flex;flex-wrap:wrap;gap:6px}
+.ic-flt button{font:inherit;font-size:13px;font-weight:600;border:1px solid var(--line);border-radius:999px;padding:6px 11px;background:var(--surface);color:var(--muted);cursor:pointer}
+.ic-flt button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.ic-flt button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.ic-builder .ic-list{max-height:340px;margin:0;padding:0;border:1px solid var(--line);border-radius:14px}
+.ic-builder .ic-opt{padding:10px 12px}
+.ic-foot{margin-top:8px;max-width:900px}
+@media (max-width:1100px){.ic-layout{grid-template-columns:1fr}.ic-builder{position:static;max-height:none;overflow:visible}.ic-results{display:contents}.ic-hero{order:-1}.ic-layout{display:flex;flex-direction:column}}
+@media (max-width:520px){.ic-builder .ic-row{grid-template-columns:minmax(0,1fr) 28px;grid-template-areas:'n x' 'a a' 'p p' 'd d'}.ic-builder .ic-rp{text-align:left}.ic-builder .ic-rd{white-space:normal}.ic-builder{padding:18px}.ic-hero.ic-top{padding:16px}.ic-app{padding-block:20px 40px}}
 </style>
 </head>
 <body>
@@ -1616,46 +1668,52 @@ main{min-height:calc(100vh - 260px)}
 </div>
 
 <div class="page" id="income" data-page="income">
-  <section class="ic-top">
-    <div class="wrap ic-topin">
-      <div class="ic-head">
-        <p class="eyebrow">Income calculator</p>
-        <h1 class="ic-title">What would your funds pay you?</h1>
-        <p class="ic-fresh" id="icFresh" aria-live="polite"></p>
-      </div>
-      <div class="ic-res" id="icRes" aria-live="polite">
-        <div class="ic-main">
-          <p class="ic-lbl">Your income</p>
-          <div class="ic-big" id="icBig">$0</div>
-          <p class="ic-from" id="icFrom"></p>
-          <div class="ic-stats" id="icStats"></div>
+  <section class="ic-app">
+    <div class="ic-shell">
+      <header class="ic-hd">
+        <div>
+          <p class="eyebrow">Income calculator</p>
+          <h1 class="ic-title">What would your funds pay you?</h1>
         </div>
-        <div class="ic-keep" id="icKeep"></div>
+        <p class="ic-fresh" id="icFresh" aria-live="polite"></p>
+      </header>
+      <div class="ic-layout">
+        <aside class="ic-builder card" aria-label="Build your mix">
+          <div class="ic-h"><h2>Your mix</h2><span class="ic-count" id="icCount"></span></div>
+          <form class="ic-split" id="icSplit"><label class="fd-f"><span>Total to invest</span><input type="number" inputmode="decimal" min="0" step="100" id="icTotal" placeholder="30000"></label><button class="btn ghost ic-splitbtn" type="submit">Split evenly</button></form>
+          <div class="ic-allocbar" id="icBar" aria-hidden="true"></div>
+          <p class="ic-alloc" id="icAlloc" aria-live="polite" hidden></p>
+          <div class="ic-rows" id="icMix"></div>
+          <p class="ic-empty" id="icEmpty" hidden>No funds yet. Search or browse below and tap a fund to add it.</p>
+          <div class="ic-add">
+            <div class="ic-h"><h3>Add funds</h3></div>
+            <label class="ic-search"><span class="sr">Search funds</span><input type="search" id="icQ" placeholder="Search a ticker or name" autocomplete="off"></label>
+            <div class="ic-flt" id="icFlt" role="group" aria-label="Filter funds"></div>
+            <div class="ic-list" id="icList" role="group" aria-label="Funds to add"></div>
+          </div>
+        </aside>
+        <div class="ic-results">
+          <div class="ic-top ic-hero">
+            <div class="ic-res" id="icRes" aria-live="polite">
+              <div class="ic-main">
+                <p class="ic-lbl">Your income</p>
+                <div class="ic-big" id="icBig">$0</div>
+                <p class="ic-from" id="icFrom"></p>
+                <div class="ic-stats" id="icStats"></div>
+              </div>
+              <div class="ic-keep" id="icKeep"></div>
+            </div>
+          </div>
+          <section class="card ic-proj" id="icProj" aria-live="polite"></section>
+        </div>
       </div>
-    </div>
-  </section>
-  <section class="ic-body">
-    <div class="wrap ic-grid">
-      <div class="card ic-mix">
-        <div class="ic-h"><h2>Your mix</h2><span class="ic-count" id="icCount"></span></div>
-        <form class="ic-split" id="icSplit"><label class="fd-f"><span>Total to invest</span><input type="number" inputmode="decimal" min="0" step="100" id="icTotal" placeholder="30000"></label><button class="btn ghost ic-splitbtn" type="submit">Split evenly</button></form>
-        <p class="ic-alloc" id="icAlloc" aria-live="polite" hidden></p>
-        <div class="ic-rows" id="icMix"></div>
-        <p class="ic-empty" id="icEmpty" hidden>Add one or more funds to start. Pick them from the list.</p>
-      </div>
-      <div class="card ic-pick">
-        <div class="ic-h"><h2>Add funds</h2></div>
-        <label class="fd-f"><span>Search</span><input type="search" id="icQ" placeholder="Ticker or name" autocomplete="off"></label>
-        <div class="ic-list" id="icList" role="group" aria-label="Funds to add"></div>
-      </div>
-    </div>
-    <div class="wrap"><section class="card ic-proj" id="icProj" aria-live="polite"></section></div>
-    <div class="wrap ic-foot">
+    <div class="ic-foot">
       <p><b>How this works.</b> Each fund’s yield is its latest regular payout per unit, times the number of payouts in a year, divided by its latest closing price. Your amount times that yield gives a yearly payout. Each fund is shown on its own schedule: most pay monthly, some twice a month, a few quarterly. When your mix has more than one schedule, the total is shown per month. The two-week paycheque figure is the yearly total spread over 26 paydays, for comparing with a biweekly paycheque.</p>
       <p><b>Withdraw and reinvest.</b> A fund grows by its total return: the change in its unit price plus its payouts. If you withdraw less than that total return, minus about 2.5% for inflation, the balance keeps growing in real terms. By default we use each fund’s longest record (10, 5 or 3 years, or since launch), its 1-year return for newer funds, and 8% when there’s no record yet. Switch the market to see a strong year (+30%, like 2025), an ordinary one (+12%) or a bear year (−25%). Past returns don’t promise future ones, so check again each year.</p>
       <p><b>Projection.</b> “Where this could go” grows each fund by the return the market setting gives it, pays its current yield on its balance every year, and takes out what you choose: every payout, the safe amount, or nothing. In Bear, the first year falls 25% and later years return 12%. It is a what-if, not a forecast.</p>
       <p><b>Payouts are not guaranteed.</b> Funds change their payouts often, and very high yields usually include some of your own money paid back (return of capital) and can wear down the unit price over time. Funds marked “Leverage” borrow to invest, so they can fall faster. Figures are before tax.</p>
       <p>This calculator is financial education, not investment advice or a recommendation to buy any fund. Compare funds side by side in the <a href="#funds">fund directory</a><span data-pl="hide">, or <a href="#book">book a free intro session</a> to build a plan that fits your family</span>.</p>
+    </div>
     </div>
   </section>
 </div>
@@ -2180,9 +2238,9 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
 /* Income calculator: reads /data/funds-live.json (refreshed nightly), falls back to the FUNDS yields */
 (function(){
   if(typeof FUNDS==='undefined'||!document.getElementById('income'))return;
-  var KEY='melius-income-v2',BY={},L={},meta=null,st={sel:{},order:[],per:'bi',total:0,pct:{},mkt:'rec',yrs:10,take:'safe'},INFL=2.5;
+  var KEY='melius-income-v2',BY={},L={},meta=null,st={sel:{},order:[],per:'bi',total:0,pct:{},mkt:'rec',yrs:10,take:'safe',flt:'all'},INFL=2.5;
   FUNDS.forEach(function(f){BY[f.t]=f});
-  try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.sel&&s.order){st=s;st.order=st.order.filter(function(t){return BY[t]});st.pct=st.pct||{};st.total=+st.total||0;st.mkt=st.mkt||'rec';st.yrs=st.yrs||10;st.take=st.take||'safe'}}catch(e){}
+  try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.sel&&s.order){st=s;st.order=st.order.filter(function(t){return BY[t]});st.pct=st.pct||{};st.total=+st.total||0;st.mkt=st.mkt||'rec';st.yrs=st.yrs||10;st.take=st.take||'safe';st.flt=st.flt||'all'}}catch(e){}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
   var $=function(id){return document.getElementById(id)};
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -2199,8 +2257,11 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   function rate(t){var m=MK[st.mkt];return m?[m[0],m[1]]:longRun(BY[t])}
   function keepYr(a,rate,payYr){if(rate<=INFL)return 0;var m=Math.pow((1+rate/100)/(1+INFL/100),1/12)-1;return Math.min(a*m*12,payYr)}
   function provName(f){try{return (FD_PROV[f.p]&&FD_PROV[f.p].name)||f.p}catch(e){return f.p}}
+  var FLT=[['all','All'],['m','Pays monthly'],['tm','Twice a month'],['ca','Canadian'],['us','U.S.'],['tech','Tech'],['nolev','No leverage'],['mine','In my mix']];
+  function fltOk(f){var k=st.flt;if(k==='m')return f.f==='Monthly';if(k==='tm')return f.f==='Twice a month';if(k==='ca')return /Canad|Banks/.test(f.x||'');if(k==='us')return /U\.S\./.test(f.x||'');if(k==='tech')return f.x==='Technology';if(k==='nolev')return !f.lev;if(k==='mine')return st.sel[f.t]!=null;return true}
   function list(){var q=($('icQ').value||'').trim().toLowerCase();
-    var rows=FUNDS.filter(function(f){return !q||(f.t+' '+f.n+' '+provName(f)+' '+(f.x||'')).toLowerCase().indexOf(q)>=0});
+    $('icFlt').innerHTML=FLT.map(function(x){return '<button type="button" data-flt="'+x[0]+'" aria-pressed="'+(st.flt===x[0])+'">'+x[1]+'</button>'}).join('');
+    var rows=FUNDS.filter(function(f){return fltOk(f)&&(!q||(f.t+' '+f.n+' '+provName(f)+' '+(f.x||'')).toLowerCase().indexOf(q)>=0)});
     $('icList').innerHTML=rows.length?rows.map(function(f){var on=st.sel[f.t]!=null,i=info(f.t);
       return '<button type="button" class="ic-opt" data-ic="'+f.t+'" aria-pressed="'+on+'"><span class="ic-box" aria-hidden="true">'+(on?'✓':'')+'</span><span><b>'+f.t+'</b>'+(f.lev?'<span class="ic-lev">Leverage</span>':'')+'<small>'+esc(f.n)+'</small></span><span class="ic-y">'+i.y.toFixed(2)+'%<small>'+(FREQ[i.n]||'')+'</small></span></button>'}).join(''):'<p class="ic-empty" style="padding:14px 4px">No funds match.</p>';
   }
@@ -2211,7 +2272,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     return {pay:'<b>'+money(y/n,1)+' <span style="font-weight:500;font-size:13px;color:var(--muted)">'+(FQ[n]||'')+'</span></b><small><span class="w">withdraw '+money(k/n,1)+'</span> · <span class="r">reinvest '+money(Math.max(0,y-k)/n,1)+'</span></small>',det:det}}
   function mix(){
     $('icMix').innerHTML=st.order.map(function(t){var f=BY[t],i=info(t),a=+st.sel[t]||0,r=rowHtml(t);
-      return '<div class="ic-row"><span class="ic-rn"><b>'+t+'</b>'+(f.lev?'<span class="ic-lev">Leverage</span>':'')+'<small>'+i.y.toFixed(2)+'% · pays '+(FREQ[i.n]||'')+'</small></span>'+
+      return '<div class="ic-row"><span class="ic-rn"><span class="ic-sw" data-sw="'+t+'"></span><b>'+t+'</b>'+(f.lev?'<span class="ic-lev">Leverage</span>':'')+'<small>'+i.y.toFixed(2)+'% · pays '+(FREQ[i.n]||'')+'</small></span>'+
         '<span class="ic-in"><label class="ic-amt"><span>$</span><input type="number" inputmode="decimal" min="0" step="100" data-amt="'+t+'" value="'+(a?r2(a):'')+'" placeholder="0" aria-label="Amount in '+t+'"></label>'+
         '<label class="ic-pct"><input type="number" inputmode="decimal" min="0" max="100" step="1" data-pct="'+t+'" value="'+pctStr(t)+'" placeholder="0" aria-label="Percent of total in '+t+'"><span>%</span></label></span>'+
         '<span class="ic-rp" data-rp="'+t+'">'+r.pay+'</span>'+
@@ -2226,7 +2287,10 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   function pctStr(t){var v=pctOf(t);if(!v)return '';return String(Math.round(v*10)/10)}
   function syncPct(){var ae=document.activeElement;document.querySelectorAll('[data-pct]').forEach(function(el){if(el!==ae)el.value=pctStr(el.dataset.pct)});
     document.querySelectorAll('[data-amt]').forEach(function(el){if(el!==ae){var a=+st.sel[el.dataset.amt]||0;el.value=a?r2(a):''}});alloc()}
-  function alloc(){var el=$('icAlloc');if(!st.order.length){el.hidden=true;return}
+  function bar(){var el=$('icBar');if(!el)return;var b=base();if(!(b>0)||!st.order.length){el.innerHTML='';return}
+    el.innerHTML=st.order.map(function(t,i){var w=Math.max(0,pctOf(t));return w>0?'<i class="ic-c'+(i%6)+'" style="width:'+w.toFixed(2)+'%" title="'+t+' '+(Math.round(w*10)/10)+'%"></i>':''}).join('');
+    st.order.forEach(function(t,i){var sw=document.querySelector('[data-sw="'+t+'"]');if(sw)sw.className='ic-sw ic-c'+(i%6)})}
+  function alloc(){bar();var el=$('icAlloc');if(!st.order.length){el.hidden=true;return}
     var tp=0;st.order.forEach(function(t){tp+=pctOf(t)});tp=Math.round(tp*10)/10;var T=st.total,S=sum();
     if(!(T>0)){if(tp>0&&S===0){el.hidden=false;el.className='ic-alloc warn';el.innerHTML='<b>'+tp+'%</b> allocated. Enter a <b>total to invest</b> to turn the percentages into dollars.';}else el.hidden=true;return}
     el.hidden=false;var left=r2(T-S);
@@ -2245,7 +2309,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     $('icBig').innerHTML=money(yr/U.dv)+'<small>'+U.u+'</small>';
     var parts=[],nf=0;[[12,'monthly'],[24,'twice-a-month'],[4,'quarterly'],[52,'weekly'],[26,'two-week'],[2,'twice-a-year'],[1,'yearly']].forEach(function(x){var c=U.cnt[x[0]];if(c){parts.push(c+' '+x[1]);nf+=c}});
     var plist=parts.length>1?parts.slice(0,-1).join(', ')+' and '+parts[parts.length-1]:parts.join('');
-    $('icFrom').innerHTML=tot>0?'From <b>'+money(tot)+'</b> invested'+(U.dv===24?' · '+money(yr/12)+' a month':'')+(U.mixed?' · '+plist+' fund'+(nf>1?'s':'')+', each paid on its own schedule':'')+'.':'Add funds and amounts below to see what they could pay you.';
+    $('icFrom').innerHTML=tot>0?'From <b>'+money(tot)+'</b> invested'+(U.dv===24?' · '+money(yr/12)+' a month':'')+(U.mixed?' · '+plist+' fund'+(nf>1?'s':'')+', each paid on its own schedule':'')+'.':'Add funds and amounts in Your mix to see what they could pay you.';
     var tiles=tot>0?[['Per month',money(yr/12)],['Per year',money(yr)],['Per 2-week paycheque',money(yr/26)],['Yield',(yr/tot*100).toFixed(2)+'%']]:[['Per month','–'],['Per year','–'],['Per 2-week paycheque','–'],['Yield','–']];
     $('icStats').innerHTML=tiles.map(function(x){return '<div class="ic-stat"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>'}).join('');
     var Mk=MK[st.mkt];
@@ -2257,7 +2321,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
         '<div class="ic-leg"><span style="--c:var(--ic-gold)">Withdraw '+sp+'% of the payouts</span><span style="--c:#5BC08F">Reinvest '+pct+'%</span></div>'+
         (st.mkt==='bear'?'<p>In a bear year, prices fall, so nothing you take out keeps your balance growing. Bear markets usually don’t last long, and payouts usually keep coming, though some funds trim them. <b>This is the time to load up:</b> reinvesting '+money(yr/U.dv)+' '+U.u+' at prices about 25% lower buys about a third more units than today, and that extra income stays with you when prices recover.</p>':'<p>'+(rest<1?'You can withdraw all of it. These funds’ long-run returns are high enough that your balance keeps growing even if you spend every payout.':'Take out up to <b>'+money(keep/U.dv)+'</b> '+U.u+' and put the other <b>'+money(rest/U.dv)+'</b> back into your funds. Your balance then keeps growing faster than inflation.')+'</p>')+
         '<p class="ic-kn">'+(Mk?'Based on a '+(Mk[0]>0?'+':'')+Mk[0]+'% return for every fund, minus '+INFL+'% for inflation. Switch to Fund records to use each fund’s own history.':'Based on each fund’s long-run total return (price plus payouts), minus '+INFL+'% for inflation. If every fund returned a steady 8% a year, you could withdraw '+money(keep8/U.dv)+' '+U.u+'.')+'</p>';
-    }else $('icKeep').innerHTML=head+'<div class="ic-two"><div class="w"><span>You can withdraw</span><b>$0</b><small>a month</small></div><div class="r"><span>Reinvest</span><b>$0</b><small>a month</small></div></div><p>Add funds and amounts below, and this splits each payout into what you can spend and what to put back so your balance keeps growing.</p>';
+    }else $('icKeep').innerHTML=head+'<div class="ic-two"><div class="w"><span>You can withdraw</span><b>$0</b><small>a month</small></div><div class="r"><span>Reinvest</span><b>$0</b><small>a month</small></div></div><p>Add funds and amounts in Your mix, and this splits each payout into what you can spend and what to put back so your balance keeps growing.</p>';
   }
   /* projection: grows each fund by its return (the market toggle), pays its yield on the balance, takes out what the viewer picks */
   function proj(){var el=$('icProj');if(!el)return;
@@ -2267,7 +2331,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     var head='<div class="ic-ph"><div><p class="eyebrow">Where this could go</p><h2>Your mix over '+st.yrs+' years</h2></div>'+
       '<div class="ic-pctl"><div><span class="ic-pl">Years</span>'+segs('yrs',[[5,'5'],[10,'10'],[15,'15'],[20,'20']],st.yrs)+'</div>'+
       '<div><span class="ic-pl">Each year you take out</span>'+segs('take',[['all','All payouts'],['safe','The safe amount'],['none','Nothing']],st.take)+'</div></div></div>';
-    if(!(tot>0)){el.innerHTML=head+'<p class="ic-pe">Add funds and amounts above to see a projection.</p>';return}
+    if(!(tot>0)){el.innerHTML=head+'<p class="ic-pe">Add funds and amounts in Your mix to see a projection.</p>';return}
     var past=fs.reduce(function(s,f){return s+f.a*f.lr},0)/tot;
     var mk=st.mkt, mkLabel={rec:'each fund’s own record',bull:'a bull market (+30% a year)',base:'a base market (+12% a year)',bear:'a bear year first (−25%), then +12% a year'}[mk]||'';
     function r(f,k){if(mk==='bull')return 30;if(mk==='base')return 12;if(mk==='bear')return k===0?-25:12;return f.lr}
@@ -2291,7 +2355,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
       '<polygon points="'+X(0)+','+y1+' '+pts+' '+X(st.yrs)+','+y1+'" class="area"/><polyline points="'+pts+'" class="ln"/>'+
       '<circle cx="'+X(st.yrs)+'" cy="'+Y(end)+'" r="4" class="dot"/>'+xl+'</svg>';
     el.innerHTML=head+'<div class="ic-ptiles">'+tiles.map(function(t){return '<div class="ic-pt"><span>'+t[0]+'</span>'+t[1]+'</div>'}).join('')+'</div>'+svg+
-      '<p class="ic-pn">Assumes '+mkLabel+', with each fund paying its current yield on its balance every year'+(st.take==='safe'?' and the safe amount taken out (its return minus '+INFL+'% for inflation, never more than it pays)':st.take==='all'?' and every payout taken out':' and every payout reinvested')+'. Change the market above to compare. Before tax and fees on your side. Payouts and returns change, and past returns don’t promise future ones.</p>';
+      '<p class="ic-pn">Assumes '+mkLabel+', with each fund paying its current yield on its balance every year'+(st.take==='safe'?' and the safe amount taken out (its return minus '+INFL+'% for inflation, never more than it pays)':st.take==='all'?' and every payout taken out':' and every payout reinvested')+'. Change the market in the panel above to compare. Before tax and fees on your side. Payouts and returns change, and past returns don’t promise future ones.</p>';
   }
   var calc0=calc;calc=function(){calc0();proj()};
   function fresh(){var el=$('icFresh');
@@ -2301,11 +2365,12 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   }
   function all(){list();mix();calc();fresh()}
   $('icQ').addEventListener('input',list);
+  $('icFlt').addEventListener('click',function(e){var b=e.target.closest('[data-flt]');if(!b)return;st.flt=b.dataset.flt;save();list()});
   $('icProj').addEventListener('click',function(e){var b=e.target.closest('[data-yrs],[data-take]');if(!b)return;if(b.dataset.yrs)st.yrs=+b.dataset.yrs;if(b.dataset.take)st.take=b.dataset.take;save();proj();try{gtag('event','income_projection',{years:st.yrs,take:st.take})}catch(x){}});
   $('icKeep').addEventListener('click',function(e){var b=e.target.closest('[data-mk]');if(!b)return;st.mkt=b.dataset.mk;save();st.order.forEach(rowUpdate);calc();try{gtag('event','income_market',{market:st.mkt})}catch(x){}});
   $('icList').addEventListener('click',function(e){var b=e.target.closest('[data-ic]');if(!b)return;var t=b.dataset.ic;
     if(st.sel[t]!=null){delete st.sel[t];delete st.pct[t];st.order=st.order.filter(function(x){return x!==t})}else{st.sel[t]=0;st.order.push(t);try{gtag('event','income_add_fund',{fund:t})}catch(x){}}
-    save();list();mix();calc();if(st.sel[t]!=null){var inp=document.querySelector('[data-amt="'+t+'"]');if(inp&&matchMedia('(min-width:981px)').matches)inp.focus()}});
+    save();list();mix();calc();if(st.sel[t]!=null){var inp=document.querySelector('[data-amt="'+t+'"]');if(inp&&matchMedia('(min-width:1101px)').matches)inp.focus()}});
   $('icMix').addEventListener('input',function(e){var t=e.target.dataset.amt,q=e.target.dataset.pct;
     if(t){st.sel[t]=Math.max(0,+e.target.value||0);if(st.total>0)st.pct[t]=st.sel[t]/st.total*100;else delete st.pct[t];save();rowUpdate(t);syncPct();calc();return}
     if(q){var v=Math.max(0,Math.min(100,+e.target.value||0));if(!(st.total>0)){var S=sum();if(S>0){st.total=S;st.order.forEach(function(x){st.pct[x]=(+st.sel[x]||0)/S*100})}}
