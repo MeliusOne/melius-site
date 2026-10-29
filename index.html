@@ -2155,7 +2155,7 @@ var FUNDS=[
   function retCls(v){return v==null?'':v<0?' neg':''}
   function row(f){
     var prov=FD_PROV[f.p]?FD_PROV[f.p].name:f.p,r=f.r||{};
-    var stratPill='<span class="fd-pill'+(f.s.indexOf('growth')>=0?' growth':'')+'">'+esc(f.s.replace(' (growth)',''))+'</span>'+(f.lst==='US'?'<span class="fd-pill" title="Listed in the U.S. and priced in U.S. dollars">U.S.-listed</span>':'')+(f.lev?'<span class="fd-pill lev" title="Borrows to invest more than it holds">Leverage</span>':'');
+    var stratPill='<span class="fd-pill'+(f.s.indexOf('growth')>=0?' growth':'')+'">'+esc(f.s.replace(' (growth)',''))+'</span>'+(f.lst==='US'?'<span class="fd-pill" title="Listed in the U.S. and priced in U.S. dollars">U.S.-listed</span>':'')+(f.uu?'<span class="fd-pill" title="Also trades in U.S. dollars as '+f.t+'.U">Also '+f.t+'.U</span>':'')+(f.lev?'<span class="fd-pill lev" title="Borrows to invest more than it holds">Leverage</span>':'');
     return '<div class="fd-row" role="listitem" data-t="'+f.t+'">'+
       '<div class="fd-sum">'+
         '<input type="checkbox" class="fd-chk" aria-label="Add '+f.t+' to compare"'+(sel[f.t]?' checked':'')+'>'+
@@ -2225,14 +2225,14 @@ var FUNDS=[
       '</dl>'+
       retTable(f)+
       calcHtml(f)+
-      '<p class="fd-about">'+esc(STRAT_INFO[f.s]||'')+(f.lev?' Leverage means the fund borrows to invest a little more than it holds, which raises the payout and the risk.':'')+(f.note?' '+esc(f.note):'')+(f.lst==='US'?' Listed in the U.S. and priced in U.S. dollars. In a TFSA, the U.S. keeps 15% of every payout. In an RRSP it doesn’t. In a non-registered account the 15% is withheld, and you can usually claim it back as a foreign tax credit.':'')+'</p>'+
+      '<p class="fd-about">'+esc(STRAT_INFO[f.s]||'')+(f.lev?' Leverage means the fund borrows to invest a little more than it holds, which raises the payout and the risk.':'')+(f.note?' '+esc(f.note):'')+(f.uu?' Also trades in U.S. dollars as '+f.t+'.U: the same fund, priced and paid in U.S. dollars.':'')+(f.lst==='US'?' Listed in the U.S. and priced in U.S. dollars. In a TFSA, the U.S. keeps 15% of every payout. In an RRSP it doesn’t. In a non-registered account the 15% is withheld, and you can usually claim it back as a foreign tax credit.':'')+'</p>'+
       '<p class="fd-links"><a href="'+tmx(f.t)+'" target="_blank" rel="noopener">Live quote, payouts and dates (TMX Money) ↗</a><a href="'+(f.u||prov.url)+'" target="_blank" rel="noopener">'+(f.u?'Fund page':esc(prov.name))+' ↗</a></p>'+
       '</div>'+
       '<div class="fd-chart" data-chart="'+f.t+'"></div>'+
     '</div>';
   }
   function current(){
-    var q=$('fdQ').value.trim().toLowerCase(),p=$('fdProv').value,x=$('fdExp').value,s=$('fdStrat').value,fr=$('fdFreq').value,lv=$('fdLev').value,so=$('fdSort').value;
+    var q=$('fdQ').value.trim().toLowerCase().replace(/[.\-\s]u$/,''),p=$('fdProv').value,x=$('fdExp').value,s=$('fdStrat').value,fr=$('fdFreq').value,lv=$('fdLev').value,so=$('fdSort').value;
     var r=FUNDS.filter(function(f){return (!q||(f.t+' '+f.n).toLowerCase().indexOf(q)>=0)&&(!p||f.p===p)&&(!x||f.x===x)&&(!s||f.s===s)&&(!fr||f.f===fr)&&(!lv||(lv==='yes')===!!f.lev)});
     var nv=function(v,dir){return v==null?(dir>0?1e9:-1e9):v};
     r.sort(function(a,b){switch(so){
@@ -2295,7 +2295,7 @@ var FUNDS=[
   /* nightly yields: replace each fund's yield with its latest payout annualized over the latest close */
   if(window.MELIUS_LIVE)window.MELIUS_LIVE.then(function(d){if(!d||d.seed||!d.funds||!d.asOf)return;var n=0;
     function fd(s){var x=new Date(s+'T12:00:00');return isNaN(x)?s:x.toLocaleDateString('en-CA',{month:'short',day:'numeric',year:'numeric'})}
-    FUNDS.forEach(function(f){var l=d.funds[f.t];if(l&&f.rl&&l.r){f.r=l.r;f.ra=fd(l.r.asof)+', from closing prices with payouts reinvested';if(!f.inc&&l.r.start)f.inc=l.r.start.slice(0,4)}if(l&&l.p&&l.y>0&&l.pd){f.y=+l.y;f.ya=fd(l.pd)+' close, latest payout annualized'+(l.stale?' (last good update)':'');f.e=false;f.live=1;n++}});
+    FUNDS.forEach(function(f){var l=d.funds[f.t];if(l&&l.u)f.uu=1;if(l&&f.rl&&l.r){f.r=l.r;f.ra=fd(l.r.asof)+', from closing prices with payouts reinvested';if(!f.inc&&l.r.start)f.inc=l.r.start.slice(0,4)}if(l&&l.p&&l.y>0&&l.pd){f.y=+l.y;f.ya=fd(l.pd)+' close, latest payout annualized'+(l.stale?' (last good update)':'');f.e=false;f.live=1;n++}});
     if(!n)return;stats();render();
     var el=$('fdLive');if(el){el.innerHTML='<span class="ic-dot live" aria-hidden="true"></span><span>Yields updated every weekday evening from the latest payouts and closing prices · last update '+fd(d.asOf.slice(0,10))+' · '+n+' of '+FUNDS.length+' funds</span>';el.hidden=false}
   });
@@ -2381,13 +2381,13 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   function rate(t){var m=MK[st.mkt];return m?[m[0],m[1]]:longRun(BY[t])}
   function keepYr(a,rate,payYr){if(rate<=INFL)return 0;var m=Math.pow((1+rate/100)/(1+INFL/100),1/12)-1;return Math.min(a*m*12,payYr)}
   function provName(f){try{return (FD_PROV[f.p]&&FD_PROV[f.p].name)||f.p}catch(e){return f.p}}
-  var FLT=[['all','All'],['m','Pays monthly'],['tm','Twice a month'],['ca','Canadian'],['us','U.S.'],['tech','Tech'],['nolev','No leverage'],['uslist','U.S.-listed'],['mine','In my mix']];
-  function fltOk(f){var k=st.flt;if(k==='m')return f.f==='Monthly';if(k==='tm')return f.f==='Twice a month';if(k==='ca')return f.lst!=='US'&&/Canad|Banks/.test(f.x||'');if(k==='us')return /U\.S\./.test(f.x||'');if(k==='tech')return f.x==='Technology';if(k==='nolev')return !f.lev;if(k==='uslist')return f.lst==='US';if(k==='mine')return st.sel[f.t]!=null;return true}
-  function list(){var q=($('icQ').value||'').trim().toLowerCase();
+  var FLT=[['all','All'],['m','Pays monthly'],['tm','Twice a month'],['ca','Canadian'],['us','U.S.'],['tech','Tech'],['nolev','No leverage'],['uslist','U.S.-listed'],['usd','Has .U'],['mine','In my mix']];
+  function fltOk(f){var k=st.flt;if(k==='m')return f.f==='Monthly';if(k==='tm')return f.f==='Twice a month';if(k==='ca')return f.lst!=='US'&&/Canad|Banks/.test(f.x||'');if(k==='us')return /U\.S\./.test(f.x||'');if(k==='tech')return f.x==='Technology';if(k==='nolev')return !f.lev;if(k==='uslist')return f.lst==='US';if(k==='usd')return hasU(f.t);if(k==='mine')return st.sel[f.t]!=null;return true}
+  function list(){var q=($('icQ').value||'').trim().toLowerCase().replace(/[.\-\s]u$/,'');
     $('icFlt').innerHTML=FLT.map(function(x){return '<button type="button" data-flt="'+x[0]+'" aria-pressed="'+(st.flt===x[0])+'">'+x[1]+'</button>'}).join('');
     var rows=FUNDS.filter(function(f){return fltOk(f)&&(!q||(f.t+' '+f.n+' '+provName(f)+' '+(f.x||'')).toLowerCase().indexOf(q)>=0)});
     $('icList').innerHTML=rows.length?rows.map(function(f){var on=st.sel[f.t]!=null,i=info(f.t);
-      return '<button type="button" class="ic-opt" data-ic="'+f.t+'" aria-pressed="'+on+'"><span class="ic-box" aria-hidden="true">'+(on?'✓':'')+'</span><span><b>'+f.t+'</b>'+(f.lst==='US'?'<span class="ic-lev ic-us">U.S.</span>':'')+(f.lev?'<span class="ic-lev">Leverage</span>':'')+'<small>'+esc(f.n)+'</small></span><span class="ic-y">'+i.yg.toFixed(2)+'%<small>'+(FREQ[i.n]||'')+'</small></span></button>'}).join(''):'<p class="ic-empty" style="padding:14px 4px">No funds match.</p>';
+      return '<button type="button" class="ic-opt" data-ic="'+f.t+'" aria-pressed="'+on+'"><span class="ic-box" aria-hidden="true">'+(on?'✓':'')+'</span><span><b>'+f.t+'</b>'+(f.lst==='US'?'<span class="ic-lev ic-us">U.S.</span>':'')+(hasU(f.t)?'<span class="ic-lev ic-us">+ '+f.t+'.U</span>':'')+(f.lev?'<span class="ic-lev">Leverage</span>':'')+'<small>'+esc(f.n)+'</small></span><span class="ic-y">'+i.yg.toFixed(2)+'%<small>'+(FREQ[i.n]||'')+'</small></span></button>'}).join(''):'<p class="ic-empty" style="padding:14px 4px">No funds match.</p>';
   }
   var FQ={52:'a week',26:'every two weeks',24:'twice a month',12:'a month',4:'a quarter',2:'twice a year',1:'a year'};
   function rowHtml(t){var f=BY[t],i=info(t),a=+st.sel[t]||0,y=a*i.y/100,Lr=longRun(f),Mk=MK[st.mkt],k=keepYr(a,rate(t)[0],y),n=i.n||12,det='';
@@ -2397,7 +2397,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     return {pay:'<b>'+cm(y/n,t,1)+' <span style="font-weight:500;font-size:13px;color:var(--muted)">'+(FQ[n]||'')+'</span></b><small><span class="w">withdraw '+cm(k/n,t,1)+'</span> · <span class="r">reinvest '+cm(Math.max(0,y-k)/n,t,1)+'</span></small>',det:det}}
   function mix(){
     $('icMix').innerHTML=st.order.map(function(t){var f=BY[t],i=info(t),a=+st.sel[t]||0,r=rowHtml(t);
-      return '<div class="ic-row"><span class="ic-rn"><span class="ic-sw" data-sw="'+t+'"></span><b>'+t+'</b>'+(f.lst==='US'?'<span class="ic-lev ic-us">U.S.</span>':'')+(f.lev?'<span class="ic-lev">Leverage</span>':'')+(hasU(t)?'<span class="ic-cur" role="group" aria-label="Currency for '+t+'"><button type="button" data-cur="'+t+'" data-c="CAD" aria-pressed="'+!isUSD(t)+'">C$</button><button type="button" data-cur="'+t+'" data-c="USD" aria-pressed="'+isUSD(t)+'">US$</button></span>':'')+'<small>'+i.yg.toFixed(2)+'%'+(usL(t)&&wh(t)<1?' ('+i.y.toFixed(2)+'% after U.S. tax)':'')+' · pays '+(FREQ[i.n]||'')+'</small></span>'+
+      return '<div class="ic-row"><span class="ic-rn"><span class="ic-sw" data-sw="'+t+'"></span><b>'+t+'</b>'+(f.lst==='US'?'<span class="ic-lev ic-us">U.S.</span>':'')+(f.lev?'<span class="ic-lev">Leverage</span>':'')+(hasU(t)?'<span class="ic-cur" role="group" aria-label="Currency for '+t+'"><button type="button" data-cur="'+t+'" data-c="CAD" aria-pressed="'+!isUSD(t)+'" title="'+t+', in Canadian dollars">'+t+'</button><button type="button" data-cur="'+t+'" data-c="USD" aria-pressed="'+isUSD(t)+'" title="'+t+'.U, in U.S. dollars">'+t+'.U</button></span>':'')+'<small>'+i.yg.toFixed(2)+'%'+(usL(t)&&wh(t)<1?' ('+i.y.toFixed(2)+'% after U.S. tax)':'')+' · pays '+(FREQ[i.n]||'')+'</small></span>'+
         '<span class="ic-in"><label class="ic-amt'+(isUSD(t)?' usd':'')+'"><span>'+(isUSD(t)?'US$':'$')+'</span><input type="number" inputmode="decimal" min="0" step="100" data-amt="'+t+'" value="'+(a?r2(shown(t,a)):'')+'" placeholder="0" aria-label="Amount in '+t+'"></label>'+
         '<label class="ic-pct"><input type="number" inputmode="decimal" min="0" max="100" step="1" data-pct="'+t+'" value="'+pctStr(t)+'" placeholder="0" aria-label="Percent of total in '+t+'"><span>%</span></label></span>'+
         '<span class="ic-rp" data-rp="'+t+'">'+r.pay+'</span>'+
