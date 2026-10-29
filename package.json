@@ -1,0 +1,8 @@
+{
+  "name": "melius-site",
+  "private": true,
+  "description": "meliusoneconsulting.com. The only dependency is for the application confirmation email.",
+  "dependencies": {
+    "nodemailer": "6.9.16"
+  }
+}

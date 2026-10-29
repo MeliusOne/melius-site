@@ -4,3 +4,7 @@
   # Skip a deploy when the only change is the nightly fund data (saves Netlify credits).
   # The Income page reads that file straight from GitHub instead.
   ignore = 'git diff --quiet "$CACHED_COMMIT_REF" "$COMMIT_REF" -- . ":(exclude)data/funds-live.json"'
+
+[functions]
+  directory = "netlify/functions"
+  included_files = ["netlify/lib/**"]
