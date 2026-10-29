@@ -1019,6 +1019,79 @@ main{min-height:calc(100vh - 260px)}
 .ic-foot{margin-top:8px;max-width:900px}
 @media (max-width:1100px){.ic-layout{grid-template-columns:1fr}.ic-builder{position:static;max-height:none;overflow:visible}.ic-results{display:contents}.ic-hero{order:-1}.ic-layout{display:flex;flex-direction:column}}
 @media (max-width:520px){.ic-builder .ic-row{grid-template-columns:minmax(0,1fr) 28px;grid-template-areas:'n x' 'a a' 'p p' 'd d'}.ic-builder .ic-rp{text-align:left}.ic-builder .ic-rd{white-space:normal}.ic-builder{padding:18px}.ic-hero.ic-top{padding:16px}.ic-app{padding-block:20px 40px}}
+
+/* phone: tabbed calculator */
+.ic-mini,.ic-tabs{display:none}
+@media (max-width:760px){
+  .ic-app{padding-bottom:calc(96px + env(safe-area-inset-bottom, 0px))}
+  .ic-hd .ic-title{font-size:24px}.ic-hd .ic-fresh{font-size:12.5px}
+  #income[data-tab] .ic-builder,#income[data-tab] .ic-hero,#income[data-tab] .ic-proj,#income[data-tab] .ic-foot{display:none}
+  #income[data-tab="mix"] .ic-builder{display:flex}
+  #income[data-tab="income"] .ic-hero{display:block}
+  #income[data-tab="future"] .ic-proj,#income[data-tab="future"] .ic-foot{display:flex}
+  #income[data-tab="future"] .ic-foot{flex-direction:column}
+  .ic-mini{display:flex;flex-wrap:wrap;gap:2px 14px;align-items:baseline;position:sticky;top:calc(var(--ic-hdr,180px) + 8px);z-index:5;width:100%;text-align:left;font:inherit;font-size:13.5px;color:var(--ic-mute);background:var(--ic-bg);border:0;border-radius:14px;padding:10px 14px;cursor:pointer;box-shadow:0 6px 18px rgba(20,33,61,.18)}
+  .ic-mini b{color:var(--ic-ink);font-size:16px;font-variant-numeric:tabular-nums}
+  .ic-mini .g{color:var(--ic-gold)}
+  #income[data-tab="income"] .ic-mini{display:none}
+  .ic-tabs{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);border-top:1px solid var(--line);padding:6px max(10px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(10px, env(safe-area-inset-left, 0px));box-shadow:0 -6px 18px rgba(20,33,61,.08)}
+  .ic-tabs button{display:flex;flex-direction:column;align-items:center;gap:3px;font:inherit;font-size:12px;font-weight:700;color:var(--muted);background:none;border:0;border-radius:12px;padding:7px 4px;cursor:pointer}
+  .ic-tabs svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .ic-tabs button[aria-current="page"]{color:var(--accent);background:var(--band)}
+  .ic-tabs button:focus-visible{outline:2px solid var(--amber);outline-offset:-2px}
+  .ic-builder .ic-list{max-height:none}
+}
+
+/* desktop refinements */
+.ic-mktbar{display:flex;align-items:center;gap:10px 14px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 16px}
+.ic-mktbar:empty{display:none}
+.ic-mktbar .ic-mkn{margin:0;font-size:13px;color:var(--muted);flex:1 1 280px;min-width:0}
+.ic-pbody{display:flex;flex-direction:column;gap:18px;min-width:0}
+@media (min-width:1300px){.ic-pbody{display:grid;grid-template-columns:minmax(300px,.85fr) minmax(0,1.6fr);gap:22px;align-items:center}.ic-pbody .ic-ptiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){#income[data-tab] .ic-mktbar{display:none}#income[data-tab="income"] .ic-mktbar,#income[data-tab="future"] .ic-mktbar{display:flex}}
+
+/* ===== site-wide layout refresh ===== */
+.wrap{max-width:1440px}
+section{padding-block:60px}
+.wrap>p,.wrap>.lede,.stack>p{max-width:75ch}
+:root{--hdr:180px}
+/* sticky in-page navigation */
+.subnav{position:sticky;top:var(--hdr);z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:saturate(1.4) blur(8px);-webkit-backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line)}
+.subnav-in{display:flex;align-items:center;gap:6px;overflow-x:auto;scrollbar-width:none;padding-block:10px}
+.subnav-in::-webkit-scrollbar{display:none}
+.subnav-in span{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:8px;white-space:nowrap}
+.subnav-in a{flex:none;font-size:14px;font-weight:600;color:var(--ink);text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid transparent;white-space:nowrap}
+.subnav-in a:hover{background:var(--band)}
+.subnav-in a[aria-current="true"]{background:var(--accent);color:var(--accent-ink)}
+.subnav-in a:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.has-sub section,.has-sub [id]{scroll-margin-top:calc(var(--hdr) + 70px)}
+@media (max-width:640px){.subnav-in span{display:none}.subnav-in a{font-size:13px;padding:6px 12px}}
+/* coaching: application tabs, two-column FAQ */
+.ap-tabs{display:inline-flex;flex-wrap:wrap;gap:6px;margin-top:24px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px}
+.ap-tabs button{font:inherit;font-size:15px;font-weight:700;border:0;border-radius:999px;padding:10px 18px;background:transparent;color:var(--muted);cursor:pointer}
+.ap-tabs button small{font-weight:600;opacity:.75;margin-left:6px}
+.ap-tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+.ap-tabs button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.apply-grid{grid-template-columns:minmax(0,860px);margin-top:18px}
+.apply-grid[data-show="cohort"] #apply-private,.apply-grid[data-show="private"] #apply-cohort{display:none}
+@media (min-width:1000px){.faq{display:grid;grid-template-columns:1fr 1fr;column-gap:48px;max-width:none}}
+/* learn: wider grids */
+@media (min-width:1100px){.lv-mods{grid-template-columns:repeat(auto-fill,minmax(330px,1fr))}}
+@media (min-width:1200px){.strats{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* about: keep the story aside in view */
+@media (min-width:900px){.story>:last-child{position:sticky;top:calc(var(--hdr) + 80px)}}
+
+.wrap{padding-left:max(16px, env(safe-area-inset-left, 0px), 3.5vw);padding-right:max(16px, env(safe-area-inset-right, 0px), 3.5vw)}
+/* phones: long card grids become swipeable rows */
+@media (max-width:760px){
+  .lv-mods,.strats,.fsteps,.wgrid{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:max(16px, env(safe-area-inset-left, 0px));gap:12px;margin-left:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));margin-right:calc(-1 * max(16px, env(safe-area-inset-right, 0px)));padding:4px max(16px, env(safe-area-inset-left, 0px)) 14px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .lv-mods::-webkit-scrollbar,.strats::-webkit-scrollbar,.fsteps::-webkit-scrollbar,.wgrid::-webkit-scrollbar{display:none}
+  .lv-mods>*,.strats>*,.fsteps>*,.wgrid>*{flex:0 0 86%;scroll-snap-align:start;max-width:none}
+  .swipe-hint{display:block;margin:8px 0 0;font-size:12.5px;font-weight:600;color:var(--muted)}
+}
+.swipe-hint{display:none}
+
+@media (max-width:640px){.ap-tabs{display:grid;grid-template-columns:1fr 1fr;border-radius:16px;width:100%}.ap-tabs button{border-radius:12px;padding:10px 8px;font-size:14px;line-height:1.25}.ap-tabs button small{display:block;margin:2px 0 0}}
 </style>
 </head>
 <body>
@@ -1048,7 +1121,7 @@ main{min-height:calc(100vh - 260px)}
     <div class="wrap pl-in">
       <p class="eyebrow">Coming soon</p>
       <h1 class="pl-title">Something better is on its way.</h1>
-      <p class="pl-lede">One-on-one money coaching for newcomers and young families in Canada: a plan for every dollar, a clear way out of debt, and investments that one day pay your bills. Until then, the free tools are open to everyone.</p>
+      <p class="pl-lede">Money coaching for newcomers and young families in Canada, in small groups and one-on-one: a plan for every dollar, a clear way out of debt, and investments that one day pay your bills. Until then, the free tools are open to everyone.</p>
       <form class="pl-form" name="launch-list" method="POST" data-netlify="true" netlify-honeypot="company" id="plForm">
         <input type="hidden" name="form-name" value="launch-list">
         <p class="hp"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
@@ -1294,7 +1367,11 @@ main{min-height:calc(100vh - 260px)}
       <p class="eyebrow">Apply</p>
       <h2>Tell me where you are</h2>
       <p class="lede" style="margin-top:12px;max-width:62ch">A few honest answers help me make sure the cohort or private coaching is right for you before you pay anything. If neither fits yet, I’ll point you to something that does.</p>
-      <div class="apply-grid">
+      <div class="ap-tabs" role="tablist" aria-label="Choose an application">
+        <button type="button" role="tab" data-ap="cohort" aria-selected="true">Freedom Steps Cohort <small>$399</small></button>
+        <button type="button" role="tab" data-ap="private" aria-selected="false">Private coaching <small>$1,497</small></button>
+      </div>
+      <div class="apply-grid" id="apGrid" data-show="cohort">
         <form class="apply-form" id="apply-cohort" name="cohort-application" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
           <input type="hidden" name="form-name" value="cohort-application">
           <p class="hp"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
@@ -1677,6 +1754,7 @@ main{min-height:calc(100vh - 260px)}
         </div>
         <p class="ic-fresh" id="icFresh" aria-live="polite"></p>
       </header>
+      <button type="button" class="ic-mini" id="icMini" data-tab="income" aria-label="See your income"></button>
       <div class="ic-layout">
         <aside class="ic-builder card" aria-label="Build your mix">
           <div class="ic-h"><h2>Your mix</h2><span class="ic-count" id="icCount"></span></div>
@@ -1693,6 +1771,7 @@ main{min-height:calc(100vh - 260px)}
           </div>
         </aside>
         <div class="ic-results">
+          <div class="ic-mktbar" id="icMkt" aria-live="polite"></div>
           <div class="ic-top ic-hero">
             <div class="ic-res" id="icRes" aria-live="polite">
               <div class="ic-main">
@@ -1707,6 +1786,11 @@ main{min-height:calc(100vh - 260px)}
           <section class="card ic-proj" id="icProj" aria-live="polite"></section>
         </div>
       </div>
+    <nav class="ic-tabs" id="icTabs" aria-label="Calculator sections">
+      <button type="button" data-tab="mix"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h7" /></svg>Mix</button>
+      <button type="button" data-tab="income"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M17 7.5c0-1.9-2.2-3-5-3s-5 1.1-5 3 2.2 2.8 5 3.5 5 1.6 5 3.5-2.2 3-5 3-5-1.1-5-3" /></svg>Income</button>
+      <button type="button" data-tab="future"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19h18M5 15l4-4 4 3 6-7" /></svg>Future</button>
+    </nav>
     <div class="ic-foot">
       <p><b>How this works.</b> Each fund’s yield is its latest regular payout per unit, times the number of payouts in a year, divided by its latest closing price. Your amount times that yield gives a yearly payout. Each fund is shown on its own schedule: most pay monthly, some twice a month, a few quarterly. When your mix has more than one schedule, the total is shown per month. The two-week paycheque figure is the yearly total spread over 26 paydays, for comparing with a biweekly paycheque.</p>
       <p><b>Withdraw and reinvest.</b> A fund grows by its total return: the change in its unit price plus its payouts. If you withdraw less than that total return, minus about 2.5% for inflation, the balance keeps growing in real terms. By default we use each fund’s longest record (10, 5 or 3 years, or since launch), its 1-year return for newer funds, and 8% when there’s no record yet. Switch the market to see a strong year (+30%, like 2025), an ordinary one (+12%) or a bear year (−25%). Past returns don’t promise future ones, so check again each year.</p>
@@ -2240,7 +2324,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   if(typeof FUNDS==='undefined'||!document.getElementById('income'))return;
   var KEY='melius-income-v2',BY={},L={},meta=null,st={sel:{},order:[],per:'bi',total:0,pct:{},mkt:'rec',yrs:10,take:'safe',flt:'all'},INFL=2.5;
   FUNDS.forEach(function(f){BY[f.t]=f});
-  try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.sel&&s.order){st=s;st.order=st.order.filter(function(t){return BY[t]});st.pct=st.pct||{};st.total=+st.total||0;st.mkt=st.mkt||'rec';st.yrs=st.yrs||10;st.take=st.take||'safe';st.flt=st.flt||'all'}}catch(e){}
+  try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.sel&&s.order){st=s;st.order=st.order.filter(function(t){return BY[t]});st.pct=st.pct||{};st.total=+st.total||0;st.mkt=st.mkt||'rec';st.yrs=st.yrs||10;st.take=st.take||'safe';st.flt=st.flt||'all';st.tab=st.tab||''}}catch(e){}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
   var $=function(id){return document.getElementById(id)};
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -2313,8 +2397,9 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     var tiles=tot>0?[['Per month',money(yr/12)],['Per year',money(yr)],['Per 2-week paycheque',money(yr/26)],['Yield',(yr/tot*100).toFixed(2)+'%']]:[['Per month','–'],['Per year','–'],['Per 2-week paycheque','–'],['Yield','–']];
     $('icStats').innerHTML=tiles.map(function(x){return '<div class="ic-stat"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>'}).join('');
     var Mk=MK[st.mkt];
-    var head='<p class="ic-kl">To keep your balance growing</p><div class="ic-seg ic-mk" role="group" aria-label="Market conditions">'+[['rec','Fund records'],['bull','Bull'],['base','Base'],['bear','Bear']].map(function(x){return '<button type="button" data-mk="'+x[0]+'" aria-pressed="'+(st.mkt===x[0])+'">'+x[1]+'</button>'}).join('')+'</div>'+
-      '<p class="ic-mkn">'+(Mk?(Mk[0]>0?'+':'')+Mk[0]+'% for every fund this year: '+Mk[2]+' (price change plus payouts).':'Each fund’s own long-run return: 10, 5 or 3 years, or its 1-year return when that’s all it has.')+'</p>';
+    $('icMkt').innerHTML='<span class="ic-pl">Market</span><div class="ic-pseg" role="group" aria-label="Market conditions">'+[['rec','Fund records'],['bull','Bull'],['base','Base'],['bear','Bear']].map(function(x){return '<button type="button" data-mk="'+x[0]+'" aria-pressed="'+(st.mkt===x[0])+'">'+x[1]+'</button>'}).join('')+'</div>'+
+      '<p class="ic-mkn">'+(Mk?(Mk[0]>0?'+':'')+Mk[0]+'% for every fund'+(st.mkt==='bear'?' this year':' a year')+': '+Mk[2]+' (price change plus payouts). Drives the withdraw amount and the projection.':'Each fund’s own long-run return: 10, 5 or 3 years, or its 1-year return when that’s all it has. Drives the withdraw amount and the projection.')+'</p>';
+    var head='<p class="ic-kl">To keep your balance growing</p>';
     if(tot>0&&yr>0){var rest=Math.max(0,yr-keep),pct=Math.round(rest/yr*100),sp=100-pct;
       $('icKeep').innerHTML=head+'<div class="ic-two"><div class="w"><span>You can withdraw</span><b>'+money(keep/U.dv)+'</b><small>'+U.u+'</small></div><div class="r"><span>Reinvest</span><b>'+money(rest/U.dv)+'</b><small>'+U.u+'</small></div></div>'+
         '<div class="ic-bar" role="img" aria-label="Withdraw '+sp+'%, reinvest '+pct+'% of the payouts"><i class="sp" style="width:'+sp+'%"></i><i class="re" style="width:'+pct+'%"></i></div>'+
@@ -2346,7 +2431,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
       ['Payouts in year '+st.yrs,'<b>'+money(incEnd/12)+'</b><small>a month, from '+money(inc[0]/12)+' in year 1</small>'],
       ['Taken out in total','<b>'+money(taken)+'</b><small>over '+st.yrs+' years</small>']];
     /* chart */
-    var W=Math.max(300,Math.min(960,(el.clientWidth||640)-40)),H=W<500?200:230,x0=52,x1=W-12,y0=16,y1=H-30,top0=Math.max.apply(null,bal),stp=function(v){var e=Math.pow(10,Math.floor(Math.log10(v))),f=v/e;return (f<=1?1:f<=2?2:f<=2.5?2.5:f<=5?5:10)*e}(top0/3),mx=Math.ceil(top0*1.04/stp)*stp,X=function(i){return x0+(x1-x0)*i/st.yrs},Y=function(v){return y1-(y1-y0)*v/mx};
+    var wide=matchMedia('(min-width:1300px)').matches,W=Math.max(300,Math.min(960,wide?Math.round((el.clientWidth||900)*.6):(el.clientWidth||640)-40)),H=W<500?200:230,x0=52,x1=W-12,y0=16,y1=H-30,top0=Math.max.apply(null,bal),stp=function(v){var e=Math.pow(10,Math.floor(Math.log10(v))),f=v/e;return (f<=1?1:f<=2?2:f<=2.5?2.5:f<=5?5:10)*e}(top0/3),mx=Math.ceil(top0*1.04/stp)*stp,X=function(i){return x0+(x1-x0)*i/st.yrs},Y=function(v){return y1-(y1-y0)*v/mx};
     var pts=bal.map(function(v,i){return X(i).toFixed(1)+','+Y(v).toFixed(1)}).join(' ');
     var tv=[];for(var q=0;q<=mx+1;q+=stp)tv.push(q);var ticks=tv.map(function(v){return '<line x1="'+x0+'" x2="'+x1+'" y1="'+Y(v)+'" y2="'+Y(v)+'" class="g"/><text x="'+(x0-8)+'" y="'+(Y(v)+4)+'" text-anchor="end">'+(v>=1e6?'$'+(+(v/1e6).toFixed(2))+'M':v===0?'$0':'$'+Math.round(v/1000)+'k')+'</text>'}).join('');
     var xl=bal.map(function(v,i){var ev=st.yrs>10?5:(W<500?2:1);return (i%ev===0||i===st.yrs)?'<text x="'+X(i)+'" y="'+(H-10)+'" text-anchor="'+(i===st.yrs?'end':i===0?'start':'middle')+'">'+(i===0?'Now':'Yr '+i)+'</text>':''}).join('');
@@ -2354,10 +2439,14 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
       '<line x1="'+x0+'" x2="'+x1+'" y1="'+Y(tot)+'" y2="'+Y(tot)+'" class="start"/><text x="'+x1+'" y="'+(Y(tot)-6)+'" text-anchor="end" class="sl">Today '+money(tot)+'</text>'+
       '<polygon points="'+X(0)+','+y1+' '+pts+' '+X(st.yrs)+','+y1+'" class="area"/><polyline points="'+pts+'" class="ln"/>'+
       '<circle cx="'+X(st.yrs)+'" cy="'+Y(end)+'" r="4" class="dot"/>'+xl+'</svg>';
-    el.innerHTML=head+'<div class="ic-ptiles">'+tiles.map(function(t){return '<div class="ic-pt"><span>'+t[0]+'</span>'+t[1]+'</div>'}).join('')+'</div>'+svg+
-      '<p class="ic-pn">Assumes '+mkLabel+', with each fund paying its current yield on its balance every year'+(st.take==='safe'?' and the safe amount taken out (its return minus '+INFL+'% for inflation, never more than it pays)':st.take==='all'?' and every payout taken out':' and every payout reinvested')+'. Change the market in the panel above to compare. Before tax and fees on your side. Payouts and returns change, and past returns don’t promise future ones.</p>';
+    el.innerHTML=head+'<div class="ic-pbody"><div class="ic-ptiles">'+tiles.map(function(t){return '<div class="ic-pt"><span>'+t[0]+'</span>'+t[1]+'</div>'}).join('')+'</div>'+svg+'</div>'+
+      '<p class="ic-pn">Assumes '+mkLabel+', with each fund paying its current yield on its balance every year'+(st.take==='safe'?' and the safe amount taken out (its return minus '+INFL+'% for inflation, never more than it pays)':st.take==='all'?' and every payout taken out':' and every payout reinvested')+'. Change the market at the top to compare. Before tax and fees on your side. Payouts and returns change, and past returns don’t promise future ones.</p>';
   }
-  var calc0=calc;calc=function(){calc0();proj()};
+  function mini(){var el=$('icMini');if(!el)return;var big=$('icBig'),w=document.querySelector('#icKeep .ic-two .w b');
+    var inc=big&&big.firstChild?big.firstChild.textContent:'$0',u=big&&big.querySelector('small')?big.querySelector('small').textContent:'a month';
+    el.innerHTML=st.order.length?'<span>Income <b>'+esc(inc)+'</b> '+esc(u)+'</span><span class="g">Safe to withdraw <b>'+esc(w?w.textContent:'$0')+'</b></span>':'<span>Add funds below to see your income</span>'}
+  function tab(t){var pg=$('income');if(!pg)return;st.tab=t;pg.setAttribute('data-tab',t);document.querySelectorAll('#icTabs [data-tab]').forEach(function(b){if(b.dataset.tab===t)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')})}
+  var calc0=calc;calc=function(){calc0();proj();mini()};
   function fresh(){var el=$('icFresh');
     if(meta&&!meta.seed&&meta.asOf){var n=(meta.failed||[]).length;
       el.innerHTML='<span class="ic-dot live" aria-hidden="true"></span><span>Prices and payouts from '+esc(meta.source||'market data')+', updated every weekday evening. Last update: '+fdate(meta.asOf.slice(0,10))+'.'+(n?' '+n+(n>1?' funds use their':' fund uses its')+' last good numbers.':'')+'</span>';}
@@ -2365,9 +2454,13 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   }
   function all(){list();mix();calc();fresh()}
   $('icQ').addEventListener('input',list);
+  document.querySelectorAll('#icTabs [data-tab],#icMini').forEach(function(b){b.addEventListener('click',function(){tab(b.dataset.tab);save();var pg=$('income');if(pg)window.scrollTo({top:Math.max(0,pg.getBoundingClientRect().top+window.scrollY-130),behavior:'smooth'});try{gtag('event','income_tab',{tab:b.dataset.tab})}catch(x){}})});
+  tab(st.tab||(st.order.length?'income':'mix'));
+  function hdr(){var h=document.querySelector('header.top'),pg=$('income');if(h&&pg)pg.style.setProperty('--ic-hdr',h.offsetHeight+'px')}
+  hdr();addEventListener('resize',hdr);addEventListener('hashchange',function(){setTimeout(hdr,50)});
   $('icFlt').addEventListener('click',function(e){var b=e.target.closest('[data-flt]');if(!b)return;st.flt=b.dataset.flt;save();list()});
   $('icProj').addEventListener('click',function(e){var b=e.target.closest('[data-yrs],[data-take]');if(!b)return;if(b.dataset.yrs)st.yrs=+b.dataset.yrs;if(b.dataset.take)st.take=b.dataset.take;save();proj();try{gtag('event','income_projection',{years:st.yrs,take:st.take})}catch(x){}});
-  $('icKeep').addEventListener('click',function(e){var b=e.target.closest('[data-mk]');if(!b)return;st.mkt=b.dataset.mk;save();st.order.forEach(rowUpdate);calc();try{gtag('event','income_market',{market:st.mkt})}catch(x){}});
+  $('icMkt').addEventListener('click',function(e){var b=e.target.closest('[data-mk]');if(!b)return;st.mkt=b.dataset.mk;save();st.order.forEach(rowUpdate);calc();try{gtag('event','income_market',{market:st.mkt})}catch(x){}});
   $('icList').addEventListener('click',function(e){var b=e.target.closest('[data-ic]');if(!b)return;var t=b.dataset.ic;
     if(st.sel[t]!=null){delete st.sel[t];delete st.pct[t];st.order=st.order.filter(function(x){return x!==t})}else{st.sel[t]=0;st.order.push(t);try{gtag('event','income_add_fund',{fund:t})}catch(x){}}
     save();list();mix();calc();if(st.sel[t]!=null){var inp=document.querySelector('[data-amt="'+t+'"]');if(inp&&matchMedia('(min-width:1101px)').matches)inp.focus()}});
@@ -2409,6 +2502,40 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
       .then(function(r){if(!r.ok)throw 0;var n=nm.value.trim().split(' ')[0];f.reset();say('Thank you, '+n+'. Your application is in, and you’ll hear from me within two business days.','ok');try{gtag('event','apply_'+(f.id==='apply-private'?'private':'cohort'))}catch(x){}})
       .catch(function(){say('That didn’t go through. Please try again, or email obi@meliusoneconsulting.com.','err')})
       .finally(function(){b.disabled=false})})})})();
+</script>
+<script>
+/* site-wide: header height, in-page section nav, coaching application tabs */
+(function(){
+  var root=document.documentElement;
+  function hdr(){var h=document.querySelector('header.top');if(h)root.style.setProperty('--hdr',h.offsetHeight+'px')}
+  hdr();addEventListener('resize',hdr);addEventListener('load',hdr);
+  var SUB={about:[['coach','Your coach'],['story','My story'],['faith','Faith'],['portfolio','How I invest']],
+    coaching:[['how','Pricing'],['apply','Apply'],['circle','Melius Circle'],['curriculum','Curriculum'],['faq','Questions']],
+    learn:[['steps','Freedom Steps'],['modules','Modules'],['strategies','Strategies'],['paydays','Paydays'],['tax','Tax'],['articles','Articles']]};
+  Object.keys(SUB).forEach(function(pid){var pg=document.getElementById(pid);if(!pg)return;
+    var items=SUB[pid].filter(function(x){return document.getElementById(x[0])});if(items.length<2)return;
+    pg.classList.add('has-sub');
+    var nav=document.createElement('nav');nav.className='subnav';nav.setAttribute('aria-label','On this page');
+    nav.innerHTML='<div class="wrap subnav-in"><span>On this page</span>'+items.map(function(x){return '<a href="#'+x[0]+'" data-sub="'+x[0]+'">'+x[1]+'</a>'}).join('')+'</div>';
+    pg.insertBefore(nav,pg.firstChild);
+    nav.addEventListener('click',function(e){var a=e.target.closest('a[data-sub]');if(!a)return;e.preventDefault();var t=document.getElementById(a.dataset.sub);if(t){t.scrollIntoView({behavior:'smooth',block:'start'});try{history.replaceState(null,'','#'+a.dataset.sub)}catch(x){}}});
+  });
+  function spy(){var pg=document.querySelector('.page.on.has-sub');if(!pg)return;var nav=pg.querySelector('.subnav');var line=(parseFloat(getComputedStyle(root).getPropertyValue('--hdr'))||180)+90;var cur=null;
+    nav.querySelectorAll('a[data-sub]').forEach(function(a){var t=document.getElementById(a.dataset.sub);if(t&&t.getBoundingClientRect().top<=line)cur=a});
+    if(!cur)cur=nav.querySelector('a[data-sub]');
+    nav.querySelectorAll('a[data-sub]').forEach(function(a){a.setAttribute('aria-current',a===cur?'true':'false')});
+    if(cur&&cur.scrollIntoView&&nav.dataset.cur!==cur.dataset.sub){nav.dataset.cur=cur.dataset.sub;var box=nav.querySelector('.subnav-in');box.scrollTo({left:cur.offsetLeft-box.clientWidth/2+cur.clientWidth/2,behavior:'smooth'})}}
+  addEventListener('scroll',spy,{passive:true});addEventListener('hashchange',function(){setTimeout(spy,120)});setTimeout(spy,300);
+  /* coaching application tabs */
+  var g=document.getElementById('apGrid');
+  function ap(k){if(!g)return;g.setAttribute('data-show',k);document.querySelectorAll('[data-ap]').forEach(function(b){b.setAttribute('aria-selected',b.dataset.ap===k?'true':'false')})}
+  document.querySelectorAll('[data-ap]').forEach(function(b){b.addEventListener('click',function(){ap(b.dataset.ap)})});
+  document.addEventListener('click',function(e){var a=e.target.closest('a[href="#apply-cohort"],a[href="#apply-private"]');if(a)ap(a.getAttribute('href')==='#apply-private'?'private':'cohort')},true);
+  if(/^#apply-private/.test(location.hash))ap('private');
+})();
+</script>
+<script>
+(function(){document.querySelectorAll('.lv-mods,.strats,.fsteps,.wgrid').forEach(function(g){var n=g.children.length;if(n<2)return;var h=document.createElement('p');h.className='swipe-hint';h.textContent='Swipe to see all '+n+' →';g.parentNode.insertBefore(h,g)})})();
 </script>
 </body>
 </html>
