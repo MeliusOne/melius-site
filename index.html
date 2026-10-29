@@ -2126,7 +2126,7 @@ var FUNDS=[
   function yv(f){return f.y==null?'–':(f.e?'~':'')+pct(f.y)}
   function fee(f){return f.m!=null?pct(f.m,2):(f.mf!=null?pct(f.mf,2)+' fee':'–')}
   function feeLong(f){return f.m!=null?pct(f.m,2)+' MER':(f.mf!=null?pct(f.mf,2)+' management fee (MER not yet published)':'See ETF Facts')}
-  function aum(v,f){var c=f&&f.cur==='USD'?'US$':'$';return v==null?'–':v>=1000?c+(v/1000).toFixed(v>=10000?0:1)+'B':c+Math.round(v)+'M'}
+  function aum(v,f){var c=f&&f.lst==='US'?'US$':'$';return v==null?'–':v>=1000?c+(v/1000).toFixed(v>=10000?0:1)+'B':c+Math.round(v)+'M'}
   function priceEst(f){var r=f.r||{};if(r.y1==null||f.y==null)return null;return ((1+r.y1/100)/(1+f.y/100)-1)*100}
   function tmx(t){return 'https://money.tmx.com/en/quote/'+t}
   function uniq(k){var o={};FUNDS.forEach(function(f){o[f[k]]=1});return Object.keys(o).sort()}
@@ -2148,7 +2148,8 @@ var FUNDS=[
     var s=document.createElement('script');s.src='https://s3.tradingview.com/external-embedding/'+file;s.async=true;s.text=JSON.stringify(cfg);c.appendChild(s);
     host.appendChild(c);
   }
-  function chartCfg(syms){return {symbols:syms.map(function(t){return [t,'TSX:'+t+'|12M']}),chartOnly:false,width:'100%',height:'100%',autosize:true,locale:'en',colorTheme:dark()?'dark':'light',isTransparent:true,showVolume:false,hideDateRanges:false,scalePosition:'right',scaleMode:'Normal',chartType:'area',lineWidth:2,lineColor:'#C9A35E',topColor:'rgba(201,163,94,0.28)',bottomColor:'rgba(201,163,94,0)',fontFamily:'Inter, system-ui, sans-serif',dateRanges:['1m|30','3m|60','12m|1D','60m|1W','all|1M']}}
+  function tvSym(t){var f=FUNDS.filter(function(x){return x.t===t})[0];return f&&f.lst==='US'?t:'TSX:'+t}
+  function chartCfg(syms){return {symbols:syms.map(function(t){return [t,tvSym(t)+'|12M']}),chartOnly:false,width:'100%',height:'100%',autosize:true,locale:'en',colorTheme:dark()?'dark':'light',isTransparent:true,showVolume:false,hideDateRanges:false,scalePosition:'right',scaleMode:'Normal',chartType:'area',lineWidth:2,lineColor:'#C9A35E',topColor:'rgba(201,163,94,0.28)',bottomColor:'rgba(201,163,94,0)',fontFamily:'Inter, system-ui, sans-serif',dateRanges:['1m|30','3m|60','12m|1D','60m|1W','all|1M']}}
   (function(){var tape=$('fdTape');if(!tape)return;var pick=['ZWB','HMAX','ZWC','ZWU','HHIS','HDIV','UMAX','HYLD','CDAY','QDAY','XEQT','VFV'];
     widget(tape,'embed-widget-ticker-tape.js',{symbols:pick.map(function(t){return {proName:'TSX:'+t,title:t}}),showSymbolLogo:false,isTransparent:true,displayMode:'adaptive',colorTheme:dark()?'dark':'light',locale:'en'},'Live prices load here.');})();
   var hdr='<div class="fd-hdr" aria-hidden="true"><span></span><span>Fund</span><span>Provider</span><span>Holds</span><span>Strategy</span><span class="r">Yield</span><span class="r">1-yr total return</span><span class="r">Size</span><span></span></div>';
@@ -2156,7 +2157,7 @@ var FUNDS=[
   function retCls(v){return v==null?'':v<0?' neg':''}
   function row(f){
     var prov=FD_PROV[f.p]?FD_PROV[f.p].name:f.p,r=f.r||{};
-    var stratPill='<span class="fd-pill'+(f.s.indexOf('growth')>=0?' growth':'')+'">'+esc(f.s.replace(' (growth)',''))+'</span>'+(f.lst==='US'?'<span class="fd-pill" title="Listed in the U.S. and priced in U.S. dollars">U.S.-listed</span>':'')+(f.uu?'<span class="fd-pill" title="Also trades in U.S. dollars as '+f.t+'.U">Also '+f.t+'.U</span>':'')+(f.lev?'<span class="fd-pill lev" title="Borrows to invest more than it holds">Leverage</span>':'');
+    var stratPill='<span class="fd-pill'+(f.s.indexOf('growth')>=0?' growth':'')+'">'+esc(f.s.replace(' (growth)',''))+'</span>'+(f.lst==='US'?'<span class="fd-pill" title="Listed in the U.S. and priced in U.S. dollars">U.S.-listed</span>':'')+(f.uu?'<span class="fd-pill" title="Also trades in U.S. dollars as '+f.t+'.U">Also '+f.t+'.U</span>':'')+(f.base?'<span class="fd-pill" title="The same fund as '+f.base+', priced and paid in U.S. dollars">US$ units</span>':'')+(f.lev?'<span class="fd-pill lev" title="Borrows to invest more than it holds">Leverage</span>':'');
     return '<div class="fd-row" role="listitem" data-t="'+f.t+'">'+
       '<div class="fd-sum">'+
         '<input type="checkbox" class="fd-chk" aria-label="Add '+f.t+' to compare"'+(sel[f.t]?' checked':'')+'>'+
@@ -2226,7 +2227,7 @@ var FUNDS=[
       '</dl>'+
       retTable(f)+
       calcHtml(f)+
-      '<p class="fd-about">'+esc(STRAT_INFO[f.s]||'')+(f.lev?' Leverage means the fund borrows to invest a little more than it holds, which raises the payout and the risk.':'')+(f.note?' '+esc(f.note):'')+(f.uu?' Also trades in U.S. dollars as '+f.t+'.U: the same fund, priced and paid in U.S. dollars.':'')+(f.lst==='US'?' Listed in the U.S. and priced in U.S. dollars. In a TFSA, the U.S. keeps 15% of every payout. In an RRSP it doesn’t. In a non-registered account the 15% is withheld, and you can usually claim it back as a foreign tax credit.':'')+'</p>'+
+      '<p class="fd-about">'+esc(STRAT_INFO[f.s]||'')+(f.lev?' Leverage means the fund borrows to invest a little more than it holds, which raises the payout and the risk.':'')+(f.note?' '+esc(f.note):'')+(f.uu?' Also trades in U.S. dollars as '+f.t+'.U: the same fund, priced and paid in U.S. dollars.':'')+(f.base?' These are the U.S.-dollar units of '+f.base+': the same fund and holdings, priced and paid in U.S. dollars. Its returns are in U.S. dollars, so they include changes in the exchange rate. Size is for the whole fund, in Canadian dollars.':'')+(f.lst==='US'?' Listed in the U.S. and priced in U.S. dollars. In a TFSA, the U.S. keeps 15% of every payout. In an RRSP it doesn’t. In a non-registered account the 15% is withheld, and you can usually claim it back as a foreign tax credit.':'')+'</p>'+
       '<p class="fd-links"><a href="'+tmx(f.t)+'" target="_blank" rel="noopener">Live quote, payouts and dates (TMX Money) ↗</a><a href="'+(f.u||prov.url)+'" target="_blank" rel="noopener">'+(f.u?'Fund page':esc(prov.name))+' ↗</a></p>'+
       '</div>'+
       '<div class="fd-chart" data-chart="'+f.t+'"></div>'+
@@ -2296,7 +2297,12 @@ var FUNDS=[
   /* nightly yields: replace each fund's yield with its latest payout annualized over the latest close */
   if(window.MELIUS_LIVE)window.MELIUS_LIVE.then(function(d){if(!d||d.seed||!d.funds||!d.asOf)return;var n=0;
     function fd(s){var x=new Date(s+'T12:00:00');return isNaN(x)?s:x.toLocaleDateString('en-CA',{month:'short',day:'numeric',year:'numeric'})}
-    FUNDS.forEach(function(f){var l=d.funds[f.t];if(l&&l.u)f.uu=1;if(l&&f.rl&&l.r){f.r=l.r;f.ra=fd(l.r.asof)+', from closing prices with payouts reinvested';if(!f.inc&&l.r.start)f.inc=l.r.start.slice(0,4)}if(l&&l.p&&l.y>0&&l.pd){f.y=+l.y;f.ya=fd(l.pd)+' close, latest payout annualized'+(l.stale?' (last good update)':'');f.e=false;f.live=1;n++}});
+    /* a row for each U.S.-dollar unit (HYLD.U), right after its fund */
+    FUNDS.slice().forEach(function(f){var l=d.funds[f.t];if(!l||!l.u||f.base||FUNDS.some(function(x){return x.t===f.t+'.U'}))return;var u=l.u,c=Object.assign({},f,{t:f.t+'.U',base:f.t,n:f.n+' (U.S.-dollar units)',uu:0,live:0,e:false});
+      if(u.y>0){c.y=+u.y;c.ya=fd(u.pd)+' close, latest payout annualized'}
+      if(u.r){c.r=u.r;c.rl=0;c.ra=fd(u.r.asof)+', in U.S. dollars, from closing prices with payouts reinvested'}else{c.r={};c.ra='not available yet'}
+      FUNDS.splice(FUNDS.indexOf(f)+1,0,c)});
+    FUNDS.forEach(function(f){var l=d.funds[f.t];if(f.base)return;if(l&&l.u)f.uu=1;if(l&&f.rl&&l.r){f.r=l.r;f.ra=fd(l.r.asof)+', from closing prices with payouts reinvested';if(!f.inc&&l.r.start)f.inc=l.r.start.slice(0,4)}if(l&&l.p&&l.y>0&&l.pd){f.y=+l.y;f.ya=fd(l.pd)+' close, latest payout annualized'+(l.stale?' (last good update)':'');f.e=false;f.live=1;n++}});
     if(!n)return;stats();render();
     var el=$('fdLive');if(el){el.innerHTML='<span class="ic-dot live" aria-hidden="true"></span><span>Yields updated every weekday evening from the latest payouts and closing prices · last update '+fd(d.asOf.slice(0,10))+' · '+n+' of '+FUNDS.length+' funds</span>';el.hidden=false}
   });
@@ -2374,7 +2380,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   function isUSD(t){return usL(t)||!!(BY[t]&&BY[t].base)}
   /* HYLD.U: the same fund as HYLD, held in U.S. dollars, as its own line in the mix */
   function mkU(b){var k=b+'.U';if(!BY[b])return;if(!BY[k])BY[k]=Object.assign({},BY[b],{t:k,base:b,n:BY[b].n+', U.S.-dollar units'});
-    if(L[b]&&L[b].u&&L[b].p){L[k]=Object.assign({},L[b],{p:+L[b].u.p,pd:L[b].u.pd,d:L[b].d*L[b].u.p/L[b].p,u:null})}}
+    if(L[b]&&L[b].u&&L[b].p){var u=L[b].u;L[k]=u.y>0&&u.d?Object.assign({},u,{u:null}):Object.assign({},L[b],{p:+u.p,pd:u.pd,d:L[b].d*u.p/L[b].p,u:null});if(u.r)BY[k].r=u.r}}
   function wh(t){return usL(t)&&st.acct!=='rrsp'?0.85:1}
   function cm(v,t,c){return isUSD(t)?'US'+money(v/fx(),c):money(v,c)}
   function info(t){var f=BY[t],l=L[t],o;
@@ -2391,9 +2397,9 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   function fltOk(f){var k=st.flt;if(k==='m')return f.f==='Monthly';if(k==='tm')return f.f==='Twice a month';if(k==='ca')return f.lst!=='US'&&/Canad|Banks/.test(f.x||'');if(k==='us')return /U\.S\./.test(f.x||'');if(k==='tech')return f.x==='Technology';if(k==='nolev')return !f.lev;if(k==='uslist')return f.lst==='US';if(k==='usd')return hasU(f.t);if(k==='mine')return st.sel[f.t]!=null||st.sel[f.t+'.U']!=null;return true}
   function list(){var q=($('icQ').value||'').trim().toLowerCase().replace(/[.\-\s]u$/,'');
     $('icFlt').innerHTML=FLT.map(function(x){return '<button type="button" data-flt="'+x[0]+'" aria-pressed="'+(st.flt===x[0])+'">'+x[1]+'</button>'}).join('');
-    var rows=FUNDS.filter(function(f){return fltOk(f)&&(!q||(f.t+' '+f.n+' '+provName(f)+' '+(f.x||'')).toLowerCase().indexOf(q)>=0)});
+    var rows=FUNDS.filter(function(f){return !f.base&&fltOk(f)&&(!q||(f.t+' '+f.n+' '+provName(f)+' '+(f.x||'')).toLowerCase().indexOf(q)>=0)});
     $('icList').innerHTML=rows.length?rows.map(function(f){var on=st.sel[f.t]!=null,i=info(f.t);
-      return '<button type="button" class="ic-opt" data-ic="'+f.t+'" aria-pressed="'+on+'"><span class="ic-box" aria-hidden="true">'+(on?'✓':'')+'</span><span><b>'+f.t+'</b>'+(f.lst==='US'?'<span class="ic-lev ic-us">U.S.</span>':'')+(f.lev?'<span class="ic-lev">Leverage</span>':'')+'<small>'+esc(f.n)+'</small></span><span class="ic-y">'+i.yg.toFixed(2)+'%<small>'+(FREQ[i.n]||'')+'</small></span></button>'+(hasU(f.t)?(function(){var k=f.t+'.U',uo=st.sel[k]!=null;return '<button type="button" class="ic-opt ic-optu" data-ic="'+k+'" aria-pressed="'+uo+'"><span class="ic-box" aria-hidden="true">'+(uo?'✓':'')+'</span><span><b>'+k+'</b><span class="ic-lev ic-us">US$</span><small>'+esc(f.t)+' in U.S. dollars, same fund</small></span><span class="ic-y">'+i.yg.toFixed(2)+'%<small>'+(FREQ[i.n]||'')+'</small></span></button>'})():'')}).join(''):'<p class="ic-empty" style="padding:14px 4px">No funds match.</p>';
+      return '<button type="button" class="ic-opt" data-ic="'+f.t+'" aria-pressed="'+on+'"><span class="ic-box" aria-hidden="true">'+(on?'✓':'')+'</span><span><b>'+f.t+'</b>'+(f.lst==='US'?'<span class="ic-lev ic-us">U.S.</span>':'')+(f.lev?'<span class="ic-lev">Leverage</span>':'')+'<small>'+esc(f.n)+'</small></span><span class="ic-y">'+i.yg.toFixed(2)+'%<small>'+(FREQ[i.n]||'')+'</small></span></button>'+(hasU(f.t)?(function(){var k=f.t+'.U',uo=st.sel[k]!=null;mkU(f.t);var i=info(k);return '<button type="button" class="ic-opt ic-optu" data-ic="'+k+'" aria-pressed="'+uo+'"><span class="ic-box" aria-hidden="true">'+(uo?'✓':'')+'</span><span><b>'+k+'</b><span class="ic-lev ic-us">US$</span><small>'+esc(f.t)+' in U.S. dollars, same fund</small></span><span class="ic-y">'+i.yg.toFixed(2)+'%<small>'+(FREQ[i.n]||'')+'</small></span></button>'})():'')}).join(''):'<p class="ic-empty" style="padding:14px 4px">No funds match.</p>';
   }
   var FQ={52:'a week',26:'every two weeks',24:'twice a month',12:'a month',4:'a quarter',2:'twice a year',1:'a year'};
   function rowHtml(t){var f=BY[t],i=info(t),a=+st.sel[t]||0,y=a*i.y/100,Lr=longRun(f),Mk=MK[st.mkt],k=keepYr(a,rate(t)[0],y),n=i.n||12,det='';
