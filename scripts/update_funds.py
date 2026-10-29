@@ -143,10 +143,18 @@ for row in TICKERS:
                 got["r"] = prev[t]["r"]
         # Canadian funds: is there a U.S.-dollar unit (like HYLD.U)?
         if row.get("lst") != "US":
-            try:
-                u = last_price(t.replace(".", "-") + "-U.TO")
-            except Exception:
-                u = None
+            u = None
+            base = t.replace(".", "-") + "-U"
+            # try the exchange the fund itself trades on first (TSX .TO or Cboe Canada .NE)
+            exs = [".NE", ".TO"] if got["sym"].endswith(".NE") else [".TO", ".NE"]
+            for ex in exs:
+                try:
+                    u = last_price(base + ex)
+                except Exception:
+                    u = None
+                if u:
+                    break
+                time.sleep(0.4)
             if u:
                 got["u"] = u
             elif t in prev and prev[t].get("u"):
