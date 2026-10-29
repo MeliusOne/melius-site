@@ -156,6 +156,20 @@ for row in TICKERS:
                     break
                 time.sleep(0.4)
             if u:
+                # the .U units' own payouts and returns (in U.S. dollars), when Yahoo has them
+                try:
+                    up, upd, udiv = fetch(u["sym"])
+                    full = summarize(t + ".U", up, upd, udiv, row.get("f", "Monthly"))
+                    full["sym"] = u["sym"]
+                    try:
+                        ur = returns(u["sym"])
+                        if ur:
+                            full["r"] = ur
+                    except Exception:
+                        pass
+                    u = full
+                except Exception:
+                    pass
                 got["u"] = u
             elif t in prev and prev[t].get("u"):
                 got["u"] = prev[t]["u"]
