@@ -909,6 +909,7 @@ main{min-height:calc(100vh - 260px)}
 .plan-price b{font-size:40px;line-height:1;color:var(--accent);font-weight:800;letter-spacing:-.01em}
 .plan-price span{font-size:14px;color:var(--muted)}
 .plan-price.small b{font-size:30px}
+.plan-save{margin:-6px 0 0;font-size:14px;color:var(--ink)}.plan-save b{color:#2E7D5B}
 .plan-meta{margin:0;font-family:var(--mono);font-size:13px;color:var(--amber)}
 .plan .ticks{margin:4px 0;flex:1}
 .plan-best{margin:0;font-size:14px;color:var(--muted)}
@@ -918,6 +919,54 @@ main{min-height:calc(100vh - 260px)}
 .plan-after>div{display:flex;flex-direction:column;gap:6px;max-width:62ch;min-width:0}
 .plan-after h3{margin:0}.plan-after p{margin:0}
 @media (max-width:820px){.plans{grid-template-columns:1fr}.plan{padding:24px}.plan-price b{font-size:34px}}
+
+/* applications */
+.apply-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:28px;align-items:start}
+.apply-form{display:flex;flex-direction:column;gap:18px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px;min-width:0;scroll-margin-top:150px}
+.apply-form#apply-private{border:2px solid var(--amber)}
+.ap-head{display:flex;flex-direction:column;gap:6px}.ap-head .tag{align-self:flex-start}.ap-head h3{margin:0;font-size:22px}.ap-head p{margin:0;color:var(--muted);font-size:15px}
+.ap-two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.aq{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+.aq legend{font-weight:600;font-size:15px;padding:0;margin-bottom:8px}
+.aq-h{margin:-4px 0 2px;font-size:13.5px;color:var(--muted)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{position:relative;display:inline-flex;font-weight:500;font-size:14px;cursor:pointer}
+.opt input{position:absolute;opacity:0;width:1px;height:1px}
+.opt span{display:inline-block;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--ink);transition:background .15s,border-color .15s}
+.opt input:checked+span{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.opt input:focus-visible+span{outline:2px solid var(--amber);outline-offset:2px}
+.opt-l{font-weight:400;color:var(--muted)}
+.ap-note{margin:0;font-size:14px;color:var(--muted);padding:12px 14px;background:var(--band);border-radius:10px}
+@media (max-width:900px){.apply-grid{grid-template-columns:1fr}}
+@media (max-width:520px){.apply-form{padding:20px}.ap-two{grid-template-columns:1fr}}
+
+/* projection */
+.ic-proj{margin-top:24px;display:flex;flex-direction:column;gap:18px;padding:28px;min-width:0}
+.ic-ph{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap}
+.ic-ph .eyebrow{margin:0 0 6px}.ic-ph h2{margin:0;font-size:26px}
+.ic-pctl{display:flex;gap:18px;flex-wrap:wrap}
+.ic-pctl>div{display:flex;flex-direction:column;gap:6px}
+.ic-pl{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ic-pseg{display:inline-flex;flex-wrap:wrap;background:var(--band);border:1px solid var(--line);border-radius:999px;padding:3px;gap:3px}
+.ic-pseg button{font:inherit;font-size:13.5px;font-weight:600;border:0;border-radius:999px;padding:7px 12px;background:transparent;color:var(--muted);cursor:pointer}
+.ic-pseg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.ic-pseg button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.ic-ptiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.ic-pt{border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:4px;min-width:0;background:var(--surface)}
+.ic-pt span{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ic-pt b{font-size:24px;font-variant-numeric:tabular-nums;color:var(--ink)}
+.ic-pt small{font-size:12.5px;color:var(--muted)}
+.ic-pchart{width:100%;height:auto;max-width:100%}
+.ic-pchart text{font-size:11.5px;fill:var(--muted)}
+.ic-pchart .g{stroke:var(--line)}
+.ic-pchart .start{stroke:var(--amber);stroke-dasharray:4 4}
+.ic-pchart .sl{fill:var(--amber);font-weight:600}
+.ic-pchart .area{fill:var(--accent);fill-opacity:.10}
+.ic-pchart .ln{fill:none;stroke:var(--accent);stroke-width:2.5}
+.ic-pchart .dot{fill:var(--accent)}
+.ic-pn,.ic-pe{margin:0;font-size:13px;color:var(--muted)}
+@media (max-width:860px){.ic-ptiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.ic-proj{padding:20px}.ic-pt b{font-size:20px}}
 </style>
 </head>
 <body>
@@ -1145,12 +1194,13 @@ main{min-height:calc(100vh - 260px)}
     <div class="wrap">
       <p class="eyebrow">Ways to work with me</p>
       <h2>Two ways to learn the Freedom Steps</h2>
-      <p class="lede" style="margin-top:12px;max-width:62ch">Every path starts with a free 30-minute intro call: what passive income is, what it isn’t, and which option fits you. Then learn in a small group, or work with me privately.</p>
+      <p class="lede" style="margin-top:12px;max-width:62ch">Learn in a small group, or work with me privately. Both start with a short application, and private coaching includes a free 30-minute intro call.</p>
       <div class="plans">
         <article class="plan">
           <span class="tag">Small group</span>
           <h3>The Freedom Steps Cohort</h3>
-          <p class="plan-price"><b>$397</b><span>or 2 payments of $199</span></p>
+          <p class="plan-price"><b>$399</b><span>by card, or 3 payments of $133</span></p>
+          <p class="plan-save"><b>$369</b> when you pay in full by e-Transfer. Save $30.</p>
           <p class="plan-meta">8 weeks · up to 12 families per cohort</p>
           <ul class="ticks">
             <li>All eight modules, one a week, as a written lesson with a worksheet</li>
@@ -1160,12 +1210,13 @@ main{min-height:calc(100vh - 260px)}
             <li>Three months of the Melius Circle included</li>
           </ul>
           <p class="plan-best"><b>Best for:</b> learning alongside other families, at your own pace, for less.</p>
-          <a class="btn ghost" href="#guide">Join the next cohort waitlist</a>
+          <a class="btn ghost" href="#apply-cohort">Apply for the next cohort</a>
         </article>
         <article class="plan plan-premium">
           <span class="tag amber">Premium · limited spots</span>
           <h3>Private coaching</h3>
-          <p class="plan-price"><b>$1,497</b><span>or 3 payments of $499</span></p>
+          <p class="plan-price"><b>$1,497</b><span>by card, or 3 payments of $499</span></p>
+          <p class="plan-save"><b>$1,397</b> when you pay in full by e-Transfer. Save $100.</p>
           <p class="plan-meta">Six 60-minute sessions · four new clients a month</p>
           <ul class="ticks">
             <li>Six private sessions built around your own accounts, numbers and goals</li>
@@ -1175,7 +1226,7 @@ main{min-height:calc(100vh - 260px)}
             <li>Twelve months of the Melius Circle included</li>
           </ul>
           <p class="plan-best"><b>Best for:</b> families who want a plan built around their exact situation.</p>
-          <a class="btn" href="#book">Book a free intro session</a>
+          <a class="btn" href="#apply-private">Apply for private coaching</a>
         </article>
       </div>
       <div class="plan-after">
@@ -1183,6 +1234,52 @@ main{min-height:calc(100vh - 260px)}
         <p class="plan-price small"><b>$49</b><span>a month</span></p>
       </div>
       <p class="founding"><span class="tag amber">Satisfaction guarantee</span> If your first private session, or your first cohort week, isn’t useful, tell me within 7 days and I’ll refund the full amount. No forms, no fuss.</p>
+    </div>
+  </section>
+
+  <section id="apply" class="band">
+    <div class="wrap">
+      <p class="eyebrow">Apply</p>
+      <h2>Tell me where you are</h2>
+      <p class="lede" style="margin-top:12px;max-width:62ch">A few honest answers help me make sure the cohort or private coaching is right for you before you pay anything. If neither fits yet, I’ll point you to something that does.</p>
+      <div class="apply-grid">
+        <form class="apply-form" id="apply-cohort" name="cohort-application" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
+          <input type="hidden" name="form-name" value="cohort-application">
+          <p class="hp"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+          <div class="ap-head"><span class="tag">Small group</span><h3>Apply for the next cohort</h3><p>Three minutes. $399 by card or 3 payments of $133, or $369 by e-Transfer.</p></div>
+          <div class="ap-two"><div class="field"><label for="ac-name">First name</label><input id="ac-name" name="name" autocomplete="given-name" required></div>
+          <div class="field"><label for="ac-email">Email</label><input id="ac-email" name="email" type="email" autocomplete="email" required></div></div>
+          <fieldset class="aq"><legend>Your main money goal for the next 12 months</legend><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="goal" value="Get out of debt" required><span>Get out of debt</span></label><label class="opt"><input type="radio" name="goal" value="Build a cushion"><span>Build a cushion</span></label><label class="opt"><input type="radio" name="goal" value="Start investing"><span>Start investing</span></label><label class="opt"><input type="radio" name="goal" value="Build income"><span>Build income</span></label></div></fieldset>
+          <fieldset class="aq"><legend>Do you have debt at 7% interest or more?</legend><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="expensive_debt" value="Yes" required><span>Yes</span></label><label class="opt"><input type="radio" name="expensive_debt" value="No"><span>No</span></label></div></fieldset>
+          <fieldset class="aq"><legend>Do you have at least one month of expenses saved?</legend><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="one_month_saved" value="Yes" required><span>Yes</span></label><label class="opt"><input type="radio" name="one_month_saved" value="No"><span>No</span></label></div></fieldset>
+          <fieldset class="aq"><legend>Can you give 1 to 2 hours a week for 8 weeks?</legend><p class="aq-h">Reading a lesson, doing the worksheet and joining most of the four group calls.</p><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="time" value="Yes" required><span>Yes</span></label><label class="opt"><input type="radio" name="time" value="Not sure"><span>Not sure</span></label><label class="opt"><input type="radio" name="time" value="No"><span>No</span></label></div></fieldset>
+          <fieldset class="aq"><legend>Are you hoping I’ll tell you which funds or stocks to buy?</legend><p class="aq-h">The cohort teaches you how to choose for yourself. It doesn’t give picks.</p><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="wants_picks" value="Yes" required><span>Yes</span></label><label class="opt"><input type="radio" name="wants_picks" value="No"><span>No</span></label></div></fieldset>
+          <fieldset class="aq"><legend>Do you live in Canada?</legend><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="canada" value="Yes" required><span>Yes</span></label><label class="opt"><input type="radio" name="canada" value="No"><span>No</span></label></div></fieldset>
+          <div class="field"><label for="ac-why">What would make this a success for you?</label><textarea id="ac-why" name="success" rows="3"></textarea></div>
+          <p class="ap-note"><b>Before the cohort starts,</b> you’ll set up the free <a href="#tools">Melius Money app</a> with your bills and spending. Your seat is confirmed once that’s done.</p>
+          <div><button class="btn" type="submit">Send my application</button></div>
+          <p class="status" role="status"></p>
+        </form>
+        <form class="apply-form" id="apply-private" name="private-application" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
+          <input type="hidden" name="form-name" value="private-application">
+          <p class="hp"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+          <div class="ap-head"><span class="tag amber">Premium · limited spots</span><h3>Apply for private coaching</h3><p>Four new clients a month. $1,497 by card or 3 payments of $499, or $1,397 by e-Transfer.</p></div>
+          <div class="ap-two"><div class="field"><label for="ap-name">First name</label><input id="ap-name" name="name" autocomplete="given-name" required></div>
+          <div class="field"><label for="ap-email">Email</label><input id="ap-email" name="email" type="email" autocomplete="email" required></div></div>
+          <div class="field"><label for="ap-phone">WhatsApp or phone <span class="opt-l">(optional)</span></label><input id="ap-phone" name="phone" type="tel" autocomplete="tel"></div>
+          <fieldset class="aq"><legend>Your main money goal</legend><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="goal" value="Get out of debt" required><span>Get out of debt</span></label><label class="opt"><input type="radio" name="goal" value="Build a cushion"><span>Build a cushion</span></label><label class="opt"><input type="radio" name="goal" value="Start investing"><span>Start investing</span></label><label class="opt"><input type="radio" name="goal" value="Build income"><span>Build income</span></label><label class="opt"><input type="radio" name="goal" value="Replace a paycheque"><span>Replace a paycheque</span></label></div></fieldset>
+          <fieldset class="aq"><legend>Roughly how much do you have saved or invested today?</legend><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="savings" value="Under $10k" required><span>Under $10k</span></label><label class="opt"><input type="radio" name="savings" value="$10k–$50k"><span>$10k–$50k</span></label><label class="opt"><input type="radio" name="savings" value="$50k–$250k"><span>$50k–$250k</span></label><label class="opt"><input type="radio" name="savings" value="Over $250k"><span>Over $250k</span></label><label class="opt"><input type="radio" name="savings" value="Prefer not to say"><span>Prefer not to say</span></label></div></fieldset>
+          <fieldset class="aq"><legend>Which of these apply to you?</legend><p class="aq-h">Tick any that apply.</p><div class="opts"><label class="opt"><input type="checkbox" name="situation" value="Debt at 7% or more"><span>Debt at 7% or more</span></label><label class="opt"><input type="checkbox" name="situation" value="Self-employed or own a business"><span>Self-employed or own a business</span></label><label class="opt"><input type="checkbox" name="situation" value="Rental property"><span>Rental property</span></label><label class="opt"><input type="checkbox" name="situation" value="New to Canada in the last 5 years"><span>New to Canada in the last 5 years</span></label><label class="opt"><input type="checkbox" name="situation" value="Employer RRSP or pension match"><span>Employer RRSP or pension match</span></label></div></fieldset>
+          <fieldset class="aq"><legend>When would you like to start?</legend><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="start" value="This month" required><span>This month</span></label><label class="opt"><input type="radio" name="start" value="In 1–3 months"><span>In 1–3 months</span></label><label class="opt"><input type="radio" name="start" value="Just exploring"><span>Just exploring</span></label></div></fieldset>
+          <fieldset class="aq"><legend>Are you comfortable sharing your accounts and numbers on screen in sessions?</legend><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="share_accounts" value="Yes" required><span>Yes</span></label><label class="opt"><input type="radio" name="share_accounts" value="Not yet"><span>Not yet</span></label></div></fieldset>
+          <fieldset class="aq"><legend>Are you hoping I’ll tell you which funds or stocks to buy?</legend><p class="aq-h">Coaching teaches you how to decide. The choices stay yours.</p><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="wants_picks" value="Yes" required><span>Yes</span></label><label class="opt"><input type="radio" name="wants_picks" value="No"><span>No</span></label></div></fieldset>
+          <fieldset class="aq"><legend>Do you live in Canada?</legend><div class="opts" role="radiogroup"><label class="opt"><input type="radio" name="canada" value="Yes" required><span>Yes</span></label><label class="opt"><input type="radio" name="canada" value="No"><span>No</span></label></div></fieldset>
+          <div class="field"><label for="ap-why">What would make private coaching worth it for you?</label><textarea id="ap-why" name="worth_it" rows="3"></textarea></div>
+          <p class="ap-note"><b>What happens next:</b> I read every application myself. If it’s a fit, you’ll get a link to book your free 30-minute intro call within two business days.</p>
+          <div><button class="btn" type="submit">Send my application</button></div>
+          <p class="status" role="status"></p>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -1234,8 +1331,9 @@ main{min-height:calc(100vh - 260px)}
         <details class="faq-q"><summary>How long is each session?</summary><p>The free intro session is 30 minutes. Private sessions are about 60 minutes, and the six are usually spaced one to two weeks apart. Cohort group calls are about 60 minutes, every other week for eight weeks.</p></details>
         <details class="faq-q"><summary>Do you teach options?</summary><p>Yes, in Modules 5 to 7: calls and puts, the wheel strategy and LEAPS. We get there only after the foundations are in place.</p></details>
         <details class="faq-q"><summary>What if I need to reschedule or cancel?</summary><p>Reschedule free with 24 hours’ notice. See the full <a href="#policies">cancellation and refund policy</a>.</p></details>
-        <details class="faq-q"><summary>What if coaching isn’t right for me?</summary><p>If your first private session, or your first cohort week, isn’t useful, tell me within 7 days and I’ll refund the full amount. You can also pay in instalments: 3 payments of $499 for private coaching, or 2 payments of $199 for the cohort.</p></details>
-        <details class="faq-q"><summary>Should I choose the cohort or private coaching?</summary><p>Both teach the same eight modules. The cohort is a small group that learns together over eight weeks, for $397. Private coaching is six sessions built around your own accounts and numbers, with messages between sessions, for $1,497. Not sure? The free intro call will help you decide.</p></details>
+        <details class="faq-q"><summary>What if coaching isn’t right for me?</summary><p>If your first private session, or your first cohort week, isn’t useful, tell me within 7 days and I’ll refund the full amount. </p></details>
+        <details class="faq-q"><summary>How can I pay?</summary><p>Pay in full by Interac e-Transfer and save: $1,397 for private coaching, or $369 for the cohort. By card, it’s $1,497 or $399, in one payment or three monthly payments ($499 or $133) through a secure payment-plan service. Card details are handled by the payment service, never stored by me.</p></details>
+        <details class="faq-q"><summary>Should I choose the cohort or private coaching?</summary><p>Both teach the same eight modules. The cohort is a small group that learns together over eight weeks, for $399 ($369 by e-Transfer). Private coaching is six sessions built around your own accounts and numbers, with messages between sessions, for $1,497 ($1,397 by e-Transfer). Not sure? Apply for either one and tell me so in your answers. I’ll suggest the better fit.</p></details>
         <details class="faq-q"><summary>What is the Melius Circle?</summary><p>A private WhatsApp community where members ask questions and I answer them in set Q&amp;A windows each week, with a short market summary deck every week and a monthly look inside my own portfolio. Membership is $29 a month, and it comes included with the cohort and private coaching. Join the waitlist through the free guide form.</p></details>
         <details class="faq-q"><summary>Which brokerage should I use?</summary><p>Any Canadian brokerage works. I use Wealthsimple. To connect with other investors, I also like Blossom, a social investing community. <a href="#accounts">Open an account</a>.</p></details>
       </div>
@@ -1291,7 +1389,7 @@ main{min-height:calc(100vh - 260px)}
       <div class="lv-value">
         <div class="stack">
           <p class="eyebrow">The investment</p>
-          <h3>$397 in a small-group cohort, or $1,497 privately</h3>
+          <h3>$399 in a small-group cohort, or $1,497 privately</h3>
           <p>Get one of these decisions right and coaching can pay for itself in the first year. The rest, understanding how money works and no longer being afraid of it, you keep for life.</p>
         </div>
         <div class="lv-value-cta"><a class="btn" href="#book">Book a free intro session</a><a class="lv-link" href="#coaching">See how coaching works →</a><a class="lv-link" href="#funds">Browse the fund directory →</a></div>
@@ -1551,9 +1649,11 @@ main{min-height:calc(100vh - 260px)}
         <div class="ic-list" id="icList" role="group" aria-label="Funds to add"></div>
       </div>
     </div>
+    <div class="wrap"><section class="card ic-proj" id="icProj" aria-live="polite"></section></div>
     <div class="wrap ic-foot">
       <p><b>How this works.</b> Each fund’s yield is its latest regular payout per unit, times the number of payouts in a year, divided by its latest closing price. Your amount times that yield gives a yearly payout. Each fund is shown on its own schedule: most pay monthly, some twice a month, a few quarterly. When your mix has more than one schedule, the total is shown per month. The two-week paycheque figure is the yearly total spread over 26 paydays, for comparing with a biweekly paycheque.</p>
       <p><b>Withdraw and reinvest.</b> A fund grows by its total return: the change in its unit price plus its payouts. If you withdraw less than that total return, minus about 2.5% for inflation, the balance keeps growing in real terms. By default we use each fund’s longest record (10, 5 or 3 years, or since launch), its 1-year return for newer funds, and 8% when there’s no record yet. Switch the market to see a strong year (+30%, like 2025), an ordinary one (+12%) or a bear year (−25%). Past returns don’t promise future ones, so check again each year.</p>
+      <p><b>Projection.</b> “Where this could go” grows each fund by the return the market setting gives it, pays its current yield on its balance every year, and takes out what you choose: every payout, the safe amount, or nothing. In Bear, the first year falls 25% and later years return 12%. It is a what-if, not a forecast.</p>
       <p><b>Payouts are not guaranteed.</b> Funds change their payouts often, and very high yields usually include some of your own money paid back (return of capital) and can wear down the unit price over time. Funds marked “Leverage” borrow to invest, so they can fall faster. Figures are before tax.</p>
       <p>This calculator is financial education, not investment advice or a recommendation to buy any fund. Compare funds side by side in the <a href="#funds">fund directory</a><span data-pl="hide">, or <a href="#book">book a free intro session</a> to build a plan that fits your family</span>.</p>
     </div>
@@ -1570,6 +1670,7 @@ main{min-height:calc(100vh - 260px)}
     <h3>Cancellation and rescheduling</h3>
     <p>You can reschedule any session for free with at least 24 hours’ notice. A session missed without notice, or cancelled with less than 24 hours’ notice, counts as used, unless it’s an emergency.</p>
     <h3>Refunds</h3>
+    <p><b>Payment plans:</b> card payments and monthly payment plans are processed by a secure third-party payment service, which holds your card details and collects any instalments. Pay-in-full prices apply to Interac e-Transfer.</p>
     <p><b>Satisfaction guarantee:</b> if your first private session, or your first cohort week, isn’t useful, ask within 7 days of it and the full amount is refunded. After that, unused private sessions are refunded in full when you ask within 30 days of purchase. A cohort seat can be moved to the next cohort at no cost before week 3. Monthly check-ins and the Melius Circle can be cancelled at any time and stop at the end of the month already paid.</p>
     <h3>Education only</h3>
     <p>Everything on this site and in sessions is general financial education, not investment, tax or legal advice. Melius One Consulting does not manage money or trade for clients. Investing involves risk, including the loss of money; options and leveraged funds can lose value quickly. Past payouts and returns do not guarantee future results. Some links on this site are referral links, which may earn a bonus for both of us.</p>
@@ -2079,9 +2180,9 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
 /* Income calculator: reads /data/funds-live.json (refreshed nightly), falls back to the FUNDS yields */
 (function(){
   if(typeof FUNDS==='undefined'||!document.getElementById('income'))return;
-  var KEY='melius-income-v2',BY={},L={},meta=null,st={sel:{},order:[],per:'bi',total:0,pct:{},mkt:'rec'},INFL=2.5;
+  var KEY='melius-income-v2',BY={},L={},meta=null,st={sel:{},order:[],per:'bi',total:0,pct:{},mkt:'rec',yrs:10,take:'safe'},INFL=2.5;
   FUNDS.forEach(function(f){BY[f.t]=f});
-  try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.sel&&s.order){st=s;st.order=st.order.filter(function(t){return BY[t]});st.pct=st.pct||{};st.total=+st.total||0;st.mkt=st.mkt||'rec'}}catch(e){}
+  try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.sel&&s.order){st=s;st.order=st.order.filter(function(t){return BY[t]});st.pct=st.pct||{};st.total=+st.total||0;st.mkt=st.mkt||'rec';st.yrs=st.yrs||10;st.take=st.take||'safe'}}catch(e){}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
   var $=function(id){return document.getElementById(id)};
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -2158,6 +2259,41 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
         '<p class="ic-kn">'+(Mk?'Based on a '+(Mk[0]>0?'+':'')+Mk[0]+'% return for every fund, minus '+INFL+'% for inflation. Switch to Fund records to use each fund’s own history.':'Based on each fund’s long-run total return (price plus payouts), minus '+INFL+'% for inflation. If every fund returned a steady 8% a year, you could withdraw '+money(keep8/U.dv)+' '+U.u+'.')+'</p>';
     }else $('icKeep').innerHTML=head+'<div class="ic-two"><div class="w"><span>You can withdraw</span><b>$0</b><small>a month</small></div><div class="r"><span>Reinvest</span><b>$0</b><small>a month</small></div></div><p>Add funds and amounts below, and this splits each payout into what you can spend and what to put back so your balance keeps growing.</p>';
   }
+  /* projection: grows each fund by its return (the market toggle), pays its yield on the balance, takes out what the viewer picks */
+  function proj(){var el=$('icProj');if(!el)return;
+    var fs=st.order.map(function(t){return {t:t,a:+st.sel[t]||0,y:info(t).y/100,lr:longRun(BY[t])[0]}}).filter(function(f){return f.a>0});
+    var tot=fs.reduce(function(s,f){return s+f.a},0);
+    var segs=function(id,opts,cur){return '<div class="ic-pseg" role="group" aria-label="'+id+'">'+opts.map(function(o){return '<button type="button" data-'+id+'="'+o[0]+'" aria-pressed="'+(String(cur)===String(o[0]))+'">'+o[1]+'</button>'}).join('')+'</div>'};
+    var head='<div class="ic-ph"><div><p class="eyebrow">Where this could go</p><h2>Your mix over '+st.yrs+' years</h2></div>'+
+      '<div class="ic-pctl"><div><span class="ic-pl">Years</span>'+segs('yrs',[[5,'5'],[10,'10'],[15,'15'],[20,'20']],st.yrs)+'</div>'+
+      '<div><span class="ic-pl">Each year you take out</span>'+segs('take',[['all','All payouts'],['safe','The safe amount'],['none','Nothing']],st.take)+'</div></div></div>';
+    if(!(tot>0)){el.innerHTML=head+'<p class="ic-pe">Add funds and amounts above to see a projection.</p>';return}
+    var past=fs.reduce(function(s,f){return s+f.a*f.lr},0)/tot;
+    var mk=st.mkt, mkLabel={rec:'each fund’s own record',bull:'a bull market (+30% a year)',base:'a base market (+12% a year)',bear:'a bear year first (−25%), then +12% a year'}[mk]||'';
+    function r(f,k){if(mk==='bull')return 30;if(mk==='base')return 12;if(mk==='bear')return k===0?-25:12;return f.lr}
+    var bal=[tot],inc=[],taken=0,B=fs.map(function(f){return f.a});
+    for(var k=0;k<st.yrs;k++){var yi=0,yb=0;
+      fs.forEach(function(f,i){var b=B[i],rr=r(f,k)/100,pay=b*f.y,take=st.take==='all'?pay:st.take==='none'?0:Math.max(0,Math.min(pay,b*((1+rr)/(1+INFL/100)-1)));
+        yi+=pay;taken+=take;B[i]=Math.max(0,b*(1+rr)-take);yb+=B[i]});
+      inc.push(yi);bal.push(yb)}
+    var end=bal[bal.length-1],incEnd=inc[inc.length-1],chg=end/tot-1;
+    var tiles=[['Past total return','<b>'+past.toFixed(1)+'%</b><small>a year, price change plus payouts, weighted by your amounts</small>'],
+      ['Balance in '+st.yrs+' years','<b>'+money(end)+'</b><small>'+(chg>=0?'+':'')+Math.round(chg*100)+'% from '+money(tot)+'</small>'],
+      ['Payouts in year '+st.yrs,'<b>'+money(incEnd/12)+'</b><small>a month, from '+money(inc[0]/12)+' in year 1</small>'],
+      ['Taken out in total','<b>'+money(taken)+'</b><small>over '+st.yrs+' years</small>']];
+    /* chart */
+    var W=Math.max(300,Math.min(960,(el.clientWidth||640)-40)),H=W<500?200:230,x0=52,x1=W-12,y0=16,y1=H-30,top0=Math.max.apply(null,bal),stp=function(v){var e=Math.pow(10,Math.floor(Math.log10(v))),f=v/e;return (f<=1?1:f<=2?2:f<=2.5?2.5:f<=5?5:10)*e}(top0/3),mx=Math.ceil(top0*1.04/stp)*stp,X=function(i){return x0+(x1-x0)*i/st.yrs},Y=function(v){return y1-(y1-y0)*v/mx};
+    var pts=bal.map(function(v,i){return X(i).toFixed(1)+','+Y(v).toFixed(1)}).join(' ');
+    var tv=[];for(var q=0;q<=mx+1;q+=stp)tv.push(q);var ticks=tv.map(function(v){return '<line x1="'+x0+'" x2="'+x1+'" y1="'+Y(v)+'" y2="'+Y(v)+'" class="g"/><text x="'+(x0-8)+'" y="'+(Y(v)+4)+'" text-anchor="end">'+(v>=1e6?'$'+(+(v/1e6).toFixed(2))+'M':v===0?'$0':'$'+Math.round(v/1000)+'k')+'</text>'}).join('');
+    var xl=bal.map(function(v,i){var ev=st.yrs>10?5:(W<500?2:1);return (i%ev===0||i===st.yrs)?'<text x="'+X(i)+'" y="'+(H-10)+'" text-anchor="'+(i===st.yrs?'end':i===0?'start':'middle')+'">'+(i===0?'Now':'Yr '+i)+'</text>':''}).join('');
+    var svg='<svg class="ic-pchart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Projected balance over '+st.yrs+' years, from '+money(tot)+' to '+money(end)+'">'+ticks+
+      '<line x1="'+x0+'" x2="'+x1+'" y1="'+Y(tot)+'" y2="'+Y(tot)+'" class="start"/><text x="'+x1+'" y="'+(Y(tot)-6)+'" text-anchor="end" class="sl">Today '+money(tot)+'</text>'+
+      '<polygon points="'+X(0)+','+y1+' '+pts+' '+X(st.yrs)+','+y1+'" class="area"/><polyline points="'+pts+'" class="ln"/>'+
+      '<circle cx="'+X(st.yrs)+'" cy="'+Y(end)+'" r="4" class="dot"/>'+xl+'</svg>';
+    el.innerHTML=head+'<div class="ic-ptiles">'+tiles.map(function(t){return '<div class="ic-pt"><span>'+t[0]+'</span>'+t[1]+'</div>'}).join('')+'</div>'+svg+
+      '<p class="ic-pn">Assumes '+mkLabel+', with each fund paying its current yield on its balance every year'+(st.take==='safe'?' and the safe amount taken out (its return minus '+INFL+'% for inflation, never more than it pays)':st.take==='all'?' and every payout taken out':' and every payout reinvested')+'. Change the market above to compare. Before tax and fees on your side. Payouts and returns change, and past returns don’t promise future ones.</p>';
+  }
+  var calc0=calc;calc=function(){calc0();proj()};
   function fresh(){var el=$('icFresh');
     if(meta&&!meta.seed&&meta.asOf){var n=(meta.failed||[]).length;
       el.innerHTML='<span class="ic-dot live" aria-hidden="true"></span><span>Prices and payouts from '+esc(meta.source||'market data')+', updated every weekday evening. Last update: '+fdate(meta.asOf.slice(0,10))+'.'+(n?' '+n+(n>1?' funds use their':' fund uses its')+' last good numbers.':'')+'</span>';}
@@ -2165,6 +2301,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   }
   function all(){list();mix();calc();fresh()}
   $('icQ').addEventListener('input',list);
+  $('icProj').addEventListener('click',function(e){var b=e.target.closest('[data-yrs],[data-take]');if(!b)return;if(b.dataset.yrs)st.yrs=+b.dataset.yrs;if(b.dataset.take)st.take=b.dataset.take;save();proj();try{gtag('event','income_projection',{years:st.yrs,take:st.take})}catch(x){}});
   $('icKeep').addEventListener('click',function(e){var b=e.target.closest('[data-mk]');if(!b)return;st.mkt=b.dataset.mk;save();st.order.forEach(rowUpdate);calc();try{gtag('event','income_market',{market:st.mkt})}catch(x){}});
   $('icList').addEventListener('click',function(e){var b=e.target.closest('[data-ic]');if(!b)return;var t=b.dataset.ic;
     if(st.sel[t]!=null){delete st.sel[t];delete st.pct[t];st.order=st.order.filter(function(x){return x!==t})}else{st.sel[t]=0;st.order.push(t);try{gtag('event','income_add_fund',{fund:t})}catch(x){}}
@@ -2191,6 +2328,22 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
       .catch(function(){m.textContent='That didn’t go through. Please try again, or email obi@meliusoneconsulting.com.';m.className='pl-msg'})
       .finally(function(){b.disabled=false})});
 })();
+</script>
+<script>
+/* coaching applications (Netlify Forms) */
+(function(){document.querySelectorAll('.apply-form').forEach(function(f){var st=f.querySelector('.status'),b=f.querySelector('button[type=submit]');
+  function say(t,c){st.textContent=t;st.className='status'+(c?' '+c:'')}
+  f.addEventListener('submit',function(e){e.preventDefault();
+    var nm=f.querySelector('[name=name]'),em=f.querySelector('[name=email]');
+    if(!nm.value.trim()){say('Please enter your first name.','err');nm.focus();return}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){say('Please enter a valid email address, like name@example.com.','err');em.focus();return}
+    var miss=[].slice.call(f.querySelectorAll('.aq')).filter(function(q){return q.querySelector('input[type=radio]')&&!q.querySelector('input:checked')});
+    if(miss.length){say('Please answer every question with options ('+miss.length+' left).','err');miss[0].scrollIntoView({block:'center',behavior:'smooth'});return}
+    b.disabled=true;say('Sending…');
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(f)).toString()})
+      .then(function(r){if(!r.ok)throw 0;var n=nm.value.trim().split(' ')[0];f.reset();say('Thank you, '+n+'. Your application is in, and you’ll hear from me within two business days.','ok');try{gtag('event','apply_'+(f.id==='apply-private'?'private':'cohort'))}catch(x){}})
+      .catch(function(){say('That didn’t go through. Please try again, or email obi@meliusoneconsulting.com.','err')})
+      .finally(function(){b.disabled=false})})})})();
 </script>
 </body>
 </html>
