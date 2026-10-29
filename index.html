@@ -1113,12 +1113,16 @@ html.no-verses .ws,html.no-verses .fs-verse,html.no-verses [data-verse]{display:
 .ws-nav .ws-hide{font-size:15px}
 .v-toggle{font:inherit;color:inherit;background:none;border:0;padding:0;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .m-only-nav{display:none}
+.v-toggle.v-pill{text-decoration:none;font-weight:600;font-size:14px;border:1px solid var(--line);border-radius:999px;padding:8px 16px;color:var(--ink)}
+.v-toggle.v-pill:hover{border-color:var(--gold,#C9A35E)}
 @media (max-width:760px){
   .m-only-nav{display:list-item}
   .m-only-nav .v-toggle{font-weight:600;text-decoration:none;padding:12px 0;color:var(--muted)}
   /* the Income calculator scrolls inside the page body, so the phone's browser bars don't slide and drag the tab bar with them */
   html.ic-lock{height:100%;overflow:hidden}
   html.ic-lock body{height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none}
+  /* room for the calculator's tab bar, so it never covers the footer */
+  html.ic-lock footer{padding-bottom:calc(96px + env(safe-area-inset-bottom, 0px))}
 }
 </style>
 </head>
@@ -1893,7 +1897,8 @@ html.no-verses .ws,html.no-verses .fs-verse,html.no-verses [data-verse]{display:
     <p><a href="mailto:obi@meliusoneconsulting.com">obi@meliusoneconsulting.com</a><span data-pl="hide"> · <a href="https://calendar.app.google/Njkvmqf26i2frhhg9" target="_blank" rel="noopener">Book a free intro session</a></span> · <a href="#tools">Budget</a> · <a href="https://wealthsimple.com/invite/JHWVAG" target="_blank" rel="noopener sponsored">Wealthsimple</a> · <a href="https://link.blossomsocial.com/7uYa/ogse4c4w" target="_blank" rel="noopener sponsored">Blossom</a> (referral links) · <a href="#policies">Privacy and policies</a></p>
     <p><span class="f-motto" lang="la" title="As long as you live, do better">Dum vivas, fac melius</span> · As long as you live, do better</p>
     <p>© 2026 Melius One Consulting Inc. · Website by Obi Oji</p>
-    <p>Scripture quotations are from the Berean Standard Bible (BSB), public domain. · <button type="button" class="v-toggle">Hide Bible verses</button></p>
+    <p>Scripture quotations are from the Berean Standard Bible (BSB), public domain.</p>
+    <p><button type="button" class="v-toggle v-pill">Hide Bible verses</button></p>
   </div>
 </footer>
 
