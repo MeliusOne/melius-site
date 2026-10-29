@@ -1096,7 +1096,7 @@ section{padding-block:60px}
 @media (min-width:1100px){.lv-mods{grid-template-columns:repeat(3,minmax(0,1fr))}.lv-mods>:nth-last-child(2):nth-child(3n+1){grid-column:span 2}}
 @media (min-width:1200px){.strats{grid-template-columns:repeat(4,minmax(0,1fr))}}
 .strat p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.55}.strat h3{font-size:20px}
-.strat-more{margin:22px 0 0;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline}
+.strat-more{text-decoration:none;color:inherit;background:var(--band)}.strat-more .lv-link{margin-top:auto}
 /* about: keep the story aside in view */
 @media (min-width:900px){.story>:last-child{position:sticky;top:calc(var(--hdr) + 80px)}}
 
@@ -1564,10 +1564,9 @@ html.no-verses .ws,html.no-verses .fs-verse,html.no-verses [data-verse]{display:
   <section id="strategies">
     <div class="wrap">
       <p class="eyebrow">Strategies</p>
-      <h2>Growth, income, or both</h2>
-      <p class="lede" style="margin-top:12px">There’s more than one way to make your money pay you. Here are some of the strategies we cover. Every one trades something away, and which ones fit you, how to combine them and when to switch is what we work out together.</p>
+      <h2>Strategies that pay you</h2>
+      <p class="lede" style="margin-top:12px">Our focus is income: money that lands in your account every month, and grows when you reinvest it. Here are some of the strategies we cover. Every one trades something away, and which ones fit you, how to combine them and when to switch is what we work out together.</p>
       <div class="strats">
-        <article class="card strat"><span class="tag">Growth</span><h3>Index ETFs</h3><p>Own the whole market at very low cost, and let it grow.</p></article>
         <article class="card strat"><span class="tag">Income</span><h3>Covered-call ETFs</h3><p>Funds that sell options on what they hold and pay you every month or twice a month.</p></article>
         <article class="card strat"><span class="tag">Income</span><h3>Enhanced income ETFs</h3><p>A little leverage for a bigger payout, and bigger swings.</p></article>
         <article class="card strat"><span class="tag">Income</span><h3>Daily-option ETFs</h3><p>Funds that sell very short-dated options to collect premium every day.</p></article>
@@ -1575,8 +1574,8 @@ html.no-verses .ws,html.no-verses .fs-verse,html.no-verses [data-verse]{display:
         <article class="card strat"><span class="tag">Hybrid</span><h3>Income first, then rotate</h3><p>Income now, and a wider portfolio over time.</p></article>
         <article class="card strat"><span class="tag amber">Options</span><h3>The wheel</h3><p>Get paid to wait for the stocks you want, then get paid while you hold them.</p></article>
         <article class="card strat"><span class="tag amber">Options</span><h3>LEAPS</h3><p>Long-dated options for long-term exposure with less cash.</p></article>
+        <a class="card strat strat-more" href="#coaching"><span class="tag amber">And more</span><h3>The details are in the coaching</h3><p>The risks, the rules and how to combine them for your family.</p><span class="lv-link">See how coaching works →</span></a>
       </div>
-      <p class="strat-more"><b>And more.</b> The details, the risks and the rules for each one are in the coaching. <a class="lv-link" href="#coaching">See how coaching works →</a></p>
     </div>
   </section>
 
