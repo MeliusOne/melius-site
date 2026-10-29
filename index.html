@@ -942,6 +942,13 @@ main{min-height:calc(100vh - 260px)}
 
 /* projection */
 .ic-proj{margin-top:24px;display:flex;flex-direction:column;gap:18px;padding:28px;min-width:0}
+.ic-plan{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:18px 28px;align-items:center;padding:24px 28px;min-width:0}
+.ic-plan h3{margin:4px 0 0;font-family:var(--display,Georgia,serif);font-size:clamp(22px,2.2vw,28px);font-weight:500;line-height:1.2;text-wrap:balance}
+.ic-plan p{margin:0}.ic-plan .ic-pn{color:var(--muted);font-size:14px;line-height:1.5}
+.ic-pbar{height:10px;border-radius:99px;background:var(--band);border:1px solid var(--line);overflow:hidden;margin-top:12px}.ic-pbar i{display:block;height:100%;background:#5BC08F;border-radius:inherit}
+.ic-pacts{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+.ic-pacts .btn{text-decoration:none}.ic-pok{color:#2E7D5B;font-weight:700;font-size:14px;align-self:center}
+@media (max-width:900px){.ic-plan{grid-template-columns:1fr;padding:20px}.ic-pacts{justify-content:flex-start}}
 .ic-ph{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap}
 .ic-ph .eyebrow{margin:0 0 6px}.ic-ph h2{margin:0;font-size:26px}
 .ic-pctl{display:flex;gap:18px;flex-wrap:wrap}
@@ -1028,6 +1035,8 @@ main{min-height:calc(100vh - 260px)}
   #income[data-tab] .ic-builder,#income[data-tab] .ic-hero,#income[data-tab] .ic-proj,#income[data-tab] .ic-foot{display:none}
   #income[data-tab="mix"] .ic-builder{display:flex}
   #income[data-tab="income"] .ic-hero{display:block}
+  #income[data-tab] .ic-plan{display:none}
+  #income[data-tab="income"] .ic-plan{display:grid}
   #income[data-tab="future"] .ic-proj,#income[data-tab="future"] .ic-foot{display:flex}
   #income[data-tab="future"] .ic-foot{flex-direction:column}
   .ic-mini{display:flex;flex-wrap:wrap;gap:2px 14px;align-items:baseline;position:sticky;top:calc(var(--ic-hdr,180px) + 8px);z-index:5;width:100%;text-align:left;font:inherit;font-size:13.5px;color:var(--ic-mute);background:var(--ic-bg);border:0;border-radius:14px;padding:10px 14px;cursor:pointer;box-shadow:0 6px 18px rgba(20,33,61,.18)}
@@ -1785,6 +1794,7 @@ header.top.menu-open .ws{display:none}
               <div class="ic-keep" id="icKeep"></div>
             </div>
           </div>
+          <section class="card ic-plan" id="icPlan" aria-live="polite"></section>
           <section class="card ic-proj" id="icProj" aria-live="polite"></section>
         </div>
       </div>
@@ -2397,6 +2407,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     var plist=parts.length>1?parts.slice(0,-1).join(', ')+' and '+parts[parts.length-1]:parts.join('');
     $('icFrom').innerHTML=tot>0?'From <b>'+money(tot)+'</b> invested'+(U.dv===24?' · '+money(yr/12)+' a month':'')+(U.mixed?' · '+plist+' fund'+(nf>1?'s':'')+', each paid on its own schedule':'')+'.':'Add funds and amounts in Your mix to see what they could pay you.';
     var tiles=tot>0?[['Per month',money(yr/12)],['Per year',money(yr)],['Per 2-week paycheque',money(yr/26)],['Yield',(yr/tot*100).toFixed(2)+'%']]:[['Per month','–'],['Per year','–'],['Per 2-week paycheque','–'],['Yield','–']];
+    st.sum={tot:Math.round(tot),yr:Math.round(yr),n:st.order.filter(function(t){return (+st.sel[t]||0)>0}).length,ts:Date.now()};save();plan(tot,yr);
     $('icStats').innerHTML=tiles.map(function(x){return '<div class="ic-stat"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>'}).join('');
     var Mk=MK[st.mkt];
     $('icMkt').innerHTML='<span class="ic-pl">Market</span><div class="ic-pseg" role="group" aria-label="Market conditions">'+[['rec','Fund records'],['bull','Bull'],['base','Base'],['bear','Bear']].map(function(x){return '<button type="button" data-mk="'+x[0]+'" aria-pressed="'+(st.mkt===x[0])+'">'+x[1]+'</button>'}).join('')+'</div>'+
@@ -2410,6 +2421,21 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
         '<p class="ic-kn">'+(Mk?'Based on a '+(Mk[0]>0?'+':'')+Mk[0]+'% return for every fund, minus '+INFL+'% for inflation. Switch to Fund records to use each fund’s own history.':'Based on each fund’s long-run total return (price plus payouts), minus '+INFL+'% for inflation. If every fund returned a steady 8% a year, you could withdraw '+money(keep8/U.dv)+' '+U.u+'.')+'</p>';
     }else $('icKeep').innerHTML=head+'<div class="ic-two"><div class="w"><span>You can withdraw</span><b>$0</b><small>a month</small></div><div class="r"><span>Reinvest</span><b>$0</b><small>a month</small></div></div><p>Add funds and amounts in Your mix, and this splits each payout into what you can spend and what to put back so your balance keeps growing.</p>';
   }
+  /* Melius Money link: the app lives on this same site, so both read the same browser storage */
+  var AK='melius-payday-v1';
+  function appS(){try{var o=JSON.parse(localStorage.getItem(AK)||'null');return o&&o.goal&&!o.example?o:null}catch(e){return null}}
+  function plan(tot,yr){var el=$('icPlan');if(!el)return;var A=appS(),yl=tot>0?yr/tot*100:0,h='';
+    if(!A){el.innerHTML='<div><p class="eyebrow">Melius Money</p><h3>Turn this into a plan</h3><p class="ic-pn">The free budget app works out how much you can invest each month, clears expensive debt first, and shows when your payouts cover your bills. No sign-up. Your numbers stay on your device.</p></div><div class="ic-pacts"><a class="btn" href="/app/" data-track="income_to_app">Open Melius Money →</a></div>';return}
+    var g=A.goal,need=+g.need||0,inv=+g.invested||0,mo=yr/12,cov=need>0?mo/need:0,saved=tot>0&&Math.round(inv)===Math.round(tot)&&Math.abs((+g.rate||0)-Math.round(yl*10)/10)<0.05;
+    if(tot<=0)h='<div><p class="eyebrow">Your Melius Money plan</p><h3>'+(inv>0?'You have '+money(inv)+' invested':'Build a mix to compare with your plan')+'</h3><p class="ic-pn">'+(need>0?'Your plan needs '+money(need)+' a month. Add funds to see how much of it they cover.':'Add your monthly need on the Goals tab of Melius Money.')+'</p></div>';
+    else if(need>0)h='<div><p class="eyebrow">Your Melius Money plan</p><h3>This mix covers '+Math.round(cov*100)+'% of your '+money(need)+' a month</h3><div class="ic-pbar" role="img" aria-label="'+Math.round(cov*100)+'% covered"><i style="width:'+Math.min(100,cov*100).toFixed(1)+'%"></i></div><p class="ic-pn" style="margin-top:10px">'+(cov>=1?'Your payouts cover your whole month. That’s Freedom.':'To cover all of it at this mix’s '+yl.toFixed(1)+'% yield, you’d need about <b>'+money(need*12/(yl/100))+'</b> invested.')+'</p></div>';
+    else h='<div><p class="eyebrow">Your Melius Money plan</p><h3>This mix pays about '+money(mo)+' a month</h3><p class="ic-pn">Add your monthly need on the Goals tab of Melius Money to see how much of it this covers.</p></div>';
+    h+='<div class="ic-pacts">'+(inv>0&&Math.round(inv)!==Math.round(tot)?'<button type="button" class="btn ghost" data-plan="use">Use my '+money(inv)+'</button>':'')+(tot>0?(saved?'<span class="ic-pok">✓ Saved to your plan</span>':'<button type="button" class="btn" data-plan="save">Save this mix to my plan</button>'):'')+'<a class="btn ghost" href="/app/#goals" data-track="income_to_app">Open my plan →</a></div>';
+    el.innerHTML=h}
+  $('icPlan')&&$('icPlan').addEventListener('click',function(e){var b=e.target.closest('[data-plan]');if(!b)return;var A=appS();if(!A)return;
+    if(b.dataset.plan==='use'){var v=Math.round(+A.goal.invested||0),old=st.total;if(!(old>0)){var S0=sum();st.order.forEach(function(t){st.pct[t]=S0>0?(+st.sel[t]||0)/S0*100:100/Math.max(1,st.order.length)})}st.order.forEach(function(t){if(st.pct[t]!=null)st.sel[t]=v*st.pct[t]/100});st.total=v;save();all();try{gtag('event','income_use_plan_total')}catch(x){}return}
+    if(b.dataset.plan==='save'){var tot=0,yr=0;st.order.forEach(function(t){var a=+st.sel[t]||0;tot+=a;yr+=a*info(t).y/100});if(!(tot>0))return;A.goal.invested=Math.round(tot);A.goal.rate=Math.round(yr/tot*1000)/10;try{localStorage.setItem(AK,JSON.stringify(A))}catch(x){}plan(tot,yr);try{gtag('event','income_saved_to_plan')}catch(x){}}});
+  window.addEventListener('storage',function(e){if(e.key===AK)calc()});
   /* projection: grows each fund by its return (the market toggle), pays its yield on the balance, takes out what the viewer picks */
   function proj(){var el=$('icProj');if(!el)return;
     var fs=st.order.map(function(t){return {t:t,a:+st.sel[t]||0,y:info(t).y/100,lr:longRun(BY[t])[0]}}).filter(function(f){return f.a>0});
