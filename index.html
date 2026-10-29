@@ -1095,6 +1095,8 @@ section{padding-block:60px}
 /* learn: wider grids */
 @media (min-width:1100px){.lv-mods{grid-template-columns:repeat(3,minmax(0,1fr))}.lv-mods>:nth-last-child(2):nth-child(3n+1){grid-column:span 2}}
 @media (min-width:1200px){.strats{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.strat p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.55}.strat h3{font-size:20px}
+.strat-more{margin:22px 0 0;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline}
 /* about: keep the story aside in view */
 @media (min-width:900px){.story>:last-child{position:sticky;top:calc(var(--hdr) + 80px)}}
 
@@ -1563,17 +1565,18 @@ html.no-verses .ws,html.no-verses .fs-verse,html.no-verses [data-verse]{display:
     <div class="wrap">
       <p class="eyebrow">Strategies</p>
       <h2>Growth, income, or both</h2>
-      <p class="lede" style="margin-top:12px">Every strategy trades something away. Here is what each one gives you, and what it costs.</p>
+      <p class="lede" style="margin-top:12px">There’s more than one way to make your money pay you. Here are some of the strategies we cover. Every one trades something away, and which ones fit you, how to combine them and when to switch is what we work out together.</p>
       <div class="strats">
-        <article class="card"><span class="tag">Growth</span><h3>Index ETFs</h3>
-          <dl class="kv"><dt>Examples</dt><dd>XEQT, VFV, QQC</dd><dt>Payout</dt><dd>under 2% a year</dd><dt>Gives you</dt><dd>The full market return at very low cost</dd><dt>Costs you</dt><dd>Little income now; you sell units to spend</dd><dt>Best for</dt><dd>Long horizons, TFSAs, people still earning a salary</dd></dl></article>
-        <article class="card"><span class="tag">Income</span><h3>Covered-call income ETFs</h3>
-          <dl class="kv"><dt>Examples</dt><dd>HHIS, HONE, EASY, CDAY, SDAY, QDAY, BDAY, HDIV</dd><dt>Payout</dt><dd>about 10–29% a year</dd><dt>Gives you</dt><dd>Large monthly or twice-monthly cash, mostly return of capital</dd><dt>Costs you</dt><dd>Capped upside; the price drifts down when payouts exceed returns</dd><dt>Best for</dt><dd>Living off a portfolio, with the surplus reinvested</dd></dl></article>
-        <article class="card"><span class="tag">Hybrid</span><h3>Income first, then rotate</h3>
-          <dl class="kv"><dt>How</dt><dd>Start in a high-payout fund; reinvest every surplus dollar into other funds</dd><dt>Gives you</dt><dd>Income now, diversification within three to five years</dd><dt>Costs you</dt><dd>Concentration in the early years</dd><dt>Best for</dt><dd>Leaving a job while still building wealth</dd></dl></article>
-        <article class="card"><span class="tag amber">Options</span><h3>The wheel and LEAPS</h3>
-          <dl class="kv"><dt>How</dt><dd>Sell cash-secured puts, then covered calls; LEAPS for long-term exposure</dd><dt>Gives you</dt><dd>Premium income on stocks you choose, more control</dd><dt>Costs you</dt><dd>Time, discipline and patience. When a stock falls hard, you keep selling covered calls on it, and each premium lowers your cost base (ACB). The key is picking the right stocks and waiting. It’s not a get-rich-quick scheme.</dd><dt>Best for</dt><dd>People willing to learn and manage trades every week</dd></dl></article>
+        <article class="card strat"><span class="tag">Growth</span><h3>Index ETFs</h3><p>Own the whole market at very low cost, and let it grow.</p></article>
+        <article class="card strat"><span class="tag">Income</span><h3>Covered-call ETFs</h3><p>Funds that sell options on what they hold and pay you every month or twice a month.</p></article>
+        <article class="card strat"><span class="tag">Income</span><h3>Enhanced income ETFs</h3><p>A little leverage for a bigger payout, and bigger swings.</p></article>
+        <article class="card strat"><span class="tag">Income</span><h3>Daily-option ETFs</h3><p>Funds that sell very short-dated options to collect premium every day.</p></article>
+        <article class="card strat"><span class="tag">Income</span><h3>Single-stock income ETFs</h3><p>Income from one company you believe in, with all of its risk.</p></article>
+        <article class="card strat"><span class="tag">Hybrid</span><h3>Income first, then rotate</h3><p>Income now, and a wider portfolio over time.</p></article>
+        <article class="card strat"><span class="tag amber">Options</span><h3>The wheel</h3><p>Get paid to wait for the stocks you want, then get paid while you hold them.</p></article>
+        <article class="card strat"><span class="tag amber">Options</span><h3>LEAPS</h3><p>Long-dated options for long-term exposure with less cash.</p></article>
       </div>
+      <p class="strat-more"><b>And more.</b> The details, the risks and the rules for each one are in the coaching. <a class="lv-link" href="#coaching">See how coaching works →</a></p>
     </div>
   </section>
 
