@@ -1092,6 +1092,8 @@ section{padding-block:60px}
 .swipe-hint{display:none}
 
 @media (max-width:640px){.ap-tabs{display:grid;grid-template-columns:1fr 1fr;border-radius:16px;width:100%}.ap-tabs button{border-radius:12px;padding:10px 8px;font-size:14px;line-height:1.25}.ap-tabs button small{display:block;margin:2px 0 0}}
+
+header.top.menu-open .ws{display:none}
 </style>
 </head>
 <body>
@@ -1945,7 +1947,7 @@ section{padding-block:60px}
 <script>
 (function(){
   var b=document.getElementById('burger'),n=document.getElementById('mainnav');if(!b||!n)return;
-  function set(o){n.classList.toggle('open',o);b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Close menu':'Open menu');}
+  function set(o){n.classList.toggle('open',o);var hd=document.querySelector('header.top');if(hd)hd.classList.toggle('menu-open',o);b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Close menu':'Open menu');}
   b.addEventListener('click',function(){set(!n.classList.contains('open'));});
   n.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});
   addEventListener('hashchange',function(){set(false);});
