@@ -30,19 +30,22 @@
   --accent:#1D3557; --accent-ink:#FFFFFF; --gold:#A8803F; --gold-soft:#F3EBDC;
   --good:#2E7D5B; --good-soft:#E3F2EA; --warn:#A86A12; --warn-soft:#FBEFD9; --bad:#A3332A; --bad-soft:#F8E3E0;
   --c1:#1D3557; --c2:#A8803F; --c3:#2E7D5B; --c4:#8FA3BF;
+  --hero-bg:#1D3557; --hero-ink:#FFFFFF; --hero-num:#FFFFFF; --hero-line:transparent; --hero-btn:#FFFFFF; --hero-btn-ink:#1D3557;
   --display:'Newsreader',Georgia,'Times New Roman',serif;
   --body:'Manrope','Segoe UI',Arial,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0B1220; --surface:#142036; --band:#111B2E; --ink:#EEF1F6; --muted:#A9B3C4; --line:#26344D;
-  --accent:#C9A76B; --accent-ink:#0E1626; --gold:#C9A76B; --gold-soft:#2A2A2A;
+  --accent:#C9A76B; --accent-ink:#0E1626; --gold:#C9A76B; --gold-soft:#2B2719;
   --good:#6CC79C; --good-soft:#15302A; --warn:#E2AE5A; --warn-soft:#33281A; --bad:#E5776C; --bad-soft:#3A1E1E;
-  --c1:#8FB0DA; --c2:#C9A76B; --c3:#6CC79C; --c4:#56657E; color-scheme:dark}}
+  --c1:#8FB0DA; --c2:#C9A76B; --c3:#6CC79C; --c4:#56657E;
+  --hero-bg:#182844; --hero-ink:#EEF1F6; --hero-num:#E3C58E; --hero-line:#3A4D70; --hero-btn:#C9A76B; --hero-btn-ink:#0E1626; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0B1220; --surface:#142036; --band:#111B2E; --ink:#EEF1F6; --muted:#A9B3C4; --line:#26344D;
-  --accent:#C9A76B; --accent-ink:#0E1626; --gold:#C9A76B; --gold-soft:#2A2A2A;
+  --accent:#C9A76B; --accent-ink:#0E1626; --gold:#C9A76B; --gold-soft:#2B2719;
   --good:#6CC79C; --good-soft:#15302A; --warn:#E2AE5A; --warn-soft:#33281A; --bad:#E5776C; --bad-soft:#3A1E1E;
-  --c1:#8FB0DA; --c2:#C9A76B; --c3:#6CC79C; --c4:#56657E; color-scheme:dark}
+  --c1:#8FB0DA; --c2:#C9A76B; --c3:#6CC79C; --c4:#56657E;
+  --hero-bg:#182844; --hero-ink:#EEF1F6; --hero-num:#E3C58E; --hero-line:#3A4D70; --hero-btn:#C9A76B; --hero-btn-ink:#0E1626; color-scheme:dark}
 *{box-sizing:border-box}
 html,body{height:100%;overflow:hidden}
 .scroller{position:fixed;inset:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;padding-top:env(safe-area-inset-top,0px)}
@@ -65,7 +68,11 @@ h1,h2,h3{margin:0;text-wrap:balance}
 .lbl{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0}
 .muted{color:var(--muted)}
 .num{font-variant-numeric:tabular-nums}
-.hero{background:var(--accent);color:var(--accent-ink);border:0;padding:22px}
+.hero{background:var(--hero-bg);color:var(--hero-ink);border:1px solid var(--hero-line);padding:22px}
+.hero .big{color:var(--hero-num)}
+.hero-warn{margin:0;font-size:14px;line-height:1.45;padding:10px 12px;border-radius:12px;background:var(--bad-soft);color:var(--bad)}
+.today-top,.tt-side{display:flex;flex-direction:column;gap:14px}
+.tt-side>.card{margin:0}
 .hero .lbl{color:inherit;opacity:.75}
 .big{font-family:var(--display);font-size:56px;font-weight:500;line-height:1;letter-spacing:-.01em}
 .hero-sub{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:14px;opacity:.9}
@@ -75,7 +82,7 @@ h1,h2,h3{margin:0;text-wrap:balance}
 .pill.good{background:var(--good-soft);color:var(--good)} .pill.warn{background:var(--warn-soft);color:var(--warn)} .pill.bad{background:var(--bad-soft);color:var(--bad)}
 .pill::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
 .btn{font:inherit;font-weight:700;border:0;border-radius:14px;padding:14px 18px;cursor:pointer;background:var(--gold);color:#fff;font-size:16px}
-.hero .btn{background:var(--accent-ink);color:var(--accent)}
+.hero .btn{background:var(--hero-btn);color:var(--hero-btn-ink)}
 .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
 .btn.sm{white-space:nowrap;padding:9px 14px;font-size:14px;border-radius:11px}
 .btn.danger{background:transparent;color:var(--bad);border:1.5px solid var(--bad)}
@@ -197,6 +204,13 @@ textarea{font:inherit;font-size:13px;width:100%;min-height:150px;border:1px soli
   .top{justify-content:flex-end;min-height:0}
   .view.stack{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
   .view .wide{grid-column:1/-1}
+  .today-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:stretch}
+  .today-top>.hero .btn{margin-top:auto}
+  #rev .rows{display:grid;grid-template-columns:1fr 1fr;column-gap:32px}
+  #rev .rv-over{grid-column:1/-1}
+  .tt-side{gap:20px}
+  .tt-side>.fm-card{flex:1}
+  .tt-side>.fm-card .btn{margin-top:auto;align-self:flex-start}
   .edit.inc{grid-template-columns:minmax(0,1.3fr) minmax(0,.9fr) minmax(0,1.3fr) minmax(0,1fr) 34px;grid-template-areas:'n a f d x';border-bottom:0;padding-bottom:0}
   .edit.bill{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,.7fr) 34px;grid-template-areas:'n a d x';border-bottom:0;padding-bottom:0}
   .edit.debt{grid-template-columns:minmax(0,1.4fr) repeat(4,minmax(0,.8fr)) minmax(0,1.1fr) 34px;grid-template-areas:'n b r m d a x';border-bottom:0;padding-bottom:0}
@@ -235,6 +249,8 @@ textarea{font:inherit;font-size:13px;width:100%;min-height:150px;border:1px soli
 
 /* Today: freedom money card */
 .fm-card{gap:10px}
+.opt-tag{font-weight:500;color:var(--muted);font-size:12px}
+.fm-time .rows{font-size:14px}.fm-time .row{padding:6px 0}.fm-time .lbl{margin:4px 0 0}
 .bguide{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .bguide>div{border-radius:12px;padding:12px 14px;background:var(--band)}
 .bguide p{margin:0;font-size:14px;line-height:1.45}
@@ -303,7 +319,7 @@ textarea{font:inherit;font-size:13px;width:100%;min-height:150px;border:1px soli
 (function(){
 'use strict';
 var KEY='melius-payday-v1';
-var APPV='Oct 29, 2026 · 3:30 AM';
+var APPV='Oct 29, 2026 · 5:00 AM';
 /* ---------- daily Bible passage (Berean Standard Bible, public domain) ---------- */
 var WORD=[["m", "Proverbs 21:5", "The plans of the diligent bring plenty, as surely as haste leads to poverty.", "Slow and steady beats get-rich-quick. A plan followed every month is how plenty is built.", "The plans of the diligent bring plenty, as surely as haste leads to poverty."], ["w", "Proverbs 6:6–8", "Walk in the manner of the ant, O slacker; observe its ways and become wise. Without a commander, without an overseer or ruler, it prepares its provisions in summer; it gathers its food at harvest.", "The ant has no boss and still prepares. Work and save in the good season for the lean one.", "Walk in the manner of the ant, O slacker; observe its ways and become wise.…"], ["c", "John 3:16", "For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not perish but have eternal life.", "The greatest gift was given, not earned. Everything else we hold is on loan.", "For God so loved the world that He gave His one and only Son…"], ["l", "Ecclesiastes 1:2–3", "“Futility of futilities,” says the Teacher, “futility of futilities! Everything is futile!” What does a man gain from all his labor, at which he toils under the sun?", "Wealth without God is chasing the wind. Money is a tool, never the goal.", "…What does a man gain from all his labor, at which he toils under the sun?"], ["m", "Proverbs 22:7", "The rich rule over the poor, and the borrower is slave to the lender.", "Debt makes you a slave. That is why we attack expensive debt before we invest.", "The rich rule over the poor, and the borrower is slave to the lender."], ["w", "Colossians 3:23–24", "Whatever you do, work at it with your whole being, as for the Lord and not for men, because you know that you will receive an inheritance from the Lord as your reward. It is the Lord Christ you are serving.", "Whatever your job is today, do it as if Christ were the one you work for, because He is.", "Whatever you do, work at it with your whole being, as for the Lord and not for men…"], ["c", "Romans 5:8", "But God proves His love for us in this: While we were still sinners, Christ died for us.", "You were loved before you got anything right, your money included.", "But God proves His love for us in this: While we were still sinners, Christ died for us."], ["l", "Ecclesiastes 5:10", "He who loves money is never satisfied by money, and he who loves wealth is never satisfied by income. This too is futile.", "There is always a bigger number. Decide what is enough.", "He who loves money is never satisfied by money…"], ["m", "Proverbs 13:11", "Dishonest wealth will dwindle, but what is earned through hard work will be multiplied.", "Shortcuts dwindle. Money earned through steady work grows.", "Dishonest wealth will dwindle, but what is earned through hard work will be multiplied."], ["w", "2 Thessalonians 3:10", "For even while we were with you, we gave you this command: “If anyone is unwilling to work, he shall not eat.”", "Work is God's design, not a punishment. Provide with your own hands.", "…If anyone is unwilling to work, he shall not eat.…"], ["c", "Romans 8:38–39", "For I am convinced that neither death nor life, neither angels nor principalities, neither the present nor the future, nor any powers, neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God that is in Christ Jesus our Lord.", "No debt, job loss or market crash can separate you from His love.", "…neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God…"], ["l", "Ecclesiastes 5:15", "As a man came from his mother’s womb, so he will depart again, naked as he arrived. He takes nothing for his labor to carry in his hands.", "You can't take it with you. Use it well while you are here.", "As a man came from his mother’s womb, so he will depart again, naked as he arrived.…"], ["m", "Luke 14:28", "Which of you, wishing to build a tower, does not first sit down and count the cost to see if he has the resources to complete it?", "Count the cost before you build. That is all a spending plan is.", "Which of you, wishing to build a tower, does not first sit down and count the cost…"], ["w", "Proverbs 10:4", "Idle hands make one poor, but diligent hands bring wealth.", "Diligence, not luck, is what builds wealth.", "Idle hands make one poor, but diligent hands bring wealth."], ["c", "John 15:13", "Greater love has no one than this, that he lay down his life for his friends.", "Love gives itself away. Let generosity mark how you handle money.", "Greater love has no one than this, that he lay down his life for his friends."], ["l", "Ecclesiastes 2:11", "Yet when I considered all the works that my hands had accomplished and what I had toiled to achieve, I found everything to be futile, a pursuit of the wind; there was nothing to be gained under the sun.", "Even Solomon, the richest of kings, found that achievement alone leaves you empty.", "…I found everything to be futile, a pursuit of the wind; there was nothing to be gained under the sun."], ["m", "Proverbs 27:23–24", "Be sure to know the state of your flocks, and pay close attention to your herds; for riches are not forever, nor does a crown endure to every generation.", "Know your numbers. Check your balance now and then, because riches are not forever.", "Be sure to know the state of your flocks, and pay close attention to your herds…"], ["w", "Proverbs 14:23", "There is profit in all labor, but mere talk leads only to poverty.", "Talking about a plan is not a plan. Do the work.", "There is profit in all labor, but mere talk leads only to poverty."], ["c", "Ephesians 3:19", "…to know this love that surpasses knowledge, that you may be filled with all the fullness of God.", "The love of Christ is the one wealth no one can measure.", "…to know this love that surpasses knowledge, that you may be filled with all the fullness of God."], ["l", "James 4:14", "You do not even know what will happen tomorrow! What is your life? You are a mist that appears for a little while and then vanishes.", "Plan for tomorrow, but hold your plans loosely.", "…What is your life? You are a mist that appears for a little while and then vanishes."], ["m", "Romans 13:8", "Be indebted to no one, except to one another in love. For he who loves his neighbor has fulfilled the law.", "The only debt worth carrying is love.", "Be indebted to no one, except to one another in love.…"], ["w", "Ecclesiastes 9:10", "Whatever you find to do with your hands, do it with all your might, for in Sheol, where you are going, there is no work or planning or knowledge or wisdom.", "Sheol is the grave. Your time to work is now, so give it your full strength.", "Whatever you find to do with your hands, do it with all your might…"], ["c", "1 John 4:19", "We love because He first loved us.", "We give and serve in answer to His love, not to earn it.", "We love because He first loved us."], ["l", "Psalm 39:6", "Surely every man goes about like a phantom; surely he bustles in vain; he heaps up riches not knowing who will haul them away.", "Don't just heap it up. Know what your money is for.", "…he heaps up riches not knowing who will haul them away."], ["m", "Proverbs 21:20", "Precious treasures and oil are in the dwelling of the wise, but a foolish man consumes them.", "The wise keep something in store. The foolish spend it all. Build your cushion.", "Precious treasures and oil are in the dwelling of the wise, but a foolish man consumes them."], ["w", "Proverbs 22:29", "Do you see a man skilled in his work? He will be stationed in the presence of kings; he will not stand before obscure men.", "Get excellent at what you do. Skill opens doors that money can't.", "Do you see a man skilled in his work? He will be stationed in the presence of kings…"], ["c", "Matthew 11:28–29", "Come to Me, all you who are weary and burdened, and I will give you rest. Take My yoke upon you and learn from Me, for I am gentle and humble in heart, and you will find rest for your souls.", "If money worries weigh on you, bring them to Him first.", "Come to Me, all you who are weary and burdened, and I will give you rest.…"], ["l", "Luke 12:15", "And He said to them, “Watch out! Guard yourselves against every form of greed, for one’s life does not consist in the abundance of his possessions.”", "Your life is more than what you own.", "…one’s life does not consist in the abundance of his possessions.…"], ["m", "Proverbs 22:3", "The prudent see danger and take cover, but the simple keep going and suffer the consequences.", "A cushion is not fear. It is prudence: seeing trouble coming and getting ready.", "The prudent see danger and take cover, but the simple keep going and suffer the consequences."], ["w", "Proverbs 12:24", "The hand of the diligent will rule, but laziness ends in forced labor.", "The diligent lead. The lazy end up working for someone else.", "The hand of the diligent will rule, but laziness ends in forced labor."], ["c", "Philippians 4:19", "And my God will supply all your needs according to His glorious riches in Christ Jesus.", "Need, not greed. He supplies what you need.", "And my God will supply all your needs according to His glorious riches in Christ Jesus."], ["l", "Luke 12:20–21", "But God said to him, “You fool! This very night your life will be required of you. Then who will own what you have accumulated?” This is how it will be for anyone who stores up treasure for himself but is not rich toward God.", "Saving is wise. Hoarding for yourself alone is foolish. Be rich toward God.", "…This very night your life will be required of you. Then who will own what you have accumulated?…"], ["m", "Luke 16:10", "Whoever is faithful with very little will also be faithful with much, and whoever is dishonest with very little will also be dishonest with much.", "Handle $20 well and you will handle $20,000 well. Faithfulness starts small.", "Whoever is faithful with very little will also be faithful with much…"], ["w", "Galatians 6:9", "Let us not grow weary in well-doing, for in due time we will reap a harvest if we do not give up.", "Results come in due time. Keep going when progress feels slow.", "Let us not grow weary in well-doing, for in due time we will reap a harvest if we do not give up."], ["c", "Matthew 6:33", "But seek first the kingdom of God and His righteousness, and all these things will be added unto you.", "Get the order right: God first, then the plan.", "But seek first the kingdom of God and His righteousness…"], ["l", "Mark 8:36", "What does it profit a man to gain the whole world, yet forfeit his soul?", "No freedom number is worth your soul.", "What does it profit a man to gain the whole world, yet forfeit his soul?"], ["m", "1 Timothy 6:10", "For the love of money is the root of all kinds of evil. By craving it, some have wandered away from the faith and pierced themselves with many sorrows.", "Money is not evil. Loving it is. Make money serve you, and never serve it.", "For the love of money is the root of all kinds of evil.…"], ["w", "1 Timothy 5:8", "If anyone does not provide for his own, and especially his own household, he has denied the faith and is worse than an unbeliever.", "Providing for your family is part of your faith, not separate from it.", "If anyone does not provide for his own, and especially his own household, he has denied the faith…"], ["c", "2 Corinthians 8:9", "For you know the grace of our Lord Jesus Christ, that though He was rich, yet for your sake He became poor, so that you through His poverty might become rich.", "Christ gave up riches for us. Our truest wealth is in Him.", "…though He was rich, yet for your sake He became poor…"], ["l", "Psalm 90:12", "So teach us to number our days, that we may present a heart of wisdom.", "We count our dollars carefully. Count your days even more carefully.", "So teach us to number our days, that we may present a heart of wisdom."], ["m", "Hebrews 13:5", "Keep your lives free from the love of money and be content with what you have, for God has said: “Never will I leave you, never will I forsake you.”", "Contentment is the cheapest way to be rich, and you are never alone in the lean months.", "Keep your lives free from the love of money and be content with what you have…"], ["w", "Proverbs 13:4", "The slacker craves yet has nothing, but the soul of the diligent is fully satisfied.", "Wanting is not working. Desire without effort leaves you with nothing.", "The slacker craves yet has nothing, but the soul of the diligent is fully satisfied."], ["c", "Philippians 4:11–13", "I am not saying this out of need, for I have learned to be content regardless of my circumstances. I know how to live humbly, and I know how to abound. I am accustomed to any and every situation—to being filled and being hungry, to having plenty and having need. I can do all things through Christ who gives me strength.", "Contentment is learned, in lean months and good ones, through Christ.", "…I have learned to be content regardless of my circumstances.…"], ["l", "1 Timothy 6:7–8", "For we brought nothing into the world, so we cannot carry anything out of it. But if we have food and clothing, we will be content with these.", "We arrive with nothing and leave with nothing. Everything in between is stewardship.", "For we brought nothing into the world, so we cannot carry anything out of it.…"], ["m", "Matthew 6:19–21", "Do not store up for yourselves treasures on earth, where moth and rust destroy, and where thieves break in and steal. But store up for yourselves treasures in heaven, where moth and rust do not destroy, and where thieves do not break in and steal. For where your treasure is, there your heart will be also.", "Build wealth, but never let it own your heart.", "…For where your treasure is, there your heart will be also."], ["w", "Proverbs 12:11", "The one who works his land will have plenty of food, but whoever chases fantasies lacks judgment.", "Tend your own field. Chasing get-rich schemes leaves you empty.", "The one who works his land will have plenty of food, but whoever chases fantasies lacks judgment."], ["c", "Galatians 2:20", "I have been crucified with Christ, and I no longer live, but Christ lives in me. The life I live in the body, I live by faith in the Son of God, who loved me and gave Himself up for me.", "He loved me and gave Himself for me. Everything else grows from that.", "…I live by faith in the Son of God, who loved me and gave Himself up for me."], ["l", "Ecclesiastes 12:13", "When all has been heard, the conclusion of the matter is this: Fear God and keep His commandments, because this is the whole duty of man.", "After all the searching, this is what matters.", "…Fear God and keep His commandments, because this is the whole duty of man."], ["m", "Proverbs 13:22", "A good man leaves an inheritance to his children’s children, but the sinner’s wealth is passed to the righteous.", "Think past yourself. What you invest today can bless your grandchildren.", "A good man leaves an inheritance to his children’s children…"], ["l", "Proverbs 23:4–5", "Do not wear yourself out to get rich; be wise enough to restrain yourself. When you glance at wealth, it disappears, for it makes wings for itself and flies like an eagle to the sky.", "Work hard, but don't wear yourself out chasing riches. They can fly away overnight.", "Do not wear yourself out to get rich; be wise enough to restrain yourself.…"], ["m", "Proverbs 3:9–10", "Honor the LORD with your wealth and with the firstfruits of all your crops; then your barns will be filled with plenty, and your vats will overflow with new wine.", "Give first, not last. Put giving in your spending plan before the extras.", "Honor the LORD with your wealth and with the firstfruits of all your crops…"], ["m", "2 Corinthians 9:7", "Each one should give what he has decided in his heart to give, not out of regret or compulsion. For God loves a cheerful giver.", "Give on purpose, and give gladly.", "…For God loves a cheerful giver."], ["m", "Matthew 25:21", "His master replied, “Well done, good and faithful servant! You have been faithful with a few things; I will put you in charge of many things. Enter into the joy of your master!”", "The servants who put their money to work were praised. Money buried in the ground does nothing.", "…Well done, good and faithful servant! You have been faithful with a few things…"], ["m", "Matthew 25:27", "Then you should have deposited my money with the bankers, and on my return I would have received it back with interest.", "Even the master said it: at the very least, put your money where it earns. Don't let it sit idle.", "…you should have deposited my money with the bankers, and on my return I would have received it back with interest."]];
 var WORD_T={m:'Money',w:'Hard work',c:'The love of Christ',l:'Life is short'};
@@ -337,7 +353,7 @@ function example(){
   return {example:true,
     incomes:[{n:'Main pay',a:3400,freq:'biweekly',last:iso(fri)},{n:'Canada Child Benefit',a:620,freq:'monthly',last:iso(onDay(t.getFullYear(),t.getMonth()-1,20))}],
     received:[],
-    push:450, pushM:2350, cushion:2500, kids:true, method:'avalanche',
+    push:450, pushM:2350, cushion:5300, kids:true, method:'avalanche',
     bills:[{n:'Rent or mortgage',a:1850,d:1},{n:'Car insurance',a:210,d:5},{n:'Phone and internet',a:165,d:12},{n:'Childcare',a:600,d:15},{n:'Hydro and gas',a:190,d:20},{n:'Streaming',a:35,d:28}],
     debts:[{n:'Credit card',b:4200,r:21,m:120,d:18},{n:'Line of credit',b:8000,r:9.5,m:160,d:25},{n:'Car loan',b:14000,r:6.4,m:390,d:10}],
     spend:[{id:1,dt:iso(fri),a:142.6,c:'Groceries'},{id:2,dt:iso(addD(fri,1)),a:60,c:'Gas & transit'},{id:3,dt:iso(addD(fri,1)),a:38.5,c:'Eating out'},{id:4,dt:iso(addD(fri,2)),a:24,c:'Kids & school',note:'School trip'}],
@@ -346,7 +362,7 @@ function example(){
     goal:{need:6000,invested:25000,rate:18,growth:12}
   };
 }
-function blank(){var t=d0();return {example:false,incomes:[{n:'Main pay',a:0,freq:'biweekly',last:iso(t)}],received:[],push:0,cushion:0,kids:false,method:'avalanche',bills:[],debts:[],spend:[],paid:{},moved:{},review:{},planMode:'month',plan:[],goal:{need:0,invested:0,rate:18,growth:12}}}
+function blank(){var t=d0();return {example:false,incomes:[{n:'Main pay',a:0,freq:'biweekly',last:''}],received:[],push:0,cushion:0,kids:false,method:'avalanche',bills:[],debts:[],spend:[],paid:{},moved:{},review:{},planMode:'month',plan:[],goal:{need:0,invested:0,rate:18,growth:12}}}
 var S;
 if(!EMBED){try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}}
 if(EMBED)S=example();
@@ -378,7 +394,7 @@ function save(){if(EMBED)return;if(S&&!S.planSince&&(S.plan||[]).length)S.planSi
 
 /* ---------- pay periods ---------- */
 function period(ref){
-  var t=ref||d0(),f=S.pay.freq,a=parse(S.pay.last),prev,next;
+  var t=ref||d0(),f=S.pay.freq,a=parse(S.pay.last||iso(d0())),prev,next;
   if(f==='weekly'||f==='biweekly'){var st=f==='weekly'?7:14,k=Math.floor(days(a,t)/st);prev=addD(a,k*st);next=addD(prev,st)}
   else if(f==='semimonthly'){var c=[];for(var m=t.getMonth()-1;m<=t.getMonth()+1;m++){c.push(onDay(t.getFullYear(),m,15),onDay(t.getFullYear(),m,31))}
     c.sort(function(x,y){return x-y});prev=c.filter(function(x){return x<=t}).pop();next=c.filter(function(x){return x>t})[0]}
@@ -410,8 +426,10 @@ function calc(P){
 var ATK_RATE=7;
 function isAtk(d){return d.atk!=null?!!d.atk:(+d.r||0)>=ATK_RATE}
 function needM(){return (+S.goal.need||0)||S.bills.reduce(function(s,b){return s+(+b.a||0)},0)}
-function targets(){var need=needM();return {starter:S.kids?2000:1000,full:need*3,goal:(+S.goal.need||0)*12/((+S.goal.rate||18)/100)}}
+function targets(){var need=needM();return {starter:Math.round(S.bills.reduce(function(t,b){return t+(+b.a||0)},0)+S.debts.filter(function(d){return (+d.b||0)>0}).reduce(function(t,d){return t+(+d.m||0)},0)+planMonth()),full:0,goal:(+S.goal.need||0)*12/((+S.goal.rate||18)/100)}}
 function sortFn(m){return m==='snowball'?function(a,b){return a.b-b.b}:function(a,b){return b.r-a.r}}
+/* visible Freedom Steps: 1 know your number, 3 attack debt, 5 invest, 6 freedom (emergency fund = one month of the monthly budget; no income cushion: the yield is the cushion) */
+var VIS=[1,2,3,5,6];function sNo(sn){var i=VIS.indexOf(sn);return i<0?VIS.filter(function(v){return v<sn}).length+1:i+1}var SN_OF=' of '+VIS.length;
 function step(){
   var T=targets();
   if(!((+S.pay.amount||0)>0&&S.bills.length))return 1;
@@ -504,7 +522,9 @@ function cardView(){
   return {card:card,prev:prev,next:next,pm:pm,owing:owing,on:on,left:pm-(on||0),frac:frac,cls:cls,txt:txt,dl:Math.max(1,days(t,next)),logged:logged};
 }
 /* card users: will chequing cover the card and the bills by the time the card is due? */
+function needDates(){return S.incomes.some(function(i){return +i.a>0&&i.freq!=='semimonthly'&&!i.last})}
 function cardCash(CV){
+  if(needDates())return null;
   var b=S.bal;if(!CV||!b||(CV.card?b.card==null:b.spent==null))return null;var bd=parse(b.dt);if(bd<CV.prev)return null;
   var W={prev:addD(bd,1),next:addD(CV.next,1)},inc=0,pays=0;
   S.incomes.forEach(function(i,ix){if(!(+i.a>0))return;depDates(i,W).forEach(function(d){inc+=+i.a;if(ix===0)pays++})});
@@ -522,30 +542,32 @@ function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return
 
 var STEPS=[
   ['Know your number','Every dollar of your income gets a job.'],
-  ['Starter cushion','A small cash buffer, so a surprise never goes on a card.'],
-  ['Attack expensive debt','Pay off every debt at 7% or more.'],
+  ['Emergency fund','One month of your monthly budget, kept in cash, so a surprise never goes on a card.'],
+  ['Attack expensive debt','Pay off every debt at 7% or more, then invest everything.'],
   ['Income cushion','Three months of expenses, invested in a stable fund that pays you monthly.'],
-  ['Invest for freedom','All your freedom money is invested every month.'],
+  ['Invest for freedom','Every dollar of freedom money is invested in funds that pay you monthly. The yield is your cushion.'],
   ['Freedom','Your investments’ payouts cover your monthly number.']
 ];
-function moveTo(sn){var t=attackTarget();return sn<=2?'Move to your starter cushion':sn===4?'Invest in your income cushion':sn===3?'Pay extra on '+(t?esc(t.n):'your debt'):'Move to investing'}
-function bucket(sn){var t=attackTarget();return sn<=2?'Step 2 · Starter cushion':sn===3?'Step 3 · Attack '+(t?esc(t.n):'debt'):sn===4?'Step 4 · Income cushion':'Step 5 · Invest'}
+function moveTo(sn){var t=attackTarget();return sn<=2?'Move to your emergency fund':sn===3?'Pay extra on '+(t?esc(t.n):'your debt'):'Move to investing'}
+function bucket(sn){var t=attackTarget();return sn<=2?'Step 2 · Emergency fund':sn===3?'Step 3 · Attack '+(t?esc(t.n):'debt'):'Step 4 · Invest'}
 /* Today: this payday's freedom money, where it goes, and progress on the current Freedom Step */
 /* Today: month at a glance plus what's left of this month's spending plan */
 function todayMonth(){return monthCard()}
 function fmToday(C,sn,k,mv){k=mkey();var amt=pushMon(),T=targets(),cush=+S.cushion||0,X=sim(),g=suggestPush(),tgt,prog='',pct=null;
-  if(sn<=2){tgt='your starter cushion';prog=money(Math.min(cush,T.starter))+' of '+money(T.starter)+' saved';pct=T.starter?cush/T.starter:0}
+  if(sn<=2){tgt='your emergency fund';prog=money(Math.min(cush,T.starter))+' of '+money(T.starter)+' saved';pct=T.starter?cush/T.starter:0}
   else if(sn===3){var t=attackTarget();tgt='paying off '+(t?esc(t.n):'your expensive debt');var left=S.debts.filter(function(d){return isAtk(d)}).reduce(function(a,d){return a+(+d.b||0)},0);prog=money(left)+' of expensive debt left'+(X.st[3]!=null&&X.st[3]>0?' · gone by <b>'+monthsOut(X.st[3])+'</b>':'')}
   else if(sn===4){tgt='your income cushion';prog=money(Math.min(cush,T.full))+' of '+money(T.full)+' invested';pct=T.full?cush/T.full:0}
   else{tgt='your income investments';var inv=+S.goal.invested||0;prog=T.goal?money(inv)+' of your '+money(T.goal)+' freedom number':'Set your freedom number on the Goals tab';pct=T.goal?inv/T.goal:null}
   var done=!!mv[k+':push'];
   var h='<div class="card fm-card"><p class="lbl">Freedom money this month</p>';
   if(!(pushMon()>0)){
+    if(!S.bills.length||!(S.plan||[]).length)return h+'<p><b>Not set yet.</b> Add your bills and spending plan on the Plan tab, and the app will suggest how much to put to work each month.</p><button class="btn ghost sm" data-go="plan">Finish my plan</button></div>';
     h+='<p><b>Not set yet.</b> '+(g.per>0?'Based on your plan, you could put <b>'+money(g.per)+'</b> to work each month, toward '+tgt+'.':'Your plan doesn’t leave room yet. Trim your spending plan to free some up.')+'</p>'+(g.per>0?'<button class="btn sm" data-act="use-sug">Use '+money(g.per)+'</button>':'<button class="btn ghost sm" data-go="plan">Open your plan</button>');
     return h+'</div>'}
   h+='<div class="fm-main"><b class="num fm-amt">'+money(amt)+'</b><span class="fm-to">→ '+tgt+'</span></div>'+
     (pct!=null?'<div class="fm-bar" aria-hidden="true"><i style="width:'+Math.max(2,Math.min(100,pct*100)).toFixed(1)+'%"></i></div>':'')+
-    '<p class="note">'+prog+'. Freedom Step '+Math.max(2,Math.min(6,sn))+' of 6.</p>'+
+    '<p class="note">'+prog+'. Freedom Step '+sNo(sn)+SN_OF+'.</p>'+
+    (function(){var r=[];for(var n=Math.max(2,sn);n<=6;n++){if(n===5||n===4||X.st[n]==null)continue;r.push('<div class="row"><span>'+({2:'Emergency fund full',3:'Expensive debt gone',4:'Income cushion full',6:'Freedom: payouts cover your month'}[n])+'</span><span class="num">'+(X.st[n]===0?'Now':monthsOut(X.st[n]))+'</span></div>')}return r.length?'<div class="fm-time"><p class="lbl">At this pace</p><div class="rows">'+r.join('')+'</div></div>':''})()+
     '<button class="btn '+(done?'ghost ':'')+'sm" data-mv="push" aria-pressed="'+done+'">'+(done?'✓ Moved this month':'Mark as moved')+'</button>';
   return h+'</div>'}
 function renderToday(){
@@ -571,17 +593,20 @@ function renderToday(){
   }
   var roll=S.debts.filter(function(d){return (+d.b||0)<=0&&(+d.m||0)>0&&!d.rolled});
   if(roll.length){var r0=roll[0];h+='<div class="card cta wide"><b>'+esc(r0.n)+' is paid off. Well done.</b><p class="note">Keep the momentum: add its '+money(+r0.m)+' monthly payment to your freedom money, so it keeps working for you instead of going to spending.</p><button class="btn sm" data-roll="'+S.debts.indexOf(r0)+'">Roll it in</button></div>'}
-  h+='<div class="card hero"><p class="lbl">'+heroL+'</p><div class="big num">'+money(heroN)+'</div>'+
+  var warn='',g0=suggestPush(),CC2=CV?cardCash(CV):null;
+  if(CC2&&CC2.end<0)warn='Chequing could come up about '+money(-CC2.end)+' short by '+fd(addD(CC2.due,-1),{month:'short',day:'numeric'})+'. Move money in or spend less.';
+  else if(!CC2&&g0.inc>0&&g0.free-pushMon()<0)warn='Your plan spends '+money(pushMon()-g0.free)+' a month more than you earn. Trim your spending plan or freedom money.';
+  var hero='<div class="card hero"><p class="lbl">'+heroL+'</p><div class="big num">'+money(heroN)+'</div>'+
      '<div class="hero-sub"><span>'+(heroN>0?'About '+money(heroN/dl)+' a day':'Nothing left to spend')+'</span><span>'+dl+' day'+(dl>1?'s':'')+(CV?(CV.card?' until the card is due':' left this month'):' to payday')+'</span></div>'+
      '<span class="note" style="color:inherit;opacity:.8">'+heroSub+'</span>'+
      (txt?'<span class="pill '+cls+'">'+txt+'</span>':'')+
+     (warn?'<p class="hero-warn" role="status"><b>Heads up.</b> '+warn+'</p>':'')+
      '<button class="btn" data-act="bal">Update my balance</button></div>';
-  var warn='';if(CV){var CC2=cardCash(CV);if(CC2&&CC2.end<0)warn='Heads up: chequing could come up about '+money(-CC2.end)+' short by '+fd(CV.card?CC2.due:addD(CC2.due,-1),{month:'short',day:'numeric'})+'. Move money in or spend less.';
-    else if(!CC2&&F.short>0)warn='Heads up: the bills due before your next pay on '+fd(C.P.next,{month:'short',day:'numeric'})+' take most of this paycheque. Go easy on spending until then.'}
-  if(warn)h+='<div class="card warnline" role="status"><span aria-hidden="true">!</span><p>'+warn+'</p></div>';
-  if(C.pay)h+=fmToday(C,sn,k,mv)+todayMonth();
-  if(faithOn())h+=wordCard();
+  /* top row: what's left (left) and where the freedom money goes (right) */
+  h+='<div class="today-top wide">'+hero+'<div class="tt-side">'+(C.pay?fmToday(C,sn,k,mv):'')+'</div></div>';
   h+=rv;
+  if(C.pay)h+=todayMonth();
+  if(faithOn())h+=wordCard().replace('class="card word','class="card wide word');
   /* the plan itself */
   h+='<div class="card"><h2 style="font-family:var(--display);font-size:22px">'+(CV?'Spending plan this month':'Spending plan this paycheque')+'</h2>'+((S.plan||[]).length?'<div class="rows">'+S.plan.map(function(c){var a0=CV?CV.prev:C.P.prev,a1=CV?CV.next:C.P.next,sp=S.spend.filter(function(e){var d=parse(e.dt);return e.c===c.c&&d>=a0&&d<a1}).reduce(function(s,e){return s+(+e.a||0)},0);return '<div class="row"><span class="l"><span>'+esc(c.c)+(sp?'<small>'+money(sp)+' logged</small>':'')+'</span></span><b class="num">'+money(CV?catPay(c)*PPM[S.pay.freq]:catPay(c))+'</b></div>'}).join('')+'<div class="row"><b>Total</b><b class="num">'+money(CV?CV.pm:planT())+'</b></div></div><p class="note">'+(CV&&CV.card?'Spend it on '+cardName()+' as planned, and pay the full balance when it’s due. Your card balance shows how much is used.':CV?'Spread it through the month. Your banking app shows how much you’ve spent.':'Some people take this out in cash, or move it to a separate spending account. When it’s gone, it’s gone.')+'</p>':'<p class="note">Add your categories on the Plan tab: groceries, gas, kids, eating out and so on.</p>')+'</div>';
   var t0=d0(),BM={prev:new Date(t0.getFullYear(),t0.getMonth(),1,12),next:new Date(t0.getFullYear(),t0.getMonth()+1,1,12)},due=dueIn(BM),mname=t0.toLocaleDateString('en-CA',{month:'long'});
@@ -632,7 +657,7 @@ function renderSpend(){
     h+='<div class="rows">'+(S.plan||[]).map(function(c){var a=catPay(c)*PPM[S.pay.freq],sp=byc[c.c]||0;return '<div class="sp-row"><div class="sp-top"><span><b>'+esc(c.c)+'</b><small>'+(hl&&sp?money(sp)+' logged · '+money(a-sp)+' left':'About '+money(a/4.33)+' a week')+'</small></span><span class="sp-r"><b class="num">'+money(a)+'</b><button class="chip sp-add" data-logc="'+esc(c.c)+'" aria-label="Log a '+esc(c.c)+' purchase">+ Log</button></span></div></div>'}).join('')+'</div>';
     h+='<div class="row" style="border-top:1px solid var(--line)"><b>Monthly plan</b><b class="num">'+money(CV.pm)+'</b></div><p class="note">'+(CV.card?'Your card balance already shows what you’ve spent, so there’s nothing to log.':'Your banking app already shows what you’ve spent, so there’s nothing to log.')+' Use “+ Log” only if you want to see one category in detail.</p></div>';
     var CC=cardCash(CV);
-    h+='<div class="card"><p class="lbl">Reality check</p>'+(CC?'<div class="tile"><b class="num"'+(CC.end<0?' style="color:var(--bad)"':'')+'>'+money(CC.end)+'</b><span class="note">left in chequing on '+fd(CV.card?CC.due:addD(CC.due,-1),{month:'short',day:'numeric'})+', '+(CV.card?'after paying your '+money(CC.card)+' card balance and your bills':'after your bills and the rest of this month’s plan')+'</span></div><div class="rows"><div class="row"><span>Chequing on '+fd(CC.dt,{month:'short',day:'numeric'})+'</span><span class="num">'+money(CC.bal)+'</span></div><div class="row"><span>Income coming in</span><span class="num">+'+money(CC.inc)+'</span></div><div class="row"><span>Bills and minimums</span><span class="num">−'+money(CC.bills)+'</span></div>'+(CC.push?'<div class="row"><span>Freedom money</span><span class="num">−'+money(CC.push)+'</span></div>':'')+''+(CV.card?'<div class="row"><span>Card balance</span><span class="num">−'+money(CC.card)+'</span></div>':'<div class="row"><span>Rest of this month’s spending plan</span><span class="num">−'+money(CC.remain)+'</span></div>')+(CC.card>0?'<div class="row"><span>Last month’s card balance still to pay<small>What you owe on the card, minus this month’s spending</small></span><span class="num">−'+money(CC.card)+'</span></div>':'')+'</div>'+(CC.end<0?'<p class="note" style="color:var(--bad)">Not enough to cover everything by the end of the month. Spend less this month, or move money in.</p>':''):'<p class="note">Enter your chequing balance and '+(CV.card?'what’s on your card. The app checks there’s enough to pay the card and your bills.':'what you’ve spent this month. The app checks there’s enough for your bills and the rest of your plan.')+'</p>')+'<button class="btn sm" data-act="bal">Update my balance</button></div>';
+    h+='<div class="card"><p class="lbl">Reality check</p>'+(CC?'<div class="tile"><b class="num"'+(CC.end<0?' style="color:var(--bad)"':'')+'>'+money(CC.end)+'</b><span class="note">left in chequing on '+fd(CV.card?CC.due:addD(CC.due,-1),{month:'short',day:'numeric'})+', '+(CV.card?'after paying your '+money(CC.card)+' card balance and your bills':'after your bills and the rest of this month’s plan')+'</span></div><div class="rows"><div class="row"><span>Chequing on '+fd(CC.dt,{month:'short',day:'numeric'})+'</span><span class="num">'+money(CC.bal)+'</span></div><div class="row"><span>Income coming in</span><span class="num">+'+money(CC.inc)+'</span></div><div class="row"><span>Bills and minimums</span><span class="num">−'+money(CC.bills)+'</span></div>'+(CC.push?'<div class="row"><span>Freedom money</span><span class="num">−'+money(CC.push)+'</span></div>':'')+''+(CV.card?'<div class="row"><span>Card balance</span><span class="num">−'+money(CC.card)+'</span></div>':'<div class="row"><span>Rest of this month’s spending plan</span><span class="num">−'+money(CC.remain)+'</span></div>')+(CC.card>0?'<div class="row"><span>Last month’s card balance still to pay<small>What you owe on the card, minus this month’s spending</small></span><span class="num">−'+money(CC.card)+'</span></div>':'')+'</div>'+(CC.end<0?'<p class="note" style="color:var(--bad)">Not enough to cover everything by the end of the month. Spend less this month, or move money in.</p>':''):(needDates()?'<p class="note">Add a recent pay date for each income on the Plan tab, and the app checks that chequing covers your bills and the rest of this month.</p><button class="btn ghost sm" data-go="plan">Add pay dates</button>':'')+(needDates()?'':'<p class="note">Enter your chequing balance and '+(CV.card?'what’s on your card. The app checks there’s enough to pay the card and your bills.':'what you’ve spent this month. The app checks there’s enough for your bills and the rest of your plan.')+'</p>'))+'<button class="btn sm" data-act="bal">Update my balance</button></div>';
   }else{
   /* 1. this paycheque's plan */
   h+='<div class="card wide"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><h2 style="font-family:var(--display);font-size:24px">This paycheque’s spending</h2><span class="note">'+fd(P.prev,{month:'short',day:'numeric'})+' to '+fd(P.next,{month:'short',day:'numeric'})+' · '+dl+' day'+(dl>1?'s':'')+' left</span></div>';
@@ -686,7 +711,7 @@ function renderGoals(){
   var inc0g=(+S.incomes[0].a||0)>0;
   var detail=[
     (S.bills.length&&inc0g?'Your pay and '+S.bills.length+' bill'+(S.bills.length>1?'s are':' is')+' in the plan.':'Add your pay and bills on the Plan tab.'),
-    money(Math.min(cush,T.starter))+' of '+money(T.starter)+(S.kids?' (with kids)':''),
+    money(Math.min(cush,T.starter))+' of '+money(T.starter)+' saved (one month of your budget)',
     '',
     (needM()>0?money(Math.min(cush,T.full))+' of '+money(T.full)+' (3 × '+money(needM())+')':'Add your monthly need in the freedom number card below.'),
     'Freedom money is '+(payM?Math.round(pushM/payM*100):0)+'% of your income. Aim for 20%.',
@@ -695,12 +720,12 @@ function renderGoals(){
   var atk=X.debts.filter(function(d){return d.atk&&(d.done==null||d.done>0)}).sort(function(a,b){return (a.done==null?1e9:a.done)-(b.done==null?1e9:b.done)});
   var sched=X.debts.filter(function(d){return !d.atk&&(d.done==null||d.done>0)});
   detail[2]=atk.length?atk.length+' debt'+(atk.length>1?'s':'')+' to clear, '+(m==='snowball'?'smallest first':'highest interest first')+'.':'No debts at 7% or more.';
-  var h='<div class="card wide"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><h2 style="font-family:var(--display);font-size:26px">The Freedom Steps</h2><span class="note">You’re on step '+sn+'</span></div><ol class="fs">';
-  STEPS.forEach(function(s,i){var n=i+1,state=n<sn?'done':n===sn?'now':'next',when='';
+  var h='<div class="card wide"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><h2 style="font-family:var(--display);font-size:26px">The Freedom Steps</h2><span class="note">You’re on step '+sNo(sn)+'</span></div><ol class="fs">';
+  STEPS.forEach(function(s,i){var n=i+1;if(VIS.indexOf(n)<0)return;var state=n<sn?'done':n===sn?'now':'next',when='';
     if(state==='done')when='Done';else if(n===5)when=state==='now'?'You’re here':'';else if(state==='now')when='You’re here'+(X.st[n]!=null&&X.st[n]>0?' · done by '+monthsOut(X.st[n]):'');else if(X.st[n]!=null)when='About '+monthsOut(X.st[n]);
     var now=state==='now',open=now||!!stepOpen[i];
-    h+='<li class="fs-'+state+(open?' fs-open':'')+'"'+(now?'':' data-fs="'+i+'" tabindex="0" role="button" aria-expanded="'+open+'" aria-label="'+s[0]+(open?', tap to close':', tap to see more')+'"')+'><span class="fs-n">'+(state==='done'?'✓':n)+'</span><span class="fs-t"><b>'+s[0]+'</b>'+(now?'<small class="fs-here">'+when+'</small>':'')+'<small>'+s[1]+'</small>'+((state!=='done'||open)&&detail[i]?'<small class="fs-d">'+detail[i]+'</small>':'')+(faithOn()&&open?'<small class="fs-v">“'+STEPV[i][0]+'”<span class="fs-vr">'+STEPV[i][1]+' · BSB</span></small>':'')+'</span><span class="fs-w">'+(now?'':when+'<span class="fs-chev" aria-hidden="true"><svg viewBox="0 0 12 8" width="12" height="8"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>')+'</span></li>'});
-  h+='</ol><p class="note">Never refuse free money: even on step 3, take a full employer RRSP or pension match.</p></div>';
+    h+='<li class="fs-'+state+(open?' fs-open':'')+'"'+(now?'':' data-fs="'+i+'" tabindex="0" role="button" aria-expanded="'+open+'" aria-label="'+s[0]+(open?', tap to close':', tap to see more')+'"')+'><span class="fs-n">'+(state==='done'?'✓':sNo(n))+'</span><span class="fs-t"><b>'+s[0]+'</b>'+(now?'<small class="fs-here">'+when+'</small>':'')+'<small>'+s[1]+'</small>'+((state!=='done'||open)&&detail[i]?'<small class="fs-d">'+detail[i]+'</small>':'')+(faithOn()&&open?'<small class="fs-v">“'+STEPV[i][0]+'”<span class="fs-vr">'+STEPV[i][1]+' · BSB</span></small>':'')+'</span><span class="fs-w">'+(now?'':when+'<span class="fs-chev" aria-hidden="true"><svg viewBox="0 0 12 8" width="12" height="8"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>')+'</span></li>'});
+  h+='</ol><p class="note">Never refuse free money: even while you pay off debt, take a full employer RRSP or pension match.</p></div>';
 
   h+='<div class="card"><p class="lbl">Step 3 · Attack expensive debt</p>';
   h+='<div class="chips" role="group" aria-label="Debt payoff method"><button class="chip" data-method="avalanche" aria-pressed="'+(m==='avalanche')+'">Avalanche</button><button class="chip" data-method="snowball" aria-pressed="'+(m==='snowball')+'">Snowball</button></div>';
@@ -761,9 +786,8 @@ function sugHtml(){var g=suggestPush(),cur=pushMon();
     '</div>'}
 function pushNote(){
   var T=targets(),c=+S.cushion||0,t=attackTarget(),jobs=[];
-  if(c<T.starter)jobs.push('your starter cushion');
+  if(c<T.starter)jobs.push('your emergency fund ('+money(T.starter)+', one month of your budget)');
   if(t)jobs.push('paying off '+esc(t.n)+(S.debts.filter(function(d){return isAtk(d)&&(+d.b||0)>0}).length>1?' and your other expensive debt':''));
-  if(c<T.full)jobs.push('your income cushion, invested in a stable fund that pays you monthly');
   var h='What’s left after all your expenses. ';
   if(!jobs.length)return h+'<b>Every dollar is invested.</b>';
   h+='<b>Right now it goes to '+jobs[0]+'.</b> ';
@@ -791,24 +815,23 @@ function planSide(){var g=suggestPush(),sn=step(),inc=g.inc,out=g.bills+g.mins+g
   var mini='<div class="side-mini"><span>Left after spending <b>'+money(g.free)+'</b></span><span>Suggested freedom money <b>'+money(g.per)+'</b>/month</span>'+(S.pSec!=='freedom'?'<button class="chip" data-psec="freedom">Set it</button>':'')+'</div>';
   return (S.pSec==='freedom'?'':mini)+'<div class="side-full">'+monthCard()+(S.pSec==='freedom'?'':
     '<div class="card side-card"><p class="lbl">Suggested freedom money</p><b class="num" style="font-family:var(--display);font-size:32px;font-weight:500;line-height:1.1">'+money(g.per)+' <small style="font-family:inherit;font-size:14px;color:var(--muted)">a month</small></b>'+
-    '<p class="note">You’re using <b>'+money(pushMon())+'</b> a month. Right now it goes to: <b>'+esc(STEPS[sn-1][0])+'</b> (Freedom Step '+sn+' of 6).</p>'+'<button class="btn ghost sm" data-psec="freedom">Set freedom money</button></div>')+'</div>'}
+    '<p class="note">You’re using <b>'+money(pushMon())+'</b> a month. Right now it goes to: <b>'+esc(STEPS[sn-1][0])+'</b> (Freedom Step '+sNo(sn)+SN_OF+').</p>'+'<button class="btn ghost sm" data-psec="freedom">Set freedom money</button></div>')+'</div>'}
 function renderPlan(){
   var T=targets(),sn=step(),inc0=(+S.incomes[0].a||0)>0;
   var todo=[['Add your take-home pay',inc0],['Add your monthly bills',S.bills.length>0],['Make your spending plan',(S.plan||[]).length>0],['Add any debts (skip this if you have none)',S.debts.length>0,true],['Set your freedom money (the app suggests an amount)',(+S.push||0)>0]];
   var setupDone=todo.filter(function(t){return !t[2]}).every(function(t){return t[1]});
   var h0=setupDone?'':'<div class="card wide cta"><b>Get set up in about 10 minutes</b><ol class="setup">'+todo.map(function(t){return '<li class="'+(t[1]?'ok':'')+'"><span aria-hidden="true">'+(t[1]?'✓':'')+'</span>'+t[0]+'</li>'}).join('')+'</ol><p class="note">Fill in the cards below, top to bottom. Everything saves as you type.</p></div>';
   var P={};P.income='<div class="card wide"><h2 style="font-family:var(--display);font-size:22px">Your income</h2><p class="note">Enter what actually lands in your bank account each time, after tax and deductions, and how often it comes. For example, $2,100 every two weeks. The app works out your monthly total. Add every regular source: your pay, your partner’s, the Canada Child Benefit.</p><div class="stack" style="gap:14px">'+
-    S.incomes.map(function(inc,i){return '<div class="edit inc" data-row="incomes" data-i="'+i+'"><label class="field i-n">'+(i===0?'Main income · sets your paydays':'Income')+'<input data-k="n" value="'+esc(inc.n)+'"></label><label class="field i-a">'+(i===0?'Take-home pay, each paycheque':'Amount each time it’s paid')+'<input data-k="a" type="number" inputmode="decimal" min="0" step="50" value="'+(+inc.a||0)+'"></label><label class="field i-f">'+(i===0?'How often you’re paid':'How often it’s paid')+'<select data-k="freq">'+Object.keys(FREQ).map(function(k){return '<option value="'+k+'"'+(k===inc.freq?' selected':'')+'>'+FREQ[k]+'</option>'}).join('')+'</select></label><label class="field i-d"'+(inc.freq==='semimonthly'?' hidden':'')+'>A recent pay date<input data-k="last" type="date" value="'+(inc.last||'')+'"></label>'+(i?'<button class="x i-x" aria-label="Remove '+esc(inc.n)+'" data-rm="incomes" data-i="'+i+'">×</button>':'')+'</div>'}).join('')+
-    '</div><p class="note" data-live="incNote">'+(incomeM()>0?'All your income together: about <b>'+money(incomeM())+' a month</b>'+(S.incomes.length>1||(S.incomes[0]&&S.incomes[0].freq!=='monthly')?' ('+S.incomes.filter(function(x){return +x.a>0}).map(function(x){return money(+x.a)+' '+({weekly:'a week',biweekly:'every two weeks',semimonthly:'twice a month',monthly:'a month'}[x.freq||'monthly'])}).join(' + ')+')':'')+'.':'Your monthly total shows here once you add your pay.')+'</p><button class="btn ghost sm" data-add="incomes">+ Add income</button><p class="note">Side gigs, bonuses or refunds that don’t come on a schedule? Don’t add them here. Use “Money came in” on the Today tab when they arrive.</p></div>';
+    S.incomes.map(function(inc,i){return '<div class="edit inc" data-row="incomes" data-i="'+i+'"><label class="field i-n">'+(i===0?'Main income':'Income')+'<input data-k="n" value="'+esc(inc.n)+'"></label><label class="field i-a">'+(i===0?'Take-home pay, each paycheque':'Amount each time it’s paid')+'<input data-k="a" type="number" inputmode="decimal" min="0" step="50" value="'+(+inc.a||0)+'"></label><label class="field i-f">'+(i===0?'How often you’re paid':'How often it’s paid')+'<select data-k="freq">'+Object.keys(FREQ).map(function(k){return '<option value="'+k+'"'+(k===inc.freq?' selected':'')+'>'+FREQ[k]+'</option>'}).join('')+'</select></label><label class="field i-d"'+(inc.freq==='semimonthly'?' hidden':'')+'>A recent pay date <span class="opt-tag">optional</span><input data-k="last" type="date" value="'+(inc.last||'')+'"></label>'+(i?'<button class="x i-x" aria-label="Remove '+esc(inc.n)+'" data-rm="incomes" data-i="'+i+'">×</button>':'')+'</div>'}).join('')+
+    '</div><p class="note" data-live="incNote">'+(incomeM()>0?'All your income together: about <b>'+money(incomeM())+' a month</b>'+(S.incomes.length>1||(S.incomes[0]&&S.incomes[0].freq!=='monthly')?' ('+S.incomes.filter(function(x){return +x.a>0}).map(function(x){return money(+x.a)+' '+({weekly:'a week',biweekly:'every two weeks',semimonthly:'twice a month',monthly:'a month'}[x.freq||'monthly'])}).join(' + ')+')':'')+'.':'Your monthly total shows here once you add your pay.')+'</p><button class="btn ghost sm" data-add="incomes">+ Add income</button><p class="note">Side gigs, bonuses or refunds that don’t come on a schedule? Don’t add them here. Use “Money came in” on the Today tab when they arrive.</p><p class="note">The pay date is optional. Add it and the app can warn you if chequing might run short before payday.</p></div>';
   P.freedom='<div class="card wide"><h2 style="font-family:var(--display);font-size:22px">Freedom money</h2>'+
-    '<p class="note">The extra you send to your current Freedom Step every month: your starter cushion first, then expensive debt, then your income cushion, then investing.</p>'+
+    '<p class="note">The extra you put to work every month: first a one-month emergency fund, then expensive debt, then every dollar gets invested in funds that pay you monthly.</p>'+
     '<div data-live="pushSug">'+sugHtml()+'</div>'+
     '<label class="field">Your freedom money, each month<input id="p-push" type="number" inputmode="decimal" min="0" step="25" value="'+pushMon()+'"></label>'+
     '<p class="note" data-live="pushNote">'+pushNote()+'</p></div>';
-  P.freedom+='<div class="card wide"><h2 style="font-family:var(--display);font-size:22px">Your cushion</h2>'+
-    '<label class="field">Cushion now (cash plus your income cushion)<input id="p-cush" type="number" inputmode="decimal" min="0" step="100" value="'+(+S.cushion||0)+'"></label>'+
-    '<div class="field">Kids at home?<div class="chips"><button class="chip" data-kids="1" aria-pressed="'+!!S.kids+'">Yes</button><button class="chip" data-kids="0" aria-pressed="'+!S.kids+'">No</button></div></div>'+
-    '<p class="note" data-live="cushNote">Starter cushion: <b>'+money(T.starter)+'</b>, kept in cash for true emergencies. Income cushion: <b>'+money(T.full)+'</b>, three months of your monthly need. Don’t leave it in savings: invest it in a high-interest savings ETF or money market fund in your TFSA. It pays you every month, barely moves when markets fall, and comes out tax-free if you need it.</p></div>';
+  P.freedom+='<div class="card wide"><h2 style="font-family:var(--display);font-size:22px">Emergency fund</h2>'+
+    '<label class="field">Saved for emergencies now<input id="p-cush" type="number" inputmode="decimal" min="0" step="100" value="'+(+S.cushion||0)+'"></label>'+
+    '<p class="note" data-live="cushNote">Your target: <b>'+money(targets().starter)+'</b>, one month of your monthly budget (bills, minimum payments and spending plan), kept in cash. That’s the only cash you hold. Everything after it is invested, and the monthly payouts are your cushion.</p></div>';
   var F=flow(),nf=flow(period(F.P.next));
   P.spending='<div class="card wide"><h2 style="font-family:var(--display);font-size:22px">Spending plan</h2><p class="note">Decide ahead of time what each category gets, and stick to it.</p>'+
     '<div class="field">How do you pay for everyday spending?<div class="chips"><button class="chip" data-card="0" aria-pressed="'+!S.card.on+'">Debit or cash</button><button class="chip" data-card="1" aria-pressed="'+!!S.card.on+'">Credit card, paid in full every month</button></div></div>'+
@@ -818,8 +841,6 @@ function renderPlan(){
     '</div><button class="btn ghost sm" data-add="plan">+ Add a category</button><p class="note" data-live="planNote">Plan total: <b>'+money(planMonth())+' a month</b>. '+(function(){var g=suggestPush(),room=g.inc-g.bills-g.mins;return g.inc>0?'After bills and minimum payments you have about '+money(room)+' a month for spending and freedom money.':''})()+' Anything left over goes to your step.</p></div>';
   P.bills='<div class="card wide"><h2 style="font-family:var(--display);font-size:22px">Monthly bills</h2>'+
     '<p class="note">A bill is a <b>fixed amount you owe on a set date</b>, and you pay about the same every month whether you’re careful or not. If you can choose to spend less of it this month, it isn’t a bill: it goes in your spending plan.</p>'+
-    '<div class="bguide"><div class="bg-yes"><p class="lbl">Bills</p><p>Rent or mortgage, property tax, hydro and heating, water, phone and internet, insurance, childcare, transit pass, subscriptions</p></div>'+
-    '<div class="bg-no"><p class="lbl">Not bills</p><p>Groceries, gas for the car, eating out, clothes, kids’ activities, gifts, money sent home: these go in your <button class="linkbtn" data-psec="spending">spending plan</button>. Loan and card payments go under <button class="linkbtn" data-psec="debts">Debts</button>.</p></div></div>'+
     '<div class="stack" style="gap:10px">'+
     S.bills.map(function(b,i){return '<div class="edit bill" data-row="bills" data-i="'+i+'"><label class="field b-n">Bill'+(b.custom?'<input data-k="n" value="'+esc(b.n)+'" placeholder="Name your bill">':catSelect(b.n,BILLS,'n'))+'</label><label class="field b-a">Amount<input data-k="a" type="number" inputmode="decimal" value="'+(+b.a||0)+'"></label><label class="field b-d">Due day<input data-k="d" type="number" inputmode="numeric" min="1" max="31" value="'+(+b.d||1)+'"></label><button class="x" aria-label="Remove '+esc(b.n)+'" data-rm="bills" data-i="'+i+'">×</button></div>'}).join('')+
     '</div><p class="note" data-live="billWarn" style="color:var(--bad)">'+billWarn()+'</p><button class="btn ghost sm" data-add="bills">+ Add a bill</button></div>';
@@ -848,7 +869,7 @@ function summary(){
   var by={};S.spend.forEach(function(e){var d=parse(e.dt);if(d>=C.P.prev&&d<C.P.next)by[e.c]=(by[e.c]||0)+(+e.a||0)});
   var top=Object.keys(by).sort(function(a,b){return by[b]-by[a]}).slice(0,3).map(function(c){return c+' '+money(by[c])}).join(', ');
   return ['Melius Money check-in · '+fd(d0(),{month:'long',day:'numeric',year:'numeric'}),'',
-    'Freedom Step: '+sn+' of 6 ('+STEPS[sn-1][0]+')',
+    'Freedom Step: '+sNo(sn)+SN_OF+' ('+STEPS[sn-1][0]+')',
     'Income: '+S.incomes.filter(function(i){return +i.a>0}).map(function(i){return (i.n||'Income')+' '+money(+i.a)+' '+FREQ[i.freq].toLowerCase()}).join('; ')+' (about '+money(incomeM())+' a month)',
     'This month:',
     (function(){var g=suggestPush();return '  Bills '+money(g.bills)+' · Minimum payments '+money(g.mins)+' · Freedom money '+money(pushMon())+' ('+bucket(sn).replace(/&amp;/g,'&')+')'})(),
@@ -856,7 +877,7 @@ function summary(){
     '  Spending plan '+money(planMonth())+' a month'+(Object.keys(S.review||{}).length?' · last reviews: '+Object.keys(S.review).sort().slice(-3).map(function(k){var o=S.review[k],c=Object.keys(o);return c.length?c.map(function(x){return x+' +'+money(o[x])}).join(', '):'all within'}).join(' | '):''),
     top?'  Logged spending: '+top:'  No purchases logged',
     (S.card.on?'Everyday spending on '+S.cards.map(function(c){return c.n+' (due the '+ord(c.due)+')'}).join(', ')+', paid in full monthly'+(S.bal&&S.bal.card?' · owing '+money(S.bal.card)+' at last check':''):'Everyday spending: debit or cash'),
-    'Cushion: '+money(+S.cushion||0)+' (starter '+money(T.starter)+' in cash, income cushion '+money(T.full)+' invested)',
+    'Emergency fund: '+money(+S.cushion||0)+' of '+money(T.starter)+' (one month of budget)',
     'Debts: '+(total?money(total)+' owing, '+money(atkTotal)+' at 7%+ · method: '+S.method+' · expensive debt gone around '+(X.st[3]==null?'not yet':X.st[3]===0?'now':monthsOut(X.st[3])):'none'),
     'Freedom number: '+money(T.goal)+' at '+S.goal.rate+'% · invested '+money(+S.goal.invested||0)+' · '+(X.st[6]==null?'over 50 years':X.st[6]===0?'reached':'about '+yrs(X.st[6])+' to go')].join('\n');
 }
