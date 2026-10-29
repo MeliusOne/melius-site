@@ -2475,6 +2475,11 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     st.total=v;save();st.order.forEach(rowUpdate);syncPct();calc()});
   $('icMix').addEventListener('click',function(e){var b=e.target.closest('[data-rm]');if(!b)return;var t=b.dataset.rm;delete st.sel[t];delete st.pct[t];st.order=st.order.filter(function(x){return x!==t});save();all()});
   $('icSplit').addEventListener('submit',function(e){e.preventDefault();var v=+$('icTotal').value||0;if(!st.order.length||v<=0)return;st.total=v;var pc=100/st.order.length;st.order.forEach(function(t){st.pct[t]=pc;st.sel[t]=v*pc/100});save();mix();calc();try{gtag('event','income_split')}catch(x){}});
+  /* coming from the Melius Money app: ?total=200000 sets the amount to invest, keeping the mix's percentages */
+  try{var qs=new URLSearchParams(location.search),tv=Math.round(+qs.get('total')||0);if(tv>0){
+    if(!(st.total>0)){var S0=sum();st.order.forEach(function(t){st.pct[t]=S0>0?(+st.sel[t]||0)/S0*100:100/Math.max(1,st.order.length)})}
+    st.order.forEach(function(t){if(st.pct[t]!=null)st.sel[t]=tv*st.pct[t]/100});st.total=tv;save();try{gtag('event','income_from_app',{total:tv})}catch(x){}
+    history.replaceState(null,'',location.pathname+location.hash)}}catch(e){}
   all();
   if(window.MELIUS_LIVE)window.MELIUS_LIVE.then(function(d){if(d&&d.funds){meta=d;L=d.funds;all()}});
 })();
