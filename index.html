@@ -756,6 +756,7 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .ic-alloc{margin:0;padding:10px 14px;border-radius:10px;font-size:14px;background:var(--band);color:var(--ink)}
 .ic-alloc.ok{border-left:3px solid #2E7D5B}.ic-alloc.warn{border-left:3px solid var(--amber)}.ic-alloc.over{border-left:3px solid var(--danger)}
 .ic-amt input:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.ic-amt.usd input{padding-left:42px}
 .ic-x{width:34px;height:34px;border-radius:50%;border:0;background:none;color:var(--muted);font-size:22px;cursor:pointer}
 .ic-x:hover{background:var(--band);color:var(--ink)}
 .ic-empty{margin:0;color:var(--muted)}
@@ -1002,6 +1003,10 @@ main{min-height:calc(100vh - 260px)}
 .ic-builder .ic-rn{display:flex;align-items:baseline;gap:0 8px;flex-wrap:wrap}
 .ic-builder .ic-rn small{display:inline;font-size:12.5px}
 .ic-builder .ic-rn .ic-lev{margin-left:0}
+.ic-lev.ic-us{border-color:var(--ic-mute,#9aa6b8);color:var(--ic-mute,#9aa6b8)}
+.ic-cur{display:inline-flex;gap:2px;border:1px solid var(--line);border-radius:999px;padding:2px;margin-left:4px;vertical-align:middle}
+.ic-cur button{font:inherit;font-size:11px;font-weight:700;border:0;background:none;color:var(--muted);padding:2px 7px;border-radius:999px;cursor:pointer}
+.ic-cur button[aria-pressed="true"]{background:var(--gold,#C9A35E);color:#14213D}
 .ic-builder .ic-in .ic-amt input,.ic-builder .ic-pct input{height:40px;font-size:14.5px}
 .ic-builder .ic-pct{flex-basis:66px}
 .ic-builder .ic-rp{text-align:right}
@@ -1769,7 +1774,7 @@ header.top.menu-open .ws{display:none}
       <div class="ic-layout">
         <aside class="ic-builder card" aria-label="Build your mix">
           <div class="ic-h"><h2>Your mix</h2><span class="ic-count" id="icCount"></span></div>
-          <form class="ic-split" id="icSplit"><label class="fd-f"><span>Total to invest</span><input type="number" inputmode="decimal" min="0" step="100" id="icTotal" placeholder="30000"></label><button class="btn ghost ic-splitbtn" type="submit">Split evenly</button></form>
+          <form class="ic-split" id="icSplit"><label class="fd-f"><span id="icTotL">Total to invest</span><input type="number" inputmode="decimal" min="0" step="100" id="icTotal" placeholder="30000"></label><button class="btn ghost ic-splitbtn" type="submit">Split evenly</button></form>
           <div class="ic-allocbar" id="icBar" aria-hidden="true"></div>
           <p class="ic-alloc" id="icAlloc" aria-live="polite" hidden></p>
           <div class="ic-rows" id="icMix"></div>
@@ -1807,6 +1812,7 @@ header.top.menu-open .ws{display:none}
       <p><b>How this works.</b> Each fund’s yield is its latest regular payout per unit, times the number of payouts in a year, divided by its latest closing price. Your amount times that yield gives a yearly payout. Each fund is shown on its own schedule: most pay monthly, some twice a month, a few quarterly. When your mix has more than one schedule, the total is shown per month. The two-week paycheque figure is the yearly total spread over 26 paydays, for comparing with a biweekly paycheque.</p>
       <p><b>Withdraw and reinvest.</b> A fund grows by its total return: the change in its unit price plus its payouts. If you withdraw less than that total return, minus about 2.5% for inflation, the balance keeps growing in real terms. By default we use each fund’s longest record (10, 5 or 3 years, or since launch), its 1-year return for newer funds, and 8% when there’s no record yet. Switch the market to see a strong year (+30%, like 2025), an ordinary one (+12%) or a bear year (−25%). Past returns don’t promise future ones, so check again each year.</p>
       <p><b>Projection.</b> “Where this could go” grows each fund by the return the market setting gives it, pays its current yield on its balance every year, and takes out what you choose: every payout, the safe amount, or nothing. In Bear, the first year falls 25% and later years return 12%. It is a what-if, not a forecast.</p>
+      <p><b>U.S. dollars.</b> U.S.-listed funds, and Canadian funds you switch to US$, show in U.S. dollars. Totals are in Canadian dollars at the latest exchange rate. Their returns are in U.S. dollars, so a change in the exchange rate isn’t included. In a TFSA or a non-registered account, the U.S. keeps 15% of a U.S.-listed fund’s payouts (in a non-registered account you can usually claim it back as a foreign tax credit). In an RRSP, it doesn’t.</p>
       <p><b>Payouts are not guaranteed.</b> Funds change their payouts often, and very high yields usually include some of your own money paid back (return of capital) and can wear down the unit price over time. Funds marked “Leverage” borrow to invest, so they can fall faster. Figures are before tax.</p>
       <p>This calculator is financial education, not investment advice or a recommendation to buy any fund. Compare funds side by side in the <a href="#funds">fund directory</a><span data-pl="hide">, or <a href="#book">book a free intro session</a> to build a plan that fits your family</span>.</p>
     </div>
@@ -1926,7 +1932,7 @@ header.top.menu-open .ws{display:none}
   var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(!en.isIntersecting)return;var e=en.target;e.classList.add('in');
       if(e.classList.contains('stat')){var b=e.querySelector('b');if(b)countUp(b);}
       if(e.classList.contains('arow')){var f=e.querySelector('.fill');if(f)f.style.width=f.dataset.w;}
-      io.unobserve(e);});},{threshold:.15,rootMargin:'0px 0px -40px 0px'});
+      io.unobserve(e);});},{threshold:0,rootMargin:'0px 0px -40px 0px'});
   els.forEach(function(e){io.observe(e)});
   var cio=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');cio.unobserve(x.target);}});},{threshold:.3});
   [].forEach.call(document.querySelectorAll('.pj-chart'),function(c){cio.observe(c);});
@@ -2034,7 +2040,12 @@ var FD_PROV={
   Evolve:{name:'Evolve ETFs',url:'https://evolveetfs.com/'},
   CI:{name:'CI ETFs',url:'https://www.ci.com/en/advisors/investments/etfs'},
   iShares:{name:'BlackRock iShares',url:'https://www.blackrock.com/ca/investors/en'},
-  Vanguard:{name:'Vanguard',url:'https://www.vanguard.ca/'}
+  Vanguard:{name:'Vanguard',url:'https://www.vanguard.ca/'},
+  JPMorgan:{name:'J.P. Morgan',url:'https://am.jpmorgan.com/'},
+  NEOS:{name:'NEOS Investments',url:'https://neosfunds.com/'},
+  'Global X US':{name:'Global X (U.S.)',url:'https://www.globalxetfs.com/'},
+  Amplify:{name:'Amplify ETFs',url:'https://amplifyetfs.com/'},
+  'Goldman Sachs':{name:'Goldman Sachs Asset Management',url:'https://am.gs.com/'}
 };
 var FUNDS=[
  {t:'ZWB',n:'BMO Covered Call Canadian Banks ETF',p:'BMO',x:'Banks and financials',s:'Covered calls',f:'Monthly',lev:0,y:6.85,ya:'Sep 30, 2026',m:0.72,a:4538.9,aa:'Sep 30, 2026',r:{ytd:24.13,y1:38.45,y3:29.76,y5:15.30,y10:12.44,si:11.19},ra:'Sep 30, 2026',inc:'2011'},
@@ -2086,7 +2097,17 @@ var FUNDS=[
  {t:'HONE',n:'Harvest All-In-One High Income Shares ETF',p:'Harvest',x:'Multi-asset, all-in-one',s:'High coverage',f:'Monthly',lev:1,y:20.9,e:1,ya:'Oct 23, 2026, first payout annualized',mf:0,a:26.1,aa:'Oct 23, 2026',nw:'October 2026',u:'https://harvestportfolios.com/etf/hone',note:'Holds HHIS, HHIC and HHII, which charge their own fees and use about 25% leverage.'},
  {t:'VFV',n:'Vanguard S&P 500 Index ETF',p:'Vanguard',x:'U.S. equity',s:'No options (growth)',f:'Quarterly',lev:0,y:0.86,ya:'Oct 23, 2026, trailing 12 months',m:0.08,a:36410,aa:'Oct 23, 2026',r:{y1:14.95},ra:'Oct 23, 2026',inc:'2012',note:'A growth fund, shown for comparison. It tracks the 500 largest U.S. companies and sells no options.'},
  {t:'QQC',n:'CI Invesco NASDAQ 100 Index ETF',p:'CI',x:'Technology',s:'No options (growth)',f:'Quarterly',lev:0,y:0.31,ya:'Oct 16, 2026, trailing 12 months',m:0.21,a:2398.1,aa:'Oct 16, 2026',r:{ytd:19.51,y1:19.60,y3:26.3},ra:'Oct 16, 2026',inc:'2021',note:'A growth fund, shown for comparison. It tracks the Nasdaq-100, the largest non-financial companies on the Nasdaq, and sells no options. Formerly the Invesco NASDAQ 100 Index ETF.'},
- {t:'XEQT',n:'iShares Core Equity ETF Portfolio',p:'iShares',x:'Global and international',s:'No options (growth)',f:'Quarterly',lev:0,y:1.61,ya:'Oct 23, 2026, trailing 12 months',m:0.19,a:23470,aa:'Oct 23, 2026',r:{y1:16.15},ra:'Oct 23, 2026',inc:'2019',note:'A growth fund, shown for comparison. It owns about 9,000 companies worldwide and sells no options.'}
+ {t:'XEQT',n:'iShares Core Equity ETF Portfolio',p:'iShares',x:'Global and international',s:'No options (growth)',f:'Quarterly',lev:0,y:1.61,ya:'Oct 23, 2026, trailing 12 months',m:0.19,a:23470,aa:'Oct 23, 2026',r:{y1:16.15},ra:'Oct 23, 2026',inc:'2019',note:'A growth fund, shown for comparison. It owns about 9,000 companies worldwide and sells no options.'},
+ {t:'JEPI',n:'JPMorgan Equity Premium Income ETF',p:'JPMorgan',x:'U.S. equity',s:'Covered calls',f:'Monthly',lev:0,y:7.99,ya:'Oct 29, 2026',m:0.35,a:45340,aa:'Oct 29, 2026',r:{},rl:1,ra:'',inc:'2020',lst:'US',cur:'USD',u:'https://am.jpmorgan.com/us/en/asset-management/adv/products/jpmorgan-equity-premium-income-etf-etf-shares-46641q332',note:'Holds lower-volatility S&P 500 stocks and earns its option income through equity-linked notes.'},
+ {t:'JEPQ',n:'JPMorgan Nasdaq Equity Premium Income ETF',p:'JPMorgan',x:'Technology',s:'Covered calls',f:'Monthly',lev:0,y:11.18,ya:'Oct 29, 2026',m:0.35,a:38860,aa:'Oct 29, 2026',r:{},rl:1,ra:'',inc:'2022',lst:'US',cur:'USD',u:'https://am.jpmorgan.com/us/en/asset-management/adv/products/jpmorgan-nasdaq-equity-premium-income-etf-etf-shares-46654q203',note:'Holds Nasdaq-100 stocks and earns its option income through equity-linked notes.'},
+ {t:'QQQI',n:'NEOS Nasdaq-100 High Income ETF',p:'NEOS',x:'Technology',s:'Covered calls',f:'Monthly',lev:0,y:14.16,ya:'Oct 29, 2026',m:0.68,a:13400,aa:'Oct 29, 2026',r:{},rl:1,ra:'',inc:'2024',lst:'US',cur:'USD',u:'https://neosfunds.com/qqqi/',note:'Sells Nasdaq-100 index call options, partly as spreads, so it keeps some of the upside.'},
+ {t:'SPYI',n:'NEOS S&P 500 High Income ETF',p:'NEOS',x:'U.S. equity',s:'Covered calls',f:'Monthly',lev:0,y:11.8,ya:'Oct 29, 2026',m:0.68,a:11050,aa:'Oct 29, 2026',r:{},rl:1,ra:'',inc:'2022',lst:'US',cur:'USD',u:'https://neosfunds.com/spyi/',note:'Sells S&P 500 index call options, partly as spreads, so it keeps some of the upside.'},
+ {t:'QYLD',n:'Global X NASDAQ 100 Covered Call ETF',p:'Global X US',x:'Technology',s:'High coverage',f:'Monthly',lev:0,y:11.78,ya:'Oct 29, 2026',m:0.6,a:8030,aa:'Oct 29, 2026',r:{},rl:1,ra:'',inc:'2013',lst:'US',cur:'USD',u:'https://www.globalxetfs.com/funds/qyld/',note:'Sells calls on the whole Nasdaq-100 every month, so it gives up most of the upside.'},
+ {t:'DIVO',n:'Amplify CWP Enhanced Dividend Income ETF',p:'Amplify',x:'U.S. equity',s:'Covered calls',f:'Monthly',lev:0,y:4.31,ya:'Oct 29, 2026',m:0.56,a:7490,aa:'Oct 29, 2026',r:{},rl:1,ra:'',inc:'2016',lst:'US',cur:'USD',u:'https://amplifyetfs.com/divo/',note:'Holds about 25 large U.S. dividend stocks and sells calls on only some of them, when the managers see fit.'},
+ {t:'GPIQ',n:'Goldman Sachs Nasdaq-100 Core Premium Income ETF',p:'Goldman Sachs',x:'Technology',s:'Covered calls',f:'Monthly',lev:0,y:10.15,ya:'Oct 29, 2026',m:0.35,a:5130,aa:'Oct 29, 2026',r:{},rl:1,ra:'',inc:'2023',lst:'US',cur:'USD',u:'https://am.gs.com/en-us/advisors/funds/detail/PV1270/38149W671/goldman-sachs-nasdaq-100-core-premium-income-etf',note:'Holds Nasdaq-100 stocks and sells calls on part of the portfolio, more or less depending on markets.'},
+ {t:'GPIX',n:'Goldman Sachs S&P 500 Core Premium Income ETF',p:'Goldman Sachs',x:'U.S. equity',s:'Covered calls',f:'Monthly',lev:0,y:7.43,ya:'Oct 29, 2026',m:0.35,a:5060,aa:'Oct 29, 2026',r:{},rl:1,ra:'',inc:'2023',lst:'US',cur:'USD',u:'https://am.gs.com/en-us/advisors/funds/detail/PV1269/38149W689/goldman-sachs-sp-500-core-premium-income-etf',note:'Holds S&P 500 stocks and sells calls on part of the portfolio, more or less depending on markets.'},
+ {t:'XYLD',n:'Global X S&P 500 Covered Call ETF',p:'Global X US',x:'U.S. equity',s:'High coverage',f:'Monthly',lev:0,y:10.47,ya:'Oct 29, 2026',m:0.6,a:3210,aa:'Oct 29, 2026',r:{},rl:1,ra:'',inc:'2013',lst:'US',cur:'USD',u:'https://www.globalxetfs.com/funds/xyld/',note:'Sells calls on the whole S&P 500 every month, so it gives up most of the upside.'},
+ {t:'RYLD',n:'Global X Russell 2000 Covered Call ETF',p:'Global X US',x:'U.S. equity',s:'High coverage',f:'Monthly',lev:0,y:11.5,ya:'Oct 29, 2026',m:0.6,a:1360,aa:'Oct 29, 2026',r:{},rl:1,ra:'',inc:'2019',lst:'US',cur:'USD',u:'https://www.globalxetfs.com/funds/ryld/',note:'Sells calls on the whole Russell 2000 (smaller U.S. companies) every month, so it gives up most of the upside.'}
 ];
 (function(){
   var $=function(id){return document.getElementById(id)};
@@ -2104,7 +2125,7 @@ var FUNDS=[
   function yv(f){return f.y==null?'–':(f.e?'~':'')+pct(f.y)}
   function fee(f){return f.m!=null?pct(f.m,2):(f.mf!=null?pct(f.mf,2)+' fee':'–')}
   function feeLong(f){return f.m!=null?pct(f.m,2)+' MER':(f.mf!=null?pct(f.mf,2)+' management fee (MER not yet published)':'See ETF Facts')}
-  function aum(v){return v==null?'–':v>=1000?'$'+(v/1000).toFixed(v>=10000?0:1)+'B':'$'+Math.round(v)+'M'}
+  function aum(v,f){var c=f&&f.cur==='USD'?'US$':'$';return v==null?'–':v>=1000?c+(v/1000).toFixed(v>=10000?0:1)+'B':c+Math.round(v)+'M'}
   function priceEst(f){var r=f.r||{};if(r.y1==null||f.y==null)return null;return ((1+r.y1/100)/(1+f.y/100)-1)*100}
   function tmx(t){return 'https://money.tmx.com/en/quote/'+t}
   function uniq(k){var o={};FUNDS.forEach(function(f){o[f[k]]=1});return Object.keys(o).sort()}
@@ -2134,16 +2155,16 @@ var FUNDS=[
   function retCls(v){return v==null?'':v<0?' neg':''}
   function row(f){
     var prov=FD_PROV[f.p]?FD_PROV[f.p].name:f.p,r=f.r||{};
-    var stratPill='<span class="fd-pill'+(f.s.indexOf('growth')>=0?' growth':'')+'">'+esc(f.s.replace(' (growth)',''))+'</span>'+(f.lev?'<span class="fd-pill lev" title="Borrows to invest more than it holds">Leverage</span>':'');
+    var stratPill='<span class="fd-pill'+(f.s.indexOf('growth')>=0?' growth':'')+'">'+esc(f.s.replace(' (growth)',''))+'</span>'+(f.lst==='US'?'<span class="fd-pill" title="Listed in the U.S. and priced in U.S. dollars">U.S.-listed</span>':'')+(f.lev?'<span class="fd-pill lev" title="Borrows to invest more than it holds">Leverage</span>':'');
     return '<div class="fd-row" role="listitem" data-t="'+f.t+'">'+
       '<div class="fd-sum">'+
         '<input type="checkbox" class="fd-chk" aria-label="Add '+f.t+' to compare"'+(sel[f.t]?' checked':'')+'>'+
         '<div class="fd-name"><b>'+f.t+'</b><small>'+esc(f.n)+'</small></div>'+
         '<div class="fd-meta"><span class="fd-cell">'+esc(prov)+'</span><span class="fd-cell">'+esc(f.x)+'</span><span class="fd-cell fd-strat">'+stratPill+'</span>'+
-          '<span class="fd-pill only-m">'+(f.nw?'New fund':'1-yr total '+sgn(r.y1))+'</span><span class="fd-pill only-m">Size '+aum(f.a)+'</span></div>'+
+          '<span class="fd-pill only-m">'+(f.nw?'New fund':'1-yr total '+sgn(r.y1))+'</span><span class="fd-pill only-m">Size '+aum(f.a,f)+'</span></div>'+
         '<span class="fd-y r"><span class="fd-yield">'+yv(f)+'</span></span>'+
         '<span class="fd-cell r hide-m fd-ret'+retCls(r.y1)+'">'+(f.nw?'<span class="fd-new">New</span>':sgn(r.y1))+'</span>'+
-        '<span class="fd-cell r hide-m">'+aum(f.a)+'</span>'+
+        '<span class="fd-cell r hide-m">'+aum(f.a,f)+'</span>'+
         '<span class="fd-chev" aria-hidden="true"></span>'+
         '<button type="button" class="fd-open" aria-expanded="false" aria-label="Details for '+f.t+'"></button>'+
       '</div></div>';
@@ -2200,11 +2221,11 @@ var FUNDS=[
         '<dt>Pays</dt><dd>'+esc(f.f)+'</dd>'+
         '<dt>Yield</dt><dd>'+yv(f)+' <span class="fd-asof">('+esc(f.ya)+(f.e?'; estimated from the provider’s figures':'')+')</span></dd>'+
         '<dt>Cost</dt><dd>'+feeLong(f)+'</dd>'+
-        '<dt>Size</dt><dd>'+aum(f.a)+' <span class="fd-asof">('+esc(f.aa)+')</span></dd>'+
+        '<dt>Size</dt><dd>'+aum(f.a,f)+' <span class="fd-asof">('+esc(f.aa)+')</span></dd>'+
       '</dl>'+
       retTable(f)+
       calcHtml(f)+
-      '<p class="fd-about">'+esc(STRAT_INFO[f.s]||'')+(f.lev?' Leverage means the fund borrows to invest a little more than it holds, which raises the payout and the risk.':'')+(f.note?' '+esc(f.note):'')+'</p>'+
+      '<p class="fd-about">'+esc(STRAT_INFO[f.s]||'')+(f.lev?' Leverage means the fund borrows to invest a little more than it holds, which raises the payout and the risk.':'')+(f.note?' '+esc(f.note):'')+(f.lst==='US'?' Listed in the U.S. and priced in U.S. dollars. In a TFSA, the U.S. keeps 15% of every payout. In an RRSP it doesn’t. In a non-registered account the 15% is withheld, and you can usually claim it back as a foreign tax credit.':'')+'</p>'+
       '<p class="fd-links"><a href="'+tmx(f.t)+'" target="_blank" rel="noopener">Live quote, payouts and dates (TMX Money) ↗</a><a href="'+(f.u||prov.url)+'" target="_blank" rel="noopener">'+(f.u?'Fund page':esc(prov.name))+' ↗</a></p>'+
       '</div>'+
       '<div class="fd-chart" data-chart="'+f.t+'"></div>'+
@@ -2252,7 +2273,7 @@ var FUNDS=[
   function compare(){
     var k=Object.keys(sel);if(k.length<2)return;var fs=k.map(byT);
     var R=function(key){return function(f){return sgn((f.r||{})[key])}};
-    var rowsDef=[['Provider',function(f){return (FD_PROV[f.p]||{name:f.p}).name}],['Holds',function(f){return f.x}],['Strategy',function(f){return f.s+(f.lev?', with leverage':'')}],['Pays',function(f){return f.f}],['Yield',yv],['Cost',fee],['Size',function(f){return aum(f.a)}],['Total return, YTD',R('ytd')],['Total return, 1 yr',function(f){return f.nw?'New fund':sgn((f.r||{}).y1)}],['Total return, 3 yr avg',R('y3')],['Price change, 1 yr (est.)',function(f){return sgn(priceEst(f))}]];
+    var rowsDef=[['Provider',function(f){return (FD_PROV[f.p]||{name:f.p}).name}],['Holds',function(f){return f.x}],['Strategy',function(f){return f.s+(f.lev?', with leverage':'')}],['Pays',function(f){return f.f}],['Yield',yv],['Cost',fee],['Size',function(f){return aum(f.a,f)}],['Total return, YTD',R('ytd')],['Total return, 1 yr',function(f){return f.nw?'New fund':sgn((f.r||{}).y1)}],['Total return, 3 yr avg',R('y3')],['Price change, 1 yr (est.)',function(f){return sgn(priceEst(f))}]];
     $('fdCmpTable').innerHTML='<thead><tr><th></th>'+fs.map(function(f){return '<th scope="col">'+f.t+'</th>'}).join('')+'</tr></thead><tbody>'+rowsDef.map(function(r){return '<tr><th scope="row">'+r[0]+'</th>'+fs.map(function(f){return '<td>'+esc(r[1](f))+'</td>'}).join('')+'</tr>'}).join('')+'</tbody>';
     $('fdCmpN').textContent=fs.length;$('fdCompare').hidden=false;
     widget($('fdCmpChart'),'embed-widget-symbol-overview.js',chartCfg(k),'Loading live charts… Each fund has its own tab.');
@@ -2274,7 +2295,7 @@ var FUNDS=[
   /* nightly yields: replace each fund's yield with its latest payout annualized over the latest close */
   if(window.MELIUS_LIVE)window.MELIUS_LIVE.then(function(d){if(!d||d.seed||!d.funds||!d.asOf)return;var n=0;
     function fd(s){var x=new Date(s+'T12:00:00');return isNaN(x)?s:x.toLocaleDateString('en-CA',{month:'short',day:'numeric',year:'numeric'})}
-    FUNDS.forEach(function(f){var l=d.funds[f.t];if(l&&l.p&&l.y>0&&l.pd){f.y=+l.y;f.ya=fd(l.pd)+' close, latest payout annualized'+(l.stale?' (last good update)':'');f.e=false;f.live=1;n++}});
+    FUNDS.forEach(function(f){var l=d.funds[f.t];if(l&&f.rl&&l.r){f.r=l.r;f.ra=fd(l.r.asof)+', from closing prices with payouts reinvested';if(!f.inc&&l.r.start)f.inc=l.r.start.slice(0,4)}if(l&&l.p&&l.y>0&&l.pd){f.y=+l.y;f.ya=fd(l.pd)+' close, latest payout annualized'+(l.stale?' (last good update)':'');f.e=false;f.live=1;n++}});
     if(!n)return;stats();render();
     var el=$('fdLive');if(el){el.innerHTML='<span class="ic-dot live" aria-hidden="true"></span><span>Yields updated every weekday evening from the latest payouts and closing prices · last update '+fd(d.asOf.slice(0,10))+' · '+n+' of '+FUNDS.length+' funds</span>';el.hidden=false}
   });
@@ -2334,18 +2355,25 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
 /* Income calculator: reads /data/funds-live.json (refreshed nightly), falls back to the FUNDS yields */
 (function(){
   if(typeof FUNDS==='undefined'||!document.getElementById('income'))return;
-  var KEY='melius-income-v2',BY={},L={},meta=null,st={sel:{},order:[],per:'bi',total:0,pct:{},mkt:'rec',yrs:10,take:'safe',flt:'all'},INFL=2.5;
+  var KEY='melius-income-v2',BY={},L={},meta=null,st={sel:{},order:[],per:'bi',total:0,pct:{},mkt:'rec',yrs:10,take:'safe',flt:'all',cur:{},acct:'tfsa'},INFL=2.5;
   FUNDS.forEach(function(f){BY[f.t]=f});
-  try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.sel&&s.order){st=s;st.order=st.order.filter(function(t){return BY[t]});st.pct=st.pct||{};st.total=+st.total||0;st.mkt=st.mkt||'rec';st.yrs=st.yrs||10;st.take=st.take||'safe';st.flt=st.flt||'all';st.tab=st.tab||''}}catch(e){}
+  try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.sel&&s.order){st=s;st.order=st.order.filter(function(t){return BY[t]});st.pct=st.pct||{};st.total=+st.total||0;st.mkt=st.mkt||'rec';st.yrs=st.yrs||10;st.take=st.take||'safe';st.flt=st.flt||'all';st.tab=st.tab||'';st.cur=st.cur||{};st.acct=st.acct||'tfsa'}}catch(e){}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
   var $=function(id){return document.getElementById(id)};
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   function money(v,c){v=+v||0;return '$'+(c&&Math.abs(v)<1000?v.toFixed(2):Math.round(v).toLocaleString('en-CA'))}
   var FREQ={52:'every week',26:'every two weeks',24:'twice a month',12:'monthly',4:'quarterly',2:'twice a year',1:'yearly'};
   function fdate(s){if(!s)return '';var d=new Date(s.length<=10?s+'T12:00:00':s);return isNaN(d)?s:d.toLocaleDateString('en-CA',{month:'short',day:'numeric',year:'numeric'})}
-  function info(t){var f=BY[t],l=L[t];
-    if(l&&l.p&&l.y>0)return {y:+l.y,p:+l.p,d:+l.d,n:+l.n};
-    return {y:+f.y,n:{Monthly:12,'Twice a month':24,Quarterly:4}[f.f]||12};
+  /* U.S. dollars: amounts are kept in C$ inside, and shown in US$ for U.S.-listed funds and for U.S.-dollar units */
+  function fx(){var v=meta&&meta.fx&&+meta.fx.usdcad;return v>1&&v<2?v:1.38}
+  function usL(t){return BY[t]&&BY[t].lst==='US'}
+  function hasU(t){return !!(L[t]&&L[t].u)}
+  function isUSD(t){return usL(t)||(st.cur[t]==='USD'&&hasU(t))}
+  function wh(t){return usL(t)&&st.acct!=='rrsp'?0.85:1}
+  function cm(v,t,c){return isUSD(t)?'US'+money(v/fx(),c):money(v,c)}
+  function info(t){var f=BY[t],l=L[t],o;
+    if(l&&l.p&&l.y>0)o={y:+l.y,p:+l.p,d:+l.d,n:+l.n};else o={y:+f.y,n:{Monthly:12,'Twice a month':24,Quarterly:4}[f.f]||12};
+    o.yg=o.y;o.y=o.y*wh(t);return o;
   }
   function longRun(f){var r=f.r||{};var c=[['y10','10-year'],['y5','5-year'],['y3','3-year']];for(var i=0;i<c.length;i++)if(r[c[i][0]]!=null)return [r[c[i][0]],c[i][1]];if(r.si!=null&&f.inc&&(+f.inc)<=2024)return [r.si,'since '+f.inc];if(r.y1!=null)return [r.y1,'1-year'];return [8,'assumed']}
   /* market conditions: each fund's own record, or one return for every fund */
@@ -2353,36 +2381,38 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   function rate(t){var m=MK[st.mkt];return m?[m[0],m[1]]:longRun(BY[t])}
   function keepYr(a,rate,payYr){if(rate<=INFL)return 0;var m=Math.pow((1+rate/100)/(1+INFL/100),1/12)-1;return Math.min(a*m*12,payYr)}
   function provName(f){try{return (FD_PROV[f.p]&&FD_PROV[f.p].name)||f.p}catch(e){return f.p}}
-  var FLT=[['all','All'],['m','Pays monthly'],['tm','Twice a month'],['ca','Canadian'],['us','U.S.'],['tech','Tech'],['nolev','No leverage'],['mine','In my mix']];
-  function fltOk(f){var k=st.flt;if(k==='m')return f.f==='Monthly';if(k==='tm')return f.f==='Twice a month';if(k==='ca')return /Canad|Banks/.test(f.x||'');if(k==='us')return /U\.S\./.test(f.x||'');if(k==='tech')return f.x==='Technology';if(k==='nolev')return !f.lev;if(k==='mine')return st.sel[f.t]!=null;return true}
+  var FLT=[['all','All'],['m','Pays monthly'],['tm','Twice a month'],['ca','Canadian'],['us','U.S.'],['tech','Tech'],['nolev','No leverage'],['uslist','U.S.-listed'],['mine','In my mix']];
+  function fltOk(f){var k=st.flt;if(k==='m')return f.f==='Monthly';if(k==='tm')return f.f==='Twice a month';if(k==='ca')return f.lst!=='US'&&/Canad|Banks/.test(f.x||'');if(k==='us')return /U\.S\./.test(f.x||'');if(k==='tech')return f.x==='Technology';if(k==='nolev')return !f.lev;if(k==='uslist')return f.lst==='US';if(k==='mine')return st.sel[f.t]!=null;return true}
   function list(){var q=($('icQ').value||'').trim().toLowerCase();
     $('icFlt').innerHTML=FLT.map(function(x){return '<button type="button" data-flt="'+x[0]+'" aria-pressed="'+(st.flt===x[0])+'">'+x[1]+'</button>'}).join('');
     var rows=FUNDS.filter(function(f){return fltOk(f)&&(!q||(f.t+' '+f.n+' '+provName(f)+' '+(f.x||'')).toLowerCase().indexOf(q)>=0)});
     $('icList').innerHTML=rows.length?rows.map(function(f){var on=st.sel[f.t]!=null,i=info(f.t);
-      return '<button type="button" class="ic-opt" data-ic="'+f.t+'" aria-pressed="'+on+'"><span class="ic-box" aria-hidden="true">'+(on?'✓':'')+'</span><span><b>'+f.t+'</b>'+(f.lev?'<span class="ic-lev">Leverage</span>':'')+'<small>'+esc(f.n)+'</small></span><span class="ic-y">'+i.y.toFixed(2)+'%<small>'+(FREQ[i.n]||'')+'</small></span></button>'}).join(''):'<p class="ic-empty" style="padding:14px 4px">No funds match.</p>';
+      return '<button type="button" class="ic-opt" data-ic="'+f.t+'" aria-pressed="'+on+'"><span class="ic-box" aria-hidden="true">'+(on?'✓':'')+'</span><span><b>'+f.t+'</b>'+(f.lst==='US'?'<span class="ic-lev ic-us">U.S.</span>':'')+(f.lev?'<span class="ic-lev">Leverage</span>':'')+'<small>'+esc(f.n)+'</small></span><span class="ic-y">'+i.yg.toFixed(2)+'%<small>'+(FREQ[i.n]||'')+'</small></span></button>'}).join(''):'<p class="ic-empty" style="padding:14px 4px">No funds match.</p>';
   }
   var FQ={52:'a week',26:'every two weeks',24:'twice a month',12:'a month',4:'a quarter',2:'twice a year',1:'a year'};
   function rowHtml(t){var f=BY[t],i=info(t),a=+st.sel[t]||0,y=a*i.y/100,Lr=longRun(f),Mk=MK[st.mkt],k=keepYr(a,rate(t)[0],y),n=i.n||12,det='';
-    if(i.p&&i.d&&a>0){var u=a/i.p;det=Math.floor(u).toLocaleString('en-CA')+' units × '+money(i.d,1)+' a payout · '}
+    if(i.p&&i.d&&a>0){var up=isUSD(t)&&!usL(t)?L[t].u.p:i.p,u=(isUSD(t)?a/fx():a)/up,dd=isUSD(t)&&!usL(t)?i.d*up/i.p:i.d;det=Math.floor(u).toLocaleString('en-CA')+' units × '+(isUSD(t)?'US':'')+money(dd,1)+' a payout · '}
+    if(usL(t))det+=(st.acct==='rrsp'?'In an RRSP, no U.S. tax is taken off. ':'After the 15% U.S. tax on each payout'+(st.acct==='nonreg'?' (usually claimable as a foreign tax credit)':'')+'. ');
     det+=Mk?'Withdraw limit assumes a '+Mk[1].toLowerCase()+' market: '+(Mk[0]>0?'+':'')+Mk[0]+'% this year. Its '+(Lr[1]==='assumed'?'record is too short to use':Lr[1]+' return was '+(+Lr[0]).toFixed(1)+'%'):'Withdraw limit uses its '+(Lr[1]==='assumed'?'assumed 8% a year':Lr[1]+' return of '+(+Lr[0]).toFixed(1)+'%');
-    return {pay:'<b>'+money(y/n,1)+' <span style="font-weight:500;font-size:13px;color:var(--muted)">'+(FQ[n]||'')+'</span></b><small><span class="w">withdraw '+money(k/n,1)+'</span> · <span class="r">reinvest '+money(Math.max(0,y-k)/n,1)+'</span></small>',det:det}}
+    return {pay:'<b>'+cm(y/n,t,1)+' <span style="font-weight:500;font-size:13px;color:var(--muted)">'+(FQ[n]||'')+'</span></b><small><span class="w">withdraw '+cm(k/n,t,1)+'</span> · <span class="r">reinvest '+cm(Math.max(0,y-k)/n,t,1)+'</span></small>',det:det}}
   function mix(){
     $('icMix').innerHTML=st.order.map(function(t){var f=BY[t],i=info(t),a=+st.sel[t]||0,r=rowHtml(t);
-      return '<div class="ic-row"><span class="ic-rn"><span class="ic-sw" data-sw="'+t+'"></span><b>'+t+'</b>'+(f.lev?'<span class="ic-lev">Leverage</span>':'')+'<small>'+i.y.toFixed(2)+'% · pays '+(FREQ[i.n]||'')+'</small></span>'+
-        '<span class="ic-in"><label class="ic-amt"><span>$</span><input type="number" inputmode="decimal" min="0" step="100" data-amt="'+t+'" value="'+(a?r2(a):'')+'" placeholder="0" aria-label="Amount in '+t+'"></label>'+
+      return '<div class="ic-row"><span class="ic-rn"><span class="ic-sw" data-sw="'+t+'"></span><b>'+t+'</b>'+(f.lst==='US'?'<span class="ic-lev ic-us">U.S.</span>':'')+(f.lev?'<span class="ic-lev">Leverage</span>':'')+(hasU(t)?'<span class="ic-cur" role="group" aria-label="Currency for '+t+'"><button type="button" data-cur="'+t+'" data-c="CAD" aria-pressed="'+!isUSD(t)+'">C$</button><button type="button" data-cur="'+t+'" data-c="USD" aria-pressed="'+isUSD(t)+'">US$</button></span>':'')+'<small>'+i.yg.toFixed(2)+'%'+(usL(t)&&wh(t)<1?' ('+i.y.toFixed(2)+'% after U.S. tax)':'')+' · pays '+(FREQ[i.n]||'')+'</small></span>'+
+        '<span class="ic-in"><label class="ic-amt'+(isUSD(t)?' usd':'')+'"><span>'+(isUSD(t)?'US$':'$')+'</span><input type="number" inputmode="decimal" min="0" step="100" data-amt="'+t+'" value="'+(a?r2(shown(t,a)):'')+'" placeholder="0" aria-label="Amount in '+t+'"></label>'+
         '<label class="ic-pct"><input type="number" inputmode="decimal" min="0" max="100" step="1" data-pct="'+t+'" value="'+pctStr(t)+'" placeholder="0" aria-label="Percent of total in '+t+'"><span>%</span></label></span>'+
         '<span class="ic-rp" data-rp="'+t+'">'+r.pay+'</span>'+
         '<button type="button" class="ic-x" data-rm="'+t+'" aria-label="Remove '+t+'">×</button>'+
         '<span class="ic-rd" data-rd="'+t+'">'+r.det+'</span></div>'}).join('');
-    var n=st.order.length;$('icEmpty').hidden=n>0;$('icCount').textContent=n?n+' fund'+(n>1?'s':''):'';if($('icTotal')&&document.activeElement!==$('icTotal'))$('icTotal').value=st.total||'';alloc();
+    var n=st.order.length;if($('icTotL'))$('icTotL').textContent=st.order.some(isUSD)?'Total to invest, in C$':'Total to invest';$('icEmpty').hidden=n>0;$('icCount').textContent=n?n+' fund'+(n>1?'s':''):'';if($('icTotal')&&document.activeElement!==$('icTotal'))$('icTotal').value=st.total||'';alloc();
   }
   function r2(v){return Math.round(v*100)/100}
+  function shown(t,a){return isUSD(t)?Math.round(a/fx()):a}
   function sum(){var x=0;st.order.forEach(function(t){x+=+st.sel[t]||0});return x}
   function base(){return st.total>0?st.total:sum()}
   function pctOf(t){var b=base();if(st.total>0&&st.pct[t]!=null)return +st.pct[t];return b>0?(+st.sel[t]||0)/b*100:(st.pct[t]!=null?+st.pct[t]:0)}
   function pctStr(t){var v=pctOf(t);if(!v)return '';return String(Math.round(v*10)/10)}
   function syncPct(){var ae=document.activeElement;document.querySelectorAll('[data-pct]').forEach(function(el){if(el!==ae)el.value=pctStr(el.dataset.pct)});
-    document.querySelectorAll('[data-amt]').forEach(function(el){if(el!==ae){var a=+st.sel[el.dataset.amt]||0;el.value=a?r2(a):''}});alloc()}
+    document.querySelectorAll('[data-amt]').forEach(function(el){if(el!==ae){var a=+st.sel[el.dataset.amt]||0;el.value=a?r2(shown(el.dataset.amt,a)):''}});alloc()}
   function bar(){var el=$('icBar');if(!el)return;var b=base();if(!(b>0)||!st.order.length){el.innerHTML='';return}
     el.innerHTML=st.order.map(function(t,i){var w=Math.max(0,pctOf(t));return w>0?'<i class="ic-c'+(i%6)+'" style="width:'+w.toFixed(2)+'%" title="'+t+' '+(Math.round(w*10)/10)+'%"></i>':''}).join('');
     st.order.forEach(function(t,i){var sw=document.querySelector('[data-sw="'+t+'"]');if(sw)sw.className='ic-sw ic-c'+(i%6)})}
@@ -2405,13 +2435,15 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     $('icBig').innerHTML=money(yr/U.dv)+'<small>'+U.u+'</small>';
     var parts=[],nf=0;[[12,'monthly'],[24,'twice-a-month'],[4,'quarterly'],[52,'weekly'],[26,'two-week'],[2,'twice-a-year'],[1,'yearly']].forEach(function(x){var c=U.cnt[x[0]];if(c){parts.push(c+' '+x[1]);nf+=c}});
     var plist=parts.length>1?parts.slice(0,-1).join(', ')+' and '+parts[parts.length-1]:parts.join('');
-    $('icFrom').innerHTML=tot>0?'From <b>'+money(tot)+'</b> invested'+(U.dv===24?' · '+money(yr/12)+' a month':'')+(U.mixed?' · '+plist+' fund'+(nf>1?'s':'')+', each paid on its own schedule':'')+'.':'Add funds and amounts in Your mix to see what they could pay you.';
+    var anyU=st.order.some(function(t){return isUSD(t)&&(+st.sel[t]||0)>0});
+    $('icFrom').innerHTML=tot>0?'From <b>'+money(tot)+'</b>'+(anyU?' (in Canadian dollars)':'')+' invested'+(U.dv===24?' · '+money(yr/12)+' a month':'')+(U.mixed?' · '+plist+' fund'+(nf>1?'s':'')+', each paid on its own schedule':'')+'.'+(anyU?' U.S.-dollar amounts converted at US$1 = C$'+fx().toFixed(4)+(meta&&meta.fx&&meta.fx.d?' ('+fdate(meta.fx.d)+')':'')+'.':''):'Add funds and amounts in Your mix to see what they could pay you.';
     var tiles=tot>0?[['Per month',money(yr/12)],['Per year',money(yr)],['Per 2-week paycheque',money(yr/26)],['Yield',(yr/tot*100).toFixed(2)+'%']]:[['Per month','–'],['Per year','–'],['Per 2-week paycheque','–'],['Yield','–']];
     st.sum={tot:Math.round(tot),yr:Math.round(yr),n:st.order.filter(function(t){return (+st.sel[t]||0)>0}).length,ts:Date.now()};save();plan(tot,yr);
     $('icStats').innerHTML=tiles.map(function(x){return '<div class="ic-stat"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>'}).join('');
     var Mk=MK[st.mkt];
     $('icMkt').innerHTML='<span class="ic-pl">Market</span><div class="ic-pseg" role="group" aria-label="Market conditions">'+[['rec','Fund records'],['bull','Bull'],['base','Base'],['bear','Bear']].map(function(x){return '<button type="button" data-mk="'+x[0]+'" aria-pressed="'+(st.mkt===x[0])+'">'+x[1]+'</button>'}).join('')+'</div>'+
-      '<p class="ic-mkn">'+(Mk?(Mk[0]>0?'+':'')+Mk[0]+'% for every fund'+(st.mkt==='bear'?' this year':' a year')+': '+Mk[2]+' (price change plus payouts). Drives the withdraw amount and the projection.':'Each fund’s own long-run return: 10, 5 or 3 years, or its 1-year return when that’s all it has. Drives the withdraw amount and the projection.')+'</p>';
+      (st.order.some(usL)?'<span class="ic-pl">Account</span><div class="ic-pseg" role="group" aria-label="Account type">'+[['tfsa','TFSA'],['rrsp','RRSP'],['nonreg','Non-registered']].map(function(x){return '<button type="button" data-acct="'+x[0]+'" aria-pressed="'+(st.acct===x[0])+'">'+x[1]+'</button>'}).join('')+'</div>':'')+
+      '<p class="ic-mkn">'+(st.order.some(usL)?(st.acct==='rrsp'?'<b>RRSP:</b> no U.S. tax on the U.S.-listed funds’ payouts. ':st.acct==='tfsa'?'<b>TFSA:</b> the U.S. keeps 15% of the U.S.-listed funds’ payouts, and you can’t get it back. ':'<b>Non-registered:</b> 15% is withheld from the U.S.-listed funds’ payouts; you can usually claim it back as a foreign tax credit. Shown after the 15%. '):'')+(Mk?(Mk[0]>0?'+':'')+Mk[0]+'% for every fund'+(st.mkt==='bear'?' this year':' a year')+': '+Mk[2]+' (price change plus payouts). Drives the withdraw amount and the projection.':'Each fund’s own long-run return: 10, 5 or 3 years, or its 1-year return when that’s all it has. Drives the withdraw amount and the projection.')+'</p>';
     var head='<p class="ic-kl">To keep your balance growing</p>';
     if(tot>0&&yr>0){var rest=Math.max(0,yr-keep),pct=Math.round(rest/yr*100),sp=100-pct;
       $('icKeep').innerHTML=head+'<div class="ic-two"><div class="w"><span>You can withdraw</span><b>'+money(keep/U.dv)+'</b><small>'+U.u+'</small></div><div class="r"><span>Reinvest</span><b>'+money(rest/U.dv)+'</b><small>'+U.u+'</small></div></div>'+
@@ -2488,18 +2520,20 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   hdr();addEventListener('resize',hdr);addEventListener('hashchange',function(){setTimeout(hdr,50)});
   $('icFlt').addEventListener('click',function(e){var b=e.target.closest('[data-flt]');if(!b)return;st.flt=b.dataset.flt;save();list()});
   $('icProj').addEventListener('click',function(e){var b=e.target.closest('[data-yrs],[data-take]');if(!b)return;if(b.dataset.yrs)st.yrs=+b.dataset.yrs;if(b.dataset.take)st.take=b.dataset.take;save();proj();try{gtag('event','income_projection',{years:st.yrs,take:st.take})}catch(x){}});
-  $('icMkt').addEventListener('click',function(e){var b=e.target.closest('[data-mk]');if(!b)return;st.mkt=b.dataset.mk;save();st.order.forEach(rowUpdate);calc();try{gtag('event','income_market',{market:st.mkt})}catch(x){}});
+  $('icMkt').addEventListener('click',function(e){var ac=e.target.closest('[data-acct]');if(ac){st.acct=ac.dataset.acct;save();mix();calc();try{gtag('event','income_account',{account:st.acct})}catch(x){}return}
+    var b=e.target.closest('[data-mk]');if(!b)return;st.mkt=b.dataset.mk;save();st.order.forEach(rowUpdate);calc();try{gtag('event','income_market',{market:st.mkt})}catch(x){}});
   $('icList').addEventListener('click',function(e){var b=e.target.closest('[data-ic]');if(!b)return;var t=b.dataset.ic;
     if(st.sel[t]!=null){delete st.sel[t];delete st.pct[t];st.order=st.order.filter(function(x){return x!==t})}else{st.sel[t]=0;st.order.push(t);try{gtag('event','income_add_fund',{fund:t})}catch(x){}}
     save();list();mix();calc();if(st.sel[t]!=null){var inp=document.querySelector('[data-amt="'+t+'"]');if(inp&&matchMedia('(min-width:1101px)').matches)inp.focus()}});
   $('icMix').addEventListener('input',function(e){var t=e.target.dataset.amt,q=e.target.dataset.pct;
-    if(t){st.sel[t]=Math.max(0,+e.target.value||0);if(st.total>0)st.pct[t]=st.sel[t]/st.total*100;else delete st.pct[t];save();rowUpdate(t);syncPct();calc();return}
+    if(t){st.sel[t]=Math.max(0,+e.target.value||0)*(isUSD(t)?fx():1);if(st.total>0)st.pct[t]=st.sel[t]/st.total*100;else delete st.pct[t];save();rowUpdate(t);syncPct();calc();return}
     if(q){var v=Math.max(0,Math.min(100,+e.target.value||0));if(!(st.total>0)){var S=sum();if(S>0){st.total=S;st.order.forEach(function(x){st.pct[x]=(+st.sel[x]||0)/S*100})}}
       st.pct[q]=v;if(st.total>0)st.sel[q]=st.total*v/100;save();rowUpdate(q);syncPct();calc()}});
   $('icTotal').addEventListener('input',function(){var v=Math.max(0,+$('icTotal').value||0),old=st.total;
     if(v>0){st.order.forEach(function(t){if(st.pct[t]==null&&!(old>0)){var S=sum();st.pct[t]=S>0?(+st.sel[t]||0)/S*100:null}if(st.pct[t]!=null)st.sel[t]=v*st.pct[t]/100;else st.pct[t]=(+st.sel[t]||0)/v*100})}
     st.total=v;save();st.order.forEach(rowUpdate);syncPct();calc()});
-  $('icMix').addEventListener('click',function(e){var b=e.target.closest('[data-rm]');if(!b)return;var t=b.dataset.rm;delete st.sel[t];delete st.pct[t];st.order=st.order.filter(function(x){return x!==t});save();all()});
+  $('icMix').addEventListener('click',function(e){var c=e.target.closest('[data-cur]');if(c){var t=c.dataset.cur;if(c.dataset.c==='USD')st.cur[t]='USD';else delete st.cur[t];save();mix();calc();try{gtag('event','income_currency',{fund:t,cur:c.dataset.c})}catch(x){}return}
+    var b=e.target.closest('[data-rm]');if(!b)return;var t=b.dataset.rm;delete st.sel[t];delete st.pct[t];st.order=st.order.filter(function(x){return x!==t});save();all()});
   $('icSplit').addEventListener('submit',function(e){e.preventDefault();var v=+$('icTotal').value||0;if(!st.order.length||v<=0)return;st.total=v;var pc=100/st.order.length;st.order.forEach(function(t){st.pct[t]=pc;st.sel[t]=v*pc/100});save();mix();calc();try{gtag('event','income_split')}catch(x){}});
   /* coming from the Melius Money app: ?total=200000 sets the amount to invest, keeping the mix's percentages */
   try{var qs=new URLSearchParams(location.search),tv=Math.round(+qs.get('total')||0);if(tv>0){
