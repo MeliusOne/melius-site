@@ -6,7 +6,9 @@
      ZOHO_APP_PASSWORD  an app-specific password made in Zoho (not your normal password)
      ZOHO_SMTP_HOST     optional; smtppro.zoho.com by default (use smtppro.zohocloud.ca if your Zoho account is in Canada) */
 const nodemailer = require('nodemailer');
-const { esc, p, h, steps, box, button, letter, SITE } = require('../lib/letter');
+const { esc, p, h, steps, box, button, letter, SITE, SEAL_CID, useEmbeddedLogo } = require('../lib/letter');
+const SEAL_B64 = require('../lib/seal-b64');
+useEmbeddedLogo(true);
 
 const BOOK = 'https://calendar.app.google/Njkvmqf26i2frhhg9';
 
@@ -59,7 +61,8 @@ exports.handler = async (event) => {
   const mail = confirmation(kind, first);
   try {
     const t = nodemailer.createTransport({ host: process.env.ZOHO_SMTP_HOST || 'smtppro.zoho.com', port: 465, secure: true, auth: { user: process.env.ZOHO_USER, pass: process.env.ZOHO_APP_PASSWORD } });
-    await t.sendMail({ from: `"Obi Oji, Melius One" <${process.env.ZOHO_USER}>`, to, replyTo: process.env.ZOHO_USER, subject: mail.subject, html: mail.html, text: mail.text });
+    await t.sendMail({ from: `"Obi Oji, Melius One" <${process.env.ZOHO_USER}>`, to, replyTo: process.env.ZOHO_USER, subject: mail.subject, html: mail.html, text: mail.text,
+      attachments: [{ filename: 'melius-one.png', content: Buffer.from(SEAL_B64, 'base64'), contentType: 'image/png', cid: SEAL_CID, contentDisposition: 'inline' }] });
     console.log('Confirmation sent for', kind);
   } catch (e) { console.log('Email failed:', e.message); }
   return { statusCode: 200, body: 'ok' };
