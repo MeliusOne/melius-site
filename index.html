@@ -104,7 +104,16 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .hero-media img{position:absolute;right:0;top:0;height:100%;width:58%;max-width:none;object-fit:cover;object-position:50% 22%;transform-origin:60% 35%;animation:heroDrift 20s ease-in-out infinite alternate}
 .hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--hb) 0%,var(--hb) 45%,rgba(20,33,61,.84) 58%,rgba(20,33,61,.38) 78%,rgba(20,33,61,.22) 100%)}
 @keyframes heroDrift{from{transform:scale(1.02) translate(0,0)}to{transform:scale(1.12) translate(-2%,-1.5%)}}
-.hero{position:relative;padding-block:96px 104px;max-width:600px}
+.hero{position:relative;padding-block:96px 104px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:56px;align-items:center}
+.hero-band{background:radial-gradient(120% 90% at 85% 10%,#1D3157 0%,var(--hb) 60%)}
+.hero-steps{display:flex;flex-direction:column;gap:14px;text-decoration:none;color:var(--hb-ink);background:rgba(251,251,248,.05);border:1px solid rgba(201,163,94,.35);border-radius:20px;padding:26px 28px}
+.hero-steps:hover{border-color:var(--hb-gold)}
+.hs-k{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--hb-gold)}
+.hero-steps ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.hero-steps li{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid rgba(251,251,248,.1);font-size:16px}
+.hero-steps li:last-child{border-bottom:0}
+.hero-steps li b{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--hb-gold);color:#14213D;font-size:14px}
+.hs-more{font-weight:700;font-size:14px;color:var(--hb-gold)}
 .hero-band .eyebrow{color:var(--hb-gold)}
 .hero-band h1{color:#FBFBF8}
 .hero-band .lede{color:var(--hb-muted)}
@@ -114,9 +123,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .promise-row{padding-block:48px 8px}
 .promise-row .promise{max-width:760px}
 @media (max-width:760px){
-  .hero-media img{width:100%;opacity:.5;object-position:50% 15%}
-  .hero-media::after{background:linear-gradient(180deg,rgba(20,33,61,.5) 0%,rgba(20,33,61,.8) 45%,var(--hb) 85%)}
-  .hero{padding-block:72px 64px}
+  .hero{padding-block:56px 56px;grid-template-columns:1fr;gap:32px}
+  .hero-steps{padding:20px}
 }
 @media (prefers-reduced-motion:reduce){.hero-media img{animation:none}}
 .pd-row{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px;align-items:center}
@@ -1176,7 +1184,6 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     </div>
   </section>
   <section class="hero-band" aria-label="Introduction">
-    <div class="hero-media" aria-hidden="true"><img src="hero.jpg" alt="" width="900" height="1200" fetchpriority="high" decoding="async"></div>
     <div class="wrap">
       <div class="hero">
       <div class="stack">
@@ -1188,6 +1195,17 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
           <a class="btn ghost" href="#steps">See the Freedom Steps</a>
         </div>
       </div>
+      <a class="hero-steps" href="#steps" aria-label="The five Freedom Steps">
+        <span class="hs-k">The Freedom Steps</span>
+        <ol>
+          <li><b>1</b><span>Know your number</span></li>
+          <li><b>2</b><span>Keep a one-month emergency fund</span></li>
+          <li><b>3</b><span>Attack expensive debt</span></li>
+          <li><b>4</b><span>Invest for income</span></li>
+          <li><b>5</b><span>Freedom: your payouts cover your month</span></li>
+        </ol>
+        <span class="hs-more">See how each step works →</span>
+      </a>
       </div>
     </div>
   </section>
