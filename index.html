@@ -1767,6 +1767,8 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
           <option value="yield-d">Yield, high to low</option>
           <option value="ret-d">1-yr total return, high to low</option>
           <option value="mer-a">Cost, low to high</option>
+          <option value="age-a">Age, oldest first</option>
+          <option value="age-d">Age, newest first</option>
           <option value="tick-a">Ticker, A to Z</option>
         </select></label>
         <button class="fd-reset" type="reset" id="fdReset">Reset</button>
@@ -2275,10 +2277,14 @@ var FUNDS=[
     var q=$('fdQ').value.trim().toLowerCase().replace(/[.\-\s]u$/,''),p=$('fdProv').value,x=$('fdExp').value,s=$('fdStrat').value,fr=$('fdFreq').value,lv=$('fdLev').value,so=$('fdSort').value;
     var r=FUNDS.filter(function(f){return (!q||(f.t+' '+f.n).toLowerCase().indexOf(q)>=0)&&(!p||f.p===p)&&(!x||f.x===x)&&(!s||f.s===s)&&(!fr||f.f===fr)&&(!lv||(lv==='yes')===!!f.lev)});
     var nv=function(v,dir){return v==null?(dir>0?1e9:-1e9):v};
+    /* launch date: the first trading day from the nightly data, else the launch month, else mid-year of the launch year */
+    function born(f){if(f.st&&(!f.inc||f.st.slice(0,4)===String(f.inc)))return Date.parse(f.st);if(f.nw){var d=Date.parse('1 '+f.nw);if(!isNaN(d))return d}if(f.inc)return Date.parse(f.inc+'-07-01');return Date.now()}
     r.sort(function(a,b){switch(so){
       case 'yield-d':return nv(b.y,-1)-nv(a.y,-1);
       case 'ret-d':return nv((b.r||{}).y1,-1)-nv((a.r||{}).y1,-1);
       case 'mer-a':return nv(a.m!=null?a.m:a.mf,1)-nv(b.m!=null?b.m:b.mf,1);
+      case 'age-a':return born(a)-born(b);
+      case 'age-d':return born(b)-born(a);
       case 'tick-a':return a.t<b.t?-1:1;
       default:var ga=a.s.indexOf('growth')>=0,gb=b.s.indexOf('growth')>=0;if(ga!==gb)return ga?1:-1;return nv(b.a,-1)-nv(a.a,-1);}});
     return r;
@@ -2338,9 +2344,9 @@ var FUNDS=[
     /* a row for each U.S.-dollar unit (HYLD.U), right after its fund */
     FUNDS.slice().forEach(function(f){var l=d.funds[f.t];if(!l||!l.u||f.base||FUNDS.some(function(x){return x.t===f.t+'.U'}))return;var u=l.u,c=Object.assign({},f,{t:f.t+'.U',base:f.t,n:f.n+' (U.S.-dollar units)',uu:0,live:0,e:false});
       if(u.y>0){c.y=+u.y;c.ya=fd(u.pd)+' close, latest payout annualized'}
-      if(u.r){c.r=u.r;c.rl=0;c.ra=fd(u.r.asof)+', in U.S. dollars, from closing prices with payouts reinvested'}else{c.r={};c.ra='not available yet'}
+      if(u.r&&u.r.start)c.st=u.r.start;if(u.r){c.r=u.r;c.rl=0;c.ra=fd(u.r.asof)+', in U.S. dollars, from closing prices with payouts reinvested'}else{c.r={};c.ra='not available yet'}
       FUNDS.splice(FUNDS.indexOf(f)+1,0,c)});
-    FUNDS.forEach(function(f){var l=d.funds[f.t];if(f.base)return;if(l&&l.u)f.uu=1;if(l&&f.rl&&l.r){f.r=l.r;f.ra=fd(l.r.asof)+', from closing prices with payouts reinvested';if(!f.inc&&l.r.start)f.inc=l.r.start.slice(0,4)}if(l&&l.p&&l.y>0&&l.pd){f.y=+l.y;f.ya=fd(l.pd)+' close, latest payout annualized'+(l.stale?' (last good update)':'');f.e=false;f.live=1;n++}});
+    FUNDS.forEach(function(f){var l=d.funds[f.t];if(l&&l.r&&l.r.start&&!f.base)f.st=l.r.start;if(f.base)return;if(l&&l.u)f.uu=1;if(l&&f.rl&&l.r){f.r=l.r;f.ra=fd(l.r.asof)+', from closing prices with payouts reinvested';if(!f.inc&&l.r.start)f.inc=l.r.start.slice(0,4)}if(l&&l.p&&l.y>0&&l.pd){f.y=+l.y;f.ya=fd(l.pd)+' close, latest payout annualized'+(l.stale?' (last good update)':'');f.e=false;f.live=1;n++}});
     if(!n)return;stats();render();
     var el=$('fdLive');if(el){el.innerHTML='<span class="ic-dot live" aria-hidden="true"></span><span>Yields updated every weekday evening from the latest payouts and closing prices · last update '+fd(d.asOf.slice(0,10))+' · '+n+' of '+FUNDS.length+' funds</span>';el.hidden=false}
   });
