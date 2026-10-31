@@ -1126,9 +1126,9 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
 .ws-nav .ws-hide{font-size:15px}
 .v-toggle{font:inherit;color:inherit;background:none;border:0;padding:0;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .m-only-nav{display:none}
-.tool-note{margin:4px 0 0;font-size:13px;line-height:1.5;color:var(--muted);padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--band);max-width:80ch}
+.tool-note{margin:0;font-size:13px;line-height:1.55;color:var(--muted);max-width:90ch}
 .tool-note b{color:var(--ink)}
-.ap-hero .tool-note{background:transparent}
+.tool-note-wrap{padding-block:8px 28px}
 .v-toggle.v-pill{text-decoration:none;font-weight:600;font-size:14px;border:1px solid var(--line);border-radius:999px;padding:8px 16px;color:var(--ink)}
 .v-toggle.v-pill:hover{border-color:var(--gold,#C9A35E)}
 @media (max-width:760px){
@@ -1694,7 +1694,6 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
           <li><b>Your freedom number:</b> what you need invested, and roughly how long it will take.</li>
         </ul>
         <div class="ap-cta"><a class="btn" href="/app/">Open the free app</a><span class="note">No sign-up. Your numbers stay on your own device.</span></div>
-        <p class="tool-note"><b>For demonstration and education only.</b> Not investment, tax or legal advice. The app and the budget template give estimates to help you plan; your own situation may need professional advice.</p>
         <p class="note ap-home"><b>Keep it on your phone:</b> open it, then on iPhone tap Share → Add to Home Screen, or on Android tap the menu → Add to home screen.</p>
       </div>
       <div class="ap-phone" aria-label="Live preview of the Melius Money app">
@@ -1742,6 +1741,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     </form>
   </div></div></section>
 
+  <section class="tool-note-wrap"><div class="wrap"><p class="tool-note"><b>For demonstration and education only.</b> Not investment, tax or legal advice. The app and the budget template give estimates to help you plan; your own situation may need professional advice.</p></div></section>
   <section class="next-wrap" data-pl="hide"><div class="wrap"><a class="next" href="#book"><span class="eyebrow">Ready for the next step?</span><span class="next-t">Book a free 30-minute intro session</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section>
 </div>
 <div class="page" id="funds" data-page="funds">
@@ -1751,7 +1751,6 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       <h1 class="fd-title">Canadian covered-call ETFs</h1>
       <p class="lede">Canada’s largest covered-call income funds, side by side: yield, cost, size and total return, with live prices. Open any fund for its returns over time and a live chart.</p>
       <p class="fd-calc"><a class="btn ghost" href="#income">What would these pay you? Try the income calculator →</a></p>
-      <p class="tool-note"><b>For demonstration and education only.</b> Not investment advice. Figures come from public sources and may be out of date, and payouts and returns are not guaranteed. Check with the fund provider before you invest.</p>
       <p class="fd-live" id="fdLive" hidden></p>
       <div class="fd-stats" id="fdStats" aria-live="polite"></div>
     </div>
@@ -1796,9 +1795,9 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       <p class="fd-empty" id="fdEmpty" hidden>No funds match these filters. <button type="button" class="fd-link" id="fdEmptyReset">Clear the filters</button></p>
 
       <div class="fd-foot">
+        <p class="tool-note"><b>For demonstration and education only.</b> Not investment advice. Figures come from public sources and may be out of date, and payouts and returns are not guaranteed. Read each fund’s ETF Facts and prospectus before you invest.</p>
         <p><b>How to read this.</b> Yield is either the latest payout, annualized, or the last 12 months of payouts, divided by the price, on the date shown for each fund. It is not a promise: payouts are set by each fund and change often. A “~” means the yield was worked out from the fund’s latest payouts and price, because the provider doesn’t publish one. Funds marked “New” are under a year old, so they have no 1-year return yet. <b>Total return</b> counts the price change plus every payout, reinvested; it is the fairest way to compare an income fund with a growth fund. The price-only change is an estimate, and the live chart shows the actual price. Cost is the MER from the latest ETF Facts, or the management fee where a new fund has no MER yet. Size is the money invested in the fund.</p>
         <p><b>Sources.</b> Yields update every weekday evening from each fund’s latest payout and closing price (Yahoo Finance), shown with the date of the update; if a fund can’t be updated, its last published yield is kept. Returns, fees and size come from each provider’s published fund data, and for a few funds from market data services, on the dates shown. Past returns do not predict future returns. Prices and charts are live market data from TradingView, delayed by up to 15 minutes. Figures last checked <span id="fdChecked"></span>.</p>
-        <p>This directory is financial education, not investment advice or a recommendation to buy any fund. Read each fund’s ETF Facts and prospectus before investing.</p>
       </div>
     </div>
   </section>
@@ -1814,7 +1813,6 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
         </div>
         <p class="ic-fresh" id="icFresh" aria-live="polite"></p>
       </header>
-      <p class="tool-note"><b>For demonstration and education only.</b> Not investment advice. The payouts, withdraw amounts and projections are illustrations built from each fund’s latest figures, not a forecast or a recommendation. Payouts can be cut and prices can fall.</p>
       <button type="button" class="ic-mini" id="icMini" data-tab="income" aria-label="See your income"></button>
       <div class="ic-layout">
         <aside class="ic-builder card" aria-label="Build your mix">
@@ -1854,10 +1852,11 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       <button type="button" data-tab="future"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19h18M5 15l4-4 4 3 6-7" /></svg>Future</button>
     </nav>
     <div class="ic-foot">
+      <p class="tool-note"><b>For demonstration and education only.</b> Not investment advice. The payouts, withdraw amounts and projections are illustrations built from each fund’s latest figures, not a forecast or a recommendation. Payouts can be cut and prices can fall.</p>
       <p><b>How this works.</b> Each fund’s yield is its latest regular payout per unit, times the number of payouts in a year, divided by its latest closing price. Your amount times that yield gives a yearly payout. Each fund is shown on its own schedule: most pay monthly, some twice a month, a few quarterly. When your mix has more than one schedule, the total is shown per month. The two-week paycheque figure is the yearly total spread over 26 paydays, for comparing with a biweekly paycheque.</p>
       <p><b>Withdraw and reinvest.</b> A fund grows by its total return: the change in its unit price plus its payouts. If you withdraw less than that total return, minus about 2.5% for inflation, the balance keeps growing in real terms. By default we use each fund’s longest record (10, 5 or 3 years, or since launch), its 1-year return for newer funds, and 8% when there’s no record yet. Switch the market to see a strong year (+30%, like 2025), an ordinary one (+12%) or a bear year (−25%). Past returns don’t promise future ones, so check again each year.</p>
       <p><b>Projection.</b> “Where this could go” grows each fund by the return the market setting gives it, pays its current yield on its balance every year, and takes out what you choose: every payout, the safe amount, or nothing. In Bear, the first year falls 25% and later years return 12%. It is a what-if, not a forecast.</p>
-      <p><b>U.S. dollars.</b> U.S.-listed funds, and Canadian funds you switch to US$, show in U.S. dollars. Totals are in Canadian dollars at the latest exchange rate. Their returns are in U.S. dollars, so a change in the exchange rate isn’t included. In a TFSA or a non-registered account, the U.S. keeps 15% of a U.S.-listed fund’s payouts (in a non-registered account you can usually claim it back as a foreign tax credit). In an RRSP, it doesn’t.</p>
+      <p><b>U.S. dollars.</b> U.S.-listed funds and the .U units of Canadian funds show in U.S. dollars. Totals are in Canadian dollars at the latest exchange rate. Their returns are in U.S. dollars, so a change in the exchange rate isn’t included. In a TFSA or a non-registered account, the U.S. keeps 15% of a U.S.-listed fund’s payouts (in a non-registered account you can usually claim it back as a foreign tax credit). In an RRSP, it doesn’t.</p>
       <p><b>Payouts are not guaranteed.</b> Funds change their payouts often, and very high yields usually include some of your own money paid back (return of capital) and can wear down the unit price over time. Funds marked “Leverage” borrow to invest, so they can fall faster. Figures are before tax.</p>
       <p>This calculator is financial education, not investment advice or a recommendation to buy any fund. Compare funds side by side in the <a href="#funds">fund directory</a><span data-pl="hide">, or <a href="#book">book a free intro session</a> to build a plan that fits your family</span>.</p>
     </div>
