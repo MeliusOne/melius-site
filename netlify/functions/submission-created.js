@@ -31,8 +31,8 @@ function confirmation(kind, first) {
     ]) +
     h(cohort ? 'How the cohort works' : 'How private coaching works') +
     box(cohort
-      ? 'Six live 60-minute group sessions, one a week, recorded if you miss one. Each module comes with a written lesson and a worksheet, and you get a private cohort group chat with answers from me every weekday.<br><br><b>$99</b> by card, or 3 payments of $33. <b>$89</b> when you pay in full by Interac e-Transfer.'
-      : 'Six private 60-minute sessions built around your own accounts, numbers and goals, with a written summary after each one, and messages between sessions for 90 days.<br><br><b>$399</b> by card, or 3 payments of $133. <b>$369</b> when you pay in full by Interac e-Transfer.') +
+      ? 'Six live 60-minute group sessions, one a week, recorded if you miss one. Each module comes with a written lesson and a worksheet, and you get a private cohort group chat with answers from me every weekday.<br><br><b>$99</b> by card. <b>$89</b> when you pay in full by Interac e-Transfer.'
+      : 'Six private 60-minute sessions built around your own accounts, numbers and goals, with a written summary after each one, and messages between sessions for 90 days.<br><br><b>$399</b> by card. <b>$369</b> when you pay in full by Interac e-Transfer.') +
     p('If your first ' + (cohort ? 'cohort week' : 'session') + ' isn’t useful, ask within 7 days and the full amount is refunded.') +
     h('While you wait') +
     p(`Set up your free <a href="${SITE}/app/" style="color:#14213D">Melius Money</a> plan: your income, bills, debts and spending. It takes about 10 minutes, and it makes our first session far more useful.`) +
