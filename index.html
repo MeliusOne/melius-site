@@ -1179,9 +1179,9 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       </form>
       <p class="pl-msg" id="plMsg" aria-live="polite">No spam. One email when we launch.</p>
       <div class="pl-tools">
-        <a class="pl-tool" href="#income"><span class="pl-k">Income calculator</span><b>What would your funds pay you?</b><span>Pick Canadian income funds and see your payout, and how much you can withdraw while your balance keeps growing.</span></a>
-        <a class="pl-tool" href="#funds"><span class="pl-k">Fund directory</span><b>Canada’s covered-call ETFs</b><span>50 income funds side by side: yield, fees, size and total return, updated every weekday.</span></a>
-        <a class="pl-tool" href="#tools"><span class="pl-k">Free app</span><b>Melius Money</b><span>What’s safe to spend until payday, your debt-free date and your freedom number.</span></a>
+        <a class="pl-tool" href="#income"><span class="pl-k">Income calculator</span><b>What would your funds pay you?</b><span>Pick income funds and see your payout, and how much you can withdraw while your balance keeps growing.</span></a>
+        <a class="pl-tool" href="#funds"><span class="pl-k">Fund directory</span><b>Covered-call income ETFs</b><span><span data-fund-count>60</span> income funds, Canadian and U.S.-listed, side by side: yield, fees, size and total return, updated every weekday.</span></a>
+        <a class="pl-tool" href="#tools"><span class="pl-k">Free app</span><b>Melius Money</b><span>What’s left to spend this month, your debt-free date and your freedom number.</span></a>
       </div>
       <p class="pl-motto" lang="la">Dum vivas, fac melius.<small>As long as you live, do better.</small></p>
     </div>
@@ -1748,8 +1748,8 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
   <section class="fd-head">
     <div class="wrap stack">
       <p class="eyebrow">Fund directory</p>
-      <h1 class="fd-title">Canadian covered-call ETFs</h1>
-      <p class="lede">Canada’s largest covered-call income funds, side by side: yield, cost, size and total return, with live prices. Open any fund for its returns over time and a live chart.</p>
+      <h1 class="fd-title">Covered-call income ETFs</h1>
+      <p class="lede">Canada’s largest covered-call income funds and the biggest U.S.-listed ones, side by side: yield, cost, size and total return, with live prices. Open any fund for its returns over time and a live chart.</p>
       <p class="fd-calc"><a class="btn ghost" href="#income">What would these pay you? Try the income calculator →</a></p>
       <p class="fd-live" id="fdLive" hidden></p>
       <div class="fd-stats" id="fdStats" aria-live="polite"></div>
@@ -2388,6 +2388,7 @@ var WORD_T={m:'Money',w:'Hard work',c:'The love of Christ',l:'Life is short'};
   document.addEventListener('click',function(e){if(e.target.closest('.ws-hide'))return set(false);if(e.target.closest('.v-toggle'))return set(!on())});
   window.addEventListener('storage',function(e){if(e.key==='melius-verses'){document.documentElement.classList.toggle('no-verses',e.newValue==='off');paint()}});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',paint);else paint();})();
+(function(){function n(){var c=0;try{FUNDS.forEach(function(f){if(!f.base)c++})}catch(e){return}document.querySelectorAll('[data-fund-count]').forEach(function(el){el.textContent=c})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',n);else n()})();
 function wordIdx(d){d=d||new Date();var n=Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5);return ((n%WORD.length)+WORD.length)%WORD.length}
 /* scripture bar: rotates key lines, tap for the full passage */
 function mountWord(host,opt){opt=opt||{};if(!host)return null;
