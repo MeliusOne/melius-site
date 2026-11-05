@@ -194,7 +194,7 @@ main{padding-block:20px calc(110px + env(safe-area-inset-bottom,0px))}
 <header class="top"><div class="wrap">
   <a class="brand" href="/app/" aria-label="Back to Melius Money"><img src="../icon-m1-192.png" alt=""><b>Melius Learn</b></a>
   <span class="chip flame" id="streak" title="Day streak"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c1 3.5-1.5 5-1.5 8 0 1.4 1 2.5 2.3 2.5 1.6 0 2.4-1.4 2.2-3.2C17.7 11 19 13.4 19 16a7 7 0 0 1-14 0c0-4.6 4.2-7 7-14z"/></svg><span>0</span></span>
-  <span class="chip xp" id="xp" title="Total XP"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg><span>0</span></span>
+  <span class="chip xp" id="xp" title="Melius points" aria-label="Melius points"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg><span>0</span></span>
 </div></header>
 
 <main class="wrap">
@@ -414,7 +414,7 @@ function finish(){var les=R.les,qn=0,ok=0;Object.keys(R.first).forEach(function(
   var rec=S.done[les.id]||{best:0,log:[]};rec.best=Math.max(rec.best,acc);rec.log=(rec.log||[]).concat(t).slice(-30);S.done[les.id]=rec;S.xp+=xp;if(S.days.indexOf(t)<0)S.days.push(t);S.days=S.days.slice(-400);save();
   R.state='fin';bar();var st=streak(),v=verses()?VERSES[R.i%VERSES.length]:null,nx=curIdx();
   $('lIn').innerHTML='<div class="done"><div class="medal">'+svg(acc===100?'star':'check',acc===100)+'</div><h2 id="lTitle">'+(acc===100?'Perfect lesson':'Lesson complete')+'</h2><p>'+esc(les.t)+(first?'':' · practised again')+'</p>'+
-    '<div class="stats"><div class="stat g"><span>XP</span><b>+'+xp+'</b></div><div class="stat"><span>Accuracy</span><b>'+acc+'%</b></div><div class="stat o"><span>Streak</span><b>'+st+(st===1?' day':' days')+'</b></div></div>'+
+    '<div class="stats"><div class="stat g"><span>Melius points</span><b>+'+xp+'</b></div><div class="stat"><span>Accuracy</span><b>'+acc+'%</b></div><div class="stat o"><span>Streak</span><b>'+st+(st===1?' day':' days')+'</b></div></div>'+
     '<div class="learned"><b>'+(first?'New terms':'Terms in this lesson')+'</b><div>'+les.terms.map(function(x){return '<span class="newterm">'+svg('check')+esc(x)+'</span>'}).join('')+'</div></div>'+
     (v?'<p class="verse">“'+esc(v[0])+'”<small>'+v[1]+' · BSB</small></p>':'')+'</div>';
   ft('','',nx>-1?'Continue':'Back to the path');try{gtag('event','learn_done',{lesson:les.id,acc:acc})}catch(x){}}
