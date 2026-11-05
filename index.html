@@ -12,7 +12,7 @@
 </script>
 <meta name="color-scheme" content="light dark">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Melius One Consulting, founded by Obi Oji: one-on-one financial education for families in Canada. Budgeting, paying off debt, income ETFs and building passive income, plus the free Melius Money app. Kitchener, Ontario. Book a free intro session.">
+<meta name="description" content="Free money tools for families in Canada from Obi Oji: the Melius Money app for budgeting and debt, an income calculator, a directory of 60 covered-call income ETFs, and plain-language lessons on TFSAs, RRSPs and income investing.">
 <!--
   Put your photo in the same folder as this file, named headshot.jpg.
   Sign-ups are handled by Netlify Forms. In Netlify: Site configuration > Forms > enable form detection,
@@ -20,20 +20,30 @@
 -->
 <script>document.documentElement.classList.add("js");try{if(localStorage.getItem("melius-verses")!=="on")document.documentElement.classList.add("no-verses")}catch(e){document.documentElement.classList.add("no-verses")}
 /* PRE-LAUNCH MODE: true shows the "coming soon" home page and hides About, Coaching, Learn and booking. Set to false at launch. */
-window.PRELAUNCH=true;if(window.PRELAUNCH)document.documentElement.classList.add("prelaunch");</script>
-<title>Melius One Consulting | Obi Oji, Financial Education Coach in Kitchener, Ontario</title>
+window.PRELAUNCH=false;if(window.PRELAUNCH)document.documentElement.classList.add("prelaunch");
+/* COACHING: false hides coaching, prices, booking, referral links and the Melius Circle, and shows the free-tools wording instead. Set to true when coaching opens. */
+window.COACHING=false;if(!window.COACHING)document.documentElement.classList.add("no-coach");</script>
+<title>Melius One | Free money tools for families in Canada</title>
 <link rel="canonical" href="https://meliusoneconsulting.com/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Melius One Consulting">
-<meta property="og:title" content="Melius One Consulting | Obi Oji, financial education coach">
-<meta property="og:description" content="One-on-one coaching for families in Canada: budgeting, paying off debt, income ETFs and passive income. Free Melius Money app. Book a free intro session.">
+<meta property="og:site_name" content="Melius One">
+<meta property="og:title" content="Melius One | Free money tools for families in Canada">
+<meta property="og:description" content="Budget, clear your debt, and see what income ETFs could pay you: the free Melius Money app, an income calculator and a fund directory.">
 <meta property="og:url" content="https://meliusoneconsulting.com/">
 <meta property="og:image" content="https://meliusoneconsulting.com/share.jpg?v=2">
 <meta name="twitter:card" content="summary_large_image">
+<!-- When coaching opens, restore the ProfessionalService entry:
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
  {"@type":"ProfessionalService","@id":"https://meliusoneconsulting.com/#business","name":"Melius One Consulting","url":"https://meliusoneconsulting.com/","logo":"https://meliusoneconsulting.com/seal.png","image":"https://meliusoneconsulting.com/headshot.jpg","description":"One-on-one financial education for families in Canada: budgeting, paying off debt, income ETFs and building passive income.","email":"obi@meliusoneconsulting.com","areaServed":"Canada","address":{"@type":"PostalAddress","addressLocality":"Kitchener","addressRegion":"ON","addressCountry":"CA"},"founder":{"@id":"https://meliusoneconsulting.com/#obi"}},
  {"@type":"Person","@id":"https://meliusoneconsulting.com/#obi","name":"Obi Oji","jobTitle":"Founder, financial education coach","worksFor":{"@id":"https://meliusoneconsulting.com/#business"},"image":"https://meliusoneconsulting.com/headshot.jpg","url":"https://meliusoneconsulting.com/"}
+]}
+</script>
+-->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"WebSite","@id":"https://meliusoneconsulting.com/#site","name":"Melius One","url":"https://meliusoneconsulting.com/","description":"Free money tools for families in Canada: budgeting, debt payoff, income ETFs and plain-language lessons.","author":{"@id":"https://meliusoneconsulting.com/#obi"}},
+ {"@type":"Person","@id":"https://meliusoneconsulting.com/#obi","name":"Obi Oji","image":"https://meliusoneconsulting.com/headshot.jpg","url":"https://meliusoneconsulting.com/#about"}
 ]}
 </script>
 <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -666,6 +676,19 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 /* ---- pre-launch mode ---- */
 .pl-home{display:none}
 .prelaunch [data-pl="hide"]{display:none!important}
+.no-coach [data-coach="hide"],.no-coach .fs-mod{display:none!important}
+.updates{padding-block:8px 56px}
+.up-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:24px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:28px 32px}
+.up-txt h2{margin:4px 0 6px}
+.up-txt p:last-child{margin:0;color:var(--muted)}
+.up-form{display:flex;flex-wrap:wrap;gap:10px}
+.up-form input[type=email]{flex:1 1 220px;min-width:0;height:48px;padding:0 16px;border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--ink);font:inherit}
+.up-form .btn{height:48px}
+.up-msg{flex-basis:100%;margin:0;font-size:14px;color:var(--muted);min-height:1em}
+@media (max-width:820px){.up-card{grid-template-columns:1fr;padding:22px}}
+html:not(.no-coach) [data-coach="show"]{display:none!important}
+@media (min-width:701px){.no-coach .tgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:700px){.no-coach .tgrid{grid-template-columns:1fr}}
 .prelaunch #home>:not(.pl-home){display:none!important}
 .prelaunch .pl-home{display:block;--pl-bg:#14213D;--pl-ink:#F7F5F0;--pl-mute:#C3CBD8;--pl-gold:#C9A35E;--pl-line:rgba(247,245,240,.14);background:var(--pl-bg);color:var(--pl-ink);padding-block:64px 72px;position:relative;overflow:hidden;text-align:center}
 .pl-home::before{content:"";position:absolute;inset:auto -160px -260px auto;width:620px;height:620px;border-radius:50%;background:radial-gradient(closest-side,rgba(201,163,94,.18),transparent);pointer-events:none}
@@ -1162,17 +1185,17 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
 
 <header class="top">
   <div class="wrap nav">
-    <a class="brand" href="#home" aria-label="Melius One Consulting, home"><svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="var(--seal)"/><circle cx="50" cy="50" r="42" fill="none" stroke="var(--seal-ring)" stroke-width="1.5"/><text x="44" y="69" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-size="54" font-weight="500" fill="var(--seal-m)">M</text><text x="73" y="44" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-size="24" font-weight="600" fill="var(--seal-1)">1</text></svg><span class="wordmark"><span class="wm1">Melius One</span><span class="wm2">CONSULTING · EST. 2021</span></span></a>
+    <a class="brand" href="#home" aria-label="Melius One, home"><svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="var(--seal)"/><circle cx="50" cy="50" r="42" fill="none" stroke="var(--seal-ring)" stroke-width="1.5"/><text x="44" y="69" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-size="54" font-weight="500" fill="var(--seal-m)">M</text><text x="73" y="44" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-size="24" font-weight="600" fill="var(--seal-1)">1</text></svg><span class="wordmark"><span class="wm1">Melius One</span><span class="wm2">CONSULTING · EST. 2021</span></span></a>
     <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mainnav"><span></span><span></span><span></span></button>
     <nav aria-label="Main" id="mainnav"><ul>
       <li data-pl="hide"><a href="#about" data-nav="about">About</a></li>
-      <li data-pl="hide"><a href="#coaching" data-nav="coaching">Coaching</a></li>
+      <li data-coach="hide" data-pl="hide"><a href="#coaching" data-nav="coaching">Coaching</a></li>
       <li data-pl="hide"><a href="#learn" data-nav="learn">Learn</a></li>
       <li><a href="#funds" data-nav="funds">Funds</a></li>
       <li><a href="#income" data-nav="income">Income</a></li>
       <li><a href="#tools" data-nav="tools">Melius Money</a></li>
-      <li data-pl="hide"><a href="#accounts" class="navref">Where I invest</a></li>
-      <li data-pl="hide"><a class="btn navbtn" href="#book" data-nav="book">Book a free session</a></li>
+      <li data-coach="hide" data-pl="hide"><a href="#accounts" class="navref">Where I invest</a></li>
+      <li data-coach="hide" data-pl="hide"><a class="btn navbtn" href="#book" data-nav="book">Book a free session</a></li>
       <li class="m-only-nav"><button type="button" class="v-toggle">Hide Bible verses</button></li>
     </ul></nav>
   </div>
@@ -1205,11 +1228,11 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     <div class="wrap">
       <div class="hero">
       <div class="stack">
-        <p class="eyebrow">Financial education services · Kitchener, Ontario</p>
+        <p data-coach="hide" class="eyebrow">Financial education services · Kitchener, Ontario</p><p data-coach="show" class="eyebrow">Free money tools · Kitchener, Ontario</p>
         <h1>Get your money in order. Then make it pay you.</h1>
-        <p class="lede">One-on-one coaching for families in Canada, whether you’re new here or just tired of money running out before the month does. Plan every dollar, keep a one-month emergency fund, clear expensive debt, then learn how income investing works, one clear step at a time, with your own accounts in front of you.</p>
+        <p data-coach="hide" class="lede">One-on-one coaching for families in Canada, whether you’re new here or just tired of money running out before the month does. Plan every dollar, keep a one-month emergency fund, clear expensive debt, then learn how income investing works, one clear step at a time, with your own accounts in front of you.</p><p data-coach="show" class="lede">Free tools for families in Canada, whether you’re new here or just tired of money running out before the month does. Plan every dollar, keep a one-month emergency fund, clear expensive debt, then learn how income investing works, one clear step at a time.</p>
         <div class="cta">
-          <a class="btn solid" href="#book">Book a free intro session</a>
+          <a data-coach="hide" class="btn solid" href="#book">Book a free intro session</a><a data-coach="show" class="btn solid" href="#tools">Open Melius Money, free</a>
           <a class="btn ghost" href="#steps">See the Freedom Steps</a>
         </div>
       </div>
@@ -1239,15 +1262,15 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
 
   <section class="teasers"><div class="wrap">
     <div class="tgrid">
-      <a class="card tcard" href="#about"><span class="tag">About</span><h3>Meet your coach</h3><p>My story, why I do this, and how I invest for my own family.</p><span class="tlink">Read more →</span></a>
-      <a class="card tcard" href="#coaching"><span class="tag">Coaching</span><h3>How it works</h3><p>A free intro call, then a small-group cohort or premium private coaching.</p><span class="tlink">See the plan →</span></a>
-      <a class="card tcard" href="#learn"><span class="tag">Learn</span><h3>What school never taught you</h3><p>How money works, how to make it work for you, and what each module is worth.</p><span class="tlink">Start learning →</span></a>
+      <a class="card tcard" href="#about"><span class="tag">About</span><h3 data-coach="hide">Meet your coach</h3><h3 data-coach="show">Meet Obi</h3><p>My story, why I do this, and how I invest for my own family.</p><span class="tlink">Read more →</span></a>
+      <a data-coach="hide" class="card tcard" href="#coaching"><span class="tag">Coaching</span><h3>How it works</h3><p>A free intro call, then a small-group cohort or premium private coaching.</p><span class="tlink">See the plan →</span></a>
+      <a class="card tcard" href="#learn"><span class="tag">Learn</span><h3>What school never taught you</h3><p data-coach="hide">How money works, how to make it work for you, and what each module is worth.</p><p data-coach="show">How money works, how to make it work for you, and how income really compounds.</p><span class="tlink">Start learning →</span></a>
       <a class="card tcard" href="#tools"><span class="tag amber">Melius Money</span><h3>Budget for free</h3><p>The Melius Money app: make every dollar better with a spending plan, a debt-free date and your freedom number. Plus a budget template and the income ETF guide.</p><span class="tlink">Try them free →</span></a>
     </div>
   </div></section>
   <section class="who"><div class="wrap">
     <p class="eyebrow">Who this is for</p>
-    <h2>Coaching for families building from here</h2>
+    <h2 data-coach="hide">Coaching for families building from here</h2><h2 data-coach="show">Made for families building from here</h2>
     <div class="wgrid four">
       <article class="card"><span class="tag">Starting out</span><h3>New to Canada, building from scratch</h3><p>You want to understand TFSAs, RRSPs and investing before you put your savings to work.</p></article>
       <article class="card"><span class="tag">Stretched</span><h3>Bills and debt take every paycheque</h3><p>You want a plan that makes the money last, and a clear way out of debt for good.</p></article>
@@ -1268,7 +1291,18 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
   </div></section>
 
 
-  <section class="accounts" id="accounts"><div class="wrap">
+  <section class="updates" id="updates"><div class="wrap"><div class="up-card">
+    <div class="up-txt"><p class="eyebrow">Get updates</p><h2>New tools, lessons and reads</h2><p>An email when something new is ready, about once a month. No spam, and unsubscribe any time.</p></div>
+    <form class="up-form" name="updates" method="POST" data-netlify="true" netlify-honeypot="company" id="upForm">
+      <input type="hidden" name="form-name" value="updates">
+      <p class="hp"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+      <input type="email" name="email" required placeholder="Your email address" aria-label="Your email address" autocomplete="email">
+      <button class="btn solid" type="submit">Keep me posted</button>
+      <p class="up-msg" id="upMsg" role="status"></p>
+    </form>
+  </div></div></section>
+
+  <section class="accounts" id="accounts" data-coach="hide"><div class="wrap">
     <p class="eyebrow">My picks, not a requirement</p>
     <h2>Where I invest, and where I connect</h2>
     <p class="lede" style="margin-top:12px">For investing, any Canadian brokerage works; I use Wealthsimple. For community, I use Blossom. Both are referral links, and signing up through them may give us both a bonus.</p>
@@ -1283,25 +1317,25 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     <div class="wrap">
       <div class="about">
         <div class="photo" id="photo">
-          <img src="headshot.jpg" alt="Obi Oji, founder of Melius One Consulting" onerror="this.remove();document.getElementById('photo').classList.add('noimg')">
+          <img src="headshot.jpg" alt="Obi Oji" onerror="this.remove();document.getElementById('photo').classList.add('noimg')">
           <span class="initials" aria-hidden="true">OO</span>
         </div>
         <div class="stack">
-          <p class="eyebrow">About your coach</p>
-          <h2>Obi Oji, founder</h2>
-          <p class="lede">I came to Canada to build a better life for my family, and learned the hard way that a salary alone rarely gets you there. Today our investments pay us every month, and we’re building toward the day they cover all of our family’s bills. I started Melius One to teach other families how to do the same, clearly and honestly.</p>
+          <p data-coach="hide" class="eyebrow">About your coach</p><p data-coach="show" class="eyebrow">About me</p>
+          <h2 data-coach="hide">Obi Oji, founder</h2><h2 data-coach="show">Obi Oji</h2>
+          <p data-coach="hide" class="lede">I came to Canada to build a better life for my family, and learned the hard way that a salary alone rarely gets you there. Today our investments pay us every month, and we’re building toward the day they cover all of our family’s bills. I started Melius One to teach other families how to do the same, clearly and honestly.</p><p data-coach="show" class="lede">I came to Canada to build a better life for my family, and learned the hard way that a salary alone rarely gets you there. Today our investments pay us every month, and we’re building toward the day they cover all of our family’s bills. I built these free tools to share what I’ve learned with other families, clearly and honestly.</p>
           <div class="stats">
             <div class="stat"><b>24</b><span>Paydays a year from our investments</span></div>
             <div class="stat"><b>6</b><span>A family of six, investing for freedom</span></div>
             <div class="stat"><b>4+ yrs</b><span>Leading delivery in Canadian banking</span></div>
-            <div class="stat"><b>1:1</b><span>Every session, just you and me</span></div>
+            <div data-coach="hide" class="stat"><b>1:1</b><span>Every session, just you and me</span></div>
           </div>
           <ul class="creds">
             <!-- After passing the CSC, add as the first credential: <li>Canadian Securities Course (CSC®), Canadian Securities Institute</li> -->
             <li>Release Train Engineer, leading large technology programmes at a major Canadian bank</li>
             <li>Board member, Octopus VC</li>
             <li>I invest in income ETFs, and run my own options desk using the wheel and LEAPS</li>
-            <li>Based in Kitchener, Ontario · Sessions online or in person</li>
+            <li data-coach="hide">Based in Kitchener, Ontario · Sessions online or in person</li><li data-coach="show">Based in Kitchener, Ontario</li>
           </ul>
         </div>
       </div>
@@ -1343,9 +1377,9 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       <h2>Money is a tool. Christ is the treasure.</h2>
       <div class="faith-grid">
         <div class="faith-txt">
-          <p>I’m a Christian, and my faith shapes how I teach money. The Bible has a lot to say about it: count the cost before you build, stay out of debt, work hard with your own hands, give gladly, and be faithful with a little before you’re trusted with much.</p>
+          <p data-coach="hide">I’m a Christian, and my faith shapes how I teach money. The Bible has a lot to say about it: count the cost before you build, stay out of debt, work hard with your own hands, give gladly, and be faithful with a little before you’re trusted with much.</p><p data-coach="show">I’m a Christian, and my faith shapes how I think about money. The Bible has a lot to say about it: count the cost before you build, stay out of debt, work hard with your own hands, give gladly, and be faithful with a little before you’re trusted with much.</p>
           <p>It also keeps money in its place. Life is a mist, and we carry nothing out of this world. So the goal was never just to be rich. It is to provide for our families, to be generous, and to be free to spend our days on what matters.</p>
-          <p>You don’t have to share my faith to work with me. Everyone is welcome, and the coaching is the same for every client. If you’d like, turn on the Bible verses at the bottom of any page, and you’ll find a passage from Scripture on this site and in the Melius Money app every day.</p>
+          <p data-coach="hide">You don’t have to share my faith to work with me. Everyone is welcome, and the coaching is the same for every client. If you’d like, turn on the Bible verses at the bottom of any page, and you’ll find a passage from Scripture on this site and in the Melius Money app every day.</p><p data-coach="show">You don’t have to share my faith to use anything here. Everyone is welcome. If you’d like, turn on the Bible verses at the bottom of any page, and you’ll find a passage from Scripture on this site and in the Melius Money app every day.</p>
         </div>
         <ul class="faith-themes">
           <li><span class="eyebrow">Money</span><q>The rich rule over the poor, and the borrower is slave to the lender.</q><small>Proverbs 22:7 · BSB</small></li>
@@ -1365,13 +1399,13 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       <h2>How I invest my own money</h2>
       <div class="port">
         <div class="stack">
-          <p>I teach what I do with my own family’s money. Most of it sits in <b>covered-call income funds</b>. Some pay us twice a month, like a salary, and the rest monthly. The portfolio grows the income way: every payout we don’t need is reinvested and buys more units.</p>
+          <p data-coach="hide">I teach what I do with my own family’s money. Most of it sits in <b>covered-call income funds</b>. Some pay us twice a month, like a salary, and the rest monthly. The portfolio grows the income way: every payout we don’t need is reinvested and buys more units.</p><p data-coach="show">Here’s what I do with my own family’s money. Most of it sits in <b>covered-call income funds</b>. Some pay us twice a month, like a salary, and the rest monthly. The portfolio grows the income way: every payout we don’t need is reinvested and buys more units.</p>
           <div class="alloc" aria-label="How the portfolio is built">
             <div class="arow"><span>Core<br><small style="color:var(--muted)">Covered-call income funds</small></span><span class="track"><span class="fill" style="width:100%;display:block"></span></span><span class="pct">Income</span></div>
             <div class="arow"><span>Alongside<br><small style="color:var(--muted)">An options desk in a separate account</small></span><span class="track"><span class="fill amber" style="width:30%;display:block"></span></span><span class="pct">Options</span></div>
           </div>
-          <p class="note">The <b>options desk</b> sells cash-secured puts and covered calls, and uses LEAPS. That’s what the options modules teach.</p>
-          <p class="note"><b>Members of the <a href="#circle">Melius Circle</a></b> see what I hold each month, what I changed and why.</p>
+          <p data-coach="hide" class="note">The <b>options desk</b> sells cash-secured puts and covered calls, and uses LEAPS. That’s what the options modules teach.</p><p data-coach="show" class="note">The <b>options desk</b> sells cash-secured puts and covered calls, and uses LEAPS.</p>
+          <p data-coach="hide" class="note"><b>Members of the <a href="#circle">Melius Circle</a></b> see what I hold each month, what I changed and why.</p>
         </div>
         <div class="stack">
           <h3>My rules</h3>
@@ -1385,7 +1419,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       </div>
     </div>
   </section>
-  <section class="next-wrap"><div class="wrap"><a class="next" href="#coaching"><span class="eyebrow">Next</span><span class="next-t">How the coaching works</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section>
+  <section data-coach="hide" class="next-wrap"><div class="wrap"><a class="next" href="#coaching"><span class="eyebrow">Next</span><span class="next-t">How the coaching works</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section><section data-coach="show" class="next-wrap"><div class="wrap"><a class="next" href="#learn"><span class="eyebrow">Next</span><span class="next-t">How money works</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section>
 </div>
 <div class="page" id="coaching" data-page="coaching">
   <section id="how">
@@ -1549,8 +1583,8 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       <div class="stack">
         <p class="eyebrow">Learn</p>
         <h1 class="lv-title">What school never taught you about money</h1>
-        <p class="lede">Nobody sat you down and explained how money works, or how to make it work for you. Most of us learned by guessing, and paid for the mistakes. Coaching changes that, one clear step at a time.</p>
-        <div class="cta"><a class="btn" href="#tools">Try the free Melius Money app</a><a class="btn ghost" href="#modules">See what you’ll learn</a></div>
+        <p data-coach="hide" class="lede">Nobody sat you down and explained how money works, or how to make it work for you. Most of us learned by guessing, and paid for the mistakes. Coaching changes that, one clear step at a time.</p><p data-coach="show" class="lede">Nobody sat you down and explained how money works, or how to make it work for you. Most of us learned by guessing, and paid for the mistakes. Start here, one clear step at a time.</p>
+        <div class="cta"><a class="btn" href="#tools">Try the free Melius Money app</a><a class="btn ghost" href="#modules" data-coach="hide">See what you’ll learn</a><a class="btn ghost" href="#steps" data-coach="show">See the Freedom Steps</a></div>
       </div>
       <ul class="lv-shifts" aria-label="What changes">
         <li><span>From</span><b>Afraid of money</b><span>to</span><b>In control of it</b></li>
@@ -1565,7 +1599,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
   <section id="steps" class="fs-sec"><div class="wrap">
     <p class="eyebrow">The method</p>
     <h2>The Freedom Steps</h2>
-    <p class="lede" style="margin-top:12px;max-width:62ch">Five steps, in order. Every client starts wherever they are today, and the coaching modules walk you through each one.</p>
+    <p data-coach="hide" class="lede" style="margin-top:12px;max-width:62ch">Five steps, in order. Every client starts wherever they are today, and the coaching modules walk you through each one.</p><p data-coach="show" class="lede" style="margin-top:12px;max-width:62ch">Five steps, in order. Start wherever you are today, and take them one at a time.</p>
     <ol class="fsteps"><li class="fstep"><span class="fs-num">1</span><h3>Know your number</h3><p>Give every dollar of your income a job, and find what your household truly needs each month.</p><span class="fs-verse">“Which of you, wishing to build a tower, does not first sit down and count the cost to see if he has the resources to complete it?”<small>Luke 14:28 · BSB</small></span><span class="fs-mod">Covered in M1</span></li><li class="fstep"><span class="fs-num">2</span><h3>Emergency fund</h3><p>One month of your monthly budget, kept in cash, so a surprise never goes on a card. It’s the only cash you hold.</p><span class="fs-verse">“The prudent see danger and take cover, but the simple keep going and suffer the consequences.”<small>Proverbs 22:3 · BSB</small></span><span class="fs-mod">Covered in M1</span></li><li class="fstep"><span class="fs-num">3</span><h3>Attack expensive debt</h3><p>Pay off every debt at 7% or more, snowball or avalanche. Cheaper loans stay on schedule.</p><span class="fs-verse">“The rich rule over the poor, and the borrower is slave to the lender.”<small>Proverbs 22:7 · BSB</small></span><span class="fs-mod">Covered in M1</span></li><li class="fstep"><span class="fs-num">4</span><h3>Invest for freedom</h3><p>Every freedom dollar is invested, in the right accounts, in funds that pay you monthly. The yield is your cushion.</p><span class="fs-verse">“Dishonest wealth will dwindle, but what is earned through hard work will be multiplied.”<small>Proverbs 13:11 · BSB</small></span><span class="fs-mod">Covered in M2 to M5</span></li><li class="fstep"><span class="fs-num">5</span><h3>Freedom</h3><p>Your investments’ payouts cover your monthly number. Work becomes optional.</p><span class="fs-verse">“A good man leaves an inheritance to his children’s children, but the sinner’s wealth is passed to the righteous.”<small>Proverbs 13:22 · BSB</small></span><span class="fs-mod">Covered in M6</span></li></ol>
     <div class="fs-foot">
       <p><b>One rule overrides the order: never refuse free money.</b> Even while you pay off debt, take a full employer RRSP or pension match.</p>
@@ -1573,7 +1607,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     </div>
   </div></section>
 
-  <section id="modules">
+  <section id="modules" data-coach="hide">
     <div class="wrap">
       <p class="eyebrow">Six modules, six sessions</p>
       <h2>What you’ll be able to do, and what it can be worth</h2>
@@ -1601,7 +1635,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     <div class="wrap">
       <p class="eyebrow">Strategies</p>
       <h2>Strategies that pay you</h2>
-      <p class="lede" style="margin-top:12px">Our focus is income: money that lands in your account every month, and grows when you reinvest it. Here are some of the strategies we cover. Every one trades something away, and which ones fit you, how to combine them and when to switch is what we work out together.</p>
+      <p data-coach="hide" class="lede" style="margin-top:12px">Our focus is income: money that lands in your account every month, and grows when you reinvest it. Here are some of the strategies we cover. Every one trades something away, and which ones fit you, how to combine them and when to switch is what we work out together.</p><p data-coach="show" class="lede" style="margin-top:12px">The focus here is income: money that lands in your account every month, and grows when you reinvest it. Here are some of the strategies income investors use. Every one trades something away, and which ones fit depends on your goals and your family.</p>
       <div class="strats">
         <article class="card strat"><span class="tag">Income</span><h3>Covered-call ETFs</h3><p>Funds that sell options on what they hold and pay you every month or twice a month.</p></article>
         <article class="card strat"><span class="tag">Income</span><h3>Enhanced income ETFs</h3><p>A little leverage for a bigger payout, and bigger swings.</p></article>
@@ -1610,7 +1644,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
         <article class="card strat"><span class="tag">Hybrid</span><h3>Income first, then rotate</h3><p>Income now, and a wider portfolio over time.</p></article>
         <article class="card strat"><span class="tag amber">Options</span><h3>The wheel</h3><p>Get paid to wait for the stocks you want, then get paid while you hold them.</p></article>
         <article class="card strat"><span class="tag amber">Options</span><h3>LEAPS</h3><p>Long-dated options for long-term exposure with less cash.</p></article>
-        <a class="card strat strat-more" href="#coaching"><span class="tag amber">And more</span><h3>The details are in the coaching</h3><p>The risks, the rules and how to combine them for your family.</p><span class="lv-link">See how coaching works →</span></a>
+        <a data-coach="show" class="card strat strat-more" href="#articles"><span class="tag amber">Read more</span><h3>How they compare</h3><p>Plain-language reads on return of capital, income versus growth, and which account to use.</p><span class="lv-link">Read the articles →</span></a><a data-coach="hide" class="card strat strat-more" href="#coaching"><span class="tag amber">And more</span><h3>The details are in the coaching</h3><p>The risks, the rules and how to combine them for your family.</p><span class="lv-link">See how coaching works →</span></a>
       </div>
     </div>
   </section>
@@ -1659,7 +1693,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
         </table>
         <p class="note" style="grid-column:1/-1;margin-top:-8px">*Before workplace pension, benefits premiums and other payroll deductions, which lower a real paycheque further.</p>
       </div>
-      <p class="note" style="margin-top:16px">The fine print: return of capital is partly your own money coming back, so it isn’t free. It defers tax rather than cancelling it. The mix changes every year and is confirmed on each fund’s T3 slip, so keep track of your cost base. Figures are rounded and simplified, and this is general education, not tax advice. Check your own situation with an accountant. Coaching covers how to track all of this.</p>
+      <p class="note" style="margin-top:16px">The fine print: return of capital is partly your own money coming back, so it isn’t free. It defers tax rather than cancelling it. The mix changes every year and is confirmed on each fund’s T3 slip, so keep track of your cost base. Figures are rounded and simplified, and this is general education, not tax advice. Check your own situation with an accountant.<span data-coach="hide"> Coaching covers how to track all of this.</span></p>
       </details>
     </div>
   </section>
@@ -1693,7 +1727,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     </div>
   </section>
 
-  <section class="next-wrap"><div class="wrap"><a class="next" href="#book"><span class="eyebrow">Ready?</span><span class="next-t">Book your free intro session</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section>
+  <section data-coach="hide" class="next-wrap"><div class="wrap"><a class="next" href="#book"><span class="eyebrow">Ready?</span><span class="next-t">Book your free intro session</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section><section data-coach="show" class="next-wrap"><div class="wrap"><a class="next" href="#tools"><span class="eyebrow">Ready?</span><span class="next-t">Set up your free Melius Money plan</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section>
 </div>
 <div class="page" id="tools" data-page="tools">
   <section class="tl-head ap-hero">
@@ -1701,7 +1735,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       <div class="stack ap-copy">
         <p class="eyebrow">Free app · Melius Money</p>
         <h1 class="tl-title">Make every dollar better.</h1>
-        <p class="lede"><i>Melius</i> is Latin for “better.” Melius Money shows what you can spend, walks you through the Freedom Steps, the five steps I teach every client, and teaches you money along the way, two minutes a day.</p>
+        <p class="lede"><i>Melius</i> is Latin for “better.” Melius Money shows what you can spend, walks you through the Freedom Steps<span data-coach="hide">, the five steps I teach every client,</span> and teaches you money along the way, two minutes a day.</p>
         <ul class="ticks ap-ticks">
           <li><b>Know what’s left:</b> for the rest of the month, from one quick balance check. No logging every purchase.</li>
           <li><b>Every dollar gets a job:</b> expenses first, then your freedom money fills a one-month emergency fund, clears expensive debt, and gets invested for income.</li>
@@ -1783,8 +1817,8 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       <p class="hp"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
       <div class="field"><label for="g-name">First name</label><input id="g-name" name="name" autocomplete="given-name" required></div>
       <div class="field"><label for="g-email">Email</label><input id="g-email" name="email" type="email" autocomplete="email" required></div>
-      <label class="chk"><input type="checkbox" name="circle" value="yes"> <span>Add me to the waitlist for the <b>Melius Circle</b>, my private WhatsApp community</span></label>
-      <label class="chk"><input type="checkbox" name="cohort" value="yes"> <span>Tell me when the next <b>Freedom Steps Cohort</b> opens</span></label>
+      <label data-coach="hide" class="chk"><input type="checkbox" name="circle" value="yes"> <span>Add me to the waitlist for the <b>Melius Circle</b>, my private WhatsApp community</span></label>
+      <label data-coach="hide" class="chk"><input type="checkbox" name="cohort" value="yes"> <span>Tell me when the next <b>Freedom Steps Cohort</b> opens</span></label>
       <div><button class="btn" id="g-submit" type="submit">Send me the guide</button></div>
       <p class="status" id="g-status" role="status"></p>
       <p class="note">You’ll also get my free weekly email on markets, saving, investing and money habits. Unsubscribe any time.</p>
@@ -1792,7 +1826,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
   </div></div></section>
 
   <section class="tool-note-wrap"><div class="wrap"><p class="tool-note"><b>For demonstration and education only.</b> Not investment, tax or legal advice. The app and the budget template give estimates to help you plan; your own situation may need professional advice.</p></div></section>
-  <section class="next-wrap" data-pl="hide"><div class="wrap"><a class="next" href="#book"><span class="eyebrow">Ready for the next step?</span><span class="next-t">Book a free 30-minute intro session</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section>
+  <section data-coach="hide" class="next-wrap" data-pl="hide"><div class="wrap"><a class="next" href="#book"><span class="eyebrow">Ready for the next step?</span><span class="next-t">Book a free 30-minute intro session</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section><section data-coach="show" class="next-wrap"><div class="wrap"><a class="next" href="#income"><span class="eyebrow">Next</span><span class="next-t">See what your funds could pay you</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section>
 </div>
 <div class="page" id="funds" data-page="funds">
   <section class="fd-head">
@@ -1909,7 +1943,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       <p><b>Projection.</b> “Where this could go” grows each fund by the return the market setting gives it, pays its current yield on its balance every year, and takes out what you choose: every payout, the safe amount, or nothing. In Bear, the first year falls 25% and later years return 12%. It is a what-if, not a forecast.</p>
       <p><b>U.S. dollars.</b> U.S.-listed funds and the .U units of Canadian funds show in U.S. dollars. Totals are in Canadian dollars at the latest exchange rate. Their returns are in U.S. dollars, so a change in the exchange rate isn’t included. In a TFSA or a non-registered account, the U.S. keeps 15% of a U.S.-listed fund’s payouts (in a non-registered account you can usually claim it back as a foreign tax credit). In an RRSP, it doesn’t.</p>
       <p><b>Payouts are not guaranteed.</b> Funds change their payouts often, and very high yields usually include some of your own money paid back (return of capital) and can wear down the unit price over time. Funds marked “Leverage” borrow to invest, so they can fall faster. Figures are before tax.</p>
-      <p>This calculator is financial education, not investment advice or a recommendation to buy any fund. Compare funds side by side in the <a href="#funds">fund directory</a><span data-pl="hide">, or <a href="#book">book a free intro session</a> to build a plan that fits your family</span>.</p>
+      <p>This calculator is financial education, not investment advice or a recommendation to buy any fund. Compare funds side by side in the <a href="#funds">fund directory</a><span data-pl="hide" data-coach="hide">, or <a href="#book">book a free intro session</a> to build a plan that fits your family</span>.</p>
     </div>
     </div>
   </section>
@@ -1918,17 +1952,18 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
 <div class="page" id="policies" data-page="policies">
   <section><div class="wrap policy">
     <p class="eyebrow">Policies</p>
-    <h2>Privacy, cancellation and refunds</h2>
+    <h2 data-coach="hide">Privacy, cancellation and refunds</h2><h2 data-coach="show">Privacy</h2>
     <h3>Privacy</h3>
-    <p>Melius One Consulting collects only what you choose to send: your name, email, phone number and anything you write in a form or share in a session. It is used only to arrange and run your sessions and to send the guide and weekly emails you asked for.</p>
-    <p>Your information is never sold or shared for marketing. Forms are processed by Netlify, bookings by Google Calendar and email by Zoho Mail. The site uses Google Analytics to count visits and see which pages are useful. It records things like pages viewed, time on the site and approximate location (city or region), never your name or email. The free Melius Money app keeps your numbers only on your own device; it counts how often it is used and which features are tapped, but never sends your amounts, bills or debts anywhere. If you join the Melius Money Plus waitlist, your email is used only to tell you when it is ready. Session notes are kept private. You can ask to see, correct or delete your information at any time by emailing <a href="mailto:obi@meliusoneconsulting.com">obi@meliusoneconsulting.com</a>, and you can unsubscribe from emails with one click.</p>
-    <h3>Cancellation and rescheduling</h3>
-    <p>You can reschedule any session for free with at least 24 hours’ notice. A session missed without notice, or cancelled with less than 24 hours’ notice, counts as used, unless it’s an emergency.</p>
-    <h3>Refunds</h3>
-    <p><b>Payment plans:</b> card payments and monthly payment plans are processed by a secure third-party payment service, which holds your card details and collects any instalments. Pay-in-full prices apply to Interac e-Transfer.</p>
-    <p><b>Satisfaction guarantee:</b> if your first private session, or your first cohort week, isn’t useful, ask within 7 days of it and the full amount is refunded. After that, unused private sessions are refunded in full when you ask within 30 days of purchase. A cohort seat can be moved to the next cohort at no cost before week 3. Monthly check-ins and the Melius Circle can be cancelled at any time and stop at the end of the month already paid.</p>
+    <p data-coach="hide">Melius One Consulting collects only what you choose to send: your name, email, phone number and anything you write in a form or share in a session. It is used only to arrange and run your sessions and to send the guide and weekly emails you asked for.</p><p data-coach="show">Melius One collects only what you choose to send: your name, your email and anything you write in a form. It is used only to send the guide and the emails you asked for.</p>
+    <p data-coach="hide">Your information is never sold or shared for marketing. Forms are processed by Netlify, bookings by Google Calendar and email by Zoho Mail. The site uses Google Analytics to count visits and see which pages are useful. It records things like pages viewed, time on the site and approximate location (city or region), never your name or email. The free Melius Money app keeps your numbers only on your own device; it counts how often it is used and which features are tapped, but never sends your amounts, bills or debts anywhere. If you join the Melius Money Plus waitlist, your email is used only to tell you when it is ready. Session notes are kept private. You can ask to see, correct or delete your information at any time by emailing <a href="mailto:obi@meliusoneconsulting.com">obi@meliusoneconsulting.com</a>, and you can unsubscribe from emails with one click.</p>
+    <p data-coach="show">Your information is never sold or shared for marketing. Forms are processed by Netlify and email by Zoho Mail. The site uses Google Analytics to count visits and see which pages are useful. It records things like pages viewed, time on the site and approximate location (city or region), never your name or email. The free Melius Money app keeps your numbers only on your own device; it counts how often it is used and which features are tapped, but never sends your amounts, bills or debts anywhere. If you join the Melius Money Plus waitlist, your email is used only to tell you when it is ready. You can ask to see, correct or delete your information at any time by emailing <a href="mailto:obi@meliusoneconsulting.com">obi@meliusoneconsulting.com</a>, and you can unsubscribe from emails with one click.</p>
+    <h3 data-coach="hide">Cancellation and rescheduling</h3>
+    <p data-coach="hide">You can reschedule any session for free with at least 24 hours’ notice. A session missed without notice, or cancelled with less than 24 hours’ notice, counts as used, unless it’s an emergency.</p>
+    <h3 data-coach="hide">Refunds</h3>
+    <p data-coach="hide"><b>Payment plans:</b> card payments and monthly payment plans are processed by a secure third-party payment service, which holds your card details and collects any instalments. Pay-in-full prices apply to Interac e-Transfer.</p>
+    <p data-coach="hide"><b>Satisfaction guarantee:</b> if your first private session, or your first cohort week, isn’t useful, ask within 7 days of it and the full amount is refunded. After that, unused private sessions are refunded in full when you ask within 30 days of purchase. A cohort seat can be moved to the next cohort at no cost before week 3. Monthly check-ins and the Melius Circle can be cancelled at any time and stop at the end of the month already paid.</p>
     <h3>Education only</h3>
-    <p>Everything on this site and in sessions is general financial education, not investment, tax or legal advice. Melius One Consulting does not manage money or trade for clients. Investing involves risk, including the loss of money; options and leveraged funds can lose value quickly. Past payouts and returns do not guarantee future results. Some links on this site are referral links, which may earn a bonus for both of us.</p>
+    <p data-coach="hide">Everything on this site and in sessions is general financial education, not investment, tax or legal advice. Melius One Consulting does not manage money or trade for clients. Investing involves risk, including the loss of money; options and leveraged funds can lose value quickly. Past payouts and returns do not guarantee future results. Some links on this site are referral links, which may earn a bonus for both of us.</p><p data-coach="show">Everything on this site is general financial education, not investment, tax or legal advice. I don’t manage money or trade for anyone. Investing involves risk, including the loss of money; options and leveraged funds can lose value quickly. Past payouts and returns do not guarantee future results.</p>
     <p class="note">Last updated October 2026.</p>
   </div></section>
 </div>
@@ -1970,11 +2005,11 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
 
 <footer>
   <div class="wrap">
-    <div style="display:flex;align-items:center;gap:10px"><svg class="logo-mark sm" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="var(--seal)"/><circle cx="50" cy="50" r="42" fill="none" stroke="var(--seal-ring)" stroke-width="1.5"/><text x="44" y="69" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-size="54" font-weight="500" fill="var(--seal-m)">M</text><text x="73" y="44" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-size="24" font-weight="600" fill="var(--seal-1)">1</text></svg><strong style="color:var(--ink)">Melius One Consulting</strong></div>
-    <p>Financial education only. Nothing on this site or in a session is a recommendation to buy or sell any security, and Melius One Consulting does not manage money or trade for clients. Options and leveraged funds can lose money quickly. Past payouts and returns do not guarantee future results.</p>
-    <p><a href="mailto:obi@meliusoneconsulting.com">obi@meliusoneconsulting.com</a><span data-pl="hide"> · <a href="https://calendar.app.google/Njkvmqf26i2frhhg9" target="_blank" rel="noopener">Book a free intro session</a></span> · <a href="#tools">Melius Money</a> · <a href="https://wealthsimple.com/invite/JHWVAG" target="_blank" rel="noopener sponsored">Wealthsimple</a> · <a href="https://link.blossomsocial.com/7uYa/ogse4c4w" target="_blank" rel="noopener sponsored">Blossom</a> (referral links) · <a href="#policies">Privacy and policies</a></p>
+    <div style="display:flex;align-items:center;gap:10px"><svg class="logo-mark sm" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="var(--seal)"/><circle cx="50" cy="50" r="42" fill="none" stroke="var(--seal-ring)" stroke-width="1.5"/><text x="44" y="69" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-size="54" font-weight="500" fill="var(--seal-m)">M</text><text x="73" y="44" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-size="24" font-weight="600" fill="var(--seal-1)">1</text></svg><strong style="color:var(--ink)" data-coach="hide">Melius One Consulting</strong><strong style="color:var(--ink)" data-coach="show">Melius One</strong></div>
+    <p data-coach="hide">Financial education only. Nothing on this site or in a session is a recommendation to buy or sell any security, and Melius One Consulting does not manage money or trade for clients. Options and leveraged funds can lose money quickly. Past payouts and returns do not guarantee future results.</p><p data-coach="show">Financial education only. Nothing on this site is a recommendation to buy or sell any security, and I don’t manage money or trade for anyone. Options and leveraged funds can lose money quickly. Past payouts and returns do not guarantee future results.</p>
+    <p><a href="mailto:obi@meliusoneconsulting.com">obi@meliusoneconsulting.com</a><span data-pl="hide" data-coach="hide"> · <a href="https://calendar.app.google/Njkvmqf26i2frhhg9" target="_blank" rel="noopener">Book a free intro session</a></span> · <a href="#tools">Melius Money</a><span data-coach="hide"> · <a href="https://wealthsimple.com/invite/JHWVAG" target="_blank" rel="noopener sponsored">Wealthsimple</a> · <a href="https://link.blossomsocial.com/7uYa/ogse4c4w" target="_blank" rel="noopener sponsored">Blossom</a> (referral links)</span> · <a href="#policies">Privacy and policies</a></p>
     <p><span class="f-motto" lang="la" title="As long as you live, do better">Dum vivas, fac melius</span> · As long as you live, do better</p>
-    <p>© 2026 Melius One Consulting Inc. · Website by Obi Oji</p>
+    <p data-coach="hide">© 2026 Melius One Consulting Inc. · Website by Obi Oji</p><p data-coach="show">© 2026 Melius One · Website by Obi Oji</p>
     <p data-verse>Scripture quotations are from the Berean Standard Bible (BSB), public domain.</p>
     <p><button type="button" class="v-toggle v-pill">Hide Bible verses</button></p>
   </div>
@@ -2039,6 +2074,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
   function route(){
     var h=decodeURIComponent((location.hash||'#home').slice(1))||'home';
     var target=document.getElementById(h), pg=null;
+    if(!window.COACHING){var cb={coaching:1,book:1};var cp=target&&(target.classList.contains('page')?target:target.closest('.page'));if((cp&&cb[cp.id])||h==='accounts'){target=null;h='home'}}
     if(window.PRELAUNCH){var blk={about:1,coaching:1,learn:1,book:1};var tp=target&&(target.classList.contains('page')?target:target.closest('.page'));if(tp&&blk[tp.id]){target=null;h='home'}}
     if(target&&target.classList.contains('page')) pg=target;
     else if(target) pg=target.closest('.page');
@@ -2049,7 +2085,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     document.documentElement.classList.toggle('ic-lock',pg.id==='income');
     if(target&&target!==pg){setTimeout(function(){target.scrollIntoView({behavior:reduce?'auto':'smooth'});},60);} else {window.scrollTo(0,0);document.body.scrollTop=0;}
     onScroll();
-    var names={home:'',about:'About · ',coaching:'Coaching · ',learn:'Learn · ',funds:'Fund directory · ',income:'Income calculator · ',tools:'Budget · ',book:'Book a session · ',policies:'Policies · '}; document.title=pg.id==='home'?(window.PRELAUNCH?'Melius One Consulting | Coming soon':'Melius One Consulting | Obi Oji, Financial Education Coach in Kitchener, Ontario'):(names[pg.id]||'')+'Melius One Consulting';
+    var names={home:'',about:'About · ',coaching:'Coaching · ',learn:'Learn · ',funds:'Fund directory · ',income:'Income calculator · ',tools:'Melius Money · ',book:'Book a session · ',policies:'Policies · '}; var BN=window.COACHING?'Melius One Consulting':'Melius One';document.title=pg.id==='home'?(window.PRELAUNCH?BN+' | Coming soon':window.COACHING?'Melius One Consulting | Obi Oji, Financial Education Coach in Kitchener, Ontario':'Melius One | Free money tools for families in Canada'):(names[pg.id]||'')+BN;
     if(pg.id!==lastPg){lastPg=pg.id;try{gtag('event','page_view',{page_title:document.title,page_location:location.origin+'/'+(pg.id==='home'?'':pg.id)});}catch(e){}}
   }
   var lastPg=null;
@@ -2440,6 +2476,8 @@ var WORD_T={m:'Money',w:'Hard work',c:'The love of Christ',l:'Life is short'};
   window.addEventListener('storage',function(e){if(e.key==='melius-verses'){document.documentElement.classList.toggle('no-verses',e.newValue==='off');paint()}});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',paint);else paint();})();
 (function(){function n(){var c=0;try{FUNDS.forEach(function(f){if(!f.base)c++})}catch(e){return}document.querySelectorAll('[data-fund-count]').forEach(function(el){el.textContent=c})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',n);else n()})();
+(function(){var f=document.getElementById('upForm');if(!f)return;f.addEventListener('submit',function(e){e.preventDefault();var m=document.getElementById('upMsg'),b=f.querySelector('button');if(!f.email.value||!f.email.checkValidity()){m.textContent='Please enter a valid email address.';return}b.disabled=true;m.textContent='Sending…';
+  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(f)).toString()}).then(function(r){if(!r.ok)throw 0;f.reset();m.textContent='Thank you. You’re on the list.';try{gtag('event','updates_signup')}catch(x){}}).catch(function(){m.textContent='That didn’t go through. Check your connection and try again.'}).then(function(){b.disabled=false})})})();
 function wordIdx(d){d=d||new Date();var n=Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5);return ((n%WORD.length)+WORD.length)%WORD.length}
 /* scripture bar: rotates key lines, tap for the full passage */
 function mountWord(host,opt){opt=opt||{};if(!host)return null;
@@ -2696,9 +2734,9 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   var root=document.documentElement;
   function hdr(){var h=document.querySelector('header.top');if(h)root.style.setProperty('--hdr',h.offsetHeight+'px')}
   hdr();addEventListener('resize',hdr);addEventListener('load',hdr);
-  var SUB={about:[['coach','Your coach'],['story','My story'],['faith','Faith'],['portfolio','How I invest']],
+  var NC=!window.COACHING;var SUB={about:[['coach',NC?'About me':'Your coach'],['story','My story'],['faith','Faith'],['portfolio','How I invest']],
     coaching:[['how','Pricing'],['apply','Apply'],['circle','Melius Circle'],['curriculum','Curriculum'],['faq','Questions']],
-    learn:[['steps','Freedom Steps'],['modules','Modules'],['strategies','Strategies'],['paydays','Paydays'],['tax','Tax'],['articles','Articles']]};
+    learn:[['steps','Freedom Steps']].concat(NC?[]:[['modules','Modules']]).concat([['strategies','Strategies'],['paydays','Paydays'],['tax','Tax'],['articles','Articles']])};
   Object.keys(SUB).forEach(function(pid){var pg=document.getElementById(pid);if(!pg)return;
     var items=SUB[pid].filter(function(x){return document.getElementById(x[0])});if(items.length<2)return;
     pg.classList.add('has-sub');
