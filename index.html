@@ -747,6 +747,24 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .ic-split{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
 .ic-split .fd-f{flex:1 1 160px}
 .ic-splitbtn{height:44px;padding:0 18px}
+.ic-mar{border:1px solid var(--line);border-radius:12px;padding:0 14px}
+.ic-mar>summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:8px;padding:12px 0;font-weight:700;font-size:14px;color:var(--ink)}
+.ic-mar>summary::-webkit-details-marker{display:none}
+.ic-mar>summary small{font-weight:500;color:var(--muted);font-size:13px}
+.ic-mar>summary::after{content:"";width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);margin-left:auto;align-self:center;margin-top:-4px;transition:transform .2s}
+.ic-mar[open]>summary::after{transform:rotate(-135deg);margin-top:4px}
+.ic-marn{margin:0 0 10px;font-size:13px;color:var(--muted)}
+.ic-marf{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding-bottom:14px}
+.ic-marc{display:flex;flex-direction:column;gap:14px;padding:24px 28px;min-width:0}
+.ic-marc[hidden]{display:none!important}
+.ic-marc h3{margin:4px 0 0;font-family:var(--display,Georgia,serif);font-size:clamp(22px,2.2vw,28px);font-weight:500;line-height:1.2;text-wrap:balance}
+.ic-marc p{margin:0;font-size:14px;line-height:1.5;color:var(--muted)}
+.ic-marc p b{color:var(--ink)}
+.ic-marc .ic-ptiles{grid-template-columns:repeat(4,minmax(0,1fr))}
+.ic-marc .ic-pt b{font-size:22px;line-height:1.2}
+.ic-marw{border-left:3px solid var(--amber);padding:8px 12px;background:var(--band);border-radius:0 10px 10px 0}
+@media (max-width:860px){.ic-marc .ic-ptiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.ic-marc{padding:20px}.ic-marc .ic-pt b{font-size:19px}}
 .ic-rows{display:flex;flex-direction:column;border-top:1px solid var(--line)}
 .ic-row{display:grid;grid-template-columns:206px minmax(0,1fr) 34px;grid-template-areas:'n n x' 'a p .' 'd d .';column-gap:14px;row-gap:4px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
 .ic-rn{grid-area:n;min-width:0}.ic-in{grid-area:a;display:flex;gap:8px;min-width:0}.ic-in .ic-amt{flex:1 1 auto;min-width:0}.ic-rp{grid-area:p;text-align:right}.ic-row .ic-x{grid-area:x}.ic-rd{grid-area:d;font-size:12.5px;color:var(--muted)}
@@ -1053,6 +1071,8 @@ main{min-height:calc(100vh - 260px)}
   #income[data-tab="income"] .ic-hero{display:block}
   #income[data-tab] .ic-plan{display:none}
   #income[data-tab="income"] .ic-plan{display:grid}
+  #income[data-tab] .ic-marc{display:none}
+  #income[data-tab="income"] .ic-marc{display:flex}
   #income[data-tab="future"] .ic-proj,#income[data-tab="future"] .ic-foot{display:flex}
   #income[data-tab="future"] .ic-foot{flex-direction:column}
   .ic-mini{display:flex;flex-wrap:wrap;gap:2px 14px;align-items:baseline;position:sticky;top:calc(var(--ic-hdr,180px) + 8px);z-index:4;width:100%;text-align:left;font:inherit;font-size:13.5px;color:var(--ic-mute);background:var(--ic-bg);border:0;border-radius:14px;padding:10px 14px;cursor:pointer;box-shadow:0 6px 18px rgba(20,33,61,.18)}
@@ -1818,6 +1838,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
         <aside class="ic-builder card" aria-label="Build your mix">
           <div class="ic-h"><h2>Your mix</h2><span class="ic-count" id="icCount"></span></div>
           <form class="ic-split" id="icSplit"><label class="fd-f"><span id="icTotL">Total to invest</span><input type="number" inputmode="decimal" min="0" step="100" id="icTotal" placeholder="30000"></label><button class="btn ghost ic-splitbtn" type="submit">Split evenly</button></form>
+          <details class="ic-mar" id="icMarBox"><summary>Margin <small id="icMarSum">optional</small></summary><p class="ic-marn">The part of your total that’s borrowed from your broker, and the yearly rate they charge.</p><div class="ic-marf"><label class="fd-f"><span>Borrowed, in C$</span><input type="number" inputmode="decimal" min="0" step="100" id="icMarA" placeholder="0"></label><label class="fd-f"><span>Interest rate, % a year</span><input type="number" inputmode="decimal" min="0" max="30" step="0.05" id="icMarR" placeholder="6.5"></label></div></details>
           <div class="ic-allocbar" id="icBar" aria-hidden="true"></div>
           <p class="ic-alloc" id="icAlloc" aria-live="polite" hidden></p>
           <div class="ic-rows" id="icMix"></div>
@@ -1842,6 +1863,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
               <div class="ic-keep" id="icKeep"></div>
             </div>
           </div>
+          <section class="card ic-marc" id="icMarC" aria-live="polite" hidden></section>
           <section class="card ic-plan" id="icPlan" aria-live="polite"></section>
           <section class="card ic-proj" id="icProj" aria-live="polite"></section>
         </div>
@@ -1857,6 +1879,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       <p><b>Withdraw and reinvest.</b> A fund grows by its total return: the change in its unit price plus its payouts. If you withdraw less than that total return, minus about 2.5% for inflation, the balance keeps growing in real terms. By default we use each fund’s longest record (10, 5 or 3 years, or since launch), its 1-year return for newer funds, and 8% when there’s no record yet. Switch the market to see a strong year (+30%, like 2025), an ordinary one (+12%) or a bear year (−25%). Past returns don’t promise future ones, so check again each year.</p>
       <p><b>Projection.</b> “Where this could go” grows each fund by the return the market setting gives it, pays its current yield on its balance every year, and takes out what you choose: every payout, the safe amount, or nothing. In Bear, the first year falls 25% and later years return 12%. It is a what-if, not a forecast.</p>
       <p><b>U.S. dollars.</b> U.S.-listed funds and the .U units of Canadian funds show in U.S. dollars. Totals are in Canadian dollars at the latest exchange rate. Their returns are in U.S. dollars, so a change in the exchange rate isn’t included. In a TFSA or a non-registered account, the U.S. keeps 15% of a U.S.-listed fund’s payouts (in a non-registered account you can usually claim it back as a foreign tax credit). In an RRSP, it doesn’t.</p>
+      <p><b>Margin.</b> The borrowed amount is part of your total to invest. Interest is the borrowed amount times your broker’s yearly rate. “Paid off” assumes every payout goes to the loan each month at that rate. The projection does the same each year, then goes back to what you chose to take out, and shows your balance after what you still owe. Brokers can change the rate, and if prices fall they can ask you to add cash or sell units (a margin call).</p>
       <p><b>Payouts are not guaranteed.</b> Funds change their payouts often, and very high yields usually include some of your own money paid back (return of capital) and can wear down the unit price over time. Funds marked “Leverage” borrow to invest, so they can fall faster. Figures are before tax.</p>
       <p>This calculator is financial education, not investment advice or a recommendation to buy any fund. Compare funds side by side in the <a href="#funds">fund directory</a><span data-pl="hide">, or <a href="#book">book a free intro session</a> to build a plan that fits your family</span>.</p>
     </div>
@@ -2421,7 +2444,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   if(typeof FUNDS==='undefined'||!document.getElementById('income'))return;
   var KEY='melius-income-v2',BY={},L={},meta=null,st={sel:{},order:[],per:'bi',total:0,pct:{},mkt:'rec',yrs:10,take:'safe',flt:'all',cur:{},acct:'tfsa'},INFL=2.5;
   FUNDS.forEach(function(f){BY[f.t]=f});
-  try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.sel&&s.order){st=s;st.order=st.order.filter(function(t){return BY[t]||(/\.U$/.test(t)&&BY[t.slice(0,-2)])});st.pct=st.pct||{};st.total=+st.total||0;st.mkt=st.mkt||'rec';st.yrs=st.yrs||10;st.take=st.take||'safe';st.flt=st.flt||'all';st.tab=st.tab||'';st.cur=st.cur||{};st.acct=st.acct||'tfsa';
+  try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.sel&&s.order){st=s;st.order=st.order.filter(function(t){return BY[t]||(/\.U$/.test(t)&&BY[t.slice(0,-2)])});st.pct=st.pct||{};st.total=+st.total||0;st.mkt=st.mkt||'rec';st.yrs=st.yrs||10;st.take=st.take||'safe';st.flt=st.flt||'all';st.tab=st.tab||'';st.cur=st.cur||{};st.acct=st.acct||'tfsa';st.mar=+st.mar||0;st.mr=st.mr==null?'':st.mr;
     Object.keys(st.cur).forEach(function(b){if(st.cur[b]!=='USD'||st.sel[b]==null)return;var k=b+'.U',ix=st.order.indexOf(b);if(st.sel[k]==null){st.sel[k]=st.sel[b];if(st.pct[b]!=null)st.pct[k]=st.pct[b];if(ix>-1)st.order[ix]=k}else if(ix>-1){st.sel[k]=(+st.sel[k]||0)+(+st.sel[b]||0);st.order.splice(ix,1)}delete st.sel[b];delete st.pct[b]});st.cur={};
     st.order.forEach(function(t){if(/\.U$/.test(t))mkU(t.slice(0,-2))})}}catch(e){}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
@@ -2475,6 +2498,29 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     var n=st.order.length;if($('icTotL'))$('icTotL').textContent=st.order.some(isUSD)?'Total to invest, in C$':'Total to invest';$('icEmpty').hidden=n>0;$('icCount').textContent=n?n+' fund'+(n>1?'s':''):'';if($('icTotal')&&document.activeElement!==$('icTotal'))$('icTotal').value=st.total||'';alloc();
   }
   function r2(v){return Math.round(v*100)/100}
+  /* margin: the borrowed part of the total, and the broker's yearly rate */
+  function marA(){return Math.max(0,+st.mar||0)}
+  function marR(){var v=parseFloat(st.mr);return v>=0?v:null}
+  function payoff(B,P,R){if(!(B>0))return 0;if(!(P>0))return Infinity;var i=(R||0)/1200;if(i===0)return B/P;if(P<=B*i)return Infinity;return -Math.log(1-B*i/P)/Math.log(1+i)}
+  function mtxt(n){if(!isFinite(n))return 'never, at this rate';n=Math.ceil(n);if(n<=12)return n+' month'+(n>1?'s':'');var y=Math.floor(n/12),m=n%12;return y+' year'+(y>1?'s':'')+(m?' '+m+' month'+(m>1?'s':''):'')}
+  function marCard(tot,yr){var el=$('icMarC');if(!el)return;var B=marA(),R=marR(),sm=$('icMarSum');
+    if(sm)sm.textContent=B>0?money(B)+(R!=null?' at '+R+'%':''):'optional';
+    if(!(B>0)){el.hidden=true;el.innerHTML='';return}
+    el.hidden=false;var h='<div><p class="eyebrow">Margin</p>';
+    if(!(tot>0)){el.innerHTML=h+'<h3>You’re borrowing '+money(B)+'</h3></div><p>Add funds and amounts in Your mix to see what the loan costs against the payouts.</p>';return}
+    if(B>tot){el.innerHTML=h+'<h3>The loan is more than your mix</h3></div><p>You entered '+money(B)+' borrowed, but your mix totals '+money(tot)+'. The borrowed amount is part of your total, so it can’t be bigger than it.</p>';return}
+    if(R==null){el.innerHTML=h+'<h3>You’re borrowing '+money(B)+'</h3></div><p>Add your broker’s margin interest rate in Your mix to see what the loan costs each month.</p>';return}
+    var own=tot-B,share=B/tot*100,im=B*R/1200,pm=yr/12,net=pm-im,yl=yr/tot*100,po=payoff(B,pm,R),bear=B/(tot*0.75)*100,cap=tot*0.15;
+    h+='<h3>'+(net>=0?'After interest, your payouts are '+money(net)+' a month':'The interest costs more than your mix pays')+'</h3></div>';
+    var tiles=[['Borrowed','<b>'+money(B)+'</b><small>'+(Math.round(share*10)/10)+'% of your mix · '+money(own)+' is your own</small>'],
+      ['Interest','<b>'+money(im)+'</b><small>a month at '+R+'% a year · '+money(B*R/100)+' a year</small>'],
+      ['Payouts after interest','<b>'+money(net)+'</b><small>a month, from '+money(pm)+' before interest</small>'],
+      ['Paid off','<b>'+(isFinite(po)?mtxt(po):'Never')+'</b><small>'+(isFinite(po)?'if every payout goes to the loan':'the payouts don’t cover the interest')+'</small>']];
+    h+='<div class="ic-ptiles">'+tiles.map(function(t){return '<div class="ic-pt"><span>'+t[0]+'</span>'+t[1]+'</div>'}).join('')+'</div>';
+    h+='<p>Let your yield pay it down: put every payout toward the loan until it’s gone, then the full payout is yours. If prices fell 25%, the loan would be <b>'+bear.toFixed(1)+'%</b> of what your mix is worth, and your broker can ask you to add cash or sell units when that gets too high.</p>';
+    if(share>15.05)h+='<p class="ic-marw"><b>That’s more than 15% of your mix.</b> I would avoid margin loans completely. If you must, don’t borrow more than 15%: '+money(cap)+' here.</p>';
+    if(R>=yl)h+='<p class="ic-marw"><b>The rate is higher than your mix’s '+yl.toFixed(2)+'% yield.</b> The borrowed money pays you less than it costs.</p>';
+    el.innerHTML=h}
   function shown(t,a){return isUSD(t)?Math.round(a/fx()):a}
   function sum(){var x=0;st.order.forEach(function(t){x+=+st.sel[t]||0});return x}
   function base(){return st.total>0?st.total:sum()}
@@ -2505,9 +2551,9 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     var parts=[],nf=0;[[12,'monthly'],[24,'twice-a-month'],[4,'quarterly'],[52,'weekly'],[26,'two-week'],[2,'twice-a-year'],[1,'yearly']].forEach(function(x){var c=U.cnt[x[0]];if(c){parts.push(c+' '+x[1]);nf+=c}});
     var plist=parts.length>1?parts.slice(0,-1).join(', ')+' and '+parts[parts.length-1]:parts.join('');
     var anyU=st.order.some(function(t){return isUSD(t)&&(+st.sel[t]||0)>0});
-    $('icFrom').innerHTML=tot>0?'From <b>'+money(tot)+'</b>'+(anyU?' (in Canadian dollars)':'')+' invested'+(U.dv===24?' · '+money(yr/12)+' a month':'')+(U.mixed?' · '+plist+' fund'+(nf>1?'s':'')+', each paid on its own schedule':'')+'.'+(anyU?' U.S.-dollar amounts converted at US$1 = C$'+fx().toFixed(4)+(meta&&meta.fx&&meta.fx.d?' ('+fdate(meta.fx.d)+')':'')+'.':''):'Add funds and amounts in Your mix to see what they could pay you.';
+    $('icFrom').innerHTML=tot>0?'From <b>'+money(tot)+'</b>'+(anyU?' (in Canadian dollars)':'')+' invested'+(marA()>0&&marA()<=tot?', '+money(marA())+' of it borrowed':'')+(U.dv===24?' · '+money(yr/12)+' a month':'')+(U.mixed?' · '+plist+' fund'+(nf>1?'s':'')+', each paid on its own schedule':'')+'.'+(anyU?' U.S.-dollar amounts converted at US$1 = C$'+fx().toFixed(4)+(meta&&meta.fx&&meta.fx.d?' ('+fdate(meta.fx.d)+')':'')+'.':''):'Add funds and amounts in Your mix to see what they could pay you.';
     var tiles=tot>0?[['Per month',money(yr/12)],['Per year',money(yr)],['Per 2-week paycheque',money(yr/26)],['Yield',(yr/tot*100).toFixed(2)+'%']]:[['Per month','–'],['Per year','–'],['Per 2-week paycheque','–'],['Yield','–']];
-    st.sum={tot:Math.round(tot),yr:Math.round(yr),n:st.order.filter(function(t){return (+st.sel[t]||0)>0}).length,ts:Date.now()};save();plan(tot,yr);
+    st.sum={tot:Math.round(tot),yr:Math.round(yr),n:st.order.filter(function(t){return (+st.sel[t]||0)>0}).length,ts:Date.now()};save();plan(tot,yr);marCard(tot,yr);
     $('icStats').innerHTML=tiles.map(function(x){return '<div class="ic-stat"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>'}).join('');
     var Mk=MK[st.mkt];
     $('icMkt').innerHTML='<span class="ic-pl">Market</span><div class="ic-pseg" role="group" aria-label="Market conditions">'+[['rec','Fund records'],['bull','Bull'],['base','Base'],['bear','Bear']].map(function(x){return '<button type="button" data-mk="'+x[0]+'" aria-pressed="'+(st.mkt===x[0])+'">'+x[1]+'</button>'}).join('')+'</div>'+
@@ -2549,27 +2595,32 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     var past=fs.reduce(function(s,f){return s+f.a*f.lr},0)/tot;
     var mk=st.mkt, mkLabel={rec:'each fund’s own record',bull:'a bull market (+30% a year)',base:'a base market (+12% a year)',bear:'a bear year first (−25%), then +12% a year'}[mk]||'';
     function r(f,k){if(mk==='bull')return 30;if(mk==='base')return 12;if(mk==='bear')return k===0?-25:12;return f.lr}
-    var bal=[tot],inc=[],taken=0,B=fs.map(function(f){return f.a});
-    for(var k=0;k<st.yrs;k++){var yi=0,yb=0;
-      fs.forEach(function(f,i){var b=B[i],rr=r(f,k)/100,pay=b*f.y,take=st.take==='all'?pay:st.take==='none'?0:Math.max(0,Math.min(pay,b*((1+rr)/(1+INFL/100)-1)));
-        yi+=pay;taken+=take;B[i]=Math.max(0,b*(1+rr)-take);yb+=B[i]});
-      inc.push(yi);bal.push(yb)}
-    var end=bal[bal.length-1],incEnd=inc[inc.length-1],chg=end/tot-1;
+    var Ln=marA()>0&&marA()<=tot?marA():0,LR=(marR()||0)/100,L0=Ln,off=Ln>0?null:0;
+    var bal=[tot-Ln],inc=[],taken=0,B=fs.map(function(f){return f.a});
+    for(var k=0;k<st.yrs;k++){var yi=0,yb=0,P=0,fr=0;
+      fs.forEach(function(f,i){P+=B[i]*f.y});
+      if(Ln>0){Ln*=1+LR;var D=Math.min(P,Ln);Ln-=D;fr=P>0?D/P:0;if(Ln<0.5){Ln=0;if(off==null)off=k+1}}
+      fs.forEach(function(f,i){var b=B[i],rr=r(f,k)/100,pay=b*f.y,take;
+        if(fr>0)take=pay*fr;else{take=st.take==='all'?pay:st.take==='none'?0:Math.max(0,Math.min(pay,b*((1+rr)/(1+INFL/100)-1)));taken+=take}
+        yi+=pay;B[i]=Math.max(0,b*(1+rr)-take);yb+=B[i]});
+      inc.push(yi);bal.push(yb-Ln)}
+    var own=tot-L0;
+    var end=bal[bal.length-1],incEnd=inc[inc.length-1],chg=own>0?end/own-1:0;
     var tiles=[['Past total return','<b>'+past.toFixed(1)+'%</b><small>a year, price change plus payouts, weighted by your amounts</small>'],
-      ['Balance in '+st.yrs+' years','<b>'+money(end)+'</b><small>'+(chg>=0?'+':'')+Math.round(chg*100)+'% from '+money(tot)+'</small>'],
+      ['Balance in '+st.yrs+' years','<b>'+money(end)+'</b><small>'+(chg>=0?'+':'')+Math.round(chg*100)+'% from '+money(own)+(L0>0?(Ln>0?', after the '+money(Ln)+' still owed':', loan repaid'):'')+'</small>'],
       ['Payouts in year '+st.yrs,'<b>'+money(incEnd/12)+'</b><small>a month, from '+money(inc[0]/12)+' in year 1</small>'],
-      ['Taken out in total','<b>'+money(taken)+'</b><small>over '+st.yrs+' years</small>']];
+      ['Taken out in total','<b>'+money(taken)+'</b><small>over '+st.yrs+' years'+(L0>0?(off?', after the loan is paid off in year '+off:', all payouts go to the loan'):'')+'</small>']];
     /* chart */
     var wide=matchMedia('(min-width:1300px)').matches,W=Math.max(300,Math.min(960,wide?Math.round((el.clientWidth||900)*.6):(el.clientWidth||640)-40)),H=W<500?200:230,x0=52,x1=W-12,y0=16,y1=H-30,top0=Math.max.apply(null,bal),stp=function(v){var e=Math.pow(10,Math.floor(Math.log10(v))),f=v/e;return (f<=1?1:f<=2?2:f<=2.5?2.5:f<=5?5:10)*e}(top0/3),mx=Math.ceil(top0*1.04/stp)*stp,X=function(i){return x0+(x1-x0)*i/st.yrs},Y=function(v){return y1-(y1-y0)*v/mx};
     var pts=bal.map(function(v,i){return X(i).toFixed(1)+','+Y(v).toFixed(1)}).join(' ');
     var tv=[];for(var q=0;q<=mx+1;q+=stp)tv.push(q);var ticks=tv.map(function(v){return '<line x1="'+x0+'" x2="'+x1+'" y1="'+Y(v)+'" y2="'+Y(v)+'" class="g"/><text x="'+(x0-8)+'" y="'+(Y(v)+4)+'" text-anchor="end">'+(v>=1e6?'$'+(+(v/1e6).toFixed(2))+'M':v===0?'$0':'$'+Math.round(v/1000)+'k')+'</text>'}).join('');
     var xl=bal.map(function(v,i){var ev=st.yrs>10?5:(W<500?2:1);return (i%ev===0||i===st.yrs)?'<text x="'+X(i)+'" y="'+(H-10)+'" text-anchor="'+(i===st.yrs?'end':i===0?'start':'middle')+'">'+(i===0?'Now':'Yr '+i)+'</text>':''}).join('');
-    var svg='<svg class="ic-pchart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Projected balance over '+st.yrs+' years, from '+money(tot)+' to '+money(end)+'">'+ticks+
-      '<line x1="'+x0+'" x2="'+x1+'" y1="'+Y(tot)+'" y2="'+Y(tot)+'" class="start"/><text x="'+x1+'" y="'+(Y(tot)-6)+'" text-anchor="end" class="sl">Today '+money(tot)+'</text>'+
+    var svg='<svg class="ic-pchart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Projected balance over '+st.yrs+' years, from '+money(own)+' to '+money(end)+'">'+ticks+
+      '<line x1="'+x0+'" x2="'+x1+'" y1="'+Y(own)+'" y2="'+Y(own)+'" class="start"/><text x="'+x1+'" y="'+(Y(own)-6)+'" text-anchor="end" class="sl">Today '+money(own)+'</text>'+
       '<polygon points="'+X(0)+','+y1+' '+pts+' '+X(st.yrs)+','+y1+'" class="area"/><polyline points="'+pts+'" class="ln"/>'+
       '<circle cx="'+X(st.yrs)+'" cy="'+Y(end)+'" r="4" class="dot"/>'+xl+'</svg>';
     el.innerHTML=head+'<div class="ic-pbody"><div class="ic-ptiles">'+tiles.map(function(t){return '<div class="ic-pt"><span>'+t[0]+'</span>'+t[1]+'</div>'}).join('')+'</div>'+svg+'</div>'+
-      '<p class="ic-pn">Assumes '+mkLabel+', with each fund paying its current yield on its balance every year'+(st.take==='safe'?' and the safe amount taken out (its return minus '+INFL+'% for inflation, never more than it pays)':st.take==='all'?' and every payout taken out':' and every payout reinvested')+'. Change the market at the top to compare. Before tax and fees on your side. Payouts and returns change, and past returns don’t promise future ones.</p>';
+      '<p class="ic-pn">Assumes '+mkLabel+', with each fund paying its current yield on its balance every year'+(st.take==='safe'?' and the safe amount taken out (its return minus '+INFL+'% for inflation, never more than it pays)':st.take==='all'?' and every payout taken out':' and every payout reinvested')+(L0>0?'. With margin, every payout goes to the '+money(L0)+' loan at '+marR()+'% until it’s repaid, and the balance shown is after what you still owe':'')+'. Change the market at the top to compare. Before tax and fees on your side. Payouts and returns change, and past returns don’t promise future ones.</p>';
   }
   function mini(){var el=$('icMini');if(!el)return;var big=$('icBig'),w=document.querySelector('#icKeep .ic-two .w b');
     var inc=big&&big.firstChild?big.firstChild.textContent:'$0',u=big&&big.querySelector('small')?big.querySelector('small').textContent:'a month';
@@ -2603,6 +2654,10 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     st.total=v;save();st.order.forEach(rowUpdate);syncPct();calc()});
   $('icMix').addEventListener('click',function(e){
     var b=e.target.closest('[data-rm]');if(!b)return;var t=b.dataset.rm;delete st.sel[t];delete st.pct[t];st.order=st.order.filter(function(x){return x!==t});save();all()});
+  (function(){var a=$('icMarA'),r=$('icMarR'),bx=$('icMarBox');if(!a)return;a.value=st.mar||'';r.value=st.mr;if(st.mar>0&&bx)bx.open=true;
+    a.addEventListener('input',function(){st.mar=Math.max(0,+a.value||0);save();calc()});
+    r.addEventListener('input',function(){st.mr=r.value;save();calc()});
+    a.addEventListener('change',function(){try{gtag('event','income_margin')}catch(x){}})})();
   $('icSplit').addEventListener('submit',function(e){e.preventDefault();var v=+$('icTotal').value||0;if(!st.order.length||v<=0)return;st.total=v;var pc=100/st.order.length;st.order.forEach(function(t){st.pct[t]=pc;st.sel[t]=v*pc/100});save();mix();calc();try{gtag('event','income_split')}catch(x){}});
   /* coming from the Melius Money app: ?total=200000 sets the amount to invest, keeping the mix's percentages */
   try{var qs=new URLSearchParams(location.search),tv=Math.round(+qs.get('total')||0);if(tv>0){
