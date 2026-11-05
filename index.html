@@ -30,7 +30,7 @@ window.COACHING=false;if(!window.COACHING)document.documentElement.classList.add
 <meta property="og:title" content="Melius One | Free money tools for families in Canada">
 <meta property="og:description" content="Budget, clear your debt, and see what income ETFs could pay you: the free Melius Money app, an income calculator and a fund directory.">
 <meta property="og:url" content="https://meliusoneconsulting.com/">
-<meta property="og:image" content="https://meliusoneconsulting.com/share.jpg?v=2">
+<meta property="og:image" content="https://meliusoneconsulting.com/share-free.jpg?v=3">
 <meta name="twitter:card" content="summary_large_image">
 <!-- When coaching opens, restore the ProfessionalService entry:
 <script type="application/ld+json">
@@ -43,7 +43,7 @@ window.COACHING=false;if(!window.COACHING)document.documentElement.classList.add
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
  {"@type":"WebSite","@id":"https://meliusoneconsulting.com/#site","name":"Melius One","url":"https://meliusoneconsulting.com/","description":"Free money tools for families in Canada: budgeting, debt payoff, income ETFs and plain-language lessons.","author":{"@id":"https://meliusoneconsulting.com/#obi"}},
- {"@type":"Person","@id":"https://meliusoneconsulting.com/#obi","name":"Obi Oji","image":"https://meliusoneconsulting.com/headshot.jpg","url":"https://meliusoneconsulting.com/#about"}
+ {"@type":"Person","@id":"https://meliusoneconsulting.com/#obi","name":"Obi Oji","image":"https://meliusoneconsulting.com/headshot-plain.jpg","url":"https://meliusoneconsulting.com/#about"}
 ]}
 </script>
 <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -689,6 +689,7 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 html:not(.no-coach) [data-coach="show"]{display:none!important}
 @media (min-width:701px){.no-coach .tgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:700px){.no-coach .tgrid{grid-template-columns:1fr}}
+.no-coach .stats{grid-template-columns:repeat(3,minmax(0,1fr))}
 .prelaunch #home>:not(.pl-home){display:none!important}
 .prelaunch .pl-home{display:block;--pl-bg:#14213D;--pl-ink:#F7F5F0;--pl-mute:#C3CBD8;--pl-gold:#C9A35E;--pl-line:rgba(247,245,240,.14);background:var(--pl-bg);color:var(--pl-ink);padding-block:64px 72px;position:relative;overflow:hidden;text-align:center}
 .pl-home::before{content:"";position:absolute;inset:auto -160px -260px auto;width:620px;height:620px;border-radius:50%;background:radial-gradient(closest-side,rgba(201,163,94,.18),transparent);pointer-events:none}
@@ -1185,7 +1186,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
 
 <header class="top">
   <div class="wrap nav">
-    <a class="brand" href="#home" aria-label="Melius One, home"><svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="var(--seal)"/><circle cx="50" cy="50" r="42" fill="none" stroke="var(--seal-ring)" stroke-width="1.5"/><text x="44" y="69" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-size="54" font-weight="500" fill="var(--seal-m)">M</text><text x="73" y="44" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-size="24" font-weight="600" fill="var(--seal-1)">1</text></svg><span class="wordmark"><span class="wm1">Melius One</span><span class="wm2">CONSULTING · EST. 2021</span></span></a>
+    <a class="brand" href="#home" aria-label="Melius One, home"><svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="var(--seal)"/><circle cx="50" cy="50" r="42" fill="none" stroke="var(--seal-ring)" stroke-width="1.5"/><text x="44" y="69" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-size="54" font-weight="500" fill="var(--seal-m)">M</text><text x="73" y="44" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-size="24" font-weight="600" fill="var(--seal-1)">1</text></svg><span class="wordmark"><span class="wm1">Melius One</span><span class="wm2"><span data-coach="hide">CONSULTING · </span>EST. 2021</span></span></a>
     <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mainnav"><span></span><span></span><span></span></button>
     <nav aria-label="Main" id="mainnav"><ul>
       <li data-pl="hide"><a href="#about" data-nav="about">About</a></li>
@@ -1317,7 +1318,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     <div class="wrap">
       <div class="about">
         <div class="photo" id="photo">
-          <img src="headshot.jpg" alt="Obi Oji" onerror="this.remove();document.getElementById('photo').classList.add('noimg')">
+          <img src="headshot-plain.jpg" alt="Obi Oji" onerror="this.remove();document.getElementById('photo').classList.add('noimg')">
           <span class="initials" aria-hidden="true">OO</span>
         </div>
         <div class="stack">
@@ -1327,12 +1328,12 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
           <div class="stats">
             <div class="stat"><b>24</b><span>Paydays a year from our investments</span></div>
             <div class="stat"><b>6</b><span>A family of six, investing for freedom</span></div>
-            <div class="stat"><b>4+ yrs</b><span>Leading delivery in Canadian banking</span></div>
+            <div class="stat" data-coach="hide"><b>4+ yrs</b><span>Leading delivery in Canadian banking</span></div><div class="stat" data-coach="show"><b>5</b><span>Freedom Steps, followed in order</span></div>
             <div data-coach="hide" class="stat"><b>1:1</b><span>Every session, just you and me</span></div>
           </div>
           <ul class="creds">
             <!-- After passing the CSC, add as the first credential: <li>Canadian Securities Course (CSC®), Canadian Securities Institute</li> -->
-            <li>Release Train Engineer, leading large technology programmes at a major Canadian bank</li>
+            <li data-coach="hide">Release Train Engineer, leading large technology programmes at a major Canadian bank</li><li data-coach="show">Years of leading large technology programmes</li>
             <li>Board member, Octopus VC</li>
             <li>I invest in income ETFs, and run my own options desk using the wheel and LEAPS</li>
             <li data-coach="hide">Based in Kitchener, Ontario · Sessions online or in person</li><li data-coach="show">Based in Kitchener, Ontario</li>
@@ -1353,7 +1354,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
           <li><span class="when">The move</span><h3>Starting over in Canada</h3><p>We moved to Canada for our children’s future. New country, new rules, and a lot to learn about how money works here.</p></li>
           <li><span class="when">The hard lessons</span><h3>Chasing returns</h3><p>I tried different investment strategies, crypto included, and lost real money. The lesson stuck: without a plan and rules, a strategy is just a gamble.</p></li>
           <li><span class="when">Until 2022</span><h3>A transportation company</h3><p>I started a transportation company. It didn’t go the way I hoped, and I sold it in 2022. Knowing when to stop is a skill too.</p></li>
-          <li><span class="when">2022</span><h3>Rebuilding, with rules this time</h3><p>The same year, I joined one of Canada’s big banks and rebuilt our portfolio with the proceeds from my real estate and other businesses. Some of it was luck, honestly: Nvidia, Palantir and Bitcoin all paid off, and I still hold Bitcoin through Strategy (MSTR). The rest was discipline: income funds and clear rules, which is the part I teach.</p></li>
+          <li><span class="when">2022</span><h3>Rebuilding, with rules this time</h3><p data-coach="hide">The same year, I joined one of Canada’s big banks and rebuilt our portfolio with the proceeds from my real estate and other businesses. Some of it was luck, honestly: Nvidia, Palantir and Bitcoin all paid off, and I still hold Bitcoin through Strategy (MSTR). The rest was discipline: income funds and clear rules, which is the part I teach.</p><p data-coach="show">The same year, I started a new career and rebuilt our portfolio with the proceeds from my real estate and other businesses. Some of it was luck, honestly: Nvidia, Palantir and Bitcoin all paid off, and I still hold Bitcoin through Strategy (MSTR). The rest was discipline: income funds and clear rules, which is the part I teach.</p></li>
           <!-- AFTER RESIGNING: change this step back to "Living on what we built" / "Our investments now pay our family’s bills." -->
           <li class="now"><span class="when">Today</span><h3>Building toward freedom</h3><p>Our investments pay us every month, and we’re working toward the day they cover all of our family’s bills. Melius One is how I share the path, mistakes included, so you can skip the expensive ones.</p></li>
         </ol>
@@ -1956,7 +1957,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     <h3>Privacy</h3>
     <p data-coach="hide">Melius One Consulting collects only what you choose to send: your name, email, phone number and anything you write in a form or share in a session. It is used only to arrange and run your sessions and to send the guide and weekly emails you asked for.</p><p data-coach="show">Melius One collects only what you choose to send: your name, your email and anything you write in a form. It is used only to send the guide and the emails you asked for.</p>
     <p data-coach="hide">Your information is never sold or shared for marketing. Forms are processed by Netlify, bookings by Google Calendar and email by Zoho Mail. The site uses Google Analytics to count visits and see which pages are useful. It records things like pages viewed, time on the site and approximate location (city or region), never your name or email. The free Melius Money app keeps your numbers only on your own device; it counts how often it is used and which features are tapped, but never sends your amounts, bills or debts anywhere. If you join the Melius Money Plus waitlist, your email is used only to tell you when it is ready. Session notes are kept private. You can ask to see, correct or delete your information at any time by emailing <a href="mailto:obi@meliusoneconsulting.com">obi@meliusoneconsulting.com</a>, and you can unsubscribe from emails with one click.</p>
-    <p data-coach="show">Your information is never sold or shared for marketing. Forms are processed by Netlify and email by Zoho Mail. The site uses Google Analytics to count visits and see which pages are useful. It records things like pages viewed, time on the site and approximate location (city or region), never your name or email. The free Melius Money app keeps your numbers only on your own device; it counts how often it is used and which features are tapped, but never sends your amounts, bills or debts anywhere. If you join the Melius Money Plus waitlist, your email is used only to tell you when it is ready. You can ask to see, correct or delete your information at any time by emailing <a href="mailto:obi@meliusoneconsulting.com">obi@meliusoneconsulting.com</a>, and you can unsubscribe from emails with one click.</p>
+    <p data-coach="show">Your information is never sold or shared for marketing. Forms are processed by Netlify and email by Zoho Mail. The site uses Google Analytics to count visits and see which pages are useful. It records things like pages viewed, time on the site and approximate location (city or region), never your name or email. The free Melius Money app keeps your numbers only on your own device; it counts how often it is used and which features are tapped, but never sends your amounts, bills or debts anywhere. You can ask to see, correct or delete your information at any time by emailing <a href="mailto:obi@meliusoneconsulting.com">obi@meliusoneconsulting.com</a>, and you can unsubscribe from emails with one click.</p>
     <h3 data-coach="hide">Cancellation and rescheduling</h3>
     <p data-coach="hide">You can reschedule any session for free with at least 24 hours’ notice. A session missed without notice, or cancelled with less than 24 hours’ notice, counts as used, unless it’s an emergency.</p>
     <h3 data-coach="hide">Refunds</h3>
