@@ -747,6 +747,21 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .ic-split{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
 .ic-split .fd-f{flex:1 1 160px}
 .ic-splitbtn{height:44px;padding:0 18px}
+.ic-back{display:inline-block;margin-bottom:10px;font-size:14px;font-weight:700;color:var(--accent);text-decoration:none}
+.ic-back:hover{text-decoration:underline}
+.ap-feats{padding-block:8px 56px}
+.ap-feats h2{margin:0}
+.ap-feats .lede{margin-top:10px;max-width:62ch}
+.apf-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:24px}
+.apf{padding:22px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.apf .eyebrow{display:flex;align-items:center;gap:8px}
+.apf .eyebrow i{font-style:normal;font-size:11px;letter-spacing:.06em;border:1px solid currentColor;border-radius:99px;padding:1px 8px}
+.apf h3{margin:0;font-size:21px}
+.apf ul{margin:4px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:6px;color:var(--muted);font-size:15px}
+.apf ul b{color:var(--ink)}
+.apf a{margin-top:auto;padding-top:6px;font-weight:700}
+@media (max-width:980px){.apf-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.apf-grid{grid-template-columns:1fr}}
 .ic-rows{display:flex;flex-direction:column;border-top:1px solid var(--line)}
 .ic-row{display:grid;grid-template-columns:206px minmax(0,1fr) 34px;grid-template-areas:'n n x' 'a p .' 'd d .';column-gap:14px;row-gap:4px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
 .ic-rn{grid-area:n;min-width:0}.ic-in{grid-area:a;display:flex;gap:8px;min-width:0}.ic-in .ic-amt{flex:1 1 auto;min-width:0}.ic-rp{grid-area:p;text-align:right}.ic-row .ic-x{grid-area:x}.ic-rd{grid-area:d;font-size:12.5px;color:var(--muted)}
@@ -1703,6 +1718,40 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     </div></div>
   </section>
 
+  <section class="ap-feats"><div class="wrap">
+    <p class="eyebrow">What you get</p>
+    <h2>Everything in Melius Money</h2>
+    <p class="lede">Five tabs, one plan. It’s free, there’s no sign-up, and your numbers stay on your own phone.</p>
+    <div class="apf-grid">
+      <div class="card apf"><p class="eyebrow">Today</p><h3>Your month, at a glance</h3><ul>
+        <li><b>Left to spend this month</b>, and about how much a day, from one quick balance check.</li>
+        <li><b>Freedom money this month:</b> what’s left after bills and spending, and which step it goes to next.</li>
+        <li><b>At this pace:</b> the month your payouts could cover your bills.</li>
+        <li>An optional daily Bible passage, if you turn it on.</li></ul></div>
+      <div class="card apf"><p class="eyebrow">Spending</p><h3>See where it went</h3><ul>
+        <li><b>Log a purchase</b> in a few taps, or <b>import a bank or card statement</b> to skip the typing.</li>
+        <li>This month’s spending against your plan, by category.</li>
+        <li><b>Your track record:</b> how each month went, so you can see the habit forming.</li></ul></div>
+      <div class="card apf"><p class="eyebrow">Goals</p><h3>The five Freedom Steps</h3><ul>
+        <li>Where you are on the steps, and what to do next.</li>
+        <li><b>A one-month emergency fund.</b> The yield is your cushion after that.</li>
+        <li><b>Expensive debt cleared:</b> every debt at 7% or more, by snowball or avalanche, with the date each is gone.</li>
+        <li><b>Your freedom number</b>, and how close you are.</li></ul></div>
+      <div class="card apf"><p class="eyebrow">Plan</p><h3>Set it up once</h3><ul>
+        <li>Your income, monthly bills, debts and spending plan.</li>
+        <li><b>Copy a backup</b> of your plan to your notes or email, and restore it on a new phone.</li>
+        <li>Start over any time.</li></ul></div>
+      <div class="card apf"><p class="eyebrow">Learn <i>New</i></p><h3>Two minutes a day</h3><ul>
+        <li>Short lessons on TFSAs, RRSPs, yield, total return, covered calls and more.</li>
+        <li>A daily streak and the terms you’ve learned, to review any time.</li>
+        <li>Some lessons use your own numbers, like your freedom number.</li></ul></div>
+      <div class="card apf"><p class="eyebrow">Works with</p><h3>The income calculator</h3><ul>
+        <li><b>Build your income mix</b> from Goals, then come back to your plan.</li>
+        <li>Save the mix to your plan, and your freedom number uses its yield.</li>
+        <li>See how much of your monthly need it covers.</li></ul><a href="#income">Open the income calculator →</a></div>
+    </div>
+  </div></section>
+
   <section class="ab-link"><div class="wrap"><a class="ab-card" href="#income"><span class="eyebrow">Free calculator</span><b>What would your funds pay you?</b><span>Pick a mix of Canadian income funds, enter an amount, and see your payout every two weeks or every month, with prices refreshed every weekday →</span></a></div></section>
   <section class="tstep" id="budget"><div class="wrap"><div class="ts-row">
     <div class="stack">
@@ -1808,6 +1857,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     <div class="ic-shell">
       <header class="ic-hd">
         <div>
+          <a class="ic-back" id="icBack" href="/app/#goals" data-track="income_back_to_plan" hidden>← Back to my plan</a>
           <p class="eyebrow">Income calculator</p>
           <h1 class="ic-title">What would your funds pay you?</h1>
         </div>
@@ -2525,7 +2575,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   /* Melius Money link: the app lives on this same site, so both read the same browser storage */
   var AK='melius-payday-v1';
   function appS(){try{var o=JSON.parse(localStorage.getItem(AK)||'null');return o&&o.goal&&!o.example?o:null}catch(e){return null}}
-  function plan(tot,yr){var el=$('icPlan');if(!el)return;var A=appS(),yl=tot>0?yr/tot*100:0,h='';
+  function plan(tot,yr){var el=$('icPlan');if(!el)return;var A=appS(),yl=tot>0?yr/tot*100:0,h='',bk=$('icBack');if(bk)bk.hidden=!(A||/\/app\//.test(document.referrer||''));
     if(!A){el.innerHTML='<div><p class="eyebrow">Melius Money</p><h3>Turn this into a plan</h3><p class="ic-pn">The free budget app works out how much you can invest each month, clears expensive debt first, and shows when your payouts cover your bills. No sign-up. Your numbers stay on your device.</p></div><div class="ic-pacts"><a class="btn" href="/app/" data-track="income_to_app">Open Melius Money →</a></div>';return}
     var g=A.goal,need=+g.need||0,inv=+g.invested||0,mo=yr/12,cov=need>0?mo/need:0,saved=tot>0&&Math.round(inv)===Math.round(tot)&&Math.abs((+g.rate||0)-Math.round(yl*10)/10)<0.05;
     if(tot<=0)h='<div><p class="eyebrow">Your Melius Money plan</p><h3>'+(inv>0?'You have '+money(inv)+' invested':'Build a mix to compare with your plan')+'</h3><p class="ic-pn">'+(need>0?'Your plan needs '+money(need)+' a month. Add funds to see how much of it they cover.':'Add your monthly need on the Goals tab of Melius Money.')+'</p></div>';
