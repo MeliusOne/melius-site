@@ -235,21 +235,6 @@
   "f": "Monthly"
  },
  {
-  "t": "VFV",
-  "y": "VFV.TO",
-  "f": "Quarterly"
- },
- {
-  "t": "QQC",
-  "y": "QQC.TO",
-  "f": "Quarterly"
- },
- {
-  "t": "XEQT",
-  "y": "XEQT.TO",
-  "f": "Quarterly"
- },
- {
   "t": "JEPI",
   "y": "JEPI",
   "f": "Monthly",
