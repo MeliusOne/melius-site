@@ -472,6 +472,16 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .inv-l b{color:var(--ink)}
 .inv-a{margin-top:auto;padding-top:8px;display:flex;flex-wrap:wrap;gap:6px 18px}
 .inv-note{margin:18px 0 0;font-size:14px;color:var(--muted);max-width:70ch}
+.why-sec{padding-block:64px 24px}
+.why{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.why h2{margin:0 0 6px;text-wrap:balance}
+.why p{margin:0;font-size:17px;line-height:1.7;color:var(--muted)}
+.why p b{color:var(--ink)}
+.why .why-q{font-family:var(--display);font-size:clamp(22px,2.4vw,27px);line-height:1.3;color:var(--ink);margin-top:14px;text-wrap:balance}
+.why .why-end{font-size:18px;color:var(--ink);font-weight:600;border-left:3px solid var(--amber);padding-left:16px;margin-top:10px}
+.why .why-verse{font-family:var(--display);font-style:italic;font-size:18px;line-height:1.45;color:var(--amber);margin-top:6px}
+.why .why-verse small{display:block;font-family:var(--body,inherit);font-style:normal;font-size:13px;color:var(--muted);margin-top:4px}
+@media (max-width:620px){.why-sec{padding-block:44px 12px}.why p{font-size:16px}}
 .fs-tool{margin-top:auto;padding-top:4px;font-size:14px;font-weight:700;color:var(--accent);text-decoration:none}
 .fs-tool:hover{text-decoration:underline}
 @media (max-width:760px){.strats.inv{grid-template-columns:1fr!important}}
@@ -1606,6 +1616,23 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
   </section>
 
 
+  <section id="why" class="why-sec"><div class="wrap"><div class="why">
+    <p class="eyebrow">The why</p>
+    <h2>What are you really working for?</h2>
+    <p class="why-q">What would you do tomorrow if you didn’t have to go to work?</p>
+    <p>Not on a holiday. On an ordinary Tuesday. Would you sleep in, then walk your children to school? Would you start the thing you keep saying you’ll do “one day”? Would you serve, teach, build or create?</p>
+    <p class="why-q">Now a harder question: why can’t you do that today?</p>
+    <p>For most of us, the honest answer is money. Our pay buys our hours. If the pay stops, the hours go back to whoever pays them. So here’s the next question: what if something else paid for your month?</p>
+    <p>Think about a farmer. Does he gamble everything on one miracle crop? Or does he plant, tend and harvest, season after season, then plant part of the harvest again so next year’s field is bigger?</p>
+    <p>Now think about money the same way. What if your savings didn’t sit still, waiting to be spent? What if they paid you every month, the way a field yields a harvest? And what if you planted every one of those payouts again, so each month’s harvest grew a little larger than the last?</p>
+    <p class="why-q">How big would that harvest need to be to cover your month?</p>
+    <p>Your rent, your groceries, your bills. That number has a name. It’s your <b>freedom number</b>. The day your payouts reach it, work becomes a choice.</p>
+    <p class="why-q">So what would you choose to do with your time?</p>
+    <p>That’s the real goal. Not money for its own sake, and not chasing the biggest gain. The goal is a harvest that covers your life, so your days are free for what you were made for.</p>
+    <p class="why-end">That’s what financial freedom means. The Freedom Steps are how you get there, one step at a time.</p>
+    <p class="why-verse" data-verse>“Let us not grow weary in well-doing, for in due time we will reap a harvest if we do not give up.”<small>Galatians 6:9 · BSB</small></p>
+  </div></div></section>
+
   <section id="steps" class="fs-sec"><div class="wrap">
     <p class="eyebrow">The method</p>
     <h2>The Freedom Steps</h2>
@@ -2656,7 +2683,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   hdr();addEventListener('resize',hdr);addEventListener('load',hdr);
   var NC=!window.COACHING;var SUB={about:[['coach',NC?'About me':'Your coach'],['story','My story'],['faith','Faith'],['portfolio','How I invest']],
     coaching:[['how','Pricing'],['apply','Apply'],['circle','Melius Circle'],['curriculum','Curriculum'],['faq','Questions']],
-    learn:[['steps','Freedom Steps'],['invest','Step 4, up close']].concat(NC?[]:[['modules','Modules']])};
+    learn:[['why','The why'],['steps','The steps'],['invest','Step 4, up close']].concat(NC?[]:[['modules','Modules']])};
   Object.keys(SUB).forEach(function(pid){var pg=document.getElementById(pid);if(!pg)return;
     var items=SUB[pid].filter(function(x){return document.getElementById(x[0])});if(items.length<2)return;
     pg.classList.add('has-sub');
