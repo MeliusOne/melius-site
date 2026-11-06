@@ -484,6 +484,17 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .why .why-verse{font-family:var(--display);font-style:italic;font-size:18px;line-height:1.45;color:var(--amber);margin-top:6px}
 .why .why-verse small{display:block;font-family:var(--body,inherit);font-style:normal;font-size:13px;color:var(--muted);margin-top:4px}
 @media (max-width:620px){.why-sec{padding-block:44px 12px}.why p{font-size:16px}}
+.hfs-sec{padding-block:24px 72px}
+.hfs-sec h2{margin:0}
+.hfs{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.hfs-c{display:flex;flex-direction:column;gap:8px;padding:20px;min-width:0}
+.hfs-n{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:600;font-size:17px;background:var(--amber);color:#fff}
+.hfs-c h3{margin:4px 0 0;font-size:19px;line-height:1.25}
+.hfs-c p{margin:0;font-size:14.5px;line-height:1.55;color:var(--muted)}
+.hfs-c .hfs-v{font-family:var(--display);font-style:italic;font-size:14.5px;color:var(--amber)}
+.hfs-c .hfs-v small{display:block;font-family:var(--body,inherit);font-style:normal;font-size:12px;color:var(--muted);margin-top:2px}
+@media (max-width:1100px){.hfs{grid-template-columns:repeat(2,minmax(0,1fr))}.hfs-c:last-child{grid-column:1/-1}}
+@media (max-width:620px){.hfs{grid-template-columns:1fr}.hfs-sec{padding-block:12px 52px}}
 .fs-tool{margin-top:auto;padding-top:4px;font-size:14px;font-weight:700;color:var(--accent);text-decoration:none}
 .fs-tool:hover{text-decoration:underline}
 @media (max-width:760px){.strats.inv{grid-template-columns:1fr!important}}
@@ -711,7 +722,8 @@ html:not(.no-coach) [data-coach="show"]{display:none!important}
 @media (min-width:701px){.no-coach .tgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:700px){.no-coach .tgrid{grid-template-columns:1fr}}
 .no-coach .stats{grid-template-columns:repeat(3,minmax(0,1fr))}
-.prelaunch #home>:not(.pl-home){display:none!important}
+.prelaunch #home>:not(.pl-home):not(.pl-keep){display:none!important}
+html:not(.prelaunch) .pl-keep{display:none!important}
 .prelaunch .pl-home{display:block;--pl-bg:#14213D;--pl-ink:#F7F5F0;--pl-mute:#C3CBD8;--pl-gold:#C9A35E;--pl-line:rgba(247,245,240,.14);background:var(--pl-bg);color:var(--pl-ink);padding-block:64px 72px;position:relative;overflow:hidden;text-align:center}
 .pl-home::before{content:"";position:absolute;inset:auto -160px -260px auto;width:620px;height:620px;border-radius:50%;background:radial-gradient(closest-side,rgba(201,163,94,.18),transparent);pointer-events:none}
 .pl-in{position:relative;display:flex;flex-direction:column;align-items:center;gap:20px}
@@ -1240,6 +1252,28 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       <p class="pl-motto" lang="la">Dum vivas, fac melius.<small>As long as you live, do better.</small></p>
     </div>
   </section>
+  <section id="hwhy" class="why-sec pl-keep"><div class="wrap"><div class="why">
+    <p class="eyebrow">The why</p>
+    <h2>What are you really working for?</h2>
+    <p class="why-q">What would you do tomorrow if you didn’t have to go to work?</p>
+    <p>Not on a holiday. On an ordinary Tuesday. Would you sleep in, then walk your children to school? Would you start the thing you keep saying you’ll do “one day”? Would you serve, teach, build or create?</p>
+    <p class="why-q">Now a harder question: why can’t you do that today?</p>
+    <p>For most of us, the honest answer is money. Our pay buys our hours. If the pay stops, the hours go back to whoever pays them. So here’s the next question: what if something else paid for your month?</p>
+    <p>Think about a farmer. Does he gamble everything on one miracle crop? Or does he plant, tend and harvest, season after season, then plant part of the harvest again so next year’s field is bigger?</p>
+    <p>Now think about money the same way. What if your savings didn’t sit still, waiting to be spent? What if they paid you every month, the way a field yields a harvest? And what if you planted every one of those payouts again, so each month’s harvest grew a little larger than the last?</p>
+    <p class="why-q">How big would that harvest need to be to cover your month?</p>
+    <p>Your rent, your groceries, your bills. That number has a name. It’s your <b>freedom number</b>. The day your payouts reach it, work becomes a choice.</p>
+    <p class="why-q">So what would you choose to do with your time?</p>
+    <p>That’s the real goal. Not money for its own sake, and not chasing the biggest gain. The goal is a harvest that covers your life, so your days are free for what you were made for.</p>
+    <p class="why-end">That’s what financial freedom means. The Freedom Steps are how you get there, one step at a time.</p>
+    <p class="why-verse" data-verse>“Let us not grow weary in well-doing, for in due time we will reap a harvest if we do not give up.”<small>Galatians 6:9 · BSB</small></p>
+  </div></div></section>
+  <section id="hsteps" class="hfs-sec pl-keep"><div class="wrap">
+    <p class="eyebrow">The method</p>
+    <h2>The Freedom Steps</h2>
+    <p class="lede" style="margin-top:12px;max-width:62ch">Five steps, in order. Start wherever you are today, and take them one at a time. Each one has a free tool to help.</p>
+    <ol class="hfs"><li class="card hfs-c"><span class="hfs-n">1</span><h3>Know your number</h3><p>Give every dollar of your income a job, and find what your household truly needs each month.</p><p class="hfs-v" data-verse>“Which of you, wishing to build a tower, does not first sit down and count the cost to see if he has the resources to complete it?”<small>Luke 14:28 · BSB</small></p><a class="fs-tool" href="#tools">Use Melius Money →</a></li><li class="card hfs-c"><span class="hfs-n">2</span><h3>Emergency fund</h3><p>One month of your monthly budget, kept in cash, so a surprise never goes on a card. It’s the only cash you hold.</p><p class="hfs-v" data-verse>“The prudent see danger and take cover, but the simple keep going and suffer the consequences.”<small>Proverbs 22:3 · BSB</small></p><a class="fs-tool" href="#tools">Set your target in Melius Money →</a></li><li class="card hfs-c"><span class="hfs-n">3</span><h3>Attack expensive debt</h3><p>Pay off every debt at 7% or more, snowball or avalanche. Cheaper loans stay on schedule.</p><p class="hfs-v" data-verse>“The rich rule over the poor, and the borrower is slave to the lender.”<small>Proverbs 22:7 · BSB</small></p><a class="fs-tool" href="#tools">Plan your payoff in Melius Money →</a></li><li class="card hfs-c"><span class="hfs-n">4</span><h3>Invest for freedom</h3><p>Every freedom dollar is invested in the right accounts, in covered-call ETFs and options that pay you every month. The yield is your cushion.</p><p class="hfs-v" data-verse>“Dishonest wealth will dwindle, but what is earned through hard work will be multiplied.”<small>Proverbs 13:11 · BSB</small></p><a class="fs-tool" href="#funds">Compare income funds →</a></li><li class="card hfs-c"><span class="hfs-n">5</span><h3>Freedom</h3><p>Your payouts cover your monthly number. Work becomes a choice.</p><p class="hfs-v" data-verse>“A good man leaves an inheritance to his children’s children, but the sinner’s wealth is passed to the righteous.”<small>Proverbs 13:22 · BSB</small></p><a class="fs-tool" href="#income">Find your freedom number →</a></li></ol>
+  </div></section>
   <section class="hero-band" aria-label="Introduction">
     <div class="wrap">
       <div class="hero">
