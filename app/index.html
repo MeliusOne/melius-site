@@ -144,6 +144,9 @@ a.tab{text-decoration:none}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .edit{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,.7fr) 34px;gap:8px;align-items:end}
 .edit.debt{grid-template-columns:repeat(3,minmax(0,1fr)) 34px;grid-template-areas:'n n n x' 'b r m .' 'd a a .';padding-bottom:12px;border-bottom:1px solid var(--line)}
+.f-y{grid-area:y}
+@media (min-width:900px){.edit.debt.hasy{grid-template-areas:'n n d a x' 'b r y m .'!important}}
+.edit.debt.hasy{grid-template-areas:'n n n x' 'b r m .' 'y d a .'}.field small.auto{font-weight:600;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--good,#2E7D5B);margin-left:4px}
 .f-n{grid-area:n}.f-b{grid-area:b}.f-r{grid-area:r}.f-m{grid-area:m}.f-d{grid-area:d}.f-a{grid-area:a}.f-x{grid-area:x}
 .edit select{font:inherit;font-size:15px;font-weight:600;color:var(--ink);background:var(--band);border:1px solid var(--line);border-radius:11px;padding:9px 8px;width:100%}
 .edit.inc{grid-template-columns:repeat(2,minmax(0,1fr)) 34px;grid-template-areas:'n n x' 'a f .' 'd d .';padding-bottom:12px;border-bottom:1px solid var(--line)}
@@ -216,7 +219,7 @@ textarea{font:inherit;font-size:13px;width:100%;min-height:150px;border:1px soli
   .tt-side>.fm-card .btn{margin-top:auto;align-self:flex-start}
   .edit.inc{grid-template-columns:minmax(0,1.3fr) minmax(0,.9fr) minmax(0,1.3fr) minmax(0,1fr) 34px;grid-template-areas:'n a f d x';border-bottom:0;padding-bottom:0}
   .edit.bill{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,.7fr) 34px;grid-template-areas:'n a d x';border-bottom:0;padding-bottom:0}
-  .edit.debt{grid-template-columns:minmax(0,1.4fr) repeat(4,minmax(0,.8fr)) minmax(0,1.1fr) 34px;grid-template-areas:'n b r m d a x';border-bottom:0;padding-bottom:0}
+  .edit.debt{grid-template-columns:repeat(4,minmax(0,1fr)) 34px;grid-template-areas:'n n d a x' 'b b r m .';padding-bottom:14px;border-bottom:1px solid var(--line)}
   .big{font-size:64px}
   .sheet-bg{align-items:center}
   .sheet{border-radius:22px;padding:24px}
@@ -331,7 +334,7 @@ textarea{font:inherit;font-size:13px;width:100%;min-height:150px;border:1px soli
 (function(){
 'use strict';
 var KEY='melius-payday-v1';
-var APPV='Nov 5, 2026 · 5:30 PM';
+var APPV='Nov 6, 2026 · 2:00 PM';
 /* COACHING: false hides coaching mentions (booking card, coach wording). Set to true when coaching opens. */
 var COACHING=false;
 /* ---------- daily Bible passage (Berean Standard Bible, public domain) ---------- */
@@ -346,7 +349,16 @@ var selNum=null;document.addEventListener('focusin',function(e){var t=e.target;i
 var EMBED=false;try{EMBED=window.self!==window.top}catch(e){EMBED=true}
 function track(name,params){if(EMBED&&name!=='app_preview_view')return;try{if(typeof gtag==='function')gtag('event',name,params||{})}catch(e){}}
 var BILLS=['Rent','Mortgage','Property tax','Condo fees','Hydro (electricity)','Gas (heating)','Water','Water heater rental','Home insurance','Tenant insurance','Car insurance','Life insurance','Phone','Internet','Childcare','Transit pass','Subscriptions','Gym'];
-var DEBTS=['Credit card','Store card','Line of credit','Car loan','Student loan','Personal loan','Buy now, pay later','Payday loan','Tax owing (CRA)','Loan from family'];
+var DEBTS=['Credit card','Store card','Line of credit','Margin loan','Car loan','Student loan','Personal loan','Buy now, pay later','Payday loan','Tax owing (CRA)','Loan from family'];
+/* minimum payments: loans amortize over the years left; lines of credit and margin are interest only; cards are 3% of the balance or $10 */
+var AMORT={'Car loan':5,'Student loan':10,'Personal loan':5},INTONLY={'Line of credit':1,'Margin loan':1},CARDD={'Credit card':1,'Store card':1};
+function autoMin(d){var b=+d.b||0,r=+d.r||0,i=r/1200;if(!(b>0))return null;
+  if(AMORT[d.n]){var n=Math.round((+d.y||AMORT[d.n])*12);if(n<1)return null;return Math.ceil(i?b*i/(1-Math.pow(1+i,-n)):b/n)}
+  if(INTONLY[d.n])return r>0?Math.ceil(b*i):null;
+  if(CARDD[d.n])return Math.ceil(Math.min(b,Math.max(10,b*0.03)));
+  return null}
+function isAutoM(d){return d.ma===false||(d.ma==null&&!(+d.m>0))}
+function setAutoM(d,row){if(!isAutoM(d))return;var m=autoMin(d);if(m==null)return;d.m=m;d.ma=false;if(row){var inp=row.querySelector('input[data-k=m]');if(inp&&document.activeElement!==inp)inp.value=m}}
 var CATS=['Groceries','Gas & transit','Eating out','Kids & school','Household supplies','Personal care','Clothing','Health & pharmacy','Entertainment','Gifts','Giving & tithe','Sending money home','Pets','Fun money','Buffer'];
 var FREQ={weekly:'Every week',biweekly:'Every two weeks',semimonthly:'Twice a month (15th and last day)',monthly:'Once a month'};
 var PPM={weekly:52/12,biweekly:26/12,semimonthly:2,monthly:1};
@@ -865,8 +877,8 @@ function renderPlan(){
     '<div class="stack" style="gap:10px">'+
     S.bills.map(function(b,i){return '<div class="edit bill" data-row="bills" data-i="'+i+'"><label class="field b-n">Bill'+(b.custom?'<input data-k="n" value="'+esc(b.n)+'" placeholder="Name your bill">':catSelect(b.n,BILLS,'n'))+'</label><label class="field b-a">Amount<input data-k="a" type="number" inputmode="decimal" placeholder="0" value="'+nv(b.a)+'"></label><label class="field b-d">Due day<input data-k="d" type="number" inputmode="numeric" min="1" max="31" value="'+(+b.d||1)+'"></label><button class="x" aria-label="Remove '+esc(b.n)+'" data-rm="bills" data-i="'+i+'">×</button></div>'}).join('')+
     '</div><p class="note" data-live="billWarn" style="color:var(--bad)">'+billWarn()+'</p><button class="btn ghost sm" data-add="bills">+ Add a bill</button></div>';
-  P.debts='<div class="card wide"><h2 style="font-family:var(--display);font-size:22px">Debts</h2><p class="note">Minimum payments count as bills on their due day. Debts at 7% or more are set to <b>Attack</b>. Lower-rate loans stay <b>On schedule</b> while the payment fits your budget comfortably; switch any debt if that changes.</p><div class="stack" style="gap:14px">'+
-    S.debts.map(function(b,i){var a=isAtk(b);return '<div class="edit debt" data-row="debts" data-i="'+i+'"><label class="field f-n">Debt'+(b.custom?'<input data-k="n" value="'+esc(b.n)+'" placeholder="Name your debt">':catSelect(b.n,DEBTS,'n'))+'</label><label class="field f-b">Owing<input data-k="b" type="number" inputmode="decimal" placeholder="0" value="'+nv(b.b)+'"></label><label class="field f-r">Rate %<input data-k="r" type="number" inputmode="decimal" step="0.1" placeholder="0" value="'+nv(b.r)+'"></label><label class="field f-m">Minimum<input data-k="m" type="number" inputmode="decimal" placeholder="0" value="'+nv(b.m)+'"></label><label class="field f-d">Due day<input data-k="d" type="number" inputmode="numeric" min="1" max="31" value="'+(+b.d||1)+'"></label><label class="field f-a">Plan<select data-k="atk"><option value="1"'+(a?' selected':'')+'>Attack</option><option value="0"'+(a?'':' selected')+'>On schedule</option></select></label><button class="x f-x" aria-label="Remove '+esc(b.n)+'" data-rm="debts" data-i="'+i+'">×</button></div>'}).join('')+
+  P.debts='<div class="card wide"><h2 style="font-family:var(--display);font-size:22px">Debts</h2><p class="note">Minimum payments count as bills on their due day. Debts at 7% or more are set to <b>Attack</b>. Lower-rate loans stay <b>On schedule</b> while the payment fits your budget comfortably; switch any debt if that changes.</p><p class="note">Minimums fill in from what you owe and the rate: loans over their amortization, lines of credit and margin loans interest only, and cards 3% of the balance or $10. If your statement shows a different minimum, type it in.</p><div class="stack" style="gap:14px">'+
+    S.debts.map(function(b,i){var a=isAtk(b);return '<div class="edit debt'+(AMORT[b.n]?' hasy':'')+'" data-row="debts" data-i="'+i+'"><label class="field f-n">Debt'+(b.custom?'<input data-k="n" value="'+esc(b.n)+'" placeholder="Name your debt">':catSelect(b.n,DEBTS,'n'))+'</label><label class="field f-b">Owing<input data-k="b" type="number" inputmode="decimal" placeholder="0" value="'+nv(b.b)+'"></label><label class="field f-r">Rate %<input data-k="r" type="number" inputmode="decimal" step="0.1" placeholder="0" value="'+nv(b.r)+'"></label>'+(AMORT[b.n]?'<label class="field f-y">Amortization (yrs)<input data-k="y" type="number" inputmode="decimal" step="0.5" min="0.5" placeholder="'+AMORT[b.n]+'" value="'+nv(b.y)+'"></label>':'')+'<label class="field f-m">Minimum'+(autoMin(b)!=null&&isAutoM(b)?' <small class="auto">auto</small>':'')+'<input data-k="m" type="number" inputmode="decimal" placeholder="'+(autoMin({n:b.n,b:1000,r:10,y:b.y})!=null?'auto':'0')+'" value="'+nv(b.m)+'"></label><label class="field f-d">Due day<input data-k="d" type="number" inputmode="numeric" min="1" max="31" value="'+(+b.d||1)+'"></label><label class="field f-a">Plan<select data-k="atk"><option value="1"'+(a?' selected':'')+'>Attack</option><option value="0"'+(a?'':' selected')+'>On schedule</option></select></label><button class="x f-x" aria-label="Remove '+esc(b.n)+'" data-rm="debts" data-i="'+i+'">×</button></div>'}).join('')+
     '</div><button class="btn ghost sm" data-add="debts">+ Add a debt</button></div>';
   P.more='<div class="card"><h2 style="font-family:var(--display);font-size:22px">Check-in summary</h2><p class="note">'+(COACHING?'A one-page snapshot to send your coach before a check-in.':'A one-page snapshot of your plan, to keep or share with your partner.')+'</p><textarea id="sum" readonly aria-label="Check-in summary">'+esc(summary())+'</textarea><button class="btn sm" data-act="copy" data-t="sum">Copy summary</button></div>';
   P.more+='<div class="card"><h2 style="font-family:var(--display);font-size:22px">Backup</h2><p class="note">Your numbers live only on this device. Copy a backup and keep it in your notes or email.'+(COACHING?' Automatic backup is coming in <button class="chip" style="padding:2px 10px;font-size:13px" data-go="goals">Melius Money Plus</button>.':'')+'</p><div class="chips"><button class="btn ghost sm" data-act="backup">Copy backup</button><button class="btn ghost sm" data-act="restore">Restore</button></div><div id="restoreBox" hidden class="stack" style="gap:8px"><textarea id="restoreTxt" aria-label="Paste your backup here" placeholder="Paste your backup here"></textarea><button class="btn sm" data-act="restore-go">Restore this backup</button><p class="note" id="restoreMsg"></p></div></div>';
@@ -1025,7 +1037,7 @@ document.addEventListener('click',function(e){
   if(t.dataset.go)return show(t.dataset.go);
   if(t.dataset.paid){var id=t.dataset.paid;if(S.paid[id])delete S.paid[id];else{S.paid[id]=1;track('bill_paid')}changed();return renderToday()}
   if(t.dataset.del){var di=S.spend.findIndex(function(x){return String(x.id)===t.dataset.del});if(di>-1){undoBuf={l:'spend',i:di,v:S.spend.splice(di,1)[0]}}changed();renderSpend();return toast('Purchase deleted',true)}
-  if(t.dataset.add){S[t.dataset.add].push(t.dataset.add==='bills'?{n:BILLS.filter(function(c){return !S.bills.some(function(x){return x.n===c})})[0]||'Other bill',a:0,d:1}:t.dataset.add==='plan'?{c:CATS.filter(function(c){return !S.plan.some(function(x){return x.c===c})})[0]||'Other',a:0}:t.dataset.add==='incomes'?{n:'Other income',a:0,freq:'monthly',last:iso(d0())}:t.dataset.add==='cards'?{n:'Another card',due:1}:{n:DEBTS.filter(function(c){return !S.debts.some(function(x){return x.n===c})})[0]||'Other debt',b:0,r:0,m:0,d:1});changed();return renderPlan()}
+  if(t.dataset.add){S[t.dataset.add].push(t.dataset.add==='bills'?{n:BILLS.filter(function(c){return !S.bills.some(function(x){return x.n===c})})[0]||'Other bill',a:0,d:1}:t.dataset.add==='plan'?{c:CATS.filter(function(c){return !S.plan.some(function(x){return x.c===c})})[0]||'Other',a:0}:t.dataset.add==='incomes'?{n:'Other income',a:0,freq:'monthly',last:iso(d0())}:t.dataset.add==='cards'?{n:'Another card',due:1}:(function(){var nn=DEBTS.filter(function(c){return !S.debts.some(function(x){return x.n===c})})[0]||'Other debt';return {n:nn,b:0,r:0,m:0,d:1,ma:false,y:AMORT[nn]||undefined}})());changed();return renderPlan()}
   if(t.dataset.rm){var lst=t.dataset.rm,ix=+t.dataset.i,gone=S[lst].splice(ix,1)[0];undoBuf={l:lst,i:ix,v:gone};changed();renderPlan();return toast('Removed '+(gone&&(gone.n||gone.c)||'item'),true)}
   if(t.dataset.act==='undo'&&undoBuf){S[undoBuf.l].splice(undoBuf.i,0,undoBuf.v);undoBuf=null;$('toast').hidden=true;changed();return show(cur)}
   if(t.dataset.mv){var mk=mkey()+':'+t.dataset.mv;S.moved=S.moved||{};if(S.moved[mk])delete S.moved[mk];else{S.moved[mk]=Date.now();track('payday_moved',{what:t.dataset.mv})}changed();return renderToday()}
@@ -1070,7 +1082,8 @@ function applyLive(el){
   if(id==='p-push'){S.pushM=+v||0;syncPush()}else if(id==='p-cush')S.cushion=+v||0;
   else if(id==='g-need')S.goal.need=+v||0;else if(id==='g-inv')S.goal.invested=+v||0;
   else if(el.dataset.k){var row=el.closest('[data-row]');if(!row)return false;var it=S[row.dataset.row][+row.dataset.i],k=el.dataset.k;if(!it)return false;
-    it[k]=(k==='n'||k==='c'||k==='freq'||k==='last')?v:(+v||0);}
+    it[k]=(k==='n'||k==='c'||k==='freq'||k==='last')?v:(+v||0);
+    if(row.dataset.row==='debts'){if(k==='m'){if(v===''){it.ma=false;setAutoM(it,null)}else it.ma=true}else if(k==='b'||k==='r'||k==='y')setAutoM(it,row)}}
   else return false;
   if(S.incomes[0]){S.pay=S.incomes[0];S.pay.amount=+S.pay.a||0}
   return true;
@@ -1097,6 +1110,7 @@ document.addEventListener('change',function(e){
   else if(id==='g-inv')S.goal.invested=+el.value||0;
   else if(el.dataset.k){var row=el.closest('[data-row]');if(!row)return;var it=S[row.dataset.row][+row.dataset.i],k=el.dataset.k;if(el.value==='__other'&&el.tagName==='SELECT'){it.custom=true;it[k]='';changed(true);renderPlan();try{document.querySelector('[data-row="'+row.dataset.row+'"][data-i="'+row.dataset.i+'"] input[data-k='+k+']').focus()}catch(e){}return}
   it[k]=(k==='n'||k==='c'||k==='freq'||k==='last')?el.value:k==='atk'?el.value==='1':(+el.value||0);if(k==='due'){it.due=Math.min(31,Math.max(1,Math.round(+el.value||1)));el.value=it.due}
+  if(row.dataset.row==='debts'){if(k==='m'){if(el.value===''){it.ma=false;setAutoM(it,null);changed(true);return renderPlan()}it.ma=true;if(row.querySelector('.auto')){changed(true);return renderPlan()}}else if(k==='b'||k==='r'||k==='y'){var wasA=isAutoM(it);setAutoM(it,row);if(wasA){changed(true);return renderPlan()}}else if(k==='n'){if(AMORT[it.n]&&!(+it.y>0))it.y=AMORT[it.n];setAutoM(it,null);changed(true);return renderPlan()}}
   if(k==='atk'||k==='freq'){changed(true);return renderPlan()}if(k==='d')it[k]=Math.min(31,Math.max(1,Math.round(it[k]||1)))}
   else return;
   if(S.incomes[0]){S.pay=S.incomes[0];S.pay.amount=+S.pay.a||0}
