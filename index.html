@@ -20,9 +20,11 @@
 -->
 <script>document.documentElement.classList.add("js");try{if(localStorage.getItem("melius-verses")!=="on")document.documentElement.classList.add("no-verses")}catch(e){document.documentElement.classList.add("no-verses")}
 /* PRE-LAUNCH MODE: true shows the "coming soon" home page and hides About, Coaching, Learn and booking. Set to false at launch. */
-window.PRELAUNCH=false;if(window.PRELAUNCH)document.documentElement.classList.add("prelaunch");
+window.PRELAUNCH=true;if(window.PRELAUNCH)document.documentElement.classList.add("prelaunch");
 /* COACHING: false hides coaching, prices, booking, referral links and the Melius Circle, and shows the free-tools wording instead. Set to true when coaching opens. */
-window.COACHING=false;if(!window.COACHING)document.documentElement.classList.add("no-coach");</script>
+window.COACHING=true;
+/* While the site is off (PRELAUNCH), coaching stays hidden and the free-tools wording shows, whatever COACHING says. */
+window.COACH_ON=window.COACHING&&!window.PRELAUNCH;if(!window.COACH_ON)document.documentElement.classList.add("no-coach");</script>
 <title>Melius One | Free money tools for families in Canada</title>
 <link rel="canonical" href="https://meliusoneconsulting.com/">
 <meta property="og:type" content="website">
@@ -1224,18 +1226,11 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
 
 <main id="top">
 <div class="page" id="home" data-page="home">
-  <section class="pl-home" aria-label="Coming soon">
+  <section class="pl-home" aria-label="Free money tools">
     <div class="wrap pl-in">
-      <p class="eyebrow">Coming soon</p>
-      <h1 class="pl-title">Something better is on its way.</h1>
-      <p class="pl-lede">Money coaching for newcomers and young families in Canada, in small groups and one-on-one: a plan for every dollar, a clear way out of debt, and investments that one day pay your bills. Until then, the free tools are open to everyone.</p>
-      <form class="pl-form" name="launch-list" method="POST" data-netlify="true" netlify-honeypot="company" id="plForm">
-        <input type="hidden" name="form-name" value="launch-list">
-        <p class="hp"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
-        <input type="email" name="email" required placeholder="Your email address" aria-label="Your email address" autocomplete="email">
-        <button class="btn solid" type="submit">Tell me when it’s live</button>
-      </form>
-      <p class="pl-msg" id="plMsg" aria-live="polite">No spam. One email when we launch.</p>
+      <p class="eyebrow">Free money tools</p>
+      <h1 class="pl-title">Make every dollar better.</h1>
+      <p class="pl-lede">Free tools for families in Canada: see what you can spend each month, clear expensive debt, and see what income funds could pay you. Open to everyone, no sign-up.</p>
       <div class="pl-tools">
         <a class="pl-tool" href="#income"><span class="pl-k">Income calculator</span><b>What would your funds pay you?</b><span>Pick income funds and see your payout, and how much you can withdraw while your balance keeps growing.</span></a>
         <a class="pl-tool" href="#funds"><span class="pl-k">Fund directory</span><b>Covered-call income ETFs</b><span><span data-fund-count>60</span> income funds, Canadian and U.S.-listed, side by side: yield, fees, size and total return, updated every weekday.</span></a>
@@ -2042,7 +2037,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
   function route(){
     var h=decodeURIComponent((location.hash||'#home').slice(1))||'home';
     var target=document.getElementById(h), pg=null;
-    if(!window.COACHING){var cb={coaching:1,book:1};var cp=target&&(target.classList.contains('page')?target:target.closest('.page'));if((cp&&cb[cp.id])||h==='accounts'){target=null;h='home'}}
+    if(!window.COACH_ON){var cb={coaching:1,book:1};var cp=target&&(target.classList.contains('page')?target:target.closest('.page'));if((cp&&cb[cp.id])||h==='accounts'){target=null;h='home'}}
     if(window.PRELAUNCH){var blk={about:1,coaching:1,learn:1,book:1};var tp=target&&(target.classList.contains('page')?target:target.closest('.page'));if(tp&&blk[tp.id]){target=null;h='home'}}
     if(target&&target.classList.contains('page')) pg=target;
     else if(target) pg=target.closest('.page');
@@ -2053,7 +2048,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     document.documentElement.classList.toggle('ic-lock',pg.id==='income');
     if(target&&target!==pg){setTimeout(function(){target.scrollIntoView({behavior:reduce?'auto':'smooth'});},60);} else {window.scrollTo(0,0);document.body.scrollTop=0;}
     onScroll();
-    var names={home:'',about:'About · ',coaching:'Coaching · ',learn:'Freedom Steps · ',funds:'Fund directory · ',income:'Income calculator · ',tools:'Melius Money · ',book:'Book a session · ',policies:'Policies · '}; var BN=window.COACHING?'Melius One Consulting':'Melius One';document.title=pg.id==='home'?(window.PRELAUNCH?BN+' | Coming soon':window.COACHING?'Melius One Consulting | Obi Oji, Financial Education Coach in Kitchener, Ontario':'Melius One | Free money tools for families in Canada'):(names[pg.id]||'')+BN;
+    var names={home:'',about:'About · ',coaching:'Coaching · ',learn:'Freedom Steps · ',funds:'Fund directory · ',income:'Income calculator · ',tools:'Melius Money · ',book:'Book a session · ',policies:'Policies · '}; var BN=window.COACH_ON?'Melius One Consulting':'Melius One';document.title=pg.id==='home'?(window.PRELAUNCH?BN+' | Free money tools':window.COACH_ON?'Melius One Consulting | Obi Oji, Financial Education Coach in Kitchener, Ontario':'Melius One | Free money tools for families in Canada'):(names[pg.id]||'')+BN;
     if(pg.id!==lastPg){lastPg=pg.id;try{gtag('event','page_view',{page_title:document.title,page_location:location.origin+'/'+(pg.id==='home'?'':pg.id)});}catch(e){}}
   }
   var lastPg=null;
@@ -2681,7 +2676,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   var root=document.documentElement;
   function hdr(){var h=document.querySelector('header.top');if(h)root.style.setProperty('--hdr',h.offsetHeight+'px')}
   hdr();addEventListener('resize',hdr);addEventListener('load',hdr);
-  var NC=!window.COACHING;var SUB={about:[['coach',NC?'About me':'Your coach'],['story','My story'],['faith','Faith'],['portfolio','How I invest']],
+  var NC=!window.COACH_ON;var SUB={about:[['coach',NC?'About me':'Your coach'],['story','My story'],['faith','Faith'],['portfolio','How I invest']],
     coaching:[['how','Pricing'],['apply','Apply'],['circle','Melius Circle'],['curriculum','Curriculum'],['faq','Questions']],
     learn:[['why','The why'],['steps','The steps'],['invest','Step 4, up close']].concat(NC?[]:[['modules','Modules']])};
   Object.keys(SUB).forEach(function(pid){var pg=document.getElementById(pid);if(!pg)return;
