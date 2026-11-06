@@ -747,6 +747,147 @@ html:not(.prelaunch) .pl-keep{display:none!important}
 .pl-motto small{display:block;font-family:var(--body,inherit);font-style:normal;font-size:13px;color:var(--pl-mute);margin-top:2px}
 @media (max-width:820px){.pl-tools{grid-template-columns:1fr}}
 @media (max-width:520px){.pl-form{flex-direction:column}.pl-form input[type=email]{flex:none;width:100%}.pl-form .btn{width:100%}.prelaunch .pl-home{padding-block:44px 52px}}
+/* ---- tools-only homepage ---- */
+:root{--hg-good:#2E7D5B;--hg-good-soft:#E3F2EA;--hg-bad:#A3332A;--hg-bad-soft:#F8E3E0;--hg-soil:#B99A72;--hg-sky:#F2EEE4}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--hg-good:#6CC79C;--hg-good-soft:#15302A;--hg-bad:#E5776C;--hg-bad-soft:#3A1D1B;--hg-soil:#6E5A40;--hg-sky:#17243C}}
+:root[data-theme="dark"]{--hg-good:#6CC79C;--hg-good-soft:#15302A;--hg-bad:#E5776C;--hg-bad-soft:#3A1D1B;--hg-soil:#6E5A40;--hg-sky:#17243C}
+.prelaunch .pl-home{text-align:left}
+.ph{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.9fr);gap:40px;align-items:center;position:relative}
+.ph-l{display:flex;flex-direction:column;gap:18px;min-width:0}
+.ph-l .pl-title{max-width:12ch}
+.ph-go{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:6px}
+.ph-tool{display:flex;flex-direction:column;gap:3px;padding:14px 16px;border:1px solid var(--pl-line);border-radius:14px;background:rgba(247,245,240,.04);color:var(--pl-ink);text-decoration:none;transition:border-color .2s,transform .2s}
+.ph-tool:hover{border-color:rgba(201,163,94,.6);transform:translateY(-2px)}
+.ph-tool b{font-family:var(--display);font-weight:500;font-size:19px;line-height:1.2}
+.ph-tool span:last-child{font-size:13px;color:var(--pl-mute);line-height:1.4}
+.ph-r{background:#F7F5F0;color:#14213D;border-radius:22px;padding:26px 26px 22px;display:flex;flex-direction:column;gap:12px;box-shadow:0 20px 50px rgba(0,0,0,.25);min-width:0}
+.fn-k{margin:0;font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#A8803F}
+.fn-q{font-weight:700;font-size:15px}
+.fn-need{display:flex;align-items:baseline;gap:8px}
+.fn-need b{font-family:var(--display);font-weight:500;font-size:34px;line-height:1;font-variant-numeric:tabular-nums}
+.fn-need span{color:#5A6474;font-size:14px}
+#fnNeed{width:100%;accent-color:#A8803F;height:28px}
+.fn-y{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:13.5px;color:#5A6474}
+.fn-y button{border:1px solid #E6E1D7;background:#fff;color:#14213D;border-radius:999px;padding:5px 12px;font:inherit;font-weight:700;cursor:pointer}
+.fn-y button[aria-pressed="true"]{background:#14213D;color:#F7F5F0;border-color:#14213D}
+.fn-out{border-top:1px solid #E6E1D7;padding-top:12px;display:flex;flex-direction:column;gap:2px}
+.fn-out span{font-size:13.5px;color:#5A6474}
+.fn-out b{font-family:var(--display);font-weight:600;font-size:clamp(38px,4vw,48px);line-height:1.05;color:#14213D;font-variant-numeric:tabular-nums}
+.fn-out small{font-size:13px;color:#5A6474}
+.fn-go{font-weight:700;color:#1D3557;text-decoration:none;font-size:14.5px}
+.fn-go:hover{text-decoration:underline}
+@media (max-width:900px){.ph{grid-template-columns:1fr;gap:28px}.ph-go{grid-template-columns:1fr}.ph-l .pl-title{max-width:none}}
+
+.hb{padding-block:28px 0}
+.hb+.hb{padding-top:20px}
+.hb-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:20px;align-items:stretch}
+.hb-grid2{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)}
+.hcard{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:14px;min-width:0;box-shadow:0 1px 2px rgba(20,33,61,.04),0 8px 24px rgba(20,33,61,.05)}
+.hcard h2{margin:0;font-size:clamp(24px,2.4vw,30px)}
+.hcard .eyebrow{margin:0}
+.hm-motto{padding-block:44px 64px;text-align:center}
+.hm-motto .pl-motto{color:var(--amber)}
+.hm-motto .pl-motto small{color:var(--muted)}
+@media (max-width:980px){.hb-grid,.hb-grid2{grid-template-columns:1fr}}
+@media (max-width:520px){.hcard{padding:20px;border-radius:18px}}
+
+/* game */
+.hg-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.hg-best{text-align:right;font-size:13px;color:var(--muted);line-height:1.4}
+.hg-best b{display:block;font-size:15px;color:var(--ink)}
+.hg-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.hg-stat{background:var(--band);border-radius:12px;padding:9px 11px;min-width:0}
+.hg-stat span{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.hg-stat b{display:block;font-size:17px;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hg-stat.bad b{color:var(--hg-bad)}
+.hg-field{height:96px;border-radius:14px;overflow:hidden;background:linear-gradient(var(--hg-sky) 0 70%,var(--hg-soil) 70% 100%)}
+.hg-field svg{display:block;width:100%;height:100%}
+.hg-meter{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:-4px}
+.hg-meter i{display:block;height:100%;width:0;background:var(--hg-good);border-radius:inherit;transition:width .6s cubic-bezier(.2,.7,.2,1)}
+.hg-play{display:flex;flex-direction:column;gap:12px;min-height:150px}
+.hg-play h3{margin:0;font-size:20px;line-height:1.3;text-wrap:balance}
+.hg-play p{margin:0;color:var(--muted);font-size:15px;line-height:1.55}
+.hg-y{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)}
+.hg-ch{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.hg-ch button,.hg-go{min-height:52px;padding:10px 14px;border-radius:14px;border:2px solid var(--line);border-bottom-width:4px;background:var(--surface);color:var(--ink);font:inherit;font-weight:700;font-size:15px;line-height:1.3;cursor:pointer;text-align:center}
+.hg-ch button:hover{border-color:var(--amber)}
+.hg-ch button:active,.hg-go:active{transform:translateY(2px);border-bottom-width:2px}
+.hg-go{background:var(--accent);color:var(--accent-ink);border-color:transparent}
+.hg-res{border-radius:14px;padding:12px 14px;font-size:15px;line-height:1.5}
+.hg-res.good{background:var(--hg-good-soft)}
+.hg-res.bad{background:var(--hg-bad-soft)}
+.hg-res b{display:block;margin-bottom:2px}
+.hg-res.good b{color:var(--hg-good)}.hg-res.bad b{color:var(--hg-bad)}
+.hg-win{text-align:center;align-items:center}
+.hg-stars{font-size:30px;letter-spacing:6px;color:var(--amber)}
+.hg-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.hg-row .hg-go,.hg-row .hg-alt{flex:1 1 180px}
+.hg-alt{min-height:52px;padding:10px 14px;border-radius:14px;border:2px solid var(--line);background:none;color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+@media (max-width:520px){.hg-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.hg-ch{grid-template-columns:1fr}}
+
+/* step quiz */
+.hb-col{display:flex;flex-direction:column;gap:20px;min-width:0}
+.hl{flex:1;text-decoration:none;color:var(--ink);transition:border-color .2s,transform .2s}
+.hl:hover{border-color:var(--amber);transform:translateY(-2px)}
+.hl-l{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.hl-l li{display:flex;flex-direction:column;padding:10px 12px;border-radius:12px;background:var(--band)}
+.hl-l b{font-size:15px}
+.hl-l span{font-size:13.5px;color:var(--muted)}
+.hm-motto .wrap{text-align:center}
+.hm-motto .pl-motto{margin:0 auto;max-width:none}
+.hq-body{display:flex;flex-direction:column;gap:12px}
+.hq-q{font-family:var(--display);font-size:21px;line-height:1.3;margin:0;text-wrap:balance}
+.hq-n{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.hq-ch{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.hq-ch button{min-height:50px;border-radius:14px;border:2px solid var(--line);border-bottom-width:4px;background:var(--surface);color:var(--ink);font:inherit;font-weight:800;font-size:16px;cursor:pointer}
+.hq-ch button:hover{border-color:var(--amber)}
+.hq-res{display:flex;flex-direction:column;gap:10px}
+.hq-badge{display:flex;align-items:center;gap:12px}
+.hq-badge span{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:var(--amber);color:#fff;font-family:var(--display);font-size:26px;font-weight:600;flex:none}
+.hq-badge b{font-family:var(--display);font-size:22px;line-height:1.2;font-weight:500}
+.hq-res p{margin:0;color:var(--muted);font-size:15px;line-height:1.55}
+.hq-res .fs-tool{margin-top:2px}
+.hq-again{margin-top:4px;align-self:flex-start;background:none;border:0;padding:0;color:var(--muted);font:inherit;font-size:14px;text-decoration:underline;cursor:pointer}
+
+/* why stepper */
+.hw-slides{position:relative;flex:1;min-height:250px}
+.hw-s{display:none;flex-direction:column;gap:12px;animation:hwIn .35s ease}
+.hw-s.on{display:flex}
+@keyframes hwIn{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
+.hw-s h2{font-size:clamp(24px,2.5vw,30px);line-height:1.25;text-wrap:balance}
+.hw-s p{margin:0;color:var(--muted);font-size:16px;line-height:1.65}
+.hw-s p b{color:var(--ink)}
+.hw-s .hw-end{color:var(--ink);font-weight:600;border-left:3px solid var(--amber);padding-left:14px}
+.hw-s .hw-v{font-family:var(--display);font-style:italic;color:var(--amber);font-size:16px}
+.hw-s .hw-v small{display:block;font-family:var(--body);font-style:normal;font-size:12px;color:var(--muted);margin-top:2px}
+.hw-nav{display:flex;align-items:center;gap:10px}
+.hw-b{height:44px;min-width:44px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-weight:700;cursor:pointer;padding:0 14px}
+.hw-b:disabled{opacity:.35;cursor:default}
+.hw-next{margin-left:auto;background:var(--accent);color:var(--accent-ink);border-color:transparent;white-space:nowrap}
+@media (max-width:440px){.hw-dots{display:none}.hw-b{font-size:14px}}
+.hw-dots{display:flex;gap:6px}
+.hw-dots i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.hw-dots i.on{background:var(--amber);width:20px;border-radius:99px}
+
+/* steps path */
+.hs-path{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:relative}
+.hs-path::before{content:"";position:absolute;left:10%;right:10%;top:23px;height:3px;background:var(--line);border-radius:3px}
+.hs-path li{display:flex;justify-content:center;position:relative}
+.hs-path button{display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:0;padding:0;font:inherit;color:var(--muted);cursor:pointer;max-width:110px}
+.hs-path .dot{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:600;font-size:20px;background:var(--surface);border:3px solid var(--line);color:var(--ink);position:relative;transition:transform .2s}
+.hs-path button:hover .dot{transform:scale(1.06)}
+.hs-path button[aria-selected="true"] .dot{background:var(--amber);border-color:var(--amber);color:#fff}
+.hs-path button[aria-selected="true"]{color:var(--ink)}
+.hs-path .nm{font-size:12.5px;font-weight:700;text-align:center;line-height:1.25}
+.hs-path .you{position:absolute;top:-10px;right:-14px;background:var(--hg-good);color:#fff;font-family:var(--body);font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:99px}
+.hs-panel{background:var(--band);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.hs-panel h3{margin:0;font-size:21px}
+.hs-panel p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.6}
+.hs-panel .hs-v{font-family:var(--display);font-style:italic;color:var(--amber);font-size:15.5px}
+.hs-panel .hs-v small{display:block;font-family:var(--body);font-style:normal;font-size:12px;color:var(--muted);margin-top:2px}
+.hs-panel .fs-tool{margin-top:4px}
+@media (max-width:520px){.hs-path .nm{font-size:11px}.hs-path .dot{width:40px;height:40px;font-size:17px}.hs-path::before{top:19px}.hs-path .you{right:-10px}}
+@media (prefers-reduced-motion:reduce){.hw-s{animation:none}.hg-meter i{transition:none}}
 /* ---- income calculator ---- */
 .ic-top{--ic-bg:#14213D;--ic-ink:#F7F5F0;--ic-mute:#C3CBD8;--ic-gold:#C9A35E;--ic-line:rgba(247,245,240,.14);background:var(--ic-bg);color:var(--ic-ink);padding-block:44px 40px;position:relative;overflow:hidden}
 .ic-top::before{content:"";position:absolute;inset:auto -120px -220px auto;width:520px;height:520px;border-radius:50%;background:radial-gradient(closest-side,rgba(201,163,94,.16),transparent);pointer-events:none}
@@ -1240,40 +1381,69 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
 <main id="top">
 <div class="page" id="home" data-page="home">
   <section class="pl-home" aria-label="Free money tools">
-    <div class="wrap pl-in">
-      <p class="eyebrow">Free money tools</p>
-      <h1 class="pl-title">Make every dollar better.</h1>
-      <p class="pl-lede">Free tools for families in Canada: see what you can spend each month, clear expensive debt, and see what income funds could pay you. Open to everyone, no sign-up.</p>
-      <div class="pl-tools">
-        <a class="pl-tool" href="#income"><span class="pl-k">Income calculator</span><b>What would your funds pay you?</b><span>Pick income funds and see your payout, and how much you can withdraw while your balance keeps growing.</span></a>
-        <a class="pl-tool" href="#funds"><span class="pl-k">Fund directory</span><b>Covered-call income ETFs</b><span><span data-fund-count>60</span> income funds, Canadian and U.S.-listed, side by side: yield, fees, size and total return, updated every weekday.</span></a>
-        <a class="pl-tool" href="#tools"><span class="pl-k">Free app</span><b>Melius Money</b><span>Budget, clear your debt and find your freedom number, and learn money in two-minute daily lessons: the terms, the accounts and how investing really works.</span></a>
+    <div class="wrap ph">
+      <div class="ph-l">
+        <p class="eyebrow">Free money tools</p>
+        <h1 class="pl-title">Make every dollar better.</h1>
+        <p class="pl-lede">Plan your month, clear expensive debt, and grow income that one day pays your bills. Free for families in Canada, no sign-up.</p>
+        <div class="ph-go">
+          <a class="ph-tool" href="#tools"><span class="pl-k">Free app</span><b>Melius Money</b><span>Budget, debts and daily lessons</span></a>
+          <a class="ph-tool" href="#income"><span class="pl-k">Calculator</span><b>Income calculator</b><span>What your funds could pay you</span></a>
+          <a class="ph-tool" href="#funds"><span class="pl-k">Directory</span><b>Income funds</b><span><span data-fund-count>57</span> covered-call ETFs, side by side</span></a>
+        </div>
       </div>
-      <p class="pl-motto" lang="la">Dum vivas, fac melius.<small>As long as you live, do better.</small></p>
+      <div class="ph-r" id="fnum">
+        <p class="fn-k">Your freedom number</p>
+        <label class="fn-q" for="fnNeed">What does your month cost?</label>
+        <div class="fn-need"><b id="fnNeedV">$4,000</b><span>a month</span></div>
+        <input type="range" id="fnNeed" min="1500" max="15000" step="100" value="4000" aria-describedby="fnOut">
+        <div class="fn-y" role="group" aria-label="Yield">
+          <span>At a yield of</span>
+          <button type="button" data-y="8" aria-pressed="false">8%</button><button type="button" data-y="10" aria-pressed="true">10%</button><button type="button" data-y="12" aria-pressed="false">12%</button>
+        </div>
+        <div class="fn-out" id="fnOut" aria-live="polite"><span>you’d need invested</span><b id="fnOutV">$480,000</b><small id="fnOutS">That pays $4,000 every month, so work becomes a choice.</small></div>
+        <a class="fn-go" href="#income">Try it with real funds →</a>
+      </div>
     </div>
   </section>
-  <section id="hwhy" class="why-sec pl-keep"><div class="wrap"><div class="why">
-    <p class="eyebrow">The why</p>
-    <h2>What are you really working for?</h2>
-    <p class="why-q">What would you do tomorrow if you didn’t have to go to work?</p>
-    <p>Not on a holiday. On an ordinary Tuesday. Would you sleep in, then walk your children to school? Would you start the thing you keep saying you’ll do “one day”? Would you serve, teach, build or create?</p>
-    <p class="why-q">Now a harder question: why can’t you do that today?</p>
-    <p>For most of us, the honest answer is money. Our pay buys our hours. If the pay stops, the hours go back to whoever pays them. So here’s the next question: what if something else paid for your month?</p>
-    <p>Think about a farmer. Does he gamble everything on one miracle crop? Or does he plant, tend and harvest, season after season, then plant part of the harvest again so next year’s field is bigger?</p>
-    <p>Now think about money the same way. What if your savings didn’t sit still, waiting to be spent? What if they paid you every month, the way a field yields a harvest? And what if you planted every one of those payouts again, so each month’s harvest grew a little larger than the last?</p>
-    <p class="why-q">How big would that harvest need to be to cover your month?</p>
-    <p>Your rent, your groceries, your bills. That number has a name. It’s your <b>freedom number</b>. The day your payouts reach it, work becomes a choice.</p>
-    <p class="why-q">So what would you choose to do with your time?</p>
-    <p>That’s the real goal. Not money for its own sake, and not chasing the biggest gain. The goal is a harvest that covers your life, so your days are free for what you were made for.</p>
-    <p class="why-end">That’s what financial freedom means. The Freedom Steps are how you get there, one step at a time.</p>
-    <p class="why-verse" data-verse>“Let us not grow weary in well-doing, for in due time we will reap a harvest if we do not give up.”<small>Galatians 6:9 · BSB</small></p>
-  </div></div></section>
-  <section id="hsteps" class="hfs-sec pl-keep"><div class="wrap">
-    <p class="eyebrow">The method</p>
-    <h2>The Freedom Steps</h2>
-    <p class="lede" style="margin-top:12px;max-width:62ch">Five steps, in order. Start wherever you are today, and take them one at a time. Each one has a free tool to help.</p>
-    <ol class="hfs"><li class="card hfs-c"><span class="hfs-n">1</span><h3>Know your number</h3><p>Give every dollar of your income a job, and find what your household truly needs each month.</p><p class="hfs-v" data-verse>“Which of you, wishing to build a tower, does not first sit down and count the cost to see if he has the resources to complete it?”<small>Luke 14:28 · BSB</small></p><a class="fs-tool" href="#tools">Use Melius Money →</a></li><li class="card hfs-c"><span class="hfs-n">2</span><h3>Emergency fund</h3><p>One month of your monthly budget, kept in cash, so a surprise never goes on a card. It’s the only cash you hold.</p><p class="hfs-v" data-verse>“The prudent see danger and take cover, but the simple keep going and suffer the consequences.”<small>Proverbs 22:3 · BSB</small></p><a class="fs-tool" href="#tools">Set your target in Melius Money →</a></li><li class="card hfs-c"><span class="hfs-n">3</span><h3>Attack expensive debt</h3><p>Pay off every debt at 7% or more, snowball or avalanche. Cheaper loans stay on schedule.</p><p class="hfs-v" data-verse>“The rich rule over the poor, and the borrower is slave to the lender.”<small>Proverbs 22:7 · BSB</small></p><a class="fs-tool" href="#tools">Plan your payoff in Melius Money →</a></li><li class="card hfs-c"><span class="hfs-n">4</span><h3>Invest for freedom</h3><p>Every freedom dollar is invested in the right accounts, in covered-call ETFs and options that pay you every month. The yield is your cushion.</p><p class="hfs-v" data-verse>“Dishonest wealth will dwindle, but what is earned through hard work will be multiplied.”<small>Proverbs 13:11 · BSB</small></p><a class="fs-tool" href="#funds">Compare income funds →</a></li><li class="card hfs-c"><span class="hfs-n">5</span><h3>Freedom</h3><p>Your payouts cover your monthly number. Work becomes a choice.</p><p class="hfs-v" data-verse>“A good man leaves an inheritance to his children’s children, but the sinner’s wealth is passed to the righteous.”<small>Proverbs 13:22 · BSB</small></p><a class="fs-tool" href="#income">Find your freedom number →</a></li></ol>
+
+  <section class="hb pl-keep" aria-label="Play and find your step"><div class="wrap hb-grid">
+    <article class="hcard hg" id="harvest" aria-label="The Harvest, a money game">
+      <div class="hg-top"><div><p class="eyebrow">Daily money game</p><h2>The Harvest</h2></div><div class="hg-best" id="hgBest"></div></div>
+      <div class="hg-stats" id="hgStats"></div>
+      <div class="hg-field" id="hgField" aria-hidden="true"></div>
+      <div class="hg-meter" aria-hidden="true"><i id="hgMeter"></i></div>
+      <div class="hg-play" id="hgPlay" aria-live="polite"></div>
+    </article>
+    <div class="hb-col">
+    <article class="hcard hq" id="whichstep" aria-label="Which Freedom Step are you on?">
+      <p class="eyebrow">Quick check</p>
+      <h2>Which step are you on?</h2>
+      <div class="hq-body" id="hqBody" aria-live="polite"></div>
+    </article>
+    <a class="hcard hl" href="/app/learn/" aria-label="Daily lessons in Melius Money">
+      <p class="eyebrow">Two minutes a day</p>
+      <h2>Learn the language of money</h2>
+      <ul class="hl-l"><li><b>TFSA or RRSP?</b><span>Which account first</span></li><li><b>Yield vs total return</b><span>Why a big payout can mislead</span></li><li><b>Covered calls</b><span>Getting paid for a promise</span></li></ul>
+      <span class="fs-tool">Start today’s lesson →</span>
+    </a>
+    </div>
   </div></section>
+
+  <section class="hb pl-keep" aria-label="The why and the Freedom Steps"><div class="wrap hb-grid hb-grid2">
+    <article class="hcard hw" id="hwhy" aria-label="What are you really working for?">
+      <p class="eyebrow">The why</p>
+      <div class="hw-slides" id="hwSlides"></div>
+      <div class="hw-nav"><button type="button" class="hw-b" id="hwPrev" aria-label="Previous question">←</button><div class="hw-dots" id="hwDots"></div><button type="button" class="hw-b hw-next" id="hwNext">Next question →</button></div>
+    </article>
+    <article class="hcard hs" id="hsteps" aria-label="The Freedom Steps">
+      <p class="eyebrow">The method</p>
+      <h2>The Freedom Steps</h2>
+      <ol class="hs-path" id="hsPath" role="tablist" aria-label="The five steps"></ol>
+      <div class="hs-panel" id="hsPanel" role="tabpanel" aria-live="polite"></div>
+    </article>
+  </div></section>
+  <section class="pl-keep hm-motto"><div class="wrap"><p class="pl-motto" lang="la">Dum vivas, fac melius.<small>As long as you live, do better.</small></p></div></section>
   <section class="hero-band" aria-label="Introduction">
     <div class="wrap">
       <div class="hero">
@@ -2455,6 +2625,124 @@ var WORD_T={m:'Money',w:'Hard work',c:'The love of Christ',l:'Life is short'};
 (function(){function n(){var c=0;try{FUNDS.forEach(function(f){if(!f.base)c++})}catch(e){return}document.querySelectorAll('[data-fund-count]').forEach(function(el){el.textContent=c})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',n);else n()})();
 (function(){var f=document.getElementById('upForm');if(!f)return;f.addEventListener('submit',function(e){e.preventDefault();var m=document.getElementById('upMsg'),b=f.querySelector('button');if(!f.email.value||!f.email.checkValidity()){m.textContent='Please enter a valid email address.';return}b.disabled=true;m.textContent='Sending…';
   fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(f)).toString()}).then(function(r){if(!r.ok)throw 0;f.reset();m.textContent='Thank you. You’re on the list.';try{gtag('event','updates_signup')}catch(x){}}).catch(function(){m.textContent='That didn’t go through. Check your connection and try again.'}).then(function(){b.disabled=false})})})();
+/* ---- tools-only homepage: freedom number, The Harvest, step quiz, the why, the steps ---- */
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  if(!$('harvest'))return;
+  function money(v){return '$'+Math.round(v).toLocaleString('en-CA')}
+  function ls(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem(k)||'null');localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}}
+  function ev(n,p){try{gtag('event',n,p||{})}catch(e){}}
+
+  /* freedom number */
+  (function(){var need=$('fnNeed'),y=10;function upd(){var n=+need.value;$('fnNeedV').textContent=money(n);$('fnOutV').textContent=money(n*12/(y/100));$('fnOutS').textContent='That pays '+money(n)+' every month, so work becomes a choice.'}
+    need.addEventListener('input',upd);
+    document.querySelectorAll('#fnum [data-y]').forEach(function(b){b.addEventListener('click',function(){y=+b.dataset.y;document.querySelectorAll('#fnum [data-y]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});upd()})});
+    upd()})();
+
+  /* steps data */
+  var STEPS=[
+    {t:'Know your number',d:'Give every dollar of your income a job, and find what your household truly needs each month.',v:['Which of you, wishing to build a tower, does not first sit down and count the cost to see if he has the resources to complete it?','Luke 14:28'],h:'#tools',l:'Use Melius Money →'},
+    {t:'Emergency fund',d:'One month of your monthly budget, kept in cash, so a surprise never goes on a card. It’s the only cash you hold.',v:['The prudent see danger and take cover, but the simple keep going and suffer the consequences.','Proverbs 22:3'],h:'#tools',l:'Set your target in Melius Money →'},
+    {t:'Attack expensive debt',d:'Pay off every debt at 7% or more, snowball or avalanche. Cheaper loans stay on schedule.',v:['The rich rule over the poor, and the borrower is slave to the lender.','Proverbs 22:7'],h:'#tools',l:'Plan your payoff in Melius Money →'},
+    {t:'Invest for freedom',d:'Every freedom dollar is invested in the right accounts, in covered-call ETFs and options that pay you every month, and every payout is planted again. The yield is your cushion.',v:['Dishonest wealth will dwindle, but what is earned through hard work will be multiplied.','Proverbs 13:11'],h:'#funds',l:'Compare income funds →'},
+    {t:'Freedom',d:'Your payouts cover your monthly number. Work becomes a choice, and your days are free for what you were made for.',v:['A good man leaves an inheritance to his children’s children, but the sinner’s wealth is passed to the righteous.','Proverbs 13:22'],h:'#income',l:'Find your freedom number →'}];
+  var mine=ls('melius-step'),sel=mine&&mine.s?mine.s-1:0;
+  function verse(v,cls){return '<p class="'+cls+'" data-verse>“'+v[0]+'”<small>'+v[1]+' · BSB</small></p>'}
+  function path(){
+    $('hsPath').innerHTML=STEPS.map(function(s,i){return '<li><button type="button" role="tab" aria-selected="'+(i===sel)+'" data-st="'+i+'"><span class="dot">'+(i+1)+(mine&&mine.s===i+1?'<span class="you">You</span>':'')+'</span><span class="nm">'+s.t+'</span></button></li>'}).join('');
+    var s=STEPS[sel];$('hsPanel').innerHTML='<h3>Step '+(sel+1)+': '+s.t+'</h3><p>'+s.d+'</p>'+verse(s.v,'hs-v')+'<a class="fs-tool" href="'+s.h+'">'+s.l+'</a>';
+  }
+  $('hsPath').addEventListener('click',function(e){var b=e.target.closest('[data-st]');if(!b)return;sel=+b.dataset.st;path();ev('home_step_view',{step:sel+1})});
+  path();
+
+  /* which step are you on */
+  var Q=[['Do you know how much your household needs each month?',0,1],['Do you have one month of your budget saved in cash?',0,2],['Do you owe anything at 7% interest or more?',1,3],['Do your investments’ payouts cover your whole month?',0,4]],qi=0;
+  function quiz(){var b=$('hqBody');
+    if(qi<0){var s=mine.s,d=STEPS[s-1];b.innerHTML='<div class="hq-res"><div class="hq-badge"><span>'+s+'</span><b>You’re on Step '+s+': '+d.t+'</b></div><p>'+d.d+'</p><a class="fs-tool" href="'+d.h+'">'+d.l+'</a><a class="fs-tool" href="#hsteps" data-show>See it on the path ↓</a><button type="button" class="hq-again">Check again</button></div>';return}
+    var q=Q[qi];b.innerHTML='<p class="hq-n">Question '+(qi+1)+' of '+Q.length+'</p><p class="hq-q">'+q[0]+'</p><div class="hq-ch"><button type="button" data-a="1">Yes</button><button type="button" data-a="0">No</button></div>'}
+  $('hqBody').addEventListener('click',function(e){var a=e.target.closest('[data-a]');
+    if(a){var q=Q[qi];if(+a.dataset.a===q[1]){mine={s:q[2],d:Date.now()}}else if(qi===Q.length-1){mine={s:5,d:Date.now()}}else{qi++;return quiz()}
+      ls('melius-step',mine);qi=-1;sel=mine.s-1;path();quiz();ev('home_step_result',{step:mine.s});return}
+    if(e.target.closest('.hq-again')){qi=0;quiz();return}
+    if(e.target.closest('[data-show]')){e.preventDefault();$('hsteps').scrollIntoView({behavior:'smooth',block:'center'})}});
+  qi=mine&&mine.s?-1:0;quiz();
+
+  /* the why, one question at a time */
+  var W=[
+    '<h2>What would you do tomorrow if you didn’t have to go to work?</h2><p>Not on a holiday. On an ordinary Tuesday. Would you sleep in, then walk your children to school? Would you start the thing you keep saying you’ll do “one day”? Would you serve, teach, build or create?</p>',
+    '<h2>Now a harder question: why can’t you do that today?</h2><p>For most of us, the honest answer is money. Our pay buys our hours. If the pay stops, the hours go back to whoever pays them.</p><p>So here’s the next question: what if something else paid for your month?</p>',
+    '<h2>Think about a farmer. Does he gamble everything on one miracle crop?</h2><p>Or does he plant, tend and harvest, season after season, then plant part of the harvest again so next year’s field is bigger?</p>',
+    '<h2>What if your money worked the same way?</h2><p>What if your savings didn’t sit still, waiting to be spent? What if they paid you every month, the way a field yields a harvest? And what if you planted every one of those payouts again, so each month’s harvest grew a little larger than the last?</p>',
+    '<h2>How big would that harvest need to be to cover your month?</h2><p>Your rent, your groceries, your bills. That number has a name. It’s your <b>freedom number</b>. The day your payouts reach it, work becomes a choice.</p><a class="fs-tool" href="#fnum" data-to="fnum">Find yours ↑</a>',
+    '<h2>So what would you choose to do with your time?</h2><p>That’s the real goal. Not money for its own sake, and not chasing the biggest gain. The goal is a harvest that covers your life, so your days are free for what you were made for.</p><p class="hw-end">That’s what financial freedom means. The Freedom Steps are how you get there, one step at a time.</p><p class="hw-v" data-verse>“Let us not grow weary in well-doing, for in due time we will reap a harvest if we do not give up.”<small>Galatians 6:9 · BSB</small></p>'],wi=0;
+  $('hwSlides').innerHTML=W.map(function(h,i){return '<div class="hw-s'+(i?'':' on')+'">'+h+'</div>'}).join('');
+  $('hwDots').innerHTML=W.map(function(_,i){return '<i'+(i?'':' class="on"')+'></i>'}).join('');
+  function why(n){wi=(n+W.length)%W.length;document.querySelectorAll('#hwSlides .hw-s').forEach(function(s,i){s.classList.toggle('on',i===wi)});document.querySelectorAll('#hwDots i').forEach(function(d,i){d.classList.toggle('on',i===wi)});
+    $('hwPrev').disabled=wi===0;$('hwNext').textContent=wi===W.length-1?'See the Freedom Steps →':'Next question →'}
+  $('hwPrev').addEventListener('click',function(){why(wi-1)});
+  $('hwNext').addEventListener('click',function(){if(wi===W.length-1){sel=Math.max(0,sel);$('hsteps').scrollIntoView({behavior:'smooth',block:'center'});why(0);ev('home_why_done');return}why(wi+1)});
+  $('hwSlides').addEventListener('click',function(e){var a=e.target.closest('[data-to]');if(a){e.preventDefault();$(a.dataset.to).scrollIntoView({behavior:'smooth',block:'center'})}});
+  why(0);
+
+  /* The Harvest */
+  var NEED=3000,YLD=0.10,TARGET=NEED*12/YLD,MAXY=30;
+  function rng(seed){var h=1779033703^seed.length;for(var i=0;i<seed.length;i++){h=Math.imul(h^seed.charCodeAt(i),3432918353);h=h<<13|h>>>19}return function(){h=Math.imul(h^h>>>16,2246822507);h=Math.imul(h^h>>>13,3266489909);h^=h>>>16;return (h>>>0)/4294967296}}
+  function today(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+  var EV=[
+    {id:'car',t:'Your car needs $2,500 of repairs.',a:['Use the emergency fund',function(g){var c=Math.min(g.E,2500);g.E-=c;g.D+=2500-c;return [1,'That’s what it’s for.','Your emergency fund took the hit, and it refills from your savings. No debt, no stress.']}],b:['Put it on the credit card',function(g){g.D+=2500;return [0,'Now it’s growing at 21%.','A card balance grows every year until it’s gone. Step 2 exists for days like this.']}]},
+    {id:'raise',t:'You got a raise: $4,000 more a year.',a:['Plant the raise',function(g){g.S+=4000;return [1,'Your field grows faster now.','Every year from here on, you plant $4,000 more. Raises are rocket fuel for freedom.']}],b:['Upgrade your lifestyle',function(g){return [0,'Lifestyle creep.','You’ll barely notice the upgrade in a month, but freedom just moved further away.']}]},
+    {id:'dip',t:'The market drops 20%. Your field is worth less today.',a:['Hold and keep replanting',function(g){g.F*=0.8;g.reb=1;return [1,'Calm wins.','Your payouts keep coming while you wait, and prices tend to recover. Panic doesn’t.']}],b:['Sell everything to be safe',function(g){g.F*=0.8;g.out=1;return [0,'You locked in the loss.','Selling made the drop permanent, and you’ll miss this year’s harvest while you’re out.']}]},
+    {id:'tip',t:'A friend swears a new coin will 10x. Put $5,000 of your field in?',a:['Pass',function(g){return [1,'Boring is beautiful.','Steady harvests beat lottery tickets. Most “sure things” aren’t.']}],b:['Go for it',function(g,r){if(r()<0.2){g.F+=10000;return [1,'It paid off… this time.','You got lucky. Luck isn’t a plan, and most tips go the other way.']}g.F=Math.max(0,g.F-5000);return [0,'It went to zero.','Those $5,000 could have paid you $500 every year, forever.']}]},
+    {id:'refund',t:'Tax refund: $1,800.',a:['Plant it',function(g){g.F+=1800;return [1,'More seeds, more harvest.','That $1,800 now pays you $180 a year, every year.']}],b:['Weekend away',function(g){g.joy++;return [1,'Enjoy it!','Rest matters. Just know a planted $1,800 would have paid you $180 a year.']}]},
+    {id:'bait',t:'A new fund promises a 25% yield. Switch your whole field?',a:['Check its total return first',function(g){return [1,'Smart move.','A huge yield with a falling price is often your own money handed back. You stayed put.']}],b:['Switch everything',function(g){g.F*=0.82;return [0,'The price kept sliding.','High yield isn’t high return. Your field shrank while the payouts looked great.']}]},
+    {id:'tv',t:'A new TV for $2,000. Buy now, pay later?',a:['Save up and wait',function(g){return [1,'Patience pays.','No debt, and your field keeps growing untouched.']}],b:['Buy it now',function(g){g.D+=2000;return [0,'The payments start.','Buy now, pay later often means paying more, later. That’s money not planted.']}]},
+    {id:'job',t:'You lost your job for two months.',a:['Live on the emergency fund',function(g){g.E=Math.max(0,g.E-3000);g.half=1;return [1,'You’re covered.','One month in cash carried you through, with a little less planted this year. That’s its job.']}],b:['Sell part of your field',function(g){g.F=Math.max(0,g.F-6000);return [0,'You sold your seeds.','Those $6,000 would have paid you $600 every year. Cash first, field last.']}]},
+    {id:'rally',t:'Stocks jump 30%. Your covered-call funds rose 10%.',a:['Stay with income',function(g){g.F*=1.10;return [1,'You got paid all year.','You gave up some upside for steady income. That trade is the whole point.']}],b:['Chase the rally',function(g,r){if(r()<0.5){g.F*=1.12;return [1,'It worked, barely.','Chasing last year’s winner is a coin flip. This time it landed.']}g.F*=0.85;return [0,'You bought the top.','The rally faded right after you jumped in. Chasing is a coin flip.']}]},
+    {id:'family',t:'Family back home needs $1,500.',a:['Help from this year’s savings',function(g){g.give=1500;return [1,'Generous and planned.','Giving is part of a good plan. You planted a little less this year, and that’s okay.']}],b:['Help from the emergency fund',function(g){g.E=Math.max(0,g.E-1500);return [1,'Done, and covered.','Your emergency fund refills from your savings. Give gladly.']}]},
+    {id:'bonus',t:'A $3,000 bonus at work!',a:['Plant it',function(g){g.F+=3000;return [1,'Bonus seeds.','$3,000 planted pays you $300 a year, for good.']}],b:['A new phone',function(g){g.joy++;return [0,'Shiny, for a while.','The phone ages fast. The planted bonus would have paid you every year.']}]}];
+  var G=null,best=ls('melius-harvest')||{};
+  function newGame(seed,daily){var r=rng(seed);var deck=EV.slice();for(var i=deck.length-1;i>0;i--){var j=Math.floor(r()*(i+1));var t=deck[i];deck[i]=deck[j];deck[j]=t}
+    G={seed:seed,daily:daily,r:r,deck:deck,di:0,y:1,F:20000,S:12000,E:3000,D:0,joy:0,reb:0,out:0,half:0,give:0,ph:'event',last:null,res:null};draw()}
+  function draw(){G.ev=G.deck[G.di%G.deck.length];G.di++;G.ph='event';render()}
+  function mpay(){return G.F*YLD/12}
+  function stats(){var m=G?mpay():20000*YLD/12;$('hgStats').innerHTML=[['Year',G?G.y:'–'],['Field',G?money(G.F):money(20000)],['Pays a month',G?money(m):money(20000*YLD/12)],['Card debt',G?money(G.D):'$0']].map(function(s,i){return '<div class="hg-stat'+(i===3&&G&&G.D>0?' bad':'')+'"><span>'+s[0]+'</span><b>'+s[1]+'</b></div>'}).join('');
+    var p=Math.min(1,(G?m:20000*YLD/12)/NEED);$('hgMeter').style.width=(p*100)+'%';field(p)}
+  function field(p){var W=600,n=12,h='<svg viewBox="0 0 600 96" preserveAspectRatio="none" role="img" aria-label="Your field">';
+    for(var i=0;i<n;i++){var x=30+i*(W-60)/(n-1),g=Math.max(0,Math.min(1,p*n-i)),gy=67;
+      if(g<=0){h+='<circle cx="'+x+'" cy="'+(gy+3)+'" r="2.5" style="fill:var(--hg-good);opacity:.35"/>';continue}
+      var sh=10+46*g;h+='<line x1="'+x+'" y1="'+gy+'" x2="'+x+'" y2="'+(gy-sh)+'" stroke-width="3" stroke-linecap="round" style="stroke:var(--hg-good)"/>';
+      h+='<ellipse cx="'+(x-7)+'" cy="'+(gy-sh*0.45)+'" rx="7" ry="3.2" transform="rotate(-30 '+(x-7)+' '+(gy-sh*0.45)+')" style="fill:var(--hg-good)"/><ellipse cx="'+(x+7)+'" cy="'+(gy-sh*0.65)+'" rx="7" ry="3.2" transform="rotate(30 '+(x+7)+' '+(gy-sh*0.65)+')" style="fill:var(--hg-good)"/>';
+      if(g>=1)h+='<ellipse cx="'+x+'" cy="'+(gy-sh-7)+'" rx="5" ry="10" style="fill:#C9A35E"/>'}
+    $('hgField').innerHTML=h+'</svg>'}
+  function bestLine(){var t=best.days&&best.days[today()];$('hgBest').innerHTML=(best.best?'<b>Best: '+best.best+' years</b>':'')+(t?'Today: '+t+' years':'New field every day')}
+  function stars(y){return y<=12?3:y<=15?2:1}
+  function render(){stats();bestLine();var p=$('hgPlay'),h='';
+    if(!G){p.innerHTML='<h3>Grow a harvest that covers your month.</h3><p>Your field starts at $20,000 and you plant $12,000 a year. It pays you 10% a year. You win when it pays <b>$3,000 a month</b> and you owe nothing on the card. Life will happen. Choose well.</p><button type="button" class="hg-go" data-g="start">Plant today’s field</button>';return}
+    if(G.ph==='event'){h='<span class="hg-y">Year '+G.y+'</span>'+(G.last?'<p>'+G.last+'</p>':'')+'<h3>'+G.ev.t+'</h3><div class="hg-ch"><button type="button" data-g="a">'+G.ev.a[0]+'</button><button type="button" data-g="b">'+G.ev.b[0]+'</button></div>'}
+    else if(G.ph==='eventres'){var r=G.res;h='<span class="hg-y">Year '+G.y+'</span><div class="hg-res '+(r[0]?'good':'bad')+'"><b>'+r[1]+'</b>'+r[2]+'</div><button type="button" class="hg-go" data-g="toharvest">Bring in the harvest →</button>'}
+    else if(G.ph==='harvest'){var pay=G.out?0:G.F*YLD;h='<span class="hg-y">Year '+G.y+' harvest</span><h3>'+(G.out?'You sat out this year, so there’s no harvest.':'Your field paid you '+money(pay)+' this year.')+'</h3>'+(G.out?'<button type="button" class="hg-go" data-g="h0">Get back in and keep planting →</button>':'<div class="hg-ch">'+(G.D>0?'<button type="button" data-g="hdebt">Pay off the card first</button><button type="button" data-g="hall">Replant it all</button>':'<button type="button" data-g="hall">Replant it all</button><button type="button" data-g="hhalf">Spend half, replant half</button>')+'</div>')}
+    else if(G.ph==='win'){var s=stars(G.y);h='<div class="hg-play hg-win"><div class="hg-stars" aria-label="'+s+' out of 3 stars">'+'★★★'.slice(0,s)+'<span style="opacity:.25">'+'★★★'.slice(0,3-s)+'</span></div><h3>Freedom in '+G.y+' years!</h3><p>Your harvest now pays '+money(mpay())+' a month, more than your $3,000 month. Work is a choice.'+'</p><div class="hg-row"><button type="button" class="hg-go" data-g="share">Copy my result</button><button type="button" class="hg-alt" data-g="random">Play a random field</button></div><p style="font-size:13px">'+(G.daily?'A new field grows tomorrow.':'Today’s field resets at midnight.')+'</p></div>'}
+    else if(G.ph==='lose'){h='<h3>Thirty years in, still growing.</h3><p>Your harvest pays '+money(mpay())+' a month'+(G.D>0?', and the card still costs you '+money(G.D*0.21)+' a year':'')+'. Fewer detours next time: clear the card first, hold through dips, skip the hot tips, and plant every raise.</p><div class="hg-row"><button type="button" class="hg-go" data-g="random">Try another field</button></div>'}
+    p.innerHTML=h}
+  function endYear(){var plant=Math.max(0,(G.half?G.S/2:G.S)-(G.give||0));if(G.E<3000){var top=Math.min(3000-G.E,plant);G.E+=top;plant-=top}G.F+=plant;G.D=G.D>0?G.D*1.21:0;if(G.reb){G.F*=1.25;G.reb=0}G.out=0;G.half=0;G.give=0;
+    if(mpay()>=NEED&&G.D<1){G.ph='win';var d=today();if(!best.best||G.y<best.best)best.best=G.y;if(G.daily){best.days=best.days||{};if(!best.days[d]||G.y<best.days[d])best.days[d]=G.y;var k=Object.keys(best.days).sort();while(k.length>40)delete best.days[k.shift()]}ls('melius-harvest',best);ev('harvest_win',{years:G.y,daily:G.daily?1:0});render();return}
+    if(mpay()>=NEED&&G.D>=1&&!G.warned){G.warned=1;G.last='Your harvest covers your month, but the card still costs you 21% a year. Freedom means no expensive debt. Pay it off.'}
+    if(G.y>=MAXY){G.ph='lose';render();return}
+    G.y++;draw()}
+  $('hgPlay').addEventListener('click',function(e){var b=e.target.closest('[data-g]');if(!b)return;var a=b.dataset.g;
+    if(a==='start'){newGame(today(),true);ev('harvest_start');return}
+    if(a==='random'){newGame(String(Math.random()),false);ev('harvest_start',{random:1});return}
+    if(a==='a'||a==='b'){G.res=G.ev[a][1](G,G.r);G.last=null;G.ph='eventres';render();return}
+    if(a==='toharvest'){G.ph='harvest';render();return}
+    if(a==='h0'){G.last='You sat out last year’s harvest.';endYear();return}
+    var pay=G.F*YLD;
+    if(a==='hall'){G.F+=pay;G.D>0?G.last='You replanted it all, and the card grew another 21%.':G.last='You replanted every dollar. The field grows faster.'}
+    if(a==='hhalf'){G.F+=pay/2;G.last='Half replanted, half enjoyed. Freedom comes a little slower.'}
+    if(a==='hdebt'){var c=Math.min(pay,G.D);G.D-=c;G.F+=pay-c;G.last=G.D>0?'The card is shrinking. Keep going.':'The card is paid off! Every harvest is yours to plant now.'}
+    if(a==='share'){var s=stars(G.y),t='I reached freedom in '+G.y+' years in '+(G.daily?'today’s ':'')+'Harvest '+'★★★'.slice(0,s)+'. Can you beat it? meliusoneconsulting.com';try{navigator.clipboard.writeText(t).then(function(){b.textContent='Copied!'},function(){b.textContent=t})}catch(x){b.textContent=t}return}
+    endYear()});
+  render();
+})();
 function wordIdx(d){d=d||new Date();var n=Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5);return ((n%WORD.length)+WORD.length)%WORD.length}
 /* scripture bar: rotates key lines, tap for the full passage */
 function mountWord(host,opt){opt=opt||{};if(!host)return null;
