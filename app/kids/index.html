@@ -32,6 +32,9 @@ h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:.2px}
 .chip.fl{color:#F07A2A}.chip.fl.off{color:var(--muted)}
 .chip.cn{color:var(--gold-d)}
 main{padding-block:18px calc(110px + env(safe-area-inset-bottom,0px))}
+.mode{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;margin-bottom:14px;background:var(--surface);border:2px solid var(--line);border-radius:999px}
+.mode a{display:flex;align-items:center;justify-content:center;height:40px;border-radius:999px;text-decoration:none;font-weight:900;font-size:15px;color:var(--muted)}
+.mode a[aria-current]{background:var(--gold);color:#1E2A44}
 .hello{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;background:var(--surface);border:2px solid var(--line);border-radius:24px;padding:16px;box-shadow:var(--shadow)}
 .hello .sprout{width:70px;height:80px}
 .tree-row{grid-column:1/-1;display:grid;grid-template-columns:76px 1fr;gap:12px;align-items:center;background:linear-gradient(var(--sky),transparent);border-radius:18px;padding:8px 12px}
@@ -427,7 +430,7 @@ function render(){top();document.querySelectorAll('.tabs [data-v]').forEach(func
   if(view==='map')return mapView();if(view==='badges')return badgeView();return parentView()}
 function mapView(){var nx=nextLesson(),lv=level(),na=nextAt(),tip=TIPS[(new Date().getDate()+S.coins)%TIPS.length];
   if(playedToday())tip=streak()>1?'You’re on a '+streak()+'-day streak! Your tree loves it.':'Great job today! Come back tomorrow to start a streak.';
-  var h='<div class="hello">'+sproutSvg(playedToday()?'wow':'happy')+'<div class="bubble">'+tip+'</div><div class="tree-row">'+tree(lv)+'<div><b>Your Money Tree</b><span>Level '+lv+(na?' · '+(na-S.coins)+' coins to grow':' · Fully grown!')+'</span><div class="bar"><i style="width:'+(na?((S.coins-(lv-1)*60)/60*100):100)+'%"></i></div></div></div></div>';
+  var h='<nav class="mode" aria-label="Who is learning"><a href="../learn/?me" data-mode="me">For me</a><a href="./" aria-current="page" data-mode="kids">For my kids</a></nav>'+'<div class="hello">'+sproutSvg(playedToday()?'wow':'happy')+'<div class="bubble">'+tip+'</div><div class="tree-row">'+tree(lv)+'<div><b>Your Money Tree</b><span>Level '+lv+(na?' · '+(na-S.coins)+' coins to grow':' · Fully grown!')+'</span><div class="bar"><i style="width:'+(na?((S.coins-(lv-1)*60)/60*100):100)+'%"></i></div></div></div></div>';
   h+=nx?'<button type="button" class="go" data-start="'+nx.l.id+'">'+icon('play','',1).replace('<svg ','<svg style="width:22px;height:22px" ')+(playedToday()?'Keep going: ':'Today’s lesson: ')+esc(nx.l.t)+'</button>':'<button type="button" class="go" data-rand="1">Play a random lesson</button>';
   GUARDS.forEach(function(g){var ws=WORLDS.filter(function(w){return w.g===g.id});
     h+='<section class="guard"><div class="guard-h"><h2>'+g.t+'</h2><span>'+g.d+'</span></div><div class="worlds">'+ws.map(function(w){var wi=WORLDS.indexOf(w),dn=wDone(w),n=w.L.length,lock=wi>0&&wDone(WORLDS[wi-1])<WORLDS[wi-1].L.length&&dn===0;
@@ -455,6 +458,8 @@ function parentView(){var n=Object.keys(S.done).length;
    '<p style="color:var(--muted);font-weight:700;font-size:14px">Made by <a href="/" style="color:inherit">Melius One</a>. Grown-ups can try <a href="/app/" style="color:inherit">Melius Money</a> for the family budget.</p>'}
 function sheet(t,b,yes,cb){var d=document.createElement('div');d.className='sheet';d.innerHTML='<div class="in" role="dialog" aria-modal="true"><h3>'+t+'</h3><p>'+b+'</p><button type="button" class="cta" data-y>'+yes+'</button><button type="button" class="cta ghost" data-n>Not now</button></div>';document.body.appendChild(d);d.addEventListener('click',function(e){if(e.target===d||e.target.closest('[data-n]'))d.remove();else if(e.target.closest('[data-y]')){d.remove();cb()}});d.querySelector('[data-y]').focus()}
 document.querySelectorAll('.tabs [data-v]').forEach(function(b){b.addEventListener('click',function(){view=b.dataset.v;openW=null;render();scrollTo(0,0)})});
+try{localStorage.setItem('melius-learn-mode','kids')}catch(e){}
+document.addEventListener('click',function(e){var a=e.target.closest('.mode [data-mode]');if(a)try{localStorage.setItem('melius-learn-mode',a.dataset.mode)}catch(x){}});
 $('main').addEventListener('click',function(e){var t;
   if(t=e.target.closest('[data-w]')){openW=+t.dataset.w;render();return}
   if(e.target.closest('[data-back]')){openW=null;render();return}

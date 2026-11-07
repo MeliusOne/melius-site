@@ -819,6 +819,15 @@ html:not(.prelaunch) .pl-keep{display:none!important}
 .hg-res b{display:block;margin-bottom:2px}
 .hg-res.good b{color:var(--hg-good)}.hg-res.bad b{color:var(--hg-bad)}
 .hg-win{text-align:center;align-items:center}
+.hg-help{border-top:1px solid var(--line);padding-top:10px}
+.hg-help summary{cursor:pointer;font-weight:700;font-size:14.5px;color:var(--accent);list-style:none}
+.hg-help summary::-webkit-details-marker{display:none}
+.hg-help summary::before{content:"? ";display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--band);margin-right:6px;font-size:12px}
+.hg-help dl{margin:12px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px}
+.hg-help dl div{min-width:0}
+.hg-help dt{font-weight:800;font-size:14px}
+.hg-help dd{margin:0;color:var(--muted);font-size:13.5px;line-height:1.5}
+@media (max-width:620px){.hg-help dl{grid-template-columns:1fr}}
 .hg-stars{font-size:30px;letter-spacing:6px;color:var(--amber)}
 .hg-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
 .hg-row .hg-go,.hg-row .hg-alt{flex:1 1 180px}
@@ -1414,6 +1423,18 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       <div class="hg-field" id="hgField" aria-hidden="true"></div>
       <div class="hg-meter" aria-hidden="true"><i id="hgMeter"></i></div>
       <div class="hg-play" id="hgPlay" aria-live="polite"></div>
+      <details class="hg-help"><summary>What do the words mean?</summary>
+        <dl>
+          <div><dt>Field</dt><dd>The money you’ve invested, in income funds that pay you.</dd></div>
+          <div><dt>Harvest</dt><dd>What your investments pay you each year: the payouts.</dd></div>
+          <div><dt>Yield</dt><dd>How much they pay in a year, as a percent. At 10%, a $20,000 field pays $2,000 a year.</dd></div>
+          <div><dt>Replant</dt><dd>Reinvest the payout. It buys more, so next year’s harvest is bigger.</dd></div>
+          <div><dt>Pays a month</dt><dd>Your yearly harvest divided by 12. When it reaches your monthly cost, you’re free.</dd></div>
+          <div><dt>Card debt</dt><dd>Money owed on a credit card. Here it grows 21% a year until you pay it off.</dd></div>
+          <div><dt>Emergency fund</dt><dd>One month of your budget kept in cash, for surprises. It refills from your savings.</dd></div>
+          <div><dt>Freedom</dt><dd>Your harvest pays your whole month ($3,000 here) and you owe nothing on the card. Work becomes a choice.</dd></div>
+        </dl>
+      </details>
     </article>
     <div class="hb-col">
     <article class="hcard hq" id="whichstep" aria-label="Which Freedom Step are you on?">
@@ -2705,7 +2726,7 @@ var WORD_T={m:'Money',w:'Hard work',c:'The love of Christ',l:'Life is short'};
     G={seed:seed,daily:daily,r:r,deck:deck,di:0,y:1,F:20000,S:12000,E:3000,D:0,joy:0,reb:0,out:0,half:0,give:0,ph:'event',last:null,res:null};draw()}
   function draw(){G.ev=G.deck[G.di%G.deck.length];G.di++;G.ph='event';render()}
   function mpay(){return G.F*YLD/12}
-  function stats(){var m=G?mpay():20000*YLD/12;$('hgStats').innerHTML=[['Year',G?G.y:'–'],['Field',G?money(G.F):money(20000)],['Pays a month',G?money(m):money(20000*YLD/12)],['Card debt',G?money(G.D):'$0']].map(function(s,i){return '<div class="hg-stat'+(i===3&&G&&G.D>0?' bad':'')+'"><span>'+s[0]+'</span><b>'+s[1]+'</b></div>'}).join('');
+  function stats(){var m=G?mpay():20000*YLD/12;$('hgStats').innerHTML=[['Year',G?G.y:'–','How many years you’ve been planting'],['Field',G?money(G.F):money(20000),'The money you’ve invested'],['Pays a month',G?money(m):money(20000*YLD/12),'Your harvest each month. Freedom is $3,000'],['Card debt',G?money(G.D):'$0','Owed on a credit card, growing 21% a year']].map(function(s,i){return '<div class="hg-stat'+(i===3&&G&&G.D>0?' bad':'')+'" title="'+s[2]+'"><span>'+s[0]+'</span><b>'+s[1]+'</b></div>'}).join('');
     var p=Math.min(1,(G?m:20000*YLD/12)/NEED);$('hgMeter').style.width=(p*100)+'%';field(p)}
   function field(p){var W=600,n=12,h='<svg viewBox="0 0 600 96" preserveAspectRatio="none" role="img" aria-label="Your field">';
     for(var i=0;i<n;i++){var x=30+i*(W-60)/(n-1),g=Math.max(0,Math.min(1,p*n-i)),gy=67;
@@ -2717,7 +2738,7 @@ var WORD_T={m:'Money',w:'Hard work',c:'The love of Christ',l:'Life is short'};
   function bestLine(){var t=best.days&&best.days[today()];$('hgBest').innerHTML=(best.best?'<b>Best: '+best.best+' years</b>':'')+(t?'Today: '+t+' years':'New field every day')}
   function stars(y){return y<=12?3:y<=15?2:1}
   function render(){stats();bestLine();var p=$('hgPlay'),h='';
-    if(!G){p.innerHTML='<h3>Grow a harvest that covers your month.</h3><p>Your field starts at $20,000 and you plant $12,000 a year. It pays you 10% a year. You win when it pays <b>$3,000 a month</b> and you owe nothing on the card. Life will happen. Choose well.</p><button type="button" class="hg-go" data-g="start">Plant today’s field</button>';return}
+    if(!G){p.innerHTML='<h3>Grow a harvest that covers your month.</h3><p>Your <b>field</b> is the money you’ve invested. It starts at $20,000, and you plant $12,000 of savings into it each year. It pays you a <b>harvest</b> of 10% a year. You win when your harvest pays <b>$3,000 a month</b> and you owe nothing on the card. Life will happen. Choose well.</p><button type="button" class="hg-go" data-g="start">Plant today’s field</button>';return}
     if(G.ph==='event'){h='<span class="hg-y">Year '+G.y+'</span>'+(G.last?'<p>'+G.last+'</p>':'')+'<h3>'+G.ev.t+'</h3><div class="hg-ch"><button type="button" data-g="a">'+G.ev.a[0]+'</button><button type="button" data-g="b">'+G.ev.b[0]+'</button></div>'}
     else if(G.ph==='eventres'){var r=G.res;h='<span class="hg-y">Year '+G.y+'</span><div class="hg-res '+(r[0]?'good':'bad')+'"><b>'+r[1]+'</b>'+r[2]+'</div><button type="button" class="hg-go" data-g="toharvest">Bring in the harvest →</button>'}
     else if(G.ph==='harvest'){var pay=G.out?0:G.F*YLD;h='<span class="hg-y">Year '+G.y+' harvest</span><h3>'+(G.out?'You sat out this year, so there’s no harvest.':'Your field paid you '+money(pay)+' this year.')+'</h3>'+(G.out?'<button type="button" class="hg-go" data-g="h0">Get back in and keep planting →</button>':'<div class="hg-ch">'+(G.D>0?'<button type="button" data-g="hdebt">Pay off the card first</button><button type="button" data-g="hall">Replant it all</button>':'<button type="button" data-g="hall">Replant it all</button><button type="button" data-g="hhalf">Spend half, replant half</button>')+'</div>')}

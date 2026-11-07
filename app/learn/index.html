@@ -37,6 +37,9 @@ button{font:inherit;color:inherit}
 .chip.xp{color:var(--good)}
 
 main{padding-block:20px calc(110px + env(safe-area-inset-bottom,0px))}
+.mode{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;margin-bottom:16px;background:var(--surface);border:1px solid var(--line);border-radius:999px}
+.mode a{display:flex;align-items:center;justify-content:center;height:40px;border-radius:999px;text-decoration:none;font-weight:800;font-size:15px;color:var(--muted)}
+.mode a[aria-current]{background:var(--accent);color:var(--accent-ink)}
 
 /* today card */
 .today{background:var(--hero);color:var(--hero-ink);border-radius:20px;padding:20px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
@@ -198,6 +201,7 @@ main{padding-block:20px calc(110px + env(safe-area-inset-bottom,0px))}
 </div></header>
 
 <main class="wrap">
+  <nav class="mode" aria-label="Who is learning"><a href="./" aria-current="page" data-mode="me">For me</a><a href="../kids/" data-mode="kids">For my kids</a></nav>
   <section id="vPath">
     <div class="today" id="today"></div>
     <div id="units"></div>
@@ -222,6 +226,9 @@ main{padding-block:20px calc(110px + env(safe-area-inset-bottom,0px))}
 </div>
 
 <script>
+/* remember who is learning: "For my kids" opens Money Quest next time */
+(function(){try{if(localStorage.getItem('melius-learn-mode')==='kids'&&!/[?&]me/.test(location.search)){location.replace('../kids/');return}}catch(e){}
+  document.addEventListener('click',function(e){var a=e.target.closest('.mode [data-mode]');if(a)try{localStorage.setItem('melius-learn-mode',a.dataset.mode)}catch(x){}})})();
 (function(){
 /* ---------- content ---------- */
 var STEPS=[
