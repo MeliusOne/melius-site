@@ -348,7 +348,7 @@ function wordCard(){var p=WORD[(wordIdx()+wordOff)%WORD.length];return '<div cla
 var selNum=null;document.addEventListener('focusin',function(e){var t=e.target;if(t&&t.tagName==='INPUT'&&t.type==='number'){selNum=t;try{t.select()}catch(x){}}});document.addEventListener('mouseup',function(e){if(selNum&&e.target===selNum){e.preventDefault();try{selNum.select()}catch(x){}}selNum=null},true);
 var EMBED=false;try{EMBED=window.self!==window.top}catch(e){EMBED=true}
 function track(name,params){if(EMBED&&name!=='app_preview_view')return;try{if(typeof gtag==='function')gtag('event',name,params||{})}catch(e){}}
-var BILLS=['Rent','Mortgage','Property tax','Condo fees','Hydro (electricity)','Gas (heating)','Water','Water heater rental','Home insurance','Tenant insurance','Car insurance','Life insurance','Phone','Internet','Childcare','Transit pass','Subscriptions','Gym'];
+var BILLS=['Rent','Mortgage','Family support back home','Property tax','Condo fees','Hydro (electricity)','Gas (heating)','Water','Water heater rental','Home insurance','Tenant insurance','Car insurance','Life insurance','Phone','Internet','Childcare','Transit pass','Subscriptions','Gym'];
 var DEBTS=['Credit card','Store card','Line of credit','Margin loan','Car loan','Student loan','Personal loan','Buy now, pay later','Payday loan','Tax owing (CRA)','Loan from family'];
 /* minimum payments: loans amortize over the years left; lines of credit and margin are interest only; cards are 3% of the balance or $10 */
 var AMORT={'Car loan':5,'Student loan':10,'Personal loan':5},INTONLY={'Line of credit':1,'Margin loan':1},CARDD={'Credit card':1,'Store card':1};
@@ -386,10 +386,10 @@ function example(){
     spend:[{id:1,dt:iso(fri),a:142.6,c:'Groceries'},{id:2,dt:iso(addD(fri,1)),a:60,c:'Gas & transit'},{id:3,dt:iso(addD(fri,1)),a:38.5,c:'Eating out'},{id:4,dt:iso(addD(fri,2)),a:24,c:'Kids & school',note:'School trip'}],
     paid:{},moved:{},review:{},bal:{a:2975,dt:iso(t),ts:Date.now()},
     planSince:'2026-01-01',planMode:'month',plan:[{c:'Groceries',a:760},{c:'Gas & transit',a:260},{c:'Kids & school',a:175},{c:'Eating out',a:130},{c:'Giving & tithe',a:110},{c:'Buffer',a:70}],
-    goal:{need:6000,invested:25000,rate:18,growth:12}
+    goal:{need:0,invested:25000,rate:10,growth:12}
   };
 }
-function blank(){var t=d0();return {example:false,incomes:[{n:'Main pay',a:0,freq:'biweekly',last:''}],received:[],push:0,cushion:0,kids:false,method:'avalanche',bills:[],debts:[],spend:[],paid:{},moved:{},review:{},planMode:'month',plan:[],goal:{need:0,invested:0,rate:18,growth:12}}}
+function blank(){var t=d0();return {example:false,incomes:[{n:'Main pay',a:0,freq:'biweekly',last:''}],received:[],push:0,cushion:0,kids:false,method:'avalanche',bills:[],debts:[],spend:[],paid:{},moved:{},review:{},planMode:'month',plan:[],goal:{need:0,invested:0,rate:10,growth:12}}}
 var S;
 if(!EMBED){try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}}
 if(EMBED)S=example();
@@ -453,8 +453,10 @@ function calc(P){
 /* ---------- the Freedom Steps ---------- */
 var ATK_RATE=7;
 function isAtk(d){return d.atk!=null?!!d.atk:(+d.r||0)>=ATK_RATE}
-function needM(){return (+S.goal.need||0)||S.bills.reduce(function(s,b){return s+(+b.a||0)},0)}
-function targets(){var need=needM();return {starter:Math.round(S.bills.reduce(function(t,b){return t+(+b.a||0)},0)+S.debts.filter(function(d){return (+d.b||0)>0}).reduce(function(t,d){return t+(+d.m||0)},0)+planMonth()),full:0,goal:(+S.goal.need||0)*12/((+S.goal.rate||18)/100)}}
+/* monthly expenses: bills + minimum debt payments + spending plan (or what the person typed in) */
+function monthExp(){return Math.round(S.bills.reduce(function(t,b){return t+(+b.a||0)},0)+S.debts.filter(function(d){return (+d.b||0)>0}).reduce(function(t,d){return t+(+d.m||0)},0)+planMonth())}
+function needM(){return (+S.goal.need||0)||monthExp()}
+function targets(){var need=needM();return {starter:Math.round(S.bills.reduce(function(t,b){return t+(+b.a||0)},0)+S.debts.filter(function(d){return (+d.b||0)>0}).reduce(function(t,d){return t+(+d.m||0)},0)+planMonth()),full:0,goal:2*needM()*12/((+S.goal.rate||10)/100)}}
 function sortFn(m){return m==='snowball'?function(a,b){return a.b-b.b}:function(a,b){return b.r-a.r}}
 /* visible Freedom Steps: 1 know your number, 3 attack debt, 5 invest, 6 freedom (emergency fund = one month of the monthly budget; no income cushion: the yield is the cushion) */
 var VIS=[1,2,3,5,6];function sNo(sn){var i=VIS.indexOf(sn);return i<0?VIS.filter(function(v){return v<sn}).length+1:i+1}var SN_OF=' of '+VIS.length;
@@ -574,7 +576,7 @@ var STEPS=[
   ['Attack expensive debt','Pay off every debt at 7% or more, then invest everything.'],
   ['Income cushion','Three months of expenses, invested in a stable fund that pays you monthly.'],
   ['Invest for freedom','Every dollar of freedom money is invested in funds that pay you monthly. The yield is your cushion.'],
-  ['Freedom','Your investments’ payouts cover your monthly number.']
+  ['Freedom','Your investments pay you 2× your monthly expenses: half pays the bills, half keeps growing.']
 ];
 function moveTo(sn){var t=attackTarget();return sn<=2?'Move to your emergency fund':sn===3?'Pay extra on '+(t?esc(t.n):'your debt'):'Move to investing'}
 function bucket(sn){var t=attackTarget();return sn<=2?'Step 2 · Emergency fund':sn===3?'Step 3 · Attack '+(t?esc(t.n):'debt'):'Step 4 · Invest'}
@@ -746,7 +748,7 @@ function renderGoals(){
     (S.bills.length&&inc0g?'Your pay and '+S.bills.length+' bill'+(S.bills.length>1?'s are':' is')+' in the plan.':'Add your pay and bills on the Plan tab.'),
     money(Math.min(cush,T.starter))+' of '+money(T.starter)+' saved (one month of your budget)',
     '',
-    (needM()>0?money(Math.min(cush,T.full))+' of '+money(T.full)+' (3 × '+money(needM())+')':'Add your monthly need in the freedom number card below.'),
+    (needM()>0?money(Math.min(cush,T.full))+' of '+money(T.full)+' (3 × '+money(needM())+')':'Add your monthly expenses in the freedom number card below.'),
     'Freedom money is '+(payM?Math.round(pushM/payM*100):0)+'% of your income. Aim for 20%.',
     money(Math.min(+g.invested||0,T.goal))+' of '+money(T.goal)+' invested'
   ];
@@ -778,11 +780,11 @@ function renderGoals(){
 
   h+='<div class="card wide"><p class="lbl">Step '+sNo(6)+' · Your freedom number</p><div class="g2"><div class="stack" style="gap:12px">'+
      '<div class="big num" data-live="gGoal">'+money(T.goal)+'</div>'+
-     '<p class="note" data-live="gGoalNote">Invested so that the payouts alone cover '+money(+g.need||0)+' a month.</p>'+
-     '<div class="grid2"><label class="field">Monthly need<input id="g-need" type="number" inputmode="numeric" min="0" step="100" placeholder="0" value="'+nv(g.need)+'"></label><label class="field">Invested now<input id="g-inv" type="number" inputmode="numeric" min="0" step="1000" placeholder="0" value="'+nv(g.invested)+'"></label></div>'+
-     '<div class="field">If it pays each year<div class="chips" data-set="rate">'+[12,18,25].concat([12,18,25].indexOf(+g.rate)<0?[+g.rate]:[]).map(function(r){return '<button class="chip" aria-pressed="'+(+g.rate===r)+'" data-v="'+r+'">'+([12,18,25].indexOf(r)<0?'Your mix '+r+'%':r+'%')+'</button>'}).join('')+'</div></div>'+
+     '<p class="note" data-live="gGoalNote">Free means passive income of 2× your monthly expenses: '+money(2*needM())+' a month. Half pays your '+money(needM())+' of bills and spending, half keeps growing.</p>'+
+     '<div class="grid2"><label class="field">Monthly expenses<input id="g-need" type="number" inputmode="numeric" min="0" step="100" placeholder="Auto: '+money(monthExp()||0)+'" value="'+nv(g.need)+'"></label><label class="field">Invested now<input id="g-inv" type="number" inputmode="numeric" min="0" step="1000" placeholder="0" value="'+nv(g.invested)+'"></label></div>'+
+     '<div class="field">If it pays each year<div class="chips" data-set="rate">'+[10,15,22].concat([10,15,22].indexOf(+g.rate)<0?[+g.rate]:[]).map(function(r){return '<button class="chip" aria-pressed="'+(+g.rate===r)+'" data-v="'+r+'">'+([10,15,22].indexOf(r)<0?'Your mix '+r+'%':r+'%')+'</button>'}).join('')+'</div><p class="note">Plan with 10%. If you do better, celebrate.</p></div>'+
      '<div class="field">If it grows each year<div class="chips" data-set="growth">'+[8,12,15].map(function(r){return '<button class="chip" aria-pressed="'+(+g.growth===r)+'" data-v="'+r+'">'+r+'%</button>'}).join('')+'</div></div>'+
-     '</div><div class="stack" style="gap:12px">'+'<div class="card" data-live="gRes" style="background:var(--band)"><span class="note">With '+money(pushMon())+' of freedom money a month, plus each debt payment as it frees up</span><b style="font-family:var(--display);font-size:30px;font-weight:500">'+(T.goal<=0?'Add your monthly need':sn===6?'You’re there':X.st[6]==null?'Over 50 years':'About '+yrs(X.st[6]))+'</b>'+(X.st[6]?'<span class="note">Around '+monthsOut(X.st[6])+'</span>':'')+'</div>'+calcLink()+'</div></div></div>';
+     '</div><div class="stack" style="gap:12px">'+'<div class="card" data-live="gRes" style="background:var(--band)"><span class="note">With '+money(pushMon())+' of freedom money a month, plus each debt payment as it frees up</span><b style="font-family:var(--display);font-size:30px;font-weight:500">'+(T.goal<=0?'Add your bills and spending plan':sn===6?'You’re there':X.st[6]==null?'Over 50 years':'About '+yrs(X.st[6]))+'</b>'+(X.st[6]?'<span class="note">Around '+monthsOut(X.st[6])+'</span>':'')+'</div>'+calcLink()+'</div></div></div>';
   if(COACHING)h+='<div class="card wide" id="plusCard"><p class="lbl">Coming soon</p><h2 style="font-family:var(--display);font-size:22px">Melius Money Plus</h2><ul class="note" style="margin:0;padding-left:18px"><li>Your numbers backed up and on every phone</li><li>Share one plan with your partner</li><li>Bank transactions added for you</li>'+(COACHING?'<li>Your coach sees your progress before check-ins</li>':'')+'</ul>'+
      (S.waitlist?'<p class="pill good">You’re on the waitlist</p>':'<form id="wlForm" class="stack" style="gap:8px" novalidate><label class="field">Email<input id="wl-email" type="email" autocomplete="email" placeholder="you@example.com"></label><button class="btn sm" type="submit">Join the waitlist</button><p class="note" id="wl-msg"></p></form>')+
      '<p class="note">We only use your email to tell you when Plus is ready. Your app numbers are never sent.</p></div>';
