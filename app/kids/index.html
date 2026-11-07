@@ -26,7 +26,9 @@ h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:.2px}
 .top .wrap{display:flex;align-items:center;gap:10px;height:60px}
 .brand{display:flex;align-items:center;gap:8px;margin-right:auto;text-decoration:none;color:var(--ink)}
 .brand svg{width:36px;height:36px}
-.brand b{font-family:var(--display);font-size:22px;font-weight:700}
+.brand b{font-family:var(--display);font-size:22px;font-weight:700;white-space:nowrap}
+@media (max-width:430px){.brand b{font-size:18px}.top .wrap{gap:6px}.chip{padding:4px 8px;font-size:15px}.brand svg{width:30px;height:30px}}
+@media (max-width:350px){.brand b{display:none}}
 .chip{display:inline-flex;align-items:center;gap:5px;font-weight:900;font-size:16px;padding:5px 11px;border-radius:999px;background:var(--surface);border:2px solid var(--line)}
 .chip svg{width:20px;height:20px}
 .chip.fl{color:#F07A2A}.chip.fl.off{color:var(--muted)}
@@ -118,7 +120,7 @@ main{padding-block:18px calc(110px + env(safe-area-inset-bottom,0px))}
 .btn2.danger{color:var(--bad)}
 /* tabs */
 .tabs{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--surface);border-top:2px solid var(--line);padding:6px max(10px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))}
-.tabs .in{max-width:620px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.tabs .in{max-width:620px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .tabs button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 4px;border:0;border-radius:14px;background:none;cursor:pointer;font-size:13px;font-weight:900;color:var(--muted)}
 .tabs svg{width:26px;height:26px}
 .tabs [aria-current]{color:var(--ink);background:var(--band)}
@@ -197,6 +199,56 @@ main{padding-block:18px calc(110px + env(safe-area-inset-bottom,0px))}
 .sheet h3{margin:0 0 6px;font-size:21px}
 .sheet p{margin:0 0 16px;color:var(--muted);font-weight:700}
 @media (min-width:700px){.worlds{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.kidchip{width:36px;height:36px;border-radius:50%;border:3px solid var(--surface);box-shadow:0 0 0 2px var(--line);color:#fff;font-family:var(--display);font-weight:700;font-size:17px;cursor:pointer;flex:none}
+.ptn{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 8px;margin-bottom:12px;padding:10px 14px;border-radius:16px;background:var(--pc);color:#fff;font-weight:800;font-size:14px}
+.ptn span{opacity:.85;font-weight:700}.ptn b{font-family:var(--display);font-size:17px}.ptn small{margin-left:auto;opacity:.85}
+.jars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.jar{display:flex;flex-direction:column;align-items:center;gap:2px;background:var(--surface);border:2px solid var(--line);border-radius:20px;padding:12px 6px}
+.jar svg{width:64px;height:88px;color:var(--ink)}
+.jar b{font-family:var(--display);font-size:20px;color:var(--ink)}
+.jar span{font-weight:900;font-size:14px}
+.goalc .bar{margin:8px 0}
+.jlog{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column}
+.jlog li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-weight:700;color:var(--muted);font-size:14.5px}
+.jlog li small{font-weight:600;opacity:.8;margin-left:4px}
+.jlog b.pos{color:var(--good)}.jlog b.neg{color:var(--bad)}
+.plan{border-color:var(--gold)}
+.pv{font-family:var(--body);font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;background:var(--gold);color:#1E2A44;border-radius:99px;padding:2px 8px;vertical-align:middle}
+.ph2{font-size:21px;margin:22px 0 10px}
+.kids{display:flex;flex-direction:column;gap:10px}
+.kc{background:var(--surface);border:2px solid var(--line);border-radius:20px;padding:14px}
+.kc.sel{border-color:var(--gold)}
+.kc-h{display:flex;align-items:center;gap:10px}
+.kc-h b{font-family:var(--display);font-size:19px}
+.kc-h small{margin-left:auto;color:var(--good);font-weight:900;font-size:12.5px}
+.kav{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font-family:var(--display);font-weight:700;flex:none}
+.kc-s{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:10px}
+.kc-s span{background:var(--band);border-radius:12px;padding:6px;text-align:center;font-size:12px;font-weight:800;color:var(--muted)}
+.kc-s b{display:block;font-family:var(--display);font-size:18px;color:var(--ink)}
+.kc-l{margin:8px 0 0;color:var(--muted);font-weight:700;font-size:13.5px}
+.kc-a{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.kc-a .btn2{padding:8px 12px;font-size:14px}
+.addk{width:100%;margin-top:10px;border-style:dashed}
+.bank .bgr{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bank label{display:flex;flex-direction:column;gap:4px;font-weight:800;font-size:13.5px;color:var(--muted)}
+.inp{display:flex;align-items:center;gap:4px;border:2px solid var(--line);border-radius:12px;padding:0 10px;height:44px;background:var(--bg);color:var(--ink);font-weight:900}
+.inp input{flex:1;min-width:0;border:0;background:none;font:inherit;color:inherit;outline:none;height:100%}
+.lbl2{margin:12px 0 6px!important;font-weight:800!important;font-size:13.5px}
+.warn{color:var(--bad)}
+.bgr4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.bjars{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.bjars span{display:inline-flex;align-items:center;gap:6px;background:var(--band);border-radius:99px;padding:5px 12px;font-weight:800;font-size:14px}
+.bjars i{width:10px;height:10px;border-radius:50%;background:var(--jc)}
+.bact{display:flex;flex-direction:column;gap:8px}
+.bact .btn2{width:100%}
+.btn2:disabled,.cta:disabled{opacity:.5;cursor:default}
+.fgr{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.fgr label{display:flex;flex-direction:column;gap:4px;font-weight:800;font-size:14px;color:var(--muted)}
+.fgr input,.fgr select{height:48px;border:2px solid var(--line);border-radius:12px;padding:0 12px;background:var(--bg);color:var(--ink);font:inherit;font-weight:800}
+.pick{display:flex;flex-direction:column;gap:8px}
+.pick button{display:flex;align-items:center;gap:12px;padding:10px 12px;border:2px solid var(--line);border-radius:16px;background:var(--bg);font-weight:900;font-size:17px;cursor:pointer;text-align:left}
+.pick button[aria-current]{border-color:var(--gold)}
+@media (max-width:420px){.jars{grid-template-columns:repeat(2,minmax(0,1fr))}.bgr4{grid-template-columns:repeat(2,minmax(0,1fr))}.bank .bgr{grid-template-columns:1fr}.brand b{font-size:19px}}
 @media (max-width:360px){.worlds{grid-template-columns:1fr}.tree-card{grid-template-columns:90px 1fr}.tree-card svg{width:90px;height:90px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -204,12 +256,14 @@ main{padding-block:18px calc(110px + env(safe-area-inset-bottom,0px))}
 <body>
 <header class="top"><div class="wrap">
   <a class="brand" href="./" aria-label="Money Quest home"><svg viewBox="0 0 100 115" aria-hidden="true" id="logoSprout"></svg><b>Money Quest</b></a>
+  <button type="button" class="kidchip" id="kidChip" aria-label="Switch player">P</button>
   <span class="chip fl" id="streak" title="Day streak"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c1 3.5-1.5 5-1.5 8 0 1.4 1 2.5 2.3 2.5 1.6 0 2.4-1.4 2.2-3.2C17.7 11 19 13.4 19 16a7 7 0 0 1-14 0c0-4.6 4.2-7 7-14z"/></svg><span>0</span></span>
   <span class="chip cn" id="coins" title="Coins"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#E0A93B"/><circle cx="12" cy="12" r="6.5" fill="none" stroke="#B8862A" stroke-width="2"/><text x="12" y="16" text-anchor="middle" font-size="9" font-weight="900" fill="#B8862A" font-family="Nunito,sans-serif">$</text></svg><span>0</span></span>
 </div></header>
 <main class="wrap" id="main"></main>
 <nav class="tabs" aria-label="Sections"><div class="in">
   <button type="button" data-v="map" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg>Map</button>
+  <button type="button" data-v="jars"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h8M9 3v3c-2 1.4-3 3.4-3 6v6a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-6c0-2.6-1-4.6-3-6V3"/><path d="M8 14h8"/></svg>Jars</button>
   <button type="button" data-v="badges"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 8 5-3 5 3-1.5-8"/></svg>Badges</button>
   <button type="button" data-v="parents"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14.5 20c.3-2.4 1.6-4.5 4-4.5 2 0 3.5 1.8 3.5 4.5"/></svg>Parents</button>
 </div></nav>
@@ -389,8 +443,23 @@ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;
 /* state */
 var KEY='melius-quest-v1',S={done:{},coins:0,days:[],sound:true};
 try{var s0=JSON.parse(localStorage.getItem(KEY)||'null');if(s0&&s0.done)S=Object.assign(S,s0)}catch(e){}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+/* ---- Family plan ---- */
+/* FAMILY_PAYWALL: when true, worlds after the first two and extra kid profiles ask for the Family plan. Off while in preview. */
+var FAMILY_PAYWALL=false,PLAN={m:'$5.99',y:'$49'};
+/* Partners: open Money Quest with ?partner=<id> to show their branding (remembered on the device). */
+var PARTNERS={demo:{name:'Your Credit Union',sub:'Free for members',c:'#1D6F5C'}};
+var P=null;try{var pm=location.search.match(/[?&]partner=([a-z0-9-]+)/i);if(pm)localStorage.setItem('melius-partner',pm[1].toLowerCase());P=PARTNERS[localStorage.getItem('melius-partner')]||null}catch(e){}
+var FKEY='melius-quest-family',FAM=null,KCOL=['#E0A93B','#4C9BE8','#D14C8B','#2E9B5F'];
+try{FAM=JSON.parse(localStorage.getItem(FKEY)||'null')}catch(e){}
+if(!FAM||!FAM.kids||!FAM.kids.length)FAM={kids:[{id:'k1',name:'Player 1',c:KCOL[0],S:S}],active:'k1'};
+function kid(){return FAM.kids.filter(function(k){return k.id===FAM.active})[0]||FAM.kids[0]}
+function norm(x){x=Object.assign({done:{},coins:0,days:[],sound:true},x||{});if(!x.jars)x.jars={spend:0,save:0,give:0,grow:0};if(!x.allow)x.allow={amt:10,split:[40,30,10,20],rate:2};if(!x.goal)x.goal={name:'',amt:0};if(!x.log)x.log=[];return x}
+FAM.kids.forEach(function(k){k.S=norm(k.S)});S=kid().S;
+function save(){kid().S=S;try{localStorage.setItem(FKEY,JSON.stringify(FAM))}catch(e){}}
+function useKid(id){kid().S=S;FAM.active=id;S=kid().S;save()}
+var PG=false;
 function dk(d){d=d||new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function streakOf(x){var set={};x.days.forEach(function(d){set[d]=1});var d=new Date(),n=0;if(!set[dk(d)])d.setDate(d.getDate()-1);while(set[dk(d)]){n++;d.setDate(d.getDate()-1)}return n}
 function streak(){var set={};S.days.forEach(function(d){set[d]=1});var d=new Date(),n=0;if(!set[dk(d)])d.setDate(d.getDate()-1);while(set[dk(d)]){n++;d.setDate(d.getDate()-1)}return n}
 function playedToday(){return S.days.indexOf(dk())>-1}
 function verses(){try{return localStorage.getItem('melius-verses')==='on'}catch(e){return false}}
@@ -423,14 +492,14 @@ function confetti(){var c=document.createElement('div');c.className='confetti';v
 
 /* views */
 var view='map',openW=null;
-function top(){var st=streak();$('streak').querySelector('span').textContent=st;$('streak').classList.toggle('off',!playedToday());$('coins').querySelector('span').textContent=S.coins}
+function top(){var k=kid(),kc=$('kidChip');if(kc){kc.textContent=(k.name||'?').trim().charAt(0).toUpperCase();kc.style.background=k.c;kc.setAttribute('aria-label','Player: '+k.name+'. Switch player')}var st=streak();$('streak').querySelector('span').textContent=st;$('streak').classList.toggle('off',!playedToday());$('coins').querySelector('span').textContent=S.coins}
 function nextLesson(){for(var i=0;i<ALL.length;i++)if(!S.done[ALL[i].l.id])return ALL[i];return null}
 function render(){top();document.querySelectorAll('.tabs [data-v]').forEach(function(b){if(b.dataset.v===(openW!=null?'map':view))b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
   if(openW!=null)return worldView();
-  if(view==='map')return mapView();if(view==='badges')return badgeView();return parentView()}
+  if(view==='map')return mapView();if(view==='jars')return jarsView();if(view==='badges')return badgeView();return parentView()}
 function mapView(){var nx=nextLesson(),lv=level(),na=nextAt(),tip=TIPS[(new Date().getDate()+S.coins)%TIPS.length];
   if(playedToday())tip=streak()>1?'You’re on a '+streak()+'-day streak! Your tree loves it.':'Great job today! Come back tomorrow to start a streak.';
-  var h='<nav class="mode" aria-label="Who is learning"><a href="../learn/?me" data-mode="me">For me</a><a href="./" aria-current="page" data-mode="kids">For my kids</a></nav>'+'<div class="hello">'+sproutSvg(playedToday()?'wow':'happy')+'<div class="bubble">'+tip+'</div><div class="tree-row">'+tree(lv)+'<div><b>Your Money Tree</b><span>Level '+lv+(na?' · '+(na-S.coins)+' coins to grow':' · Fully grown!')+'</span><div class="bar"><i style="width:'+(na?((S.coins-(lv-1)*60)/60*100):100)+'%"></i></div></div></div></div>';
+  var h=ptn()+'<nav class="mode" aria-label="Who is learning"><a href="../learn/?me" data-mode="me">For me</a><a href="./" aria-current="page" data-mode="kids">For my kids</a></nav>'+'<div class="hello">'+sproutSvg(playedToday()?'wow':'happy')+'<div class="bubble">'+tip+'</div><div class="tree-row">'+tree(lv)+'<div><b>Your Money Tree</b><span>Level '+lv+(na?' · '+(na-S.coins)+' coins to grow':' · Fully grown!')+'</span><div class="bar"><i style="width:'+(na?((S.coins-(lv-1)*60)/60*100):100)+'%"></i></div></div></div></div>';
   h+=nx?'<button type="button" class="go" data-start="'+nx.l.id+'">'+icon('play','',1).replace('<svg ','<svg style="width:22px;height:22px" ')+(playedToday()?'Keep going: ':'Today’s lesson: ')+esc(nx.l.t)+'</button>':'<button type="button" class="go" data-rand="1">Play a random lesson</button>';
   GUARDS.forEach(function(g){var ws=WORLDS.filter(function(w){return w.g===g.id});
     h+='<section class="guard"><div class="guard-h"><h2>'+g.t+'</h2><span>'+g.d+'</span></div><div class="worlds">'+ws.map(function(w){var wi=WORLDS.indexOf(w),dn=wDone(w),n=w.L.length,lock=wi>0&&wDone(WORLDS[wi-1])<WORLDS[wi-1].L.length&&dn===0;
@@ -450,27 +519,69 @@ function badgeView(){var st=streak(),best=S.best||0,perfect=Object.keys(S.done).
   var terms=[];WORLDS.forEach(function(w){w.L.forEach(function(l){if(S.done[l.id])l.terms.forEach(function(t){terms.push([t,w.t])})})});
   $('main').innerHTML='<h1 class="sec-h">Your badges</h1><p class="sec-p">'+got+' of '+B.length+' earned. Finish every lesson in a world to earn its badge.</p><div class="bgrid">'+B.map(function(b){return '<div class="bdg'+(b[3]?'':' off')+'">'+badgeSvg(b[1],b[2])+'<b>'+esc(b[0])+'</b>'+(b[3]?'':'<small>Locked</small>')+'</div>'}).join('')+'</div>'+
     '<h2 class="sec-h" style="margin-top:26px">Your money words</h2><p class="sec-p">'+(terms.length?terms.length+' words learned. Tap one to remember what it means.':'Finish lessons to collect money words.')+'</p><div class="terms">'+terms.map(function(t){return '<details class="term"><summary>'+esc(t[0])+'<small>'+esc(t[1])+'</small></summary><p>'+esc(DEF[t[0]]||'')+'</p></details>'}).join('')+'</div>'}
-function parentView(){var n=Object.keys(S.done).length;
-  $('main').innerHTML='<h1 class="sec-h">For parents</h1><p class="sec-p">Money Quest is a free game that teaches kids about money, two minutes a day.</p>'+
-   '<div class="card"><h3>What your child learns</h3><ul><li><b>Foundations:</b> what money is, needs and wants, earning, saving, interest.</li><li><b>The Old Guard:</b> banks, credit, investing, real estate, and how the economy works.</li><li><b>The New Guard:</b> Bitcoin, blockchains, decentralization and DeFi, with a strong focus on safety and scams.</li><li><b>The Future Guard:</b> AI, the future of work, and owning assets.</li></ul></div>'+
-   '<div class="card"><h3>Safe by design</h3><ul><li>No accounts, no ads, no chat.</li><li>Nothing is collected or sent anywhere. Progress is saved only on this device.</li><li>Education only. It never tells kids to buy anything, and it reminds them to involve a trusted adult before any crypto.</li></ul></div>'+
-   '<div class="card"><h3>Settings</h3><div class="row"><b>Sounds</b><button type="button" class="sw" role="switch" aria-checked="'+S.sound+'" data-set="sound" aria-label="Sounds"></button></div><div class="row"><b>Bible verses after lessons</b><button type="button" class="sw" role="switch" aria-checked="'+verses()+'" data-set="verses" aria-label="Bible verses"></button></div><div class="row"><span style="color:var(--muted);font-weight:700">'+n+' of '+ALL.length+' lessons done · '+S.coins+' coins</span><button type="button" class="btn2 danger" data-set="reset">Reset progress</button></div></div>'+
-   '<p style="color:var(--muted);font-weight:700;font-size:14px">Made by <a href="/" style="color:inherit">Melius One</a>. Grown-ups can try <a href="/app/" style="color:inherit">Melius Money</a> for the family budget.</p>'}
+function money(v){v=Math.round((+v||0)*100)/100;return '$'+v.toLocaleString('en-CA',{minimumFractionDigits:v%1?2:0,maximumFractionDigits:2})}
+function ptn(){return P?'<div class="ptn" style="--pc:'+P.c+'"><span>Brought to you by</span><b>'+esc(P.name)+'</b><small>'+esc(P.sub||'')+'</small></div>':''}
+var JARS=[['spend','Spend','#4C9BE8'],['save','Save','#2E9B5F'],['give','Give','#D14C8B'],['grow','Grow','#E0A93B']];
+function jarSvg(f,c){var y=14+86*(1-f);return '<svg viewBox="0 0 80 110" aria-hidden="true"><defs><clipPath id="jc'+c.slice(1)+'"><path d="M14 22h52v74a10 10 0 0 1-10 10H24a10 10 0 0 1-10-10z"/></clipPath></defs><rect x="20" y="6" width="40" height="12" rx="4" fill="'+c+'" opacity=".55"/><g clip-path="url(#jc'+c.slice(1)+')"><rect x="10" y="'+y+'" width="60" height="100" fill="'+c+'" opacity=".85"/></g><path d="M14 22h52v74a10 10 0 0 1-10 10H24a10 10 0 0 1-10-10z" fill="none" stroke="currentColor" stroke-width="3" opacity=".35"/></svg>'}
+function jarsView(){var J=S.jars,tot=JARS.reduce(function(a,j){return a+J[j[0]]},0),mx=Math.max(20,JARS.reduce(function(a,j){return Math.max(a,J[j[0]])},0));
+  var h=ptn()+'<h1 class="sec-h">My jars</h1><p class="sec-p">The Bank of Mom and Dad. You have <b>'+money(tot)+'</b> in your jars.</p><div class="jars">'+JARS.map(function(j){return '<div class="jar" style="color:'+j[2]+'">'+jarSvg(Math.min(1,J[j[0]]/mx),j[2])+'<b>'+money(J[j[0]])+'</b><span>'+j[1]+'</span></div>'}).join('')+'</div>';
+  if(S.goal.amt>0){var g=Math.min(1,J.save/S.goal.amt);h+='<div class="card goalc"><h3>Saving for: '+esc(S.goal.name||'my goal')+'</h3><div class="bar"><i style="width:'+(g*100)+'%"></i></div><p>'+(g>=1?'You did it! Your Save jar reached '+money(S.goal.amt)+'.':money(S.goal.amt-J.save)+' more to go. You have '+money(J.save)+' of '+money(S.goal.amt)+'.')+'</p></div>'}
+  if(S.allow.rate>0)h+='<div class="card"><h3>Your Save jar earns interest</h3><p>Mom and Dad pay you '+S.allow.rate+'% of your Save jar every month. The more you save, the more you earn. That’s compound interest!</p></div>';
+  h+='<div class="card"><h3>Recent</h3>'+(S.log.length?'<ul class="jlog">'+S.log.slice(-6).reverse().map(function(l){return '<li><span>'+esc(l.t)+'</span><b class="'+(l.a<0?'neg':'pos')+'">'+(l.a<0?'−':'+')+money(Math.abs(l.a))+'</b></li>'}).join('')+'</ul>':'<p>Nothing yet. Ask a grown-up to set up your allowance in the Parents tab.</p>')+'</div>';
+  $('main').innerHTML=h}
+function statOf(x){var n=Object.keys(x.done).length,st=Object.keys(x.done).reduce(function(a,k){return a+x.done[k].stars},0),last=x.days.length?x.days[x.days.length-1]:null,wd=WORLDS.filter(function(w){return w.L.every(function(l){return x.done[l.id]})}).length;return {n:n,st:st,last:last,wd:wd,sk:streakOf(x)}}
+var PK=null;
+function parentView(){if(!PK||!FAM.kids.some(function(k){return k.id===PK}))PK=FAM.active;var K=FAM.kids.filter(function(k){return k.id===PK})[0],x=K.id===FAM.active?S:K.S,A=x.allow,sum=A.split.reduce(function(a,b){return a+(+b||0)},0);
+  var h=ptn()+'<h1 class="sec-h">For parents</h1><p class="sec-p">See how each child is doing, and run the Bank of Mom and Dad.</p>';
+  h+='<div class="card plan"><h3>Family plan <span class="pv">Preview</span></h3><p>Everything is unlocked while Money Quest is in preview: all 9 worlds, up to 4 kids, the Bank of Mom and Dad and progress for each child.'+(P?' Free for you, thanks to '+esc(P.name)+'.':' Later it will be '+PLAN.m+' a month or '+PLAN.y+' a year.')+'</p></div>';
+  h+='<h2 class="ph2">Your kids</h2><div class="kids">'+FAM.kids.map(function(k){var y=statOf(k.id===FAM.active?S:k.S);return '<div class="kc'+(k.id===PK?' sel':'')+'"><div class="kc-h"><span class="kav" style="background:'+k.c+'">'+esc(k.name.charAt(0).toUpperCase())+'</span><b>'+esc(k.name)+'</b>'+(k.id===FAM.active?'<small>Playing now</small>':'')+'</div><div class="kc-s"><span><b>'+y.n+'/'+ALL.length+'</b>lessons</span><span><b>'+y.st+'</b>stars</span><span><b>'+y.sk+'</b>day streak</span><span><b>'+y.wd+'/'+WORLDS.length+'</b>worlds</span></div><p class="kc-l">'+(y.last?'Last played '+(y.last===dk()?'today':y.last):'Hasn’t played yet')+'</p><div class="kc-a"><button type="button" class="btn2" data-pk="'+k.id+'">Bank of Mom and Dad</button>'+(k.id!==FAM.active?'<button type="button" class="btn2" data-play="'+k.id+'">Play as '+esc(k.name)+'</button>':'')+'<button type="button" class="btn2" data-ren="'+k.id+'">Rename</button>'+(FAM.kids.length>1?'<button type="button" class="btn2 danger" data-del="'+k.id+'">Remove</button>':'')+'</div></div>'}).join('')+'</div>'+(FAM.kids.length<4?'<button type="button" class="btn2 addk" data-add="1">+ Add a kid</button>':'');
+  h+='<h2 class="ph2">Bank of Mom and Dad: '+esc(K.name)+'</h2><div class="card bank"><p>A pretend bank you run at home. Real money stays with you; the app keeps score in four jars.</p>'+
+    '<div class="bgr"><label>Weekly allowance<span class="inp">$<input type="number" inputmode="decimal" min="0" step="0.5" value="'+A.amt+'" data-al="amt"></span></label><label>Interest on Save jar, % a month<span class="inp"><input type="number" inputmode="decimal" min="0" max="20" step="0.5" value="'+A.rate+'" data-al="rate">%</span></label></div>'+
+    '<p class="lbl2">How each allowance is split'+(sum!==100?' <span class="warn">(adds up to '+sum+'%, should be 100%)</span>':'')+'</p><div class="bgr4">'+JARS.map(function(j,i){return '<label style="color:'+j[2]+'">'+j[1]+'<span class="inp"><input type="number" inputmode="numeric" min="0" max="100" value="'+A.split[i]+'" data-sp="'+i+'">%</span></label>'}).join('')+'</div>'+
+    '<div class="bjars">'+JARS.map(function(j){return '<span style="--jc:'+j[2]+'"><i></i>'+j[1]+' <b>'+money(x.jars[j[0]])+'</b></span>'}).join('')+'</div>'+
+    '<div class="bact"><button type="button" class="cta" data-pay="1"'+(sum!==100||!(A.amt>0)?' disabled':'')+'>Pay allowance: '+money(A.amt)+'</button><button type="button" class="btn2" data-int="1"'+(!(A.rate>0)||!(x.jars.save>0)?' disabled':'')+'>Pay interest: '+money(x.jars.save*A.rate/100)+'</button><button type="button" class="btn2" data-spend="1">Record spending</button><button type="button" class="btn2" data-goal="1">'+(x.goal.amt>0?'Change savings goal':'Set a savings goal')+'</button></div>'+
+    (x.goal.amt>0?'<p class="lbl2">Goal: '+esc(x.goal.name||'Savings goal')+', '+money(x.jars.save)+' of '+money(x.goal.amt)+'</p>':'')+
+    (x.log.length?'<ul class="jlog">'+x.log.slice(-8).reverse().map(function(l){return '<li><span>'+esc(l.t)+' <small>'+l.d+'</small></span><b class="'+(l.a<0?'neg':'pos')+'">'+(l.a<0?'−':'+')+money(Math.abs(l.a))+'</b></li>'}).join('')+'</ul>':'')+'</div>';
+  var n=Object.keys(S.done).length;
+  h+='<div class="card"><h3>What your child learns</h3><ul><li><b>Foundations:</b> what money is, needs and wants, earning, saving, interest.</li><li><b>The Old Guard:</b> banks, credit, investing, real estate, and how the economy works.</li><li><b>The New Guard:</b> Bitcoin, blockchains, decentralization and DeFi, with a strong focus on safety and scams.</li><li><b>The Future Guard:</b> AI, the future of work, and owning assets.</li></ul></div>'+
+   '<div class="card"><h3>Safe by design</h3><ul><li>No ads and no chat.</li><li>Nothing is collected or sent anywhere. Progress and jars are saved only on this device.</li><li>The Bank of Mom and Dad is pretend: no real money is held or moved.</li><li>Education only. It never tells kids to buy anything, and it reminds them to involve a trusted adult before any crypto.</li></ul></div>'+
+   '<div class="card"><h3>Settings</h3><div class="row"><b>Sounds</b><button type="button" class="sw" role="switch" aria-checked="'+S.sound+'" data-set="sound" aria-label="Sounds"></button></div><div class="row"><b>Bible verses after lessons</b><button type="button" class="sw" role="switch" aria-checked="'+verses()+'" data-set="verses" aria-label="Bible verses"></button></div><div class="row"><span style="color:var(--muted);font-weight:700">'+esc(kid().name)+': '+n+' of '+ALL.length+' lessons · '+S.coins+' coins</span><button type="button" class="btn2 danger" data-set="reset">Reset progress</button></div></div>'+
+   '<p style="color:var(--muted);font-weight:700;font-size:14px">Made by <a href="/" style="color:inherit">Melius One</a>. Grown-ups can try <a href="/app/" style="color:inherit">Melius Money</a> for the family budget.</p>';
+  $('main').innerHTML=h}
+function kx(){return PK===FAM.active?S:FAM.kids.filter(function(k){return k.id===PK})[0].S}
+function logIt(x,t,a){x.log.push({t:t,a:Math.round(a*100)/100,d:dk()});x.log=x.log.slice(-60)}
+function form(title,body,fields,yes,cb){var d=document.createElement('div');d.className='sheet';d.innerHTML='<div class="in" role="dialog" aria-modal="true"><h3>'+title+'</h3>'+(body?'<p>'+body+'</p>':'')+'<div class="fgr">'+fields+'</div><button type="button" class="cta" data-y>'+yes+'</button><button type="button" class="cta ghost" data-n>Cancel</button></div>';document.body.appendChild(d);
+  var f=d.querySelector('input,select');if(f)setTimeout(function(){f.focus()},50);
+  d.addEventListener('click',function(e){if(e.target===d||e.target.closest('[data-n]'))d.remove();else if(e.target.closest('[data-y]')){if(cb(d)!==false)d.remove()}})}
+function gate(cb){var a=6+Math.floor(Math.random()*4),b=6+Math.floor(Math.random()*4);form('Grown-ups only','To open the parents area, answer: what is '+a+' × '+b+'?','<input type="number" inputmode="numeric" id="gAns" aria-label="Answer">','Open',function(d){var v=+d.querySelector('#gAns').value;if(v===a*b){cb();return true}d.querySelector('#gAns').value='';d.querySelector('p').textContent='Not quite. What is '+a+' × '+b+'?';return false})}
+function upsell(){sheet('Part of the Family plan','Unlock all 9 worlds, up to 4 kids, the Bank of Mom and Dad and progress for each child, for '+PLAN.m+' a month or '+PLAN.y+' a year.','Coming soon',function(){})}
+function pickKid(){var d=document.createElement('div');d.className='sheet';d.innerHTML='<div class="in" role="dialog" aria-modal="true"><h3>Who’s playing?</h3><div class="pick">'+FAM.kids.map(function(k){return '<button type="button" data-k="'+k.id+'"'+(k.id===FAM.active?' aria-current="true"':'')+'><span class="kav" style="background:'+k.c+'">'+esc(k.name.charAt(0).toUpperCase())+'</span>'+esc(k.name)+'</button>'}).join('')+'</div><p style="margin-top:12px;font-size:14px">Grown-ups can add kids in the Parents tab.</p><button type="button" class="cta ghost" data-n>Close</button></div>';document.body.appendChild(d);
+  d.addEventListener('click',function(e){var b=e.target.closest('[data-k]');if(b){useKid(b.dataset.k);d.remove();openW=null;if(view==='parents')view='map';render();return}if(e.target===d||e.target.closest('[data-n]'))d.remove()})}
 function sheet(t,b,yes,cb){var d=document.createElement('div');d.className='sheet';d.innerHTML='<div class="in" role="dialog" aria-modal="true"><h3>'+t+'</h3><p>'+b+'</p><button type="button" class="cta" data-y>'+yes+'</button><button type="button" class="cta ghost" data-n>Not now</button></div>';document.body.appendChild(d);d.addEventListener('click',function(e){if(e.target===d||e.target.closest('[data-n]'))d.remove();else if(e.target.closest('[data-y]')){d.remove();cb()}});d.querySelector('[data-y]').focus()}
-document.querySelectorAll('.tabs [data-v]').forEach(function(b){b.addEventListener('click',function(){view=b.dataset.v;openW=null;render();scrollTo(0,0)})});
+document.querySelectorAll('.tabs [data-v]').forEach(function(b){b.addEventListener('click',function(){if(b.dataset.v==='parents'&&!PG){gate(function(){PG=true;view='parents';openW=null;render();scrollTo(0,0)});return}view=b.dataset.v;openW=null;render();scrollTo(0,0)})});
+$('kidChip').addEventListener('click',pickKid);
 try{localStorage.setItem('melius-learn-mode','kids')}catch(e){}
 document.addEventListener('click',function(e){var a=e.target.closest('.mode [data-mode]');if(a)try{localStorage.setItem('melius-learn-mode',a.dataset.mode)}catch(x){}});
 $('main').addEventListener('click',function(e){var t;
-  if(t=e.target.closest('[data-w]')){openW=+t.dataset.w;render();return}
+  if(t=e.target.closest('[data-w]')){if(FAMILY_PAYWALL&&+t.dataset.w>=2){upsell();return}openW=+t.dataset.w;render();return}
   if(e.target.closest('[data-back]')){openW=null;render();return}
   if(t=e.target.closest('[data-start]')){var it=ALL.filter(function(x){return x.l.id===t.dataset.start})[0],w=it.w,first=-1;w.L.forEach(function(l,i){if(first<0&&!S.done[l.id])first=i});
     if(!S.done[it.l.id]&&first>-1&&it.li>first){sheet('Jump ahead?','“'+it.l.t+'” comes after “'+w.L[first].t+'”. You can start it now, but the earlier lesson helps.','Start anyway',function(){start(it)});return}
     start(it);return}
   if(e.target.closest('[data-rand]')){start(ALL[Math.floor(Math.random()*ALL.length)]);return}
+  if(t=e.target.closest('[data-pk]')){PK=t.dataset.pk;render();var bk=document.querySelector('.bank');if(bk)bk.scrollIntoView({behavior:'smooth',block:'start'});return}
+  if(t=e.target.closest('[data-play]')){useKid(t.dataset.play);PK=FAM.active;render();return}
+  if(t=e.target.closest('[data-ren]')){var kk=FAM.kids.filter(function(k){return k.id===t.dataset.ren})[0];form('Rename','', '<input type="text" maxlength="20" id="fName" value="'+esc(kk.name)+'" aria-label="Name">','Save',function(d){var v=d.querySelector('#fName').value.trim();if(!v)return false;kk.name=v;save();render()});return}
+  if(t=e.target.closest('[data-del]')){var kd=FAM.kids.filter(function(k){return k.id===t.dataset.del})[0];sheet('Remove '+esc(kd.name)+'?','Their lessons, coins and jars on this device will be deleted.','Remove',function(){if(kd.id===FAM.active){var o=FAM.kids.filter(function(k){return k.id!==kd.id})[0];useKid(o.id)}FAM.kids=FAM.kids.filter(function(k){return k.id!==kd.id});PK=FAM.active;save();render()});return}
+  if(e.target.closest('[data-add]')){if(FAMILY_PAYWALL&&FAM.kids.length>=1){upsell();return}form('Add a kid','First name or a nickname is enough.','<input type="text" maxlength="20" id="fName" placeholder="Name" aria-label="Name">','Add',function(d){var v=d.querySelector('#fName').value.trim();if(!v)return false;var id='k'+Date.now();FAM.kids.push({id:id,name:v,c:KCOL[FAM.kids.length%4],S:norm({sound:S.sound})});PK=id;save();render()});return}
+  if(e.target.closest('[data-pay]')){var x=kx(),A=x.allow;JARS.forEach(function(j,i){x.jars[j[0]]=Math.round((x.jars[j[0]]+A.amt*(+A.split[i]||0)/100)*100)/100});logIt(x,'Weekly allowance',A.amt);save();render();tone([523,659,784]);return}
+  if(e.target.closest('[data-int]')){var x=kx(),it=Math.round(x.jars.save*x.allow.rate)/100;if(!(it>0))return;x.jars.save=Math.round((x.jars.save+it)*100)/100;logIt(x,'Interest on Save jar',it);save();render();tone([660,880]);return}
+  if(e.target.closest('[data-spend]')){var x=kx();form('Record spending','Take money out of a jar.','<label>From jar<select id="fJar">'+JARS.map(function(j){return '<option value="'+j[0]+'">'+j[1]+' ('+money(x.jars[j[0]])+')</option>'}).join('')+'</select></label><label>Amount<input type="number" inputmode="decimal" min="0" step="0.01" id="fAmt"></label><label>What for?<input type="text" maxlength="40" id="fNote" placeholder="e.g. Book fair"></label>','Record',function(d){var jn=d.querySelector('#fJar').value,a=+d.querySelector('#fAmt').value;if(!(a>0))return false;if(a>x.jars[jn]){d.querySelector('p').textContent='That jar only has '+money(x.jars[jn])+'.';return false}x.jars[jn]=Math.round((x.jars[jn]-a)*100)/100;var lab=JARS.filter(function(j){return j[0]===jn})[0][1];logIt(x,(d.querySelector('#fNote').value.trim()||'Spent')+' ('+lab+' jar)',-a);save();render()});return}
+  if(e.target.closest('[data-goal]')){var x=kx();form('Savings goal','What is '+esc((FAM.kids.filter(function(k){return k.id===PK})[0]||kid()).name)+' saving for?','<label>Goal<input type="text" maxlength="30" id="gName" value="'+esc(x.goal.name)+'" placeholder="e.g. A new bike"></label><label>Amount<input type="number" inputmode="decimal" min="0" id="gAmt" value="'+(x.goal.amt||'')+'"></label>','Save goal',function(d){x.goal={name:d.querySelector('#gName').value.trim(),amt:+d.querySelector('#gAmt').value||0};save();render()});return}
   if(t=e.target.closest('[data-set]')){var k=t.dataset.set;
     if(k==='sound'){S.sound=!S.sound;save();render();if(S.sound)tone([660,880])}
     if(k==='verses'){try{localStorage.setItem('melius-verses',verses()?'off':'on')}catch(x){}render()}
-    if(k==='reset')sheet('Reset all progress?','All coins, stars and badges on this device will be cleared.','Reset',function(){S={done:{},coins:0,days:[],sound:S.sound};save();render()})}});
+    if(k==='reset')sheet('Reset all progress?','All coins, stars and badges on this device will be cleared.','Reset',function(){S=norm({done:{},coins:0,days:[],sound:S.sound,jars:S.jars,allow:S.allow,goal:S.goal,log:S.log});save();render()})}});
 
 /* lesson engine */
 var R=null;
@@ -524,6 +635,7 @@ function finish(){var l=R.it.l,qn=0,ok=0;Object.keys(R.first).forEach(function(k
     '<div class="stats"><div class="stat"><span>Coins</span><b>+'+coins+'</b></div><div class="stat"><span>Correct</span><b>'+ok+'/'+qn+'</b></div><div class="stat"><span>Streak</span><b>'+streak()+'</b></div></div>'+
     '<div class="learned"><b>Money words</b><div>'+l.terms.map(function(x){return '<span class="tchip">'+esc(x)+'</span>'}).join('')+'</div></div>'+(v?'<p class="verse">“'+esc(v[0])+'”<small>'+v[1]+' · BSB</small></p>':'')+'</div>';
   ft('','','Continue');tone([523,659,784,1047]);confetti();try{gtag('event','quest_done',{lesson:l.id,stars:stars})}catch(x){}}
+$('main').addEventListener('change',function(e){var t=e.target,x;if(t.dataset.al){x=kx();x.allow[t.dataset.al]=Math.max(0,+t.value||0);save();render()}else if(t.dataset.sp!=null){x=kx();x.allow.split[+t.dataset.sp]=Math.max(0,Math.min(100,Math.round(+t.value||0)));save();render()}});
 render();
 })();
 
