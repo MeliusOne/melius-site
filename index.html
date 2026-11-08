@@ -1360,7 +1360,8 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
   html.ic-lock{height:100%;overflow:hidden}
   html.ic-lock body{height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none}
   /* room for the calculator's tab bar, so it never covers the footer */
-  html.ic-lock footer{padding-bottom:calc(96px + env(safe-area-inset-bottom, 0px))}
+  html.ic-lock footer,html.ic-kb footer{padding-bottom:calc(96px + env(safe-area-inset-bottom, 0px))}
+  html.ic-kb #icTabs{display:none!important}
 }
 </style>
 </head>
@@ -2272,7 +2273,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     pagesEls.forEach(function(p){p.classList.toggle('on',p===pg);});
     navLinks.forEach(function(a){a.classList.toggle('active',a.getAttribute('data-nav')===pg.id);});
     fixCharts(pg);
-    document.documentElement.classList.toggle('ic-lock',pg.id==='income');
+    document.documentElement.classList.remove('ic-kb');document.documentElement.classList.toggle('ic-lock',pg.id==='income');
     if(target&&target!==pg){setTimeout(function(){target.scrollIntoView({behavior:reduce?'auto':'smooth'});},60);} else {window.scrollTo(0,0);document.body.scrollTop=0;}
     onScroll();
     var names={home:'',about:'About · ',coaching:'Coaching · ',learn:'Freedom Steps · ',funds:'Fund directory · ',income:'Income calculator · ',tools:'Melius Money · ',book:'Book a session · ',policies:'Policies · '}; var BN=window.COACH_ON?'Melius One Consulting':'Melius One';document.title=pg.id==='home'?(window.PRELAUNCH?BN+' | Free money tools':window.COACH_ON?'Melius One Consulting | Obi Oji, Financial Education Coach in Kitchener, Ontario':'Melius One | Free money tools for families in Canada'):(names[pg.id]||'')+BN;
@@ -2765,6 +2766,10 @@ var WORD_T={m:'Money',w:'Hard work',c:'The love of Christ',l:'Life is short'};
     endYear()});
   render();
 })();
+/* iPhone: while the keyboard is open, scroll the page normally (the inner scroller leaves a blank gap above the keyboard) */
+(function(){var h=document.documentElement,typ=function(el){return el&&el.matches&&el.matches('input:not([type=range]):not([type=checkbox]):not([type=radio]),textarea,select')};
+  document.addEventListener('focusin',function(e){if(!h.classList.contains('ic-lock')||!typ(e.target))return;var y=document.body.scrollTop;h.classList.remove('ic-lock');h.classList.add('ic-kb');window.scrollTo(0,y)});
+  document.addEventListener('focusout',function(){if(!h.classList.contains('ic-kb'))return;setTimeout(function(){if(typ(document.activeElement))return;var y=window.scrollY,pg=document.getElementById('income');h.classList.remove('ic-kb');if(pg&&pg.classList.contains('on')){window.scrollTo(0,0);h.classList.add('ic-lock');document.body.scrollTop=y}},80)})})();
 function wordIdx(d){d=d||new Date();var n=Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5);return ((n%WORD.length)+WORD.length)%WORD.length}
 /* scripture bar: rotates key lines, tap for the full passage */
 function mountWord(host,opt){opt=opt||{};if(!host)return null;
