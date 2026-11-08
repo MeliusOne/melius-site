@@ -452,7 +452,9 @@ function calc(P){
 
 /* ---------- the Freedom Steps ---------- */
 var ATK_RATE=7;
-function isAtk(d){return d.atk!=null?!!d.atk:(+d.r||0)>=ATK_RATE}
+/* Step 3 attacks every debt except the mortgage; a person can still switch one to On schedule */
+function isMortgage(d){return /mortgage/i.test(d.n||'')}
+function isAtk(d){return d.atk!=null?!!d.atk:!isMortgage(d)}
 /* monthly expenses: bills + minimum debt payments + spending plan (or what the person typed in) */
 function monthExp(){return Math.round(S.bills.reduce(function(t,b){return t+(+b.a||0)},0)+S.debts.filter(function(d){return (+d.b||0)>0}).reduce(function(t,d){return t+(+d.m||0)},0)+planMonth())}
 function needM(){return (+S.goal.need||0)||monthExp()}
@@ -573,7 +575,7 @@ function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return
 var STEPS=[
   ['Know your number','Every dollar of your income gets a job.'],
   ['Emergency fund','One month of your monthly budget, kept in cash, so a surprise never goes on a card.'],
-  ['Attack expensive debt','Pay off every debt at 7% or more, then invest everything.'],
+  ['Attack expensive debt','Pay off every debt except your mortgage, then invest everything.'],
   ['Income cushion','Three months of expenses, invested in a stable fund that pays you monthly.'],
   ['Invest for freedom','Every dollar of freedom money is invested in funds that pay you monthly. The yield is your cushion.'],
   ['Freedom','Your investments pay you 2× your monthly expenses: half pays the bills, half keeps growing.']
@@ -585,7 +587,7 @@ function bucket(sn){var t=attackTarget();return sn<=2?'Step 2 · Emergency fund'
 function todayMonth(){return monthCard()}
 function fmToday(C,sn,k,mv){k=mkey();var amt=pushMon(),T=targets(),cush=+S.cushion||0,X=sim(),g=suggestPush(),tgt,prog='',pct=null;
   if(sn<=2){tgt='your emergency fund';prog=money(Math.min(cush,T.starter))+' of '+money(T.starter)+' saved';pct=T.starter?cush/T.starter:0}
-  else if(sn===3){var t=attackTarget();tgt='paying off '+(t?esc(t.n):'your expensive debt');var left=S.debts.filter(function(d){return isAtk(d)}).reduce(function(a,d){return a+(+d.b||0)},0);prog=money(left)+' of expensive debt left'+(X.st[3]!=null&&X.st[3]>0?' · gone by <b>'+monthsOut(X.st[3])+'</b>':'')}
+  else if(sn===3){var t=attackTarget();tgt='paying off '+(t?esc(t.n):'your debt');var left=S.debts.filter(function(d){return isAtk(d)}).reduce(function(a,d){return a+(+d.b||0)},0);prog=money(left)+' of debt left to clear'+(X.st[3]!=null&&X.st[3]>0?' · gone by <b>'+monthsOut(X.st[3])+'</b>':'')}
   else if(sn===4){tgt='your income cushion';prog=money(Math.min(cush,T.full))+' of '+money(T.full)+' invested';pct=T.full?cush/T.full:0}
   else{tgt='your income investments';var inv=+S.goal.invested||0;prog=T.goal?money(inv)+' of your '+money(T.goal)+' freedom number':'Set your freedom number on the Goals tab';pct=T.goal?inv/T.goal:null}
   var done=!!mv[k+':push'];
@@ -754,7 +756,7 @@ function renderGoals(){
   ];
   var atk=X.debts.filter(function(d){return d.atk&&(d.done==null||d.done>0)}).sort(function(a,b){return (a.done==null?1e9:a.done)-(b.done==null?1e9:b.done)});
   var sched=X.debts.filter(function(d){return !d.atk&&(d.done==null||d.done>0)});
-  detail[2]=atk.length?atk.length+' debt'+(atk.length>1?'s':'')+' to clear, '+(m==='snowball'?'smallest first':'highest interest first')+'.':'No debts at 7% or more.';
+  detail[2]=atk.length?atk.length+' debt'+(atk.length>1?'s':'')+' to clear, '+(m==='snowball'?'smallest first':'highest interest first')+'.':'No debts to clear except your mortgage.';
   var h='<div class="card wide"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><h2 style="font-family:var(--display);font-size:26px">The Freedom Steps</h2><span class="note">You’re on step '+sNo(sn)+'</span></div><ol class="fs">';
   STEPS.forEach(function(s,i){var n=i+1;if(VIS.indexOf(n)<0)return;var state=n<sn?'done':n===sn?'now':'next',when='';
     if(state==='done')when='Done';else if(n===5)when=state==='now'?'You’re here':'';else if(state==='now')when='You’re here'+(X.st[n]!=null&&X.st[n]>0?' · done by '+monthsOut(X.st[n]):'');else if(X.st[n]!=null)when='About '+monthsOut(X.st[n]);
@@ -765,17 +767,17 @@ function renderGoals(){
   var dL='',dR='',noDebt=!atk.length&&!sched.length;
   dL+='<div class="chips" role="group" aria-label="Debt payoff method"><button class="chip" data-method="avalanche" aria-pressed="'+(m==='avalanche')+'">Avalanche</button><button class="chip" data-method="snowball" aria-pressed="'+(m==='snowball')+'">Snowball</button></div>';
   dL+='<p class="note">'+(m==='avalanche'?'<b>Avalanche:</b> highest interest first. It costs you the least.':'<b>Snowball:</b> smallest balance first. Quick wins keep you going.')+'</p>';
-  if(!atk.length)dL+='<p><b>No expensive debt.</b> Nothing at 7% or more, so your freedom money skips straight past this step.</p>';
+  if(!atk.length)dL+='<p><b>No debt to clear.</b> Only your mortgage is left, so your freedom money skips straight past this step.</p>';
   else if(X.st[3]==null)dL+='<div class="big" style="font-size:36px">Not yet</div><p class="note">Your payments don’t cover the interest. Raise your freedom money on the Plan tab.</p>';
   else{
     var t1=atk[0],t2=atk[1];
-    dL+='<div><span class="note">Expensive debt gone by</span><div class="big">'+monthsOut(X.st[3])+'</div></div>';
+    dL+='<div><span class="note">Debt-free (except your mortgage) by</span><div class="big">'+monthsOut(X.st[3])+'</div></div>';
     dL+='<ol class="ts-steps"><li>Pay the minimum on every debt, every month.</li><li>Every extra dollar, <b>'+money(pushMon())+' a month</b>, goes to <b>'+esc(t1.n)+'</b> until it’s gone.</li>'+(t2?'<li>Then all you were paying on it rolls onto <b>'+esc(t2.n)+'</b>. The payment grows as each debt falls.</li>':'')+'<li>Spend less until it’s done. Delayed gratification is the whole game.</li></ol>';
     dR+='<div class="rows">'+atk.map(function(d,i){var o=S.debts.filter(function(x){return x.n===d.n})[0]||{};return '<div class="row"><span class="l"><span class="key" style="background:'+(i?'var(--c4)':'var(--c2)')+'"></span><span>'+(i+1)+'. '+esc(d.n)+'<small>'+money(+o.b||0)+' at '+(+o.r||0).toFixed(1)+'%'+(i===0?' · attack this now':'')+'</small></span></span><b class="num">'+(d.done?monthsOut(d.done):'—')+'</b></div>'}).join('')+'</div>';
     if(alt.st[3]!=null){var diff=alt.interest-X.interest,dm=alt.st[3]-X.st[3];dR+='<p class="note">Interest along the way: about <b>'+money(X.interest)+'</b>. The '+(m==='avalanche'?'snowball':'avalanche')+' would cost '+(Math.abs(diff)<50?'about the same':money(Math.abs(diff))+(diff>0?' more':' less'))+' and finish '+(dm===0?'in the same month':Math.abs(dm)+' month'+(Math.abs(dm)>1?'s':'')+(dm>0?' later':' sooner'))+'.</p>'}
   }
-  if(sched.length)dR+='<p class="lbl" style="margin-top:4px">On schedule</p><div class="rows">'+sched.map(function(d){var o=S.debts.filter(function(x){return x.n===d.n})[0]||{};return '<div class="row"><span class="l"><span class="key" style="background:var(--line)"></span><span>'+esc(d.n)+'<small>'+(+o.r||0).toFixed(1)+'% · '+money(+o.m||0)+' a month, paid like a bill</small></span></span><b class="num">'+(d.done?monthsOut(d.done):'—')+'</b></div>'}).join('')+'</div><p class="note">Loans under 7% stay on their normal schedule while the payment fits your budget comfortably. When one finishes, its payment rolls into your plan.</p>';
-  if(noDebt)h+='<div class="card wide g-done"><span class="g-tick" aria-hidden="true">✓</span><div><p class="lbl">Step '+sNo(3)+' · Attack expensive debt</p><p><b>No expensive debt.</b> Nothing at 7% or more, so every dollar of freedom money goes straight to investing.</p></div></div>';
+  if(sched.length)dR+='<p class="lbl" style="margin-top:4px">On schedule</p><div class="rows">'+sched.map(function(d){var o=S.debts.filter(function(x){return x.n===d.n})[0]||{};return '<div class="row"><span class="l"><span class="key" style="background:var(--line)"></span><span>'+esc(d.n)+'<small>'+(+o.r||0).toFixed(1)+'% · '+money(+o.m||0)+' a month, paid like a bill</small></span></span><b class="num">'+(d.done?monthsOut(d.done):'—')+'</b></div>'}).join('')+'</div><p class="note">Your mortgage, and any debt you switched to On schedule, keeps its normal payments. Step 3 clears every other debt first. When one finishes, its payment rolls into your plan.</p>';
+  if(noDebt)h+='<div class="card wide g-done"><span class="g-tick" aria-hidden="true">✓</span><div><p class="lbl">Step '+sNo(3)+' · Attack expensive debt</p><p><b>No debt to clear.</b> Only your mortgage is left, so every dollar of freedom money goes straight to investing.</p></div></div>';
   else h+='<div class="card wide"><p class="lbl">Step '+sNo(3)+' · Attack expensive debt</p><div class="g2"><div class="stack" style="gap:12px">'+dL+'</div><div class="stack" style="gap:12px">'+dR+'</div></div></div>';
 
   h+='<div class="card wide"><p class="lbl">Step '+sNo(6)+' · Your freedom number</p><div class="g2"><div class="stack" style="gap:12px">'+
@@ -822,7 +824,7 @@ function sugHtml(){var g=suggestPush(),cur=pushMon();
 function pushNote(){
   var T=targets(),c=+S.cushion||0,t=attackTarget(),jobs=[];
   if(c<T.starter)jobs.push('your emergency fund ('+money(T.starter)+', one month of your budget)');
-  if(t)jobs.push('paying off '+esc(t.n)+(S.debts.filter(function(d){return isAtk(d)&&(+d.b||0)>0}).length>1?' and your other expensive debt':''));
+  if(t)jobs.push('paying off '+esc(t.n)+(S.debts.filter(function(d){return isAtk(d)&&(+d.b||0)>0}).length>1?' and your other debts':''));
   var h='What’s left after all your expenses. ';
   if(!jobs.length)return h+'<b>Every dollar is invested.</b>';
   h+='<b>Right now it goes to '+jobs[0]+'.</b> ';
@@ -879,7 +881,7 @@ function renderPlan(){
     '<div class="stack" style="gap:10px">'+
     S.bills.map(function(b,i){return '<div class="edit bill" data-row="bills" data-i="'+i+'"><label class="field b-n">Bill'+(b.custom?'<input data-k="n" value="'+esc(b.n)+'" placeholder="Name your bill">':catSelect(b.n,BILLS,'n'))+'</label><label class="field b-a">Amount<input data-k="a" type="number" inputmode="decimal" placeholder="0" value="'+nv(b.a)+'"></label><label class="field b-d">Due day<input data-k="d" type="number" inputmode="numeric" min="1" max="31" value="'+(+b.d||1)+'"></label><button class="x" aria-label="Remove '+esc(b.n)+'" data-rm="bills" data-i="'+i+'">×</button></div>'}).join('')+
     '</div><p class="note" data-live="billWarn" style="color:var(--bad)">'+billWarn()+'</p><button class="btn ghost sm" data-add="bills">+ Add a bill</button></div>';
-  P.debts='<div class="card wide"><h2 style="font-family:var(--display);font-size:22px">Debts</h2><p class="note">Minimum payments count as bills on their due day. Debts at 7% or more are set to <b>Attack</b>. Lower-rate loans stay <b>On schedule</b> while the payment fits your budget comfortably; switch any debt if that changes.</p><p class="note">Minimums fill in from what you owe and the rate: loans over their amortization, lines of credit and margin loans interest only, and cards 3% of the balance or $10. If your statement shows a different minimum, type it in.</p><div class="stack" style="gap:14px">'+
+  P.debts='<div class="card wide"><h2 style="font-family:var(--display);font-size:22px">Debts</h2><p class="note">Minimum payments count as bills on their due day. Every debt except your mortgage is set to <b>Attack</b>: clear them all before you invest. Your mortgage stays <b>On schedule</b>.</p><p class="note">Minimums fill in from what you owe and the rate: loans over their amortization, lines of credit and margin loans interest only, and cards 3% of the balance or $10. If your statement shows a different minimum, type it in.</p><div class="stack" style="gap:14px">'+
     S.debts.map(function(b,i){var a=isAtk(b);return '<div class="edit debt'+(AMORT[b.n]?' hasy':'')+'" data-row="debts" data-i="'+i+'"><label class="field f-n">Debt'+(b.custom?'<input data-k="n" value="'+esc(b.n)+'" placeholder="Name your debt">':catSelect(b.n,DEBTS,'n'))+'</label><label class="field f-b">Owing<input data-k="b" type="number" inputmode="decimal" placeholder="0" value="'+nv(b.b)+'"></label><label class="field f-r">Rate %<input data-k="r" type="number" inputmode="decimal" step="0.1" placeholder="0" value="'+nv(b.r)+'"></label>'+(AMORT[b.n]?'<label class="field f-y">Amortization (yrs)<input data-k="y" type="number" inputmode="decimal" step="0.5" min="0.5" placeholder="'+AMORT[b.n]+'" value="'+nv(b.y)+'"></label>':'')+'<label class="field f-m">Minimum'+(autoMin(b)!=null&&isAutoM(b)?' <small class="auto">auto</small>':'')+'<input data-k="m" type="number" inputmode="decimal" placeholder="'+(autoMin({n:b.n,b:1000,r:10,y:b.y})!=null?'auto':'0')+'" value="'+nv(b.m)+'"></label><label class="field f-d">Due day<input data-k="d" type="number" inputmode="numeric" min="1" max="31" value="'+(+b.d||1)+'"></label><label class="field f-a">Plan<select data-k="atk"><option value="1"'+(a?' selected':'')+'>Attack</option><option value="0"'+(a?'':' selected')+'>On schedule</option></select></label><button class="x f-x" aria-label="Remove '+esc(b.n)+'" data-rm="debts" data-i="'+i+'">×</button></div>'}).join('')+
     '</div><button class="btn ghost sm" data-add="debts">+ Add a debt</button></div>';
   P.more='<div class="card"><h2 style="font-family:var(--display);font-size:22px">Check-in summary</h2><p class="note">'+(COACHING?'A one-page snapshot to send your coach before a check-in.':'A one-page snapshot of your plan, to keep or share with your partner.')+'</p><textarea id="sum" readonly aria-label="Check-in summary">'+esc(summary())+'</textarea><button class="btn sm" data-act="copy" data-t="sum">Copy summary</button></div>';
@@ -913,7 +915,7 @@ function summary(){
     top?'  Logged spending: '+top:'  No purchases logged',
     (S.card.on?'Everyday spending on '+S.cards.map(function(c){return c.n+' (due the '+ord(c.due)+')'}).join(', ')+', paid in full monthly'+(S.bal&&S.bal.card?' · owing '+money(S.bal.card)+' at last check':''):'Everyday spending: debit or cash'),
     'Emergency fund: '+money(+S.cushion||0)+' of '+money(T.starter)+' (one month of budget)',
-    'Debts: '+(total?money(total)+' owing, '+money(atkTotal)+' at 7%+ · method: '+S.method+' · expensive debt gone around '+(X.st[3]==null?'not yet':X.st[3]===0?'now':monthsOut(X.st[3])):'none'),
+    'Debts: '+(total?money(total)+' owing, '+money(atkTotal)+' to clear · method: '+S.method+' · debt-free around '+(X.st[3]==null?'not yet':X.st[3]===0?'now':monthsOut(X.st[3])):'none'),
     'Freedom number: '+money(T.goal)+' at '+S.goal.rate+'% · invested '+money(+S.goal.invested||0)+' · '+(X.st[6]==null?'over 50 years':X.st[6]===0?'reached':'about '+yrs(X.st[6])+' to go')].join('\n');
 }
 

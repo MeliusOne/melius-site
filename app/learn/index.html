@@ -234,7 +234,7 @@ main{padding-block:20px calc(110px + env(safe-area-inset-bottom,0px))}
 var STEPS=[
  {n:1,t:'Know your number',d:'Budgets, needs and wants'},
  {n:2,t:'Emergency fund',d:'One month, in cash'},
- {n:3,t:'Attack expensive debt',d:'7% or more, snowball or avalanche'},
+ {n:3,t:'Attack expensive debt',d:'All debt except the mortgage, snowball or avalanche'},
  {n:4,t:'Invest for freedom',d:'Accounts, funds and payouts',live:1},
  {n:5,t:'Freedom',d:'When the payouts cover your month'}
 ];
@@ -335,8 +335,8 @@ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;
 
 /* personalised lessons from Melius Money */
 function personal(les){var A=app(),g=A&&A.goal,teach=les.teach.slice(),qs=les.qs.slice();
-  if(les.id==='tfsa'&&A&&A.debts){var hi=A.debts.filter(function(d){return +d.b>0&&+d.r>=7});
-    if(hi.length)teach.push({h:'Before you invest',b:'<div class="ex you"><b>From your budget</b>You have '+hi.length+' debt'+(hi.length>1?'s':'')+' at 7% or more, like your '+esc(hi[0].n||'debt')+' at '+(+hi[0].r)+'%. That’s Step 3: clear '+(hi.length>1?'them':'it')+' first, then every freedom dollar goes into these accounts.</div><p>Paying off '+(+hi[0].r)+'% debt is a guaranteed '+(+hi[0].r)+'% return. No fund promises that.</p>'})}
+  if(les.id==='tfsa'&&A&&A.debts){var hi=A.debts.filter(function(d){return +d.b>0&&!/mortgage/i.test(d.n||'')}).sort(function(a,b){return (+b.r||0)-(+a.r||0)});
+    if(hi.length)teach.push({h:'Before you invest',b:'<div class="ex you"><b>From your budget</b>You have '+hi.length+' debt'+(hi.length>1?'s':'')+' still to clear, like your '+esc(hi[0].n||'debt')+' at '+(+hi[0].r)+'%. That’s Step 3: clear '+(hi.length>1?'them':'it')+' first, then every freedom dollar goes into these accounts.</div><p>Paying off '+(+hi[0].r)+'% debt is a guaranteed '+(+hi[0].r)+'% return. No fund promises that.</p>'})}
   if(les.me&&g&&+g.need>0&&+g.rate>0){var need=+g.need,y=+g.rate,fn=2*need*12/(y/100),inv=+g.invested||0;
     teach.push({h:'Yours, from Melius Money',b:'<div class="ex you"><b>Your plan</b>Your expenses are <b>'+$m(need)+'</b> a month, so free means <b>'+$m(2*need)+'</b> a month passive. At a '+y+'% yield, your freedom number is <b>'+$m(fn)+'</b>.'+(inv>0?' You have '+$m(inv)+' invested: <b>'+Math.min(100,Math.round(inv/fn*100))+'%</b> of the way.':'')+'</div>'});
     qs.push({k:'num',q:'Your expenses in Melius Money are '+$m(need)+' a month. At a '+y+'% yield, what is your freedom number?',pre:'$',a:Math.round(fn),tol:Math.max(100,fn*0.01),w:'2 × '+$m(need)+' × 12 ÷ '+y+'% = '+$m(fn)+'.'})}
