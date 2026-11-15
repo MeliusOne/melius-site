@@ -3,10 +3,10 @@
   "usdcad": 1.4269,
   "d": "2026-11-15"
  },
- "asOf": "2026-11-15T09:33Z",
+ "asOf": "2026-11-15T10:27Z",
  "seed": false,
  "source": "Yahoo Finance",
- "updated": 58,
+ "updated": 59,
  "failed": [],
  "funds": {
   "ZWB": {
@@ -391,6 +391,21 @@
    "t12": null,
    "sp": null,
    "sym": "IMAX.TO",
+   "r": {
+    "asof": "2026-11-13",
+    "start": "2026-05-11"
+   }
+  },
+  "CMAX": {
+   "p": 15.81,
+   "pd": "2026-11-13",
+   "d": 0.15,
+   "dd": "2026-10-30",
+   "n": 12,
+   "y": 11.39,
+   "t12": null,
+   "sp": null,
+   "sym": "CMAX.TO",
    "r": {
     "asof": "2026-11-13",
     "start": "2026-05-11"
