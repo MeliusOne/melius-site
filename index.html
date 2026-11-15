@@ -1021,8 +1021,31 @@ html:not(.prelaunch) .pl-keep{display:none!important}
 .faith-themes q{font-family:var(--display);font-style:italic;font-size:19px;line-height:1.35;color:var(--ink);quotes:'“' '”'}
 .faith-themes small{font-weight:700;color:var(--amber);font-size:13px}
 @media (max-width:820px){.faith-grid{grid-template-columns:1fr;gap:24px}}
-.nm-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:36px;margin-top:22px;align-items:start}
-.nm-txt{display:grid;gap:14px;max-width:62ch;min-width:0}.nm-txt p{margin:0;line-height:1.65}
+/* About, free-tools version */
+.ab-hero{--ab:#14213D;--ab-ink:#F7F5F0;--ab-mute:#C3CBD8;--ab-gold:#C9A35E;background:var(--ab);color:var(--ab-ink);padding-block:84px 80px;position:relative;overflow:hidden}
+.ab-hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;border:1px solid rgba(201,163,94,.22);box-shadow:0 0 0 60px rgba(201,163,94,.04),0 0 0 140px rgba(201,163,94,.03);pointer-events:none}
+.ab-hero-in{position:relative;z-index:1;display:grid;gap:22px}
+.ab-hero .eyebrow{color:var(--ab-gold);margin:0}
+.ab-h1{margin:0;font-family:var(--display);font-weight:500;font-size:clamp(34px,5.4vw,60px);line-height:1.08;letter-spacing:-.015em;max-width:22ch;color:var(--ab-ink);text-wrap:balance}
+.ab-sub{margin:0;max-width:58ch;font-size:clamp(16px,1.6vw,18px);line-height:1.65;color:var(--ab-mute)}
+.ab-cue{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-weight:700;color:var(--ab-gold);text-decoration:none;border-bottom:1px solid rgba(201,163,94,.5);padding-bottom:3px}
+.ab-cue:hover{border-color:var(--ab-gold)}
+.ab-lede{margin-top:12px;max-width:60ch}
+.abq-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px;align-items:start}
+.abq{background:var(--surface);border:1px solid var(--line);border-radius:18px;transition:border-color .2s,box-shadow .2s}
+.abq[open]{border-color:var(--amber);box-shadow:0 10px 28px -18px rgba(20,33,61,.35)}
+.abq summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:auto 1fr;gap:6px 16px;padding:22px 22px 18px}
+.abq summary::-webkit-details-marker{display:none}
+.abq-n{grid-row:span 2;font-family:var(--display);font-size:28px;line-height:1;color:var(--amber)}
+.abq-q{font-family:var(--display);font-size:clamp(19px,2vw,22px);line-height:1.3;color:var(--ink);text-wrap:balance}
+.abq-tap{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.abq-tap::after{content:" +"}
+.abq[open] .abq-tap::after{content:" −"}
+.abq p{margin:0;padding:0 22px 22px 66px;line-height:1.65;color:var(--muted)}
+.abq p a{color:var(--amber);font-weight:700;text-decoration:none;white-space:nowrap}
+.ab-sting{margin:28px 0 0;font-family:var(--display);font-style:italic;font-size:clamp(19px,2.2vw,24px);color:var(--ink)}
+.nm-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px;align-items:center}
+.nm-txt{display:grid;gap:14px;max-width:62ch;min-width:0}.nm-txt p{margin:0;line-height:1.65}.nm-txt h2{margin:0}.nm-txt .eyebrow{margin:0}
 .nm-card{background:var(--band);border:1px solid var(--line);border-radius:18px;padding:22px 22px 20px;display:grid;gap:14px;min-width:0}
 .nm-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:12px}
 .nm-w{font-family:var(--display);font-size:30px;line-height:1;color:var(--ink)}
@@ -1030,7 +1053,29 @@ html:not(.prelaunch) .pl-keep{display:none!important}
 .nm-sum{margin:0;font-family:var(--display);font-style:italic;font-size:22px;color:var(--ink)}
 .nm-verse{margin:0;display:grid;gap:4px}.nm-verse q{font-family:var(--display);font-style:italic;font-size:17px;line-height:1.4;quotes:'“' '”';color:var(--muted)}
 .nm-verse small{font-weight:700;color:var(--amber);font-size:13px}
-@media (max-width:820px){.nm-grid{grid-template-columns:1fr;gap:24px}}
+.ab-me{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:44px;align-items:center}
+.ab-photo{max-width:260px}
+.ab-me-txt{display:grid;gap:14px;max-width:60ch;min-width:0}.ab-me-txt p{margin:0;line-height:1.7}.ab-me-txt h2{margin:0}.ab-me-txt .eyebrow{margin:0}
+.abl{list-style:none;margin:30px 0 0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}
+.abl li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:18px;padding:22px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.abl-n{font-family:var(--display);font-size:40px;line-height:1;color:var(--amber)}
+.abl h3{margin:0 0 6px;font-family:var(--display);font-weight:500;font-size:clamp(21px,2.4vw,27px);line-height:1.25;color:var(--ink);text-wrap:balance}
+.abl p{margin:0;color:var(--muted);line-height:1.6}
+.ab-faith{display:grid;gap:14px;max-width:760px}.ab-faith h2,.ab-faith .eyebrow{margin:0}.ab-faith p{margin:0;line-height:1.7}
+.ab-faith-note{color:var(--muted);font-size:15px}
+.ab-next{--ab:#14213D;--ab-ink:#F7F5F0;--ab-mute:#C3CBD8;--ab-gold:#C9A35E;background:var(--ab);color:var(--ab-ink)}
+.ab-next .eyebrow{color:var(--ab-gold);margin:0}
+.ab-next h2{color:var(--ab-ink);margin:10px 0 0;max-width:22ch;text-wrap:balance}
+.abn-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:30px}
+.abn{position:relative;display:grid;gap:8px;align-content:start;text-decoration:none;color:var(--ab-ink);background:rgba(247,245,240,.05);border:1px solid rgba(201,163,94,.35);border-radius:18px;padding:22px 22px 24px;transition:border-color .2s,transform .2s}
+.abn:hover{border-color:var(--ab-gold);transform:translateY(-2px)}
+.abn-t{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ab-gold)}
+.abn b{font-family:var(--display);font-weight:500;font-size:22px;line-height:1.25}
+.abn-d{color:var(--ab-mute);font-size:15px;line-height:1.5;padding-right:24px}
+.abn-go{position:absolute;right:20px;bottom:20px;color:var(--ab-gold);font-size:20px}
+.ab-motto{margin:44px 0 0;text-align:center;font-family:var(--display);font-style:italic;font-size:clamp(26px,3.4vw,36px);color:var(--ab-ink)}
+.ab-motto small{display:block;margin-top:6px;font-family:var(--body);font-style:normal;font-size:14px;letter-spacing:.06em;color:var(--ab-mute)}
+@media (max-width:820px){.nm-grid,.ab-me{grid-template-columns:1fr;gap:24px}.abq-grid,.abn-grid{grid-template-columns:1fr}.ab-photo{max-width:200px}.abq p{padding-left:22px}.ab-hero{padding-block:60px 56px}}
 .fs-verse{font-family:var(--display);font-style:italic;font-size:15px;line-height:1.4;color:var(--amber)}
 .fs-verse small{display:block;margin-top:3px;font-family:var(--body,inherit);font-style:normal;font-weight:700;font-size:12px}
 .fs-mod{margin-top:auto;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--amber)}
@@ -1565,7 +1610,103 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
   </div></section>
 </div>
 <div class="page" id="about" data-page="about">
-  <section id="coach">
+  <!-- ABOUT, free-tools version (shown when coaching is off). The coaching version follows, hidden. -->
+  <section class="ab-hero" data-coach="show">
+    <div class="wrap ab-hero-in">
+      <p class="eyebrow">About Melius One</p>
+      <h1 class="ab-h1">Most of us were taught how to earn money. Almost no one taught us how to make it work for us.</h1>
+      <p class="ab-sub">Melius One is a free, quiet corner of the internet built on one belief: any family can do better with money, one step at a time. It doesn’t start with a product. It starts with a few honest questions.</p>
+      <a class="ab-cue" href="#ab-ask">Start with the questions <span aria-hidden="true">↓</span></a>
+    </div>
+  </section>
+
+  <section id="ab-ask" class="band" data-coach="show">
+    <div class="wrap">
+      <p class="eyebrow">Four questions</p>
+      <h2>Sit with these for a minute</h2>
+      <p class="lede ab-lede">There are no right answers. Read a question, answer it honestly in your head, then tap it for a thought.</p>
+      <div class="abq-grid">
+        <details class="abq"><summary><span class="abq-n">01</span><span class="abq-q">If your paycheque stopped next month, how long would your family be okay?</span><span class="abq-tap">A thought</span></summary><p>For most families the honest answer is weeks, not years. That gap isn’t a failure. It’s the starting line, and it’s the first thing worth closing.</p></details>
+        <details class="abq"><summary><span class="abq-n">02</span><span class="abq-q">Who is your money working for right now?</span><span class="abq-tap">A thought</span></summary><p>Every dollar of expensive debt works for a lender. Every dollar invested works for you. Most of us have never counted which side is winning.</p></details>
+        <details class="abq"><summary><span class="abq-n">03</span><span class="abq-q">What does “enough” look like for your family?</span><span class="abq-tap">A thought</span></summary><p>Without a number, more is never enough. With one, freedom stops being a dream and becomes a target you can measure. <a href="#fnum">Find yours in two minutes →</a></p></details>
+        <details class="abq"><summary><span class="abq-n">04</span><span class="abq-q">What would you do with a Tuesday that belonged to you?</span><span class="abq-tap">A thought</span></summary><p>Money was never the point. Time is. The school run, the bedtime story, the trip that begins on a random afternoon simply because you can.</p></details>
+      </div>
+      <p class="ab-sting">If one of these stung a little, good. That’s usually where <i>better</i> begins.</p>
+    </div>
+  </section>
+
+  <section id="ab-name" data-coach="show">
+    <div class="wrap">
+      <div class="nm-grid">
+        <div class="nm-txt">
+          <p class="eyebrow">The name</p>
+          <h2>Why Melius One</h2>
+          <p><b lang="la">Melius</b> is Latin for “better,” the word at the heart of improvement. It comes from the motto <i lang="la">Dum vivas, fac melius</i>: as long as you live, do better.</p>
+          <p><b>One</b> is for one step at a time. Nobody gets free in a single leap. You get there one payday, one paid-off debt, one step in the right order. You don’t need to see the whole road, just the next step.</p>
+        </div>
+        <div class="nm-card" aria-label="What the name means">
+          <div class="nm-row"><span class="nm-w" lang="la">Melius</span><span class="nm-m">Better</span></div>
+          <div class="nm-row"><span class="nm-w">One</span><span class="nm-m">One step at a time</span></div>
+          <p class="nm-sum">Better, one step at a time.</p>
+          <p class="nm-verse" data-verse><q>Your word is a lamp to my feet and a light to my path.</q><small>Psalm 119:105 · BSB</small></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ab-me" class="band" data-coach="show">
+    <div class="wrap ab-me">
+      <div class="photo ab-photo" id="photo2">
+        <img src="headshot-plain.jpg" alt="Obi Oji" onerror="this.remove();document.getElementById('photo2').classList.add('noimg')">
+        <span class="initials" aria-hidden="true">OO</span>
+      </div>
+      <div class="ab-me-txt">
+        <p class="eyebrow">The person behind it</p>
+        <h2>Hi, I’m Obi.</h2>
+        <p>I’m a husband, a dad and a Christian, living in Kitchener, Ontario. I’m not writing this as someone who got everything right. I got plenty wrong first, and some of it cost real money.</p>
+        <p>Melius One is what I wish someone had handed me at the start: the order to do things in, tools that help you see clearly, and the reminder that money is meant to serve your life, not run it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ab-lessons" data-coach="show">
+    <div class="wrap">
+      <p class="eyebrow">The wrong turns</p>
+      <h2>What I learned the expensive way</h2>
+      <p class="lede ab-lede">So you can learn it the cheap way.</p>
+      <ol class="abl">
+        <li><span class="abl-n" aria-hidden="true">1</span><div><h3>A salary buys your time. Only assets can buy it back.</h3><p>Learned running my own business, then starting over in a new country.</p></div></li>
+        <li><span class="abl-n" aria-hidden="true">2</span><div><h3>A strategy without rules is just a gamble.</h3><p>Learned chasing returns, crypto included, and losing real money.</p></div></li>
+        <li><span class="abl-n" aria-hidden="true">3</span><div><h3>Knowing when to stop is a skill.</h3><p>Learned building a company that didn’t work, and choosing to let it go.</p></div></li>
+        <li><span class="abl-n" aria-hidden="true">4</span><div><h3>Luck is not a plan. Discipline is.</h3><p>Learned rebuilding from scratch: a few bets paid off, but the rules did the real work.</p></div></li>
+        <li><span class="abl-n" aria-hidden="true">5</span><div><h3>Order matters more than speed.</h3><p>Learned from all of the above. It’s why the Freedom Steps go in order.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="ab-faith" class="band" data-coach="show">
+    <div class="wrap ab-faith">
+      <p class="eyebrow">Faith and money</p>
+      <h2>Money is a tool. Christ is the treasure.</h2>
+      <p>Faith shapes how I think about money: count the cost before you build, stay out of debt, work hard, give gladly, and be faithful with a little before you’re trusted with much. It also keeps money in its place. The goal was never just to be rich. It’s to provide, to be generous, and to be free for what matters.</p>
+      <p class="ab-faith-note">You don’t have to share my faith to use anything here. Everyone is welcome. Turn on the Bible verses at the bottom of any page if you’d like a passage each day.</p>
+    </div>
+  </section>
+
+  <section id="ab-next" class="ab-next" data-coach="show">
+    <div class="wrap">
+      <p class="eyebrow">Your next step</p>
+      <h2>Don’t just finish reading. Take one small step today.</h2>
+      <div class="abn-grid">
+        <a class="abn" href="#whichstep"><span class="abn-t">1 minute</span><b>Find which step you’re on</b><span class="abn-d">Five quick questions show where to start.</span><span class="abn-go" aria-hidden="true">→</span></a>
+        <a class="abn" href="#fnum"><span class="abn-t">2 minutes</span><b>Find your freedom number</b><span class="abn-d">See what “enough” costs, in real dollars.</span><span class="abn-go" aria-hidden="true">→</span></a>
+        <a class="abn" href="#tools"><span class="abn-t">10 minutes</span><b>Plan your next payday</b><span class="abn-d">Give every dollar a job in Melius Money. Free.</span><span class="abn-go" aria-hidden="true">→</span></a>
+      </div>
+      <p class="ab-motto" lang="la">Dum vivas, fac melius.<small>As long as you live, do better.</small></p>
+    </div>
+  </section>
+
+  <section id="coach" data-coach="hide">
     <div class="wrap">
       <div class="about">
         <div class="photo" id="photo">
@@ -1594,7 +1735,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     </div>
   </section>
 
-  <section id="story" class="band">
+  <section id="story" class="band" data-coach="hide">
     <div class="wrap">
       <p class="eyebrow">My story</p>
       <h2>How I got here</h2>
@@ -1623,27 +1764,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     </div>
   </section>
 
-  <section id="name">
-    <div class="wrap">
-      <p class="eyebrow">The name</p>
-      <h2>Why Melius One</h2>
-      <div class="nm-grid">
-        <div class="nm-txt">
-          <p><b lang="la">Melius</b> is Latin for “better,” the word at the heart of improvement. It comes from my motto, <i lang="la">Dum vivas, fac melius</i>: as long as you live, do better.</p>
-          <p><b>One</b> is for one step at a time. Nobody gets free in a single leap. You get there the way my family is getting there: one payday, one paid-off debt, one step in the right order. You don’t need to see the whole road, just the next step.</p>
-          <p>Melius One is where I share that path: the Freedom Steps, and free tools that make them easier. Melius Money plans every payday and shows your freedom number. Melius Learn and Money Quest teach the ideas behind it, for you and for your kids. Take what helps.</p>
-        </div>
-        <div class="nm-card" aria-label="What the name means">
-          <div class="nm-row"><span class="nm-w" lang="la">Melius</span><span class="nm-m">Latin for “better”</span></div>
-          <div class="nm-row"><span class="nm-w">One</span><span class="nm-m">One step at a time</span></div>
-          <p class="nm-sum">Better, one step at a time.</p>
-          <p class="nm-verse" data-verse><q>Your word is a lamp to my feet and a light to my path.</q><small>Psalm 119:105 · BSB</small></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="faith">
+  <section id="faith" data-coach="hide">
     <div class="wrap">
       <p class="eyebrow">Faith and money</p>
       <h2>Money is a tool. Christ is the treasure.</h2>
@@ -1663,9 +1784,9 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     </div>
   </section>
 
-  <section class="ab-link"><div class="wrap"><a class="ab-card" href="#tools"><span class="eyebrow">Free budget app</span><b>Make every dollar better</b><span>Try the free Melius Money app: your spending plan, debt-free date and freedom number →</span></a></div></section>
+  <section class="ab-link" data-coach="hide"><div class="wrap"><a class="ab-card" href="#tools"><span class="eyebrow">Free budget app</span><b>Make every dollar better</b><span>Try the free Melius Money app: your spending plan, debt-free date and freedom number →</span></a></div></section>
 
-  <section id="portfolio">
+  <section id="portfolio" data-coach="hide">
     <div class="wrap">
       <p class="eyebrow">My portfolio</p>
       <h2>How I invest my own money</h2>
@@ -1691,7 +1812,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       </div>
     </div>
   </section>
-  <section data-coach="hide" class="next-wrap"><div class="wrap"><a class="next" href="#coaching"><span class="eyebrow">Next</span><span class="next-t">How the coaching works</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section><section data-coach="show" data-pl="hide" class="next-wrap"><div class="wrap"><a class="next" href="#learn"><span class="eyebrow">Next</span><span class="next-t">How money works</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section><section class="next-wrap pl-keep"><div class="wrap"><a class="next" href="#tools"><span class="eyebrow">Next</span><span class="next-t">Try Melius Money, free</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section>
+  <section data-coach="hide" class="next-wrap"><div class="wrap"><a class="next" href="#coaching"><span class="eyebrow">Next</span><span class="next-t">How the coaching works</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section>
 </div>
 <div class="page" id="coaching" data-page="coaching">
   <section id="how">
@@ -3056,7 +3177,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   var root=document.documentElement;
   function hdr(){var h=document.querySelector('header.top');if(h)root.style.setProperty('--hdr',h.offsetHeight+'px')}
   hdr();addEventListener('resize',hdr);addEventListener('load',hdr);
-  var NC=!window.COACH_ON;var SUB={about:[['coach',NC?'About me':'Your coach'],['story','My story'],['faith','Faith'],['portfolio','How I invest']],
+  var NC=!window.COACH_ON;var SUB={about:NC?[]:[['coach','Your coach'],['story','My story'],['faith','Faith'],['portfolio','How I invest']],
     coaching:[['how','Pricing'],['apply','Apply'],['circle','Melius Circle'],['curriculum','Curriculum'],['faq','Questions']],
     learn:[['why','The why'],['steps','The steps'],['invest','Step 4, up close']].concat(NC?[]:[['modules','Modules']])};
   Object.keys(SUB).forEach(function(pid){var pg=document.getElementById(pid);if(!pg)return;
