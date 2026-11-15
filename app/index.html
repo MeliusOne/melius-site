@@ -458,7 +458,7 @@ function isAtk(d){return d.atk!=null?!!d.atk:!isMortgage(d)}
 /* monthly expenses: bills + minimum debt payments + spending plan (or what the person typed in) */
 function monthExp(){return Math.round(S.bills.reduce(function(t,b){return t+(+b.a||0)},0)+S.debts.filter(function(d){return (+d.b||0)>0}).reduce(function(t,d){return t+(+d.m||0)},0)+planMonth())}
 function needM(){return (+S.goal.need||0)||monthExp()}
-function targets(){var need=needM();return {starter:Math.round(S.bills.reduce(function(t,b){return t+(+b.a||0)},0)+S.debts.filter(function(d){return (+d.b||0)>0}).reduce(function(t,d){return t+(+d.m||0)},0)+planMonth()),full:0,goal:2*needM()*12/((+S.goal.rate||10)/100)}}
+function targets(){var need=needM();return {starter:Math.round(S.bills.reduce(function(t,b){return t+(+b.a||0)},0)+S.debts.filter(function(d){return (+d.b||0)>0}).reduce(function(t,d){return t+(+d.m||0)},0)+planMonth()),full:0,goal:needM()*12/((+S.goal.rate||10)/100)}}
 function sortFn(m){return m==='snowball'?function(a,b){return a.b-b.b}:function(a,b){return b.r-a.r}}
 /* visible Freedom Steps: 1 know your number, 3 attack debt, 5 invest, 6 freedom (emergency fund = one month of the monthly budget; no income cushion: the yield is the cushion) */
 var VIS=[1,2,3,5,6];function sNo(sn){var i=VIS.indexOf(sn);return i<0?VIS.filter(function(v){return v<sn}).length+1:i+1}var SN_OF=' of '+VIS.length;
@@ -578,7 +578,7 @@ var STEPS=[
   ['Attack your debt','Pay off every debt except your mortgage, then invest everything.'],
   ['Income cushion','Three months of expenses, invested in a stable fund that pays you monthly.'],
   ['Invest for freedom','Every dollar of freedom money is invested in funds that pay you monthly. The yield is your cushion.'],
-  ['Freedom','Your investments pay you 2× your monthly expenses: half pays the bills, half keeps growing.']
+  ['Freedom','Your investments’ payouts cover your monthly expenses. Keep a cash buffer so you can reinvest every payout in a downturn.']
 ];
 function moveTo(sn){var t=attackTarget();return sn<=2?'Move to your emergency fund':sn===3?'Pay extra on '+(t?esc(t.n):'your debt'):'Move to investing'}
 function bucket(sn){var t=attackTarget();return sn<=2?'Step 2 · Emergency fund':sn===3?'Step 3 · Attack '+(t?esc(t.n):'debt'):'Step 4 · Invest'}
@@ -782,7 +782,7 @@ function renderGoals(){
 
   h+='<div class="card wide"><p class="lbl">Step '+sNo(6)+' · Your freedom number</p><div class="g2"><div class="stack" style="gap:12px">'+
      '<div class="big num" data-live="gGoal">'+money(T.goal)+'</div>'+
-     '<p class="note" data-live="gGoalNote">Free means passive income of 2× your monthly expenses: '+money(2*needM())+' a month. Half pays your '+money(needM())+' of bills and spending, half keeps growing.</p>'+
+     '<p class="note" data-live="gGoalNote">Free means passive income that covers your monthly expenses: '+money(needM())+' a month. Keep a cash buffer for down years: in a downturn, live on it and reinvest every payout. Most years are ordinary or strong, and that’s when you withdraw.</p>'+
      '<div class="grid2"><label class="field">Monthly expenses<input id="g-need" type="number" inputmode="numeric" min="0" step="100" placeholder="Auto: '+money(monthExp()||0)+'" value="'+nv(g.need)+'"></label><label class="field">Invested now<input id="g-inv" type="number" inputmode="numeric" min="0" step="1000" placeholder="0" value="'+nv(g.invested)+'"></label></div>'+
      '<div class="field">If it pays each year<div class="chips" data-set="rate">'+[10,15,22].concat([10,15,22].indexOf(+g.rate)<0?[+g.rate]:[]).map(function(r){return '<button class="chip" aria-pressed="'+(+g.rate===r)+'" data-v="'+r+'">'+([10,15,22].indexOf(r)<0?'Your mix '+r+'%':r+'%')+'</button>'}).join('')+'</div><p class="note">Plan with 10%. If you do better, celebrate.</p></div>'+
      '<div class="field">If it grows each year<div class="chips" data-set="growth">'+[8,12,15].map(function(r){return '<button class="chip" aria-pressed="'+(+g.growth===r)+'" data-v="'+r+'">'+r+'%</button>'}).join('')+'</div></div>'+
