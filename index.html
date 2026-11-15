@@ -3091,7 +3091,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     if(b.dataset.plan==='save'){var tot=0,yr=0;st.order.forEach(function(t){var a=+st.sel[t]||0;tot+=a;yr+=a*info(t).y/100});if(!(tot>0))return;A.goal.invested=Math.round(tot);A.goal.rate=Math.round(yr/tot*1000)/10;try{localStorage.setItem(AK,JSON.stringify(A))}catch(x){}plan(tot,yr);try{gtag('event','income_saved_to_plan')}catch(x){}}});
   window.addEventListener('storage',function(e){if(e.key===AK)calc()});
   /* projection: grows each fund by its return (the market toggle), pays its yield on the balance, takes out what the viewer picks */
-  function proj(){var el=$('icProj');if(!el)return;
+  function proj(keep){var el=$('icProj');if(!el)return;
     var fs=st.order.map(function(t){return {t:t,a:+st.sel[t]||0,y:info(t).y/100,lr:longRun(BY[t])[0]}}).filter(function(f){return f.a>0});
     var tot=fs.reduce(function(s,f){return s+f.a},0);
     var segs=function(id,opts,cur){return '<div class="ic-pseg" role="group" aria-label="'+id+'">'+opts.map(function(o){return '<button type="button" data-'+id+'="'+o[0]+'" aria-pressed="'+(String(cur)===String(o[0]))+'">'+o[1]+'</button>'}).join('')+'</div>'};
@@ -3117,8 +3117,9 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
       '<line x1="'+x0+'" x2="'+x1+'" y1="'+Y(tot)+'" y2="'+Y(tot)+'" class="start"/><text x="'+x1+'" y="'+(Y(tot)-6)+'" text-anchor="end" class="sl">Today '+money(tot)+'</text>'+
       '<polygon points="'+X(0)+','+y1+' '+pts+' '+X(st.yrs)+','+y1+'" class="area"/><polyline points="'+pts+'" class="ln"/>'+
       '<circle cx="'+X(st.yrs)+'" cy="'+Y(end)+'" r="4" class="dot"/>'+xl+'</svg>';
-    el.innerHTML=head+'<div class="ic-pbody"><div class="ic-ptiles">'+tiles.map(function(t){return '<div class="ic-pt"><span>'+t[0]+'</span>'+t[1]+'</div>'}).join('')+'</div>'+svg+'</div>'+
+    var outP='<div class="ic-pbody"><div class="ic-ptiles">'+tiles.map(function(t){return '<div class="ic-pt"><span>'+t[0]+'</span>'+t[1]+'</div>'}).join('')+'</div>'+svg+'</div>'+
       '<p class="ic-pn">Assumes '+mkLabel+', with each fund paying its current yield on its balance every year'+(st.take==='safe'?' and the safe amount taken out (its return minus '+INFL+'% for inflation, never more than it pays)':st.take==='all'?' and every payout taken out':st.take==='fixed'?' with '+money(+st.rin||0)+' a month reinvested and the rest of the payouts taken out':' and every payout reinvested')+'. Change the market at the top to compare. Before tax and fees on your side. Payouts and returns change, and past returns don’t promise future ones.</p>';
+    var o=keep&&el.querySelector('.ic-pout');if(o)o.innerHTML=outP;else el.innerHTML=head+'<div class="ic-pout">'+outP+'</div>';
   }
   /* ---- scenarios, mix compare, payout check ---- */
   function fsOf(sel,order){return order.map(function(t){if(/\.U$/.test(t))mkU(t.slice(0,-2));return BY[t]?{t:t,a:+sel[t]||0,y:info(t).y/100,yg:info(t).yg,lr:longRun(BY[t])}:null}).filter(function(f){return f&&f.a>0})}
@@ -3132,18 +3133,19 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   var SC=[['Strong','18% a year',function(){return 18}],['Average','12% a year',function(){return 12}],['Weak','8% a year',function(){return 8}],['Crash in year 2','−30%, payouts cut 30%',function(f,k){return k===1?-30:12},function(k){return k===1?0.7:1}]];
   function takeTxt(){return st.take==='all'?'every payout taken out':st.take==='none'?'every payout reinvested':st.take==='fixed'?money(+st.rin||0)+' a month reinvested, the rest taken out':'the safe amount taken out'}
   function needV(){if(+st.need>0)return +st.need;var A=appS();return A&&A.goal&&+A.goal.need>0?+A.goal.need:0}
-  function scen(){var el=$('icScen');if(!el)return;var fs=fsOf(st.sel,st.order),tot=fs.reduce(function(s,f){return s+f.a},0),need=needV();
+  function scen(keep){var el=$('icScen');if(!el)return;var fs=fsOf(st.sel,st.order),tot=fs.reduce(function(s,f){return s+f.a},0),need=needV();
     var head='<div class="ic-ph"><div><p class="eyebrow">Every market, side by side</p><h2>How your mix holds up</h2></div>'+
       '<div class="ic-pctl"><div><span class="ic-pl">Your monthly costs</span><label class="ic-amt ic-need"><span>$</span><input type="number" inputmode="decimal" min="0" step="100" data-need value="'+(need||'')+'" placeholder="7000" aria-label="Your monthly costs"></label></div></div></div>';
-    if(!(tot>0)){el.innerHTML=head+'<p class="ic-pe">Add funds and amounts in Your mix to compare markets.</p>';return}
+    var put=function(h){var o=keep&&el.querySelector('.ic-sout');if(o)o.innerHTML=h;else el.innerHTML=head+'<div class="ic-sout">'+h+'</div>'};
+    if(!(tot>0)){put('<p class="ic-pe">Add funds and amounts in Your mix to compare markets.</p>');return}
     var Y=st.yrs,cols=[1,3,5,Y].filter(function(v,i,a){return v<=Y&&a.indexOf(v)===i});
     var rows=SC.map(function(s){var r=simulate(fs,s[2],Y,s[3]),fr='';
       if(need>0){var hit=-1;for(var k=0;k<r.length;k++)if(r[k].pay/12>=2*need){hit=k;break}fr=hit===0?'<b class="ok">Year 1</b>':hit>0?'<b class="ok">Year '+(hit+1)+'</b>':'<b class="no">Not in '+Y+' years</b>'}
       var low=Math.min.apply(null,r.map(function(x){return x.take/12}));
       return '<tr><th scope="row">'+s[0]+'<small>'+s[1]+'</small></th>'+cols.map(function(c){var x=r[c-1];return '<td><b>'+money(x.bal)+'</b><small>spend '+money(x.take/12)+'/mo</small></td>'}).join('')+
         (need>0?'<td>'+fr+'<small>'+(low>=need?'Spending covers your costs every year':'Spending dips to '+money(low)+' a month')+'</small></td>':'')+'</tr>'}).join('');
-    el.innerHTML=head+'<div class="ic-sw2"><table class="ic-sct"><thead><tr><th scope="col">Market</th>'+cols.map(function(c){return '<th scope="col">Year '+c+'</th>'}).join('')+(need>0?'<th scope="col">Payouts reach 2× your costs</th>':'')+'</tr></thead><tbody>'+rows+'</tbody></table></div>'+
-      '<p class="ic-pn">Each cell shows the balance, then what’s left to spend each month, with '+takeTxt()+' (change it in “Where this could go”). The yearly returns are total returns, price change plus payouts, for every fund. '+(need>0?'Freedom means payouts of <b>2× your costs</b>, '+money(2*need)+' a month: half pays your month, half keeps growing. ':'Add your monthly costs to see when payouts reach 2× them. ')+'Before tax. A what-if, not a forecast.</p>';
+    put('<div class="ic-sw2"><table class="ic-sct"><thead><tr><th scope="col">Market</th>'+cols.map(function(c){return '<th scope="col">Year '+c+'</th>'}).join('')+(need>0?'<th scope="col">Payouts reach 2× your costs</th>':'')+'</tr></thead><tbody>'+rows+'</tbody></table></div>'+
+      '<p class="ic-pn">Each cell shows the balance, then what’s left to spend each month, with '+takeTxt()+' (change it in “Where this could go”). The yearly returns are total returns, price change plus payouts, for every fund. '+(need>0?'Freedom means payouts of <b>2× your costs</b>, '+money(2*need)+' a month: half pays your month, half keeps growing. ':'Add your monthly costs to see when payouts reach 2× them. ')+'Before tax. A what-if, not a forecast.</p>');
   }
   function mixStats(sel,order){var fs=fsOf(sel,order),tot=0,yr=0,yg=0,tr=0;fs.forEach(function(f){tot+=f.a;yr+=f.a*f.y;yg+=f.a*f.yg/100;tr+=f.a*f.lr[0]/100});
     if(!(tot>0))return null;var a=simulate(fs,SC[1][2],st.yrs),c=simulate(fs,SC[3][2],st.yrs,SC[3][3]);
@@ -3187,8 +3189,8 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   function hdr(){var h=document.querySelector('header.top'),pg=$('income');if(h&&pg)pg.style.setProperty('--ic-hdr',h.offsetHeight+'px')}
   hdr();addEventListener('resize',hdr);addEventListener('hashchange',function(){setTimeout(hdr,50)});try{new ResizeObserver(hdr).observe(document.querySelector('header.top'))}catch(e){}
   $('icFlt').addEventListener('click',function(e){var b=e.target.closest('[data-flt]');if(!b)return;st.flt=b.dataset.flt;save();list()});
-  $('icProj').addEventListener('input',function(e){if(e.target.dataset.rin==null)return;st.rin=Math.max(0,+e.target.value||0);save();keepFocus(function(){proj();scen();cmp()})});
-  $('icScen').addEventListener('input',function(e){if(e.target.dataset.need==null)return;st.need=Math.max(0,+e.target.value||0);save();keepFocus(scen)});
+  $('icProj').addEventListener('input',function(e){if(e.target.dataset.rin==null)return;st.rin=Math.max(0,+e.target.value||0);save();proj(1);scen(1);cmp()});
+  $('icScen').addEventListener('input',function(e){if(e.target.dataset.need==null)return;st.need=Math.max(0,+e.target.value||0);save();scen(1)});
   $('icCmp').addEventListener('click',function(e){var b=e.target.closest('[data-cmp]');if(!b)return;var a=b.dataset.cmp;
     if(a==='keep'){var o=st.order.filter(function(t){return (+st.sel[t]||0)>0}),sl={};o.forEach(function(t){sl[t]=+st.sel[t]});st.cmp={sel:sl,order:o}}
     else if(a==='clear')st.cmp=null;
