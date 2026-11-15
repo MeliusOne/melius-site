@@ -1021,6 +1021,16 @@ html:not(.prelaunch) .pl-keep{display:none!important}
 .faith-themes q{font-family:var(--display);font-style:italic;font-size:19px;line-height:1.35;color:var(--ink);quotes:'“' '”'}
 .faith-themes small{font-weight:700;color:var(--amber);font-size:13px}
 @media (max-width:820px){.faith-grid{grid-template-columns:1fr;gap:24px}}
+.nm-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:36px;margin-top:22px;align-items:start}
+.nm-txt{display:grid;gap:14px;max-width:62ch;min-width:0}.nm-txt p{margin:0;line-height:1.65}
+.nm-card{background:var(--band);border:1px solid var(--line);border-radius:18px;padding:22px 22px 20px;display:grid;gap:14px;min-width:0}
+.nm-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:12px}
+.nm-w{font-family:var(--display);font-size:30px;line-height:1;color:var(--ink)}
+.nm-m{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--amber)}
+.nm-sum{margin:0;font-family:var(--display);font-style:italic;font-size:22px;color:var(--ink)}
+.nm-verse{margin:0;display:grid;gap:4px}.nm-verse q{font-family:var(--display);font-style:italic;font-size:17px;line-height:1.4;quotes:'“' '”';color:var(--muted)}
+.nm-verse small{font-weight:700;color:var(--amber);font-size:13px}
+@media (max-width:820px){.nm-grid{grid-template-columns:1fr;gap:24px}}
 .fs-verse{font-family:var(--display);font-style:italic;font-size:15px;line-height:1.4;color:var(--amber)}
 .fs-verse small{display:block;margin-top:3px;font-family:var(--body,inherit);font-style:normal;font-weight:700;font-size:12px}
 .fs-mod{margin-top:auto;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--amber)}
@@ -1374,7 +1384,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mainnav"><span></span><span></span><span></span></button>
     <nav aria-label="Main" id="mainnav"><ul>
       <li><a href="#home" data-nav="home">Home</a></li>
-      <li data-pl="hide"><a href="#about" data-nav="about">About</a></li>
+      <li><a href="#about" data-nav="about">About</a></li>
       <li data-coach="hide" data-pl="hide"><a href="#coaching" data-nav="coaching">Coaching</a></li>
       <li data-pl="hide"><a href="#learn" data-nav="learn">Freedom Steps</a></li>
       <li><a href="#funds" data-nav="funds">Funds</a></li>
@@ -1565,7 +1575,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
         <div class="stack">
           <p data-coach="hide" class="eyebrow">About your coach</p><p data-coach="show" class="eyebrow">About me</p>
           <h2 data-coach="hide">Obi Oji, founder</h2><h2 data-coach="show">Obi Oji</h2>
-          <p data-coach="hide" class="lede">I came to Canada to build a better life for my family, and learned the hard way that a salary alone rarely gets you there. Today our investments pay us every month, and we’re building toward the day they cover all of our family’s bills. I started Melius One to teach other families how to do the same, clearly and honestly.</p><p data-coach="show" class="lede">I came to Canada to build a better life for my family, and learned the hard way that a salary alone rarely gets you there. Today our investments pay us every month, and we’re building toward the day they cover all of our family’s bills. I built these free tools to share what I’ve learned with other families, clearly and honestly.</p>
+          <p data-coach="hide" class="lede">I came to Canada to build a better life for my family, and learned the hard way that a salary alone rarely gets you there. Today our investments pay us every month, and we’re building toward the day they cover all of our family’s bills. I started Melius One to teach other families how to do the same, clearly and honestly.</p><p data-coach="show" class="lede">I came to Canada to build a better life for my family, and learned the hard way that a salary alone rarely gets you there. Today our investments pay us every month, and we’re building toward the day they cover all of our family’s bills. Melius One is how I share what I’ve learned with other families: free tools and a clear path, one step at a time.</p>
           <div class="stats">
             <div class="stat"><b>24</b><span>Paydays a year from our investments</span></div>
             <div class="stat"><b>6</b><span>A family of six, investing for freedom</span></div>
@@ -1588,14 +1598,14 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     <div class="wrap">
       <p class="eyebrow">My story</p>
       <h2>How I got here</h2>
-      <p class="lede" style="margin-top:12px">It wasn’t a straight line. Every wrong turn taught me something I now teach.</p>
+      <p class="lede" style="margin-top:12px">It wasn’t a straight line. Every wrong turn taught me something I now <span data-coach="hide">teach</span><span data-coach="show">share</span>.</p>
       <div class="story">
         <ol class="journey">
           <li><span class="when">Before Canada</span><h3>Building a real estate business</h3><p>I ran my own real estate business. It taught me how money really moves: cash flow, debt and patience.</p></li>
           <li><span class="when">The move</span><h3>Starting over in Canada</h3><p>We moved to Canada for our children’s future. New country, new rules, and a lot to learn about how money works here.</p></li>
           <li><span class="when">The hard lessons</span><h3>Chasing returns</h3><p>I tried different investment strategies, crypto included, and lost real money. The lesson stuck: without a plan and rules, a strategy is just a gamble.</p></li>
           <li><span class="when">Until 2022</span><h3>A transportation company</h3><p>I started a transportation company. It didn’t go the way I hoped, and I sold it in 2022. Knowing when to stop is a skill too.</p></li>
-          <li><span class="when">2022</span><h3>Rebuilding, with rules this time</h3><p data-coach="hide">The same year, I joined one of Canada’s big banks and rebuilt our portfolio with the proceeds from my real estate and other businesses. Some of it was luck, honestly: Nvidia, Palantir and Bitcoin all paid off, and I still hold Bitcoin through Strategy (MSTR). The rest was discipline: income funds and clear rules, which is the part I teach.</p><p data-coach="show">The same year, I started a new career and rebuilt our portfolio with the proceeds from my real estate and other businesses. Some of it was luck, honestly: Nvidia, Palantir and Bitcoin all paid off, and I still hold Bitcoin through Strategy (MSTR). The rest was discipline: income funds and clear rules, which is the part I teach.</p></li>
+          <li><span class="when">2022</span><h3>Rebuilding, with rules this time</h3><p data-coach="hide">The same year, I joined one of Canada’s big banks and rebuilt our portfolio with the proceeds from my real estate and other businesses. Some of it was luck, honestly: Nvidia, Palantir and Bitcoin all paid off, and I still hold Bitcoin through Strategy (MSTR). The rest was discipline: income funds and clear rules, which is the part I <span data-coach="hide">teach</span><span data-coach="show">share</span>.</p><p data-coach="show">The same year, I started a new career and rebuilt our portfolio with the proceeds from my real estate and other businesses. Some of it was luck, honestly: Nvidia, Palantir and Bitcoin all paid off, and I still hold Bitcoin through Strategy (MSTR). The rest was discipline: income funds and clear rules, which is the part I <span data-coach="hide">teach</span><span data-coach="show">share</span>.</p></li>
           <!-- AFTER RESIGNING: change this step back to "Living on what we built" / "Our investments now pay our family’s bills." -->
           <li class="now"><span class="when">Today</span><h3>Building toward freedom</h3><p>Our investments pay us every month, and we’re working toward the day they cover all of our family’s bills. Melius One is how I share the path, mistakes included, so you can skip the expensive ones.</p></li>
         </ol>
@@ -1607,8 +1617,28 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
           <p>Retiring early was never about doing nothing. It is about doing what matters, while the people who matter most still want you around.</p>
           <p>And the strangest gift of all: you learn to love Mondays again, because Monday finally belongs to you.</p>
           <p class="note">That is what I am building for my family, and what I want to help yours build too.</p>
-          <p class="motto"><span lang="la">Dum vivas, fac melius.</span><small>As long as you live, do better. My motto, and the promise behind the name Melius.</small></p>
+          <p class="motto"><span lang="la">Dum vivas, fac melius.</span><small>As long as you live, do better. My motto, and the promise behind the name Melius One.</small></p>
         </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="name">
+    <div class="wrap">
+      <p class="eyebrow">The name</p>
+      <h2>Why Melius One</h2>
+      <div class="nm-grid">
+        <div class="nm-txt">
+          <p><b lang="la">Melius</b> is Latin for “better,” the word at the heart of improvement. It comes from my motto, <i lang="la">Dum vivas, fac melius</i>: as long as you live, do better.</p>
+          <p><b>One</b> is for one step at a time. Nobody gets free in a single leap. You get there the way my family is getting there: one payday, one paid-off debt, one step in the right order. You don’t need to see the whole road, just the next step.</p>
+          <p>Melius One is where I share that path: the Freedom Steps, and free tools that make them easier. Melius Money plans every payday and shows your freedom number. Melius Learn and Money Quest teach the ideas behind it, for you and for your kids. Take what helps.</p>
+        </div>
+        <div class="nm-card" aria-label="What the name means">
+          <div class="nm-row"><span class="nm-w" lang="la">Melius</span><span class="nm-m">Latin for “better”</span></div>
+          <div class="nm-row"><span class="nm-w">One</span><span class="nm-m">One step at a time</span></div>
+          <p class="nm-sum">Better, one step at a time.</p>
+          <p class="nm-verse" data-verse><q>Your word is a lamp to my feet and a light to my path.</q><small>Psalm 119:105 · BSB</small></p>
+        </div>
       </div>
     </div>
   </section>
@@ -1661,7 +1691,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       </div>
     </div>
   </section>
-  <section data-coach="hide" class="next-wrap"><div class="wrap"><a class="next" href="#coaching"><span class="eyebrow">Next</span><span class="next-t">How the coaching works</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section><section data-coach="show" class="next-wrap"><div class="wrap"><a class="next" href="#learn"><span class="eyebrow">Next</span><span class="next-t">How money works</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section>
+  <section data-coach="hide" class="next-wrap"><div class="wrap"><a class="next" href="#coaching"><span class="eyebrow">Next</span><span class="next-t">How the coaching works</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section><section data-coach="show" data-pl="hide" class="next-wrap"><div class="wrap"><a class="next" href="#learn"><span class="eyebrow">Next</span><span class="next-t">How money works</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section><section class="next-wrap pl-keep"><div class="wrap"><a class="next" href="#tools"><span class="eyebrow">Next</span><span class="next-t">Try Melius Money, free</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section>
 </div>
 <div class="page" id="coaching" data-page="coaching">
   <section id="how">
@@ -2266,7 +2296,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     var h=decodeURIComponent((location.hash||'#home').slice(1))||'home';
     var target=document.getElementById(h), pg=null;
     if(!window.COACH_ON){var cb={coaching:1,book:1};var cp=target&&(target.classList.contains('page')?target:target.closest('.page'));if((cp&&cb[cp.id])||h==='accounts'){target=null;h='home'}}
-    if(window.PRELAUNCH){var blk={about:1,coaching:1,learn:1,book:1};var tp=target&&(target.classList.contains('page')?target:target.closest('.page'));if(tp&&blk[tp.id]){target=null;h='home'}}
+    if(window.PRELAUNCH){var blk={coaching:1,learn:1,book:1};var tp=target&&(target.classList.contains('page')?target:target.closest('.page'));if(tp&&blk[tp.id]){target=null;h='home'}}
     if(target&&target.classList.contains('page')) pg=target;
     else if(target) pg=target.closest('.page');
     if(!pg){pg=document.getElementById('home');target=null;}
