@@ -1276,8 +1276,17 @@ main{min-height:calc(100vh - 260px)}
 .ic-need{max-width:170px}
 .ic-vd{display:inline-block;font-size:12.5px;font-weight:700;padding:4px 10px;border-radius:999px;white-space:nowrap}
 .ic-vd.ok{background:rgba(46,139,87,.12);color:#2E8B57}.ic-vd.mid{background:rgba(168,128,63,.15);color:var(--amber)}.ic-vd.no{background:rgba(163,51,42,.12);color:var(--danger)}.ic-vd.wait{background:var(--soft);color:var(--muted)}
-#icCmp .ic-pacts{display:flex;gap:10px;flex-wrap:wrap}
-@media (max-width:1100px){#icScen,#icTr,#icCmp{align-self:stretch;width:100%;box-sizing:border-box}}
+#icProj .ic-pacts{display:flex;gap:10px;flex-wrap:wrap}
+.ic-fv{display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none;margin-top:-4px}
+.ic-fv::-webkit-scrollbar{display:none}
+.ic-fv button{font:inherit;font-size:14px;font-weight:700;color:var(--muted);background:none;border:0;border-bottom:2px solid transparent;padding:10px 12px;cursor:pointer;white-space:nowrap}
+.ic-fv button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--amber)}
+.ic-fv button:focus-visible{outline:2px solid var(--amber);outline-offset:-2px}
+.ic-pout{display:flex;flex-direction:column;gap:18px;min-width:0}
+.ic-rn .ic-vd{font-size:11px;padding:2px 8px;margin-left:6px;vertical-align:1px}
+.ic-plan.ic-plan1{display:block;padding:16px 22px}
+.ic-p1{color:var(--ink);text-decoration:none;font-size:15px}.ic-p1 b{color:var(--amber)}.ic-p1:hover b{text-decoration:underline}
+@media (max-width:1100px){#icProj{align-self:stretch;width:100%;box-sizing:border-box}}
 
 
 /* income workspace layout */
@@ -2288,9 +2297,6 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
           </div>
           <section class="card ic-plan" id="icPlan" aria-live="polite"></section>
           <section class="card ic-proj" id="icProj" aria-live="polite"></section>
-          <section class="card ic-proj" id="icScen" aria-live="polite"></section>
-          <section class="card ic-proj" id="icTr" aria-live="polite"></section>
-          <section class="card ic-proj" id="icCmp" aria-live="polite"></section>
         </div>
       </div>
     <nav class="ic-tabs" id="icTabs" aria-label="Calculator sections">
@@ -2303,7 +2309,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       <p><b>How this works.</b> Each fund’s yield is its latest regular payout per unit, times the number of payouts in a year, divided by its latest closing price. Your amount times that yield gives a yearly payout. Each fund is shown on its own schedule: most pay monthly, some twice a month, a few quarterly. When your mix has more than one schedule, the total is shown per month. The two-week paycheque figure is the yearly total spread over 26 paydays, for comparing with a biweekly paycheque.</p>
       <p><b>Withdraw and reinvest.</b> A fund grows by its total return: the change in its unit price plus its payouts. If you withdraw less than that total return, minus about 2.5% for inflation, the balance keeps growing in real terms. By default we use each fund’s longest record (10, 5 or 3 years, or since launch), its 1-year return for newer funds, and 8% when there’s no record yet. Switch the market to see a strong year (+30%, like 2025), an ordinary one (+12%) or a bear year (−25%). Past returns don’t promise future ones, so check again each year.</p>
       <p><b>Projection.</b> “Where this could go” grows each fund by the return the market setting gives it, pays its current yield on its balance every year, and takes out what you choose: every payout, the safe amount, or nothing. In Bear, the first year falls 25% and later years return 12%. It is a what-if, not a forecast.</p>
-      <p><b>Every market, side by side.</b> Runs your mix through four markets with the same take-out choice: strong (18% a year total return), average (12%), weak (8%), and a crash in year 2 (−30%, with payouts cut 30% that year, then 12%). Freedom means payouts of 2× your monthly costs: half pays your month, half keeps growing. “Is the payout earned?” compares each fund’s yield with its own total-return record. “Compare two mixes” keeps one mix so you can try another against it.</p>
+      <p><b>Every market, side by side.</b> Runs your mix through four markets with the same take-out choice: strong (18% a year total return), average (12%), weak (8%), and a crash in year 2 (−30%, with payouts cut 30% that year, then 12%). Freedom means payouts of 2× your monthly costs: half pays your month, half keeps growing. “Payout check” and the label beside each fund compare its yield with its own total-return record. “Compare” keeps one mix so you can try another against it.</p>
       <p><b>U.S. dollars.</b> U.S.-listed funds and the .U units of Canadian funds show in U.S. dollars. Totals are in Canadian dollars at the latest exchange rate. Their returns are in U.S. dollars, so a change in the exchange rate isn’t included. In a TFSA or a non-registered account, the U.S. keeps 15% of a U.S.-listed fund’s payouts (in a non-registered account you can usually claim it back as a foreign tax credit). In an RRSP, it doesn’t.</p>
       <p><b>Payouts are not guaranteed.</b> Funds change their payouts often, and very high yields usually include some of your own money paid back (return of capital) and can wear down the unit price over time. Funds marked “Leverage” borrow to invest, so they can fall faster. Figures are before tax.</p>
       <p>This calculator is financial education, not investment advice or a recommendation to buy any fund. Compare funds side by side in the <a href="#funds">fund directory</a><span data-pl="hide" data-coach="hide">, or <a href="#book">book a free intro session</a> to build a plan that fits your family</span>.</p>
@@ -2972,9 +2978,9 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
 /* Income calculator: reads /data/funds-live.json (refreshed nightly), falls back to the FUNDS yields */
 (function(){
   if(typeof FUNDS==='undefined'||!document.getElementById('income'))return;
-  var KEY='melius-income-v2',BY={},L={},meta=null,st={sel:{},order:[],per:'bi',total:0,pct:{},mkt:'rec',yrs:10,take:'safe',flt:'all',cur:{},acct:'tfsa',rin:1000},INFL=2.5;
+  var KEY='melius-income-v2',BY={},L={},meta=null,st={sel:{},order:[],per:'bi',total:0,pct:{},mkt:'rec',yrs:10,take:'safe',flt:'all',cur:{},acct:'tfsa',rin:1000,fv:'over'},INFL=2.5;
   FUNDS.forEach(function(f){BY[f.t]=f});
-  try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.sel&&s.order){st=s;st.order=st.order.filter(function(t){return BY[t]||(/\.U$/.test(t)&&BY[t.slice(0,-2)])});st.pct=st.pct||{};st.total=+st.total||0;st.mkt=st.mkt||'rec';st.yrs=st.yrs||10;st.take=st.take||'safe';st.flt=st.flt||'all';st.tab=st.tab||'';st.cur=st.cur||{};st.acct=st.acct||'tfsa';st.rin=st.rin!=null?st.rin:1000;
+  try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.sel&&s.order){st=s;st.order=st.order.filter(function(t){return BY[t]||(/\.U$/.test(t)&&BY[t.slice(0,-2)])});st.pct=st.pct||{};st.total=+st.total||0;st.mkt=st.mkt||'rec';st.yrs=st.yrs||10;st.take=st.take||'safe';st.flt=st.flt||'all';st.tab=st.tab||'';st.cur=st.cur||{};st.acct=st.acct||'tfsa';st.rin=st.rin!=null?st.rin:1000;st.fv=st.fv||'over';
     Object.keys(st.cur).forEach(function(b){if(st.cur[b]!=='USD'||st.sel[b]==null)return;var k=b+'.U',ix=st.order.indexOf(b);if(st.sel[k]==null){st.sel[k]=st.sel[b];if(st.pct[b]!=null)st.pct[k]=st.pct[b];if(ix>-1)st.order[ix]=k}else if(ix>-1){st.sel[k]=(+st.sel[k]||0)+(+st.sel[b]||0);st.order.splice(ix,1)}delete st.sel[b];delete st.pct[b]});st.cur={};
     st.order.forEach(function(t){if(/\.U$/.test(t))mkU(t.slice(0,-2))})}}catch(e){}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
@@ -3019,7 +3025,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     return {pay:'<b>'+cm(y/n,t,1)+' <span style="font-weight:500;font-size:13px;color:var(--muted)">'+(FQ[n]||'')+'</span></b><small><span class="w">withdraw '+cm(k/n,t,1)+'</span> · <span class="r">reinvest '+cm(Math.max(0,y-k)/n,t,1)+'</span></small>',det:det}}
   function mix(){
     $('icMix').innerHTML=st.order.map(function(t){var f=BY[t],i=info(t),a=+st.sel[t]||0,r=rowHtml(t);
-      return '<div class="ic-row"><span class="ic-rn"><span class="ic-sw" data-sw="'+t+'"></span><b>'+t+'</b>'+(f.lst==='US'?'<span class="ic-lev ic-us">U.S.</span>':f.base?'<span class="ic-lev ic-us">US$</span>':'')+(f.lev?'<span class="ic-lev">Leverage</span>':'')+'<small>'+i.yg.toFixed(2)+'%'+(usL(t)&&wh(t)<1?' ('+i.y.toFixed(2)+'% after U.S. tax)':'')+' · pays '+(FREQ[i.n]||'')+'</small></span>'+
+      return '<div class="ic-row"><span class="ic-rn"><span class="ic-sw" data-sw="'+t+'"></span><b>'+t+'</b>'+(f.lst==='US'?'<span class="ic-lev ic-us">U.S.</span>':f.base?'<span class="ic-lev ic-us">US$</span>':'')+(f.lev?'<span class="ic-lev">Leverage</span>':'')+'<small>'+i.yg.toFixed(2)+'%'+(usL(t)&&wh(t)<1?' ('+i.y.toFixed(2)+'% after U.S. tax)':'')+' · pays '+(FREQ[i.n]||'')+'</small>'+vdBadge(t)+'</span>'+
         '<span class="ic-in"><label class="ic-amt'+(isUSD(t)?' usd':'')+'"><span>'+(isUSD(t)?'US$':'$')+'</span><input type="number" inputmode="decimal" min="0" step="100" data-amt="'+t+'" value="'+(a?r2(shown(t,a)):'')+'" placeholder="0" aria-label="Amount in '+t+'"></label>'+
         '<label class="ic-pct"><input type="number" inputmode="decimal" min="0" max="100" step="1" data-pct="'+t+'" value="'+pctStr(t)+'" placeholder="0" aria-label="Percent of total in '+t+'"><span>%</span></label></span>'+
         '<span class="ic-rp" data-rp="'+t+'">'+r.pay+'</span>'+
@@ -3027,6 +3033,8 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
         '<span class="ic-rd" data-rd="'+t+'">'+r.det+'</span></div>'}).join('');
     var n=st.order.length;if($('icTotL'))$('icTotL').textContent=st.order.some(isUSD)?'Total to invest, in C$':'Total to invest';$('icEmpty').hidden=n>0;$('icCount').textContent=n?n+' fund'+(n>1?'s':''):'';if($('icTotal')&&document.activeElement!==$('icTotal'))$('icTotal').value=st.total||'';alloc();
   }
+  function vdOf(t){var lr=longRun(BY[t]),yg=info(t).yg,g=yg-lr[0];if(/1-year|assumed|since 202[5-9]/.test(lr[1]))return ['wait','Too new to judge'];return g<=0?['ok','Earned']:g<=3?['mid','Close']:['no','Pays more than it earns']}
+  function vdBadge(t){var v=vdOf(t);return '<span class="ic-vd '+v[0]+'" title="Yield compared with its total-return record">'+v[1]+'</span>'}
   function r2(v){return Math.round(v*100)/100}
   function shown(t,a){return isUSD(t)?Math.round(a/fx()):a}
   function sum(){var x=0;st.order.forEach(function(t){x+=+st.sel[t]||0});return x}
@@ -3079,7 +3087,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   var AK='melius-payday-v1';
   function appS(){try{var o=JSON.parse(localStorage.getItem(AK)||'null');return o&&o.goal&&!o.example?o:null}catch(e){return null}}
   function plan(tot,yr){var el=$('icPlan');if(!el)return;var A=appS(),yl=tot>0?yr/tot*100:0,h='',bk=$('icBack');if(bk)bk.hidden=!(A||/\/app\//.test(document.referrer||''));
-    if(!A){el.innerHTML='<div><p class="eyebrow">Melius Money</p><h3>Turn this into a plan</h3><p class="ic-pn">The free budget app works out how much you can invest each month, clears your debt first, and shows when your payouts cover your bills. No sign-up. Your numbers stay on your device.</p></div><div class="ic-pacts"><a class="btn" href="/app/" data-track="income_to_app">Open Melius Money →</a></div>';return}
+    if(!A){el.classList.add('ic-plan1');el.innerHTML='<a class="ic-p1" href="/app/" data-track="income_to_app">Turn this into a plan in <b>Melius Money</b> <span aria-hidden="true">→</span></a>';return}el.classList.remove('ic-plan1');
     var g=A.goal,need=+g.need||0,inv=+g.invested||0,mo=yr/12,cov=need>0?mo/need:0,saved=tot>0&&Math.round(inv)===Math.round(tot)&&Math.abs((+g.rate||0)-Math.round(yl*10)/10)<0.05;
     if(tot<=0)h='<div><p class="eyebrow">Your Melius Money plan</p><h3>'+(inv>0?'You have '+money(inv)+' invested':'Build a mix to compare with your plan')+'</h3><p class="ic-pn">'+(need>0?'Your plan needs '+money(need)+' a month. Add funds to see how much of it they cover.':'Add your monthly need on the Goals tab of Melius Money.')+'</p></div>';
     else if(need>0)h='<div><p class="eyebrow">Your Melius Money plan</p><h3>This mix covers '+Math.round(cov*100)+'% of your '+money(need)+' a month</h3><div class="ic-pbar" role="img" aria-label="'+Math.round(cov*100)+'% covered"><i style="width:'+Math.min(100,cov*100).toFixed(1)+'%"></i></div><p class="ic-pn" style="margin-top:10px">'+(cov>=1?'Your payouts cover your whole month. That’s Freedom.':'To cover all of it at this mix’s '+yl.toFixed(1)+'% yield, you’d need about <b>'+money(need*12/(yl/100))+'</b> invested.')+'</p></div>';
@@ -3097,7 +3105,9 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     var segs=function(id,opts,cur){return '<div class="ic-pseg" role="group" aria-label="'+id+'">'+opts.map(function(o){return '<button type="button" data-'+id+'="'+o[0]+'" aria-pressed="'+(String(cur)===String(o[0]))+'">'+o[1]+'</button>'}).join('')+'</div>'};
     var head='<div class="ic-ph"><div><p class="eyebrow">Where this could go</p><h2>Your mix over '+st.yrs+' years</h2></div>'+
       '<div class="ic-pctl"><div><span class="ic-pl">Years</span>'+segs('yrs',[[5,'5'],[10,'10'],[15,'15'],[20,'20']],st.yrs)+'</div>'+
-      '<div><span class="ic-pl">Each year you take out</span>'+segs('take',[['all','All payouts'],['safe','The safe amount'],['fixed','Reinvest a set amount'],['none','Nothing']],st.take)+'</div>'+(st.take==='fixed'?'<div><span class="ic-pl">Reinvest each month</span><label class="ic-amt ic-need"><span>$</span><input type="number" inputmode="decimal" min="0" step="100" data-rin value="'+(+st.rin||'')+'" placeholder="4000" aria-label="Amount to reinvest each month"></label></div>':'')+'</div></div>';
+      '<div><span class="ic-pl">Your monthly costs</span><label class="ic-amt ic-need"><span>$</span><input type="number" inputmode="decimal" min="0" step="100" data-need value="'+(needV()||'')+'" placeholder="7000" aria-label="Your monthly costs"></label></div>'+
+      '<div><span class="ic-pl">Each year you take out</span>'+segs('take',[['all','All payouts'],['safe','The safe amount'],['fixed','Reinvest a set amount'],['none','Nothing']],st.take)+'</div>'+(st.take==='fixed'?'<div><span class="ic-pl">Reinvest each month</span><label class="ic-amt ic-need"><span>$</span><input type="number" inputmode="decimal" min="0" step="100" data-rin value="'+(+st.rin||'')+'" placeholder="4000" aria-label="Amount to reinvest each month"></label></div>':'')+'</div></div>'+
+      '<div class="ic-fv" role="tablist" aria-label="Views">'+[['over','Over time'],['mkts','Every market'],['cmp','Compare'],['chk','Payout check']].map(function(v){return '<button type="button" role="tab" data-fv="'+v[0]+'" aria-selected="'+(st.fv===v[0])+'">'+v[1]+'</button>'}).join('')+'</div>';
     if(!(tot>0)){el.innerHTML=head+'<p class="ic-pe">Add funds and amounts in Your mix to see a projection.</p>';return}
     var past=fs.reduce(function(s,f){return s+f.a*f.lr},0)/tot;
     var mk=st.mkt, mkLabel={rec:'each fund’s own record',bull:'a bull market (+30% a year)',base:'a base market (+12% a year)',bear:'a bear year first (−25%), then +12% a year'}[mk]||'';
@@ -3119,6 +3129,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
       '<circle cx="'+X(st.yrs)+'" cy="'+Y(end)+'" r="4" class="dot"/>'+xl+'</svg>';
     var outP='<div class="ic-pbody"><div class="ic-ptiles">'+tiles.map(function(t){return '<div class="ic-pt"><span>'+t[0]+'</span>'+t[1]+'</div>'}).join('')+'</div>'+svg+'</div>'+
       '<p class="ic-pn">Assumes '+mkLabel+', with each fund paying its current yield on its balance every year'+(st.take==='safe'?' and the safe amount taken out (its return minus '+INFL+'% for inflation, never more than it pays)':st.take==='all'?' and every payout taken out':st.take==='fixed'?' with '+money(+st.rin||0)+' a month reinvested and the rest of the payouts taken out':' and every payout reinvested')+'. Change the market at the top to compare. Before tax and fees on your side. Payouts and returns change, and past returns don’t promise future ones.</p>';
+    if(st.fv!=='over'){var tmp={innerHTML:''};(st.fv==='mkts'?scen:st.fv==='cmp'?cmp:trc)(tmp);outP=tmp.innerHTML}
     var o=keep&&el.querySelector('.ic-pout');if(o)o.innerHTML=outP;else el.innerHTML=head+'<div class="ic-pout">'+outP+'</div>';
   }
   /* ---- scenarios, mix compare, payout check ---- */
@@ -3133,9 +3144,8 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   var SC=[['Strong','18% a year',function(){return 18}],['Average','12% a year',function(){return 12}],['Weak','8% a year',function(){return 8}],['Crash in year 2','−30%, payouts cut 30%',function(f,k){return k===1?-30:12},function(k){return k===1?0.7:1}]];
   function takeTxt(){return st.take==='all'?'every payout taken out':st.take==='none'?'every payout reinvested':st.take==='fixed'?money(+st.rin||0)+' a month reinvested, the rest taken out':'the safe amount taken out'}
   function needV(){if(+st.need>0)return +st.need;var A=appS();return A&&A.goal&&+A.goal.need>0?+A.goal.need:0}
-  function scen(keep){var el=$('icScen');if(!el)return;var fs=fsOf(st.sel,st.order),tot=fs.reduce(function(s,f){return s+f.a},0),need=needV();
-    var head='<div class="ic-ph"><div><p class="eyebrow">Every market, side by side</p><h2>How your mix holds up</h2></div>'+
-      '<div class="ic-pctl"><div><span class="ic-pl">Your monthly costs</span><label class="ic-amt ic-need"><span>$</span><input type="number" inputmode="decimal" min="0" step="100" data-need value="'+(need||'')+'" placeholder="7000" aria-label="Your monthly costs"></label></div></div></div>';
+  function scen(el){var keep=0;var fs=fsOf(st.sel,st.order),tot=fs.reduce(function(s,f){return s+f.a},0),need=needV();
+    var head='';
     var put=function(h){var o=keep&&el.querySelector('.ic-sout');if(o)o.innerHTML=h;else el.innerHTML=head+'<div class="ic-sout">'+h+'</div>'};
     if(!(tot>0)){put('<p class="ic-pe">Add funds and amounts in Your mix to compare markets.</p>');return}
     var Y=st.yrs,cols=[1,3,5,Y].filter(function(v,i,a){return v<=Y&&a.indexOf(v)===i});
@@ -3145,13 +3155,13 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
       return '<tr><th scope="row">'+s[0]+'<small>'+s[1]+'</small></th>'+cols.map(function(c){var x=r[c-1];return '<td><b>'+money(x.bal)+'</b><small>spend '+money(x.take/12)+'/mo</small></td>'}).join('')+
         (need>0?'<td>'+fr+'<small>'+(low>=need?'Spending covers your costs every year':'Spending dips to '+money(low)+' a month')+'</small></td>':'')+'</tr>'}).join('');
     put('<div class="ic-sw2"><table class="ic-sct"><thead><tr><th scope="col">Market</th>'+cols.map(function(c){return '<th scope="col">Year '+c+'</th>'}).join('')+(need>0?'<th scope="col">Payouts reach 2× your costs</th>':'')+'</tr></thead><tbody>'+rows+'</tbody></table></div>'+
-      '<p class="ic-pn">Each cell shows the balance, then what’s left to spend each month, with '+takeTxt()+' (change it in “Where this could go”). The yearly returns are total returns, price change plus payouts, for every fund. '+(need>0?'Freedom means payouts of <b>2× your costs</b>, '+money(2*need)+' a month: half pays your month, half keeps growing. ':'Add your monthly costs to see when payouts reach 2× them. ')+'Before tax. A what-if, not a forecast.</p>');
+      '<p class="ic-pn">Each cell shows the balance, then what’s left to spend each month, with '+takeTxt()+'. The yearly returns are total returns, price change plus payouts, for every fund. '+(need>0?'Freedom means payouts of <b>2× your costs</b>, '+money(2*need)+' a month: half pays your month, half keeps growing. ':'Add your monthly costs to see when payouts reach 2× them. ')+'Before tax. A what-if, not a forecast.</p>');
   }
   function mixStats(sel,order){var fs=fsOf(sel,order),tot=0,yr=0,yg=0,tr=0;fs.forEach(function(f){tot+=f.a;yr+=f.a*f.y;yg+=f.a*f.yg/100;tr+=f.a*f.lr[0]/100});
     if(!(tot>0))return null;var a=simulate(fs,SC[1][2],st.yrs),c=simulate(fs,SC[3][2],st.yrs,SC[3][3]);
     return {fs:fs,tot:tot,mo:yr/12,y:yg/tot*100,tr:tr/tot*100,aB:a[a.length-1].bal,aS:a[a.length-1].take/12,cB:c[c.length-1].bal,cL:Math.min.apply(null,c.map(function(x){return x.take/12}))}}
-  function cmp(){var el=$('icCmp');if(!el)return;var B=mixStats(st.sel,st.order),A=st.cmp?mixStats(st.cmp.sel,st.cmp.order):null;
-    var head='<div class="ic-ph"><div><p class="eyebrow">Compare two mixes</p><h2>'+(A?'Saved mix vs this mix':'Try another mix against this one')+'</h2></div></div>';
+  function cmp(el){var B=mixStats(st.sel,st.order),A=st.cmp?mixStats(st.cmp.sel,st.cmp.order):null;
+    var head='';
     if(!A){el.innerHTML=head+'<p class="ic-pn">Keep this mix, then change the funds or amounts above. The two show side by side: income, how much of the payout is earned, and how each holds up in an average market and a crash.</p><div class="ic-pacts">'+(B?'<button type="button" class="btn" data-cmp="keep">Keep this mix to compare</button>':'<span class="ic-pe">Add funds and amounts first.</span>')+'</div>';return}
     function nm(S){return S?S.fs.map(function(f){return f.t+' '+Math.round(f.a/S.tot*100)+'%'}).join(', '):'–'}
     function v(S,fn){return S?fn(S):'–'}
@@ -3163,10 +3173,10 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
       '<p class="ic-pn">Both use '+takeTxt()+'. “Past total return” is each fund’s record, weighted by your amounts; very new funds only have a year or two, so treat theirs with care.</p>'+
       '<div class="ic-pacts"><button type="button" class="btn ghost" data-cmp="load">Load the saved mix</button>'+(B?'<button type="button" class="btn ghost" data-cmp="keep">Save this mix instead</button>':'')+'<button type="button" class="btn ghost" data-cmp="clear">Clear</button></div>';
   }
-  function trc(){var el=$('icTr');if(!el)return;var fs=fsOf(st.sel,st.order),tot=fs.reduce(function(s,f){return s+f.a},0);
-    var head='<div class="ic-ph"><div><p class="eyebrow">Is the payout earned?</p><h2>Yield vs total return</h2></div></div>';
+  function trc(el){var fs=fsOf(st.sel,st.order),tot=fs.reduce(function(s,f){return s+f.a},0);
+    var head='';
     if(!(tot>0)){el.innerHTML=head+'<p class="ic-pe">Add funds and amounts in Your mix to check them.</p>';return}
-    var rows=fs.map(function(f){var lr=f.lr,young=/1-year|assumed|since 202[5-9]/.test(lr[1]),g=f.yg-lr[0],vd=young?['wait','Too new to judge']:g<=0?['ok','Earned']:g<=3?['mid','Close']:['no','Paying out more than it earns'];
+    var rows=fs.map(function(f){var lr=f.lr,vd=vdOf(f.t);
       return '<tr><th scope="row">'+f.t+'</th><td>'+f.yg.toFixed(1)+'%</td><td>'+(lr[1]==='assumed'?'No record yet':(+lr[0]).toFixed(1)+'%<small>'+lr[1]+'</small>')+'</td><td><span class="ic-vd '+vd[0]+'">'+vd[1]+'</span></td></tr>'}).join('');
     el.innerHTML=head+'<div class="ic-sw2"><table class="ic-sct ic-trt"><thead><tr><th scope="col">Fund</th><th scope="col">Pays</th><th scope="col">Total return</th><th scope="col">Verdict</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
       '<p class="ic-pn">A fund can only keep paying what it earns. When the yield is higher than its total return (price change plus payouts) over several years, the gap comes out of the unit price, and future payouts shrink. A fund with only a year or two of history hasn’t been through a bear market, so its record can look better than it is. Check again every quarter.</p>';
@@ -3176,7 +3186,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     var inc=big&&big.firstChild?big.firstChild.textContent:'$0',u=big&&big.querySelector('small')?big.querySelector('small').textContent:'a month';
     el.innerHTML=st.order.length?'<span>Income <b>'+esc(inc)+'</b> '+esc(u)+'</span><span class="g">Safe to withdraw <b>'+esc(w?w.textContent:'$0')+'</b></span>':'<span>Add funds below to see your income</span>'}
   function tab(t){var pg=$('income');if(!pg)return;st.tab=t;pg.setAttribute('data-tab',t);document.querySelectorAll('#icTabs [data-tab]').forEach(function(b){if(b.dataset.tab===t)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')})}
-  var calc0=calc;calc=function(){calc0();proj();scen();trc();cmp();mini()};
+  var calc0=calc;calc=function(){calc0();proj();mini()};
   function fresh(){var el=$('icFresh');
     if(meta&&!meta.seed&&meta.asOf){var n=(meta.failed||[]).length;
       el.innerHTML='<span class="ic-dot live" aria-hidden="true"></span><span>Prices and payouts from '+esc(meta.source||'market data')+', updated every weekday evening. Last update: '+fdate(meta.asOf.slice(0,10))+'.'+(n?' '+n+(n>1?' funds use their':' fund uses its')+' last good numbers.':'')+'</span>';}
@@ -3189,14 +3199,14 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   function hdr(){var h=document.querySelector('header.top'),pg=$('income');if(h&&pg)pg.style.setProperty('--ic-hdr',h.offsetHeight+'px')}
   hdr();addEventListener('resize',hdr);addEventListener('hashchange',function(){setTimeout(hdr,50)});try{new ResizeObserver(hdr).observe(document.querySelector('header.top'))}catch(e){}
   $('icFlt').addEventListener('click',function(e){var b=e.target.closest('[data-flt]');if(!b)return;st.flt=b.dataset.flt;save();list()});
-  $('icProj').addEventListener('input',function(e){if(e.target.dataset.rin==null)return;st.rin=Math.max(0,+e.target.value||0);save();proj(1);scen(1);cmp()});
-  $('icScen').addEventListener('input',function(e){if(e.target.dataset.need==null)return;st.need=Math.max(0,+e.target.value||0);save();scen(1)});
-  $('icCmp').addEventListener('click',function(e){var b=e.target.closest('[data-cmp]');if(!b)return;var a=b.dataset.cmp;
+  $('icProj').addEventListener('input',function(e){var d=e.target.dataset;if(d.rin!=null)st.rin=Math.max(0,+e.target.value||0);else if(d.need!=null)st.need=Math.max(0,+e.target.value||0);else return;save();proj(1)});
+  $('icProj').addEventListener('click',function(e){var v=e.target.closest('[data-fv]');if(v){st.fv=v.dataset.fv;save();proj();try{gtag('event','income_view',{view:st.fv})}catch(x){}return}
+    var b=e.target.closest('[data-cmp]');if(!b)return;var a=b.dataset.cmp;
     if(a==='keep'){var o=st.order.filter(function(t){return (+st.sel[t]||0)>0}),sl={};o.forEach(function(t){sl[t]=+st.sel[t]});st.cmp={sel:sl,order:o}}
     else if(a==='clear')st.cmp=null;
     else if(a==='load'&&st.cmp){var cur={sel:{},order:st.order.filter(function(t){return (+st.sel[t]||0)>0})};cur.order.forEach(function(t){cur.sel[t]=+st.sel[t]});st.sel={};st.pct={};st.order=st.cmp.order.slice();st.order.forEach(function(t){if(/\.U$/.test(t))mkU(t.slice(0,-2));st.sel[t]=st.cmp.sel[t]});st.total=0;st.cmp=cur.order.length?cur:null;all()}
-    save();cmp();try{gtag('event','income_compare',{action:a})}catch(x){}});
-  $('icProj').addEventListener('click',function(e){var b=e.target.closest('[data-yrs],[data-take]');if(!b)return;if(b.dataset.yrs)st.yrs=+b.dataset.yrs;if(b.dataset.take)st.take=b.dataset.take;save();proj();scen();cmp();try{gtag('event','income_projection',{years:st.yrs,take:st.take})}catch(x){}});
+    save();proj();try{gtag('event','income_compare',{action:a})}catch(x){}});
+  $('icProj').addEventListener('click',function(e){var b=e.target.closest('[data-yrs],[data-take]');if(!b)return;if(b.dataset.yrs)st.yrs=+b.dataset.yrs;if(b.dataset.take)st.take=b.dataset.take;save();proj();try{gtag('event','income_projection',{years:st.yrs,take:st.take})}catch(x){}});
   $('icMkt').addEventListener('click',function(e){var ac=e.target.closest('[data-acct]');if(ac){st.acct=ac.dataset.acct;save();mix();calc();try{gtag('event','income_account',{account:st.acct})}catch(x){}return}
     var b=e.target.closest('[data-mk]');if(!b)return;st.mkt=b.dataset.mk;save();st.order.forEach(rowUpdate);calc();try{gtag('event','income_market',{market:st.mkt})}catch(x){}});
   $('icList').addEventListener('click',function(e){var b=e.target.closest('[data-ic]');if(!b)return;var t=b.dataset.ic;if(/\.U$/.test(t))mkU(t.slice(0,-2));
