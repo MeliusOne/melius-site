@@ -2311,7 +2311,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       <p><b>How this works.</b> Each fund’s yield is its latest regular payout per unit, times the number of payouts in a year, divided by its latest closing price. Your amount times that yield gives a yearly payout. Each fund is shown on its own schedule: most pay monthly, some twice a month, a few quarterly. When your mix has more than one schedule, the total is shown per month. The two-week paycheque figure is the yearly total spread over 26 paydays, for comparing with a biweekly paycheque.</p>
       <p><b>Withdraw and reinvest.</b> A fund grows by its total return: the change in its unit price plus its payouts. If you withdraw less than that total return, minus about 2.5% for inflation, the balance keeps growing in real terms. By default we use each fund’s longest record (10, 5 or 3 years, or since launch), its 1-year return for newer funds, and 8% when there’s no record yet. Switch the market to see a strong year (+30%, like 2025), an ordinary one (+12%) or a bear year (−25%). Past returns don’t promise future ones, so check again each year.</p>
       <p><b>Projection.</b> “Where this could go” grows each fund by the return the market setting gives it, pays its current yield on its balance every year, and takes out what you choose: every payout, the safe amount, or nothing. In Bear, the first year falls 25% and later years return 12%. It is a what-if, not a forecast.</p>
-      <p><b>Every market, side by side.</b> Runs your mix through four markets with the same take-out choice: strong (18% a year total return), average (12%), weak (8%), and a crash in year 2 (−30%, with payouts cut 30% that year, then 12%). Freedom means payouts that cover your monthly costs. Keep a cash buffer for down years, so in a downturn you can live on it and reinvest every payout. “Payout check” and the label beside each fund compare its yield with its own total-return record. “Compare” keeps one mix so you can try another against it.</p>
+      <p><b>Every market, side by side.</b> Runs your mix through four markets with the same take-out choice: strong (the market returns 18% a year), average (12%), weak (8%), and a crash in year 2 (−30%, with payouts cut 30% that year, then 12%). Each fund turns the market return into its own: DayMAX funds get 1.25× the market, minus about 1.25% for borrowing and plus about 1% from same-day calls, with their upside uncapped; other covered-call funds give up half of any gain above 10% a year, and their premiums cushion a fall by about 2 points; leveraged covered-call funds move 1.25× that, minus about 1.25% for borrowing. With a cash buffer, the crash year’s payouts are reinvested while you live on the buffer. Freedom means payouts that cover your monthly costs. Keep a cash buffer for down years, so in a downturn you can live on it and reinvest every payout. “Payout check” and the label beside each fund compare its yield with its own total-return record. “Compare” keeps one mix so you can try another against it.</p>
       <p><b>U.S. dollars.</b> U.S.-listed funds and the .U units of Canadian funds show in U.S. dollars. Totals are in Canadian dollars at the latest exchange rate. Their returns are in U.S. dollars, so a change in the exchange rate isn’t included. In a TFSA or a non-registered account, the U.S. keeps 15% of a U.S.-listed fund’s payouts (in a non-registered account you can usually claim it back as a foreign tax credit). In an RRSP, it doesn’t.</p>
       <p><b>Payouts are not guaranteed.</b> Funds change their payouts often, and very high yields usually include some of your own money paid back (return of capital) and can wear down the unit price over time. Funds marked “Leverage” borrow to invest, so they can fall faster. Figures are before tax.</p>
       <p>This calculator is financial education, not investment advice or a recommendation to buy any fund. Compare funds side by side in the <a href="#funds">fund directory</a><span data-pl="hide" data-coach="hide">, or <a href="#book">book a free intro session</a> to build a plan that fits your family</span>.</p>
@@ -2950,7 +2950,7 @@ var WORD_T={m:'Money',w:'Hard work',c:'The love of Christ',l:'Life is short'};
 })();
 /* iPhone: while the keyboard is open, scroll the page normally (the inner scroller leaves a blank gap above the keyboard) */
 (function(){var h=document.documentElement,typ=function(el){return el&&el.matches&&el.matches('input:not([type=range]):not([type=checkbox]):not([type=radio]),textarea,select')};
-  document.addEventListener('focusin',function(e){if(!h.classList.contains('ic-lock')||!typ(e.target))return;var y=document.body.scrollTop;h.classList.remove('ic-lock');h.classList.add('ic-kb');window.scrollTo(0,y)});
+  document.addEventListener('focusin',function(e){if(!h.classList.contains('ic-lock')||!typ(e.target)||!matchMedia('(max-width:760px)').matches)return;var y=document.body.scrollTop;h.classList.remove('ic-lock');h.classList.add('ic-kb');window.scrollTo(0,y)});
   document.addEventListener('focusout',function(){if(!h.classList.contains('ic-kb'))return;setTimeout(function(){if(typ(document.activeElement))return;var y=window.scrollY,pg=document.getElementById('income');h.classList.remove('ic-kb');if(pg&&pg.classList.contains('on')){window.scrollTo(0,0);h.classList.add('ic-lock');document.body.scrollTop=y}},80)})})();
 function wordIdx(d){d=d||new Date();var n=Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5);return ((n%WORD.length)+WORD.length)%WORD.length}
 /* scripture bar: rotates key lines, tap for the full passage */
@@ -3010,7 +3010,14 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   function longRun(f){var r=f.r||{};var c=[['y10','10-year'],['y5','5-year'],['y3','3-year']];for(var i=0;i<c.length;i++)if(r[c[i][0]]!=null)return [r[c[i][0]],c[i][1]];if(r.si!=null&&f.inc&&(+f.inc)<=2024)return [r.si,'since '+f.inc];if(r.y1!=null)return [r.y1,'1-year'];return [8,'assumed']}
   /* market conditions: each fund's own record, or one return for every fund */
   var MK={bull:[30,'Bull','a strong year like 2025'],base:[12,'Base','a solid, ordinary year'],bear:[-25,'Bear','a bear-market year']};
-  function rate(t){var m=MK[st.mkt];return m?[m[0],m[1]]:longRun(BY[t])}
+  /* how each fund type turns a market return into its own total return (%):
+     DayMAX: 1.25x the market, minus ~1.25% borrowing, plus ~1% from same-day calls (upside stays uncapped)
+     covered-call funds: give up half of any gain above 10% a year; premiums cushion a fall by ~2 points
+     leveraged covered-call funds: 1.25x the covered-call return, minus ~1.25% borrowing */
+  function kindOf(t){var f=BY[t]||{};if(/DayMAX/i.test(f.n||''))return 'day';return f.lev?'lev':'cc'}
+  function ccR(m){return m<0?m+2:(m<=10?m:10+0.5*(m-10))}
+  function fr(t,m){var k=kindOf(t);return k==='day'?1.25*m-0.25:k==='lev'?1.25*ccR(m)-1.25:ccR(m)}
+  function rate(t){var m=MK[st.mkt];return m?[fr(t,m[0]),m[1]]:longRun(BY[t])}
   function keepYr(a,rate,payYr){if(rate<=INFL)return 0;var m=Math.pow((1+rate/100)/(1+INFL/100),1/12)-1;return Math.min(a*m*12,payYr)}
   function provName(f){try{return (FD_PROV[f.p]&&FD_PROV[f.p].name)||f.p}catch(e){return f.p}}
   var FLT=[['all','All'],['m','Pays monthly'],['tm','Twice a month'],['ca','Canadian'],['us','U.S.'],['tech','Tech'],['nolev','No leverage'],['uslist','U.S.-listed'],['usd','Has .U'],['mine','In my mix']];
@@ -3077,14 +3084,14 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     var Mk=MK[st.mkt];
     $('icMkt').innerHTML='<span class="ic-pl">Market</span><div class="ic-pseg" role="group" aria-label="Market conditions">'+[['rec','Fund records'],['bull','Bull'],['base','Base'],['bear','Bear']].map(function(x){return '<button type="button" data-mk="'+x[0]+'" aria-pressed="'+(st.mkt===x[0])+'">'+x[1]+'</button>'}).join('')+'</div>'+
       (st.order.some(usL)?'<span class="ic-pl">Account</span><div class="ic-pseg" role="group" aria-label="Account type">'+[['tfsa','TFSA'],['rrsp','RRSP'],['nonreg','Non-registered']].map(function(x){return '<button type="button" data-acct="'+x[0]+'" aria-pressed="'+(st.acct===x[0])+'">'+x[1]+'</button>'}).join('')+'</div>':'')+
-      '<p class="ic-mkn">'+(st.order.some(usL)?(st.acct==='rrsp'?'<b>RRSP:</b> no U.S. tax on the U.S.-listed funds’ payouts. ':st.acct==='tfsa'?'<b>TFSA:</b> the U.S. keeps 15% of the U.S.-listed funds’ payouts, and you can’t get it back. ':'<b>Non-registered:</b> 15% is withheld from the U.S.-listed funds’ payouts; you can usually claim it back as a foreign tax credit. Shown after the 15%. '):'')+(Mk?(Mk[0]>0?'+':'')+Mk[0]+'% for every fund'+(st.mkt==='bear'?' this year':' a year')+': '+Mk[2]+' (price change plus payouts). Drives the withdraw amount and the projection.':'Each fund’s own long-run return: 10, 5 or 3 years, or its 1-year return when that’s all it has. Drives the withdraw amount and the projection.')+'</p>';
+      '<p class="ic-mkn">'+(st.order.some(usL)?(st.acct==='rrsp'?'<b>RRSP:</b> no U.S. tax on the U.S.-listed funds’ payouts. ':st.acct==='tfsa'?'<b>TFSA:</b> the U.S. keeps 15% of the U.S.-listed funds’ payouts, and you can’t get it back. ':'<b>Non-registered:</b> 15% is withheld from the U.S.-listed funds’ payouts; you can usually claim it back as a foreign tax credit. Shown after the 15%. '):'')+(Mk?(Mk[0]>0?'+':'')+Mk[0]+'% for the market'+(st.mkt==='bear'?' this year':' a year')+': '+Mk[2]+'. Each fund’s return is adjusted for its type: DayMAX keeps its upside, covered-call funds give some up, leveraged funds move more. Drives the withdraw amount and the projection.':'Each fund’s own long-run return: 10, 5 or 3 years, or its 1-year return when that’s all it has. Drives the withdraw amount and the projection.')+'</p>';
     var head='<p class="ic-kl">To keep your balance growing</p>';
     if(tot>0&&yr>0){var rest=Math.max(0,yr-keep),pct=Math.round(rest/yr*100),sp=100-pct;
       $('icKeep').innerHTML=head+'<div class="ic-two"><div class="w"><span>You can withdraw</span><b>'+money(keep/U.dv)+'</b><small>'+U.u+'</small></div><div class="r"><span>Reinvest</span><b>'+money(rest/U.dv)+'</b><small>'+U.u+'</small></div></div>'+
         '<div class="ic-bar" role="img" aria-label="Withdraw '+sp+'%, reinvest '+pct+'% of the payouts"><i class="sp" style="width:'+sp+'%"></i><i class="re" style="width:'+pct+'%"></i></div>'+
         '<div class="ic-leg"><span style="--c:var(--ic-gold)">Withdraw '+sp+'% of the payouts</span><span style="--c:#5BC08F">Reinvest '+pct+'%</span></div>'+
         (st.mkt==='bear'?'<p>In a bear year, prices fall, so nothing you take out keeps your balance growing. Bear markets usually don’t last long, and payouts usually keep coming, though some funds trim them. <b>This is the time to load up:</b> reinvesting '+money(yr/U.dv)+' '+U.u+' at prices about 25% lower buys about a third more units than today, and that extra income stays with you when prices recover.</p>':'<p>'+(rest<1?'You can withdraw all of it. These funds’ long-run returns are high enough that your balance keeps growing even if you spend every payout.':'Take out up to <b>'+money(keep/U.dv)+'</b> '+U.u+' and put the other <b>'+money(rest/U.dv)+'</b> back into your funds. Your balance then keeps growing faster than inflation.')+'</p>')+
-        '<p class="ic-kn">'+(Mk?'Based on a '+(Mk[0]>0?'+':'')+Mk[0]+'% return for every fund, minus '+INFL+'% for inflation. Switch to Fund records to use each fund’s own history.':'Based on each fund’s long-run total return (price plus payouts), minus '+INFL+'% for inflation. If every fund returned a steady 8% a year, you could withdraw '+money(keep8/U.dv)+' '+U.u+'.')+'</p>';
+        '<p class="ic-kn">'+(Mk?'Based on a '+(Mk[0]>0?'+':'')+Mk[0]+'% market, adjusted for each fund’s type, minus '+INFL+'% for inflation. Switch to Fund records to use each fund’s own history.':'Based on each fund’s long-run total return (price plus payouts), minus '+INFL+'% for inflation. If every fund returned a steady 8% a year, you could withdraw '+money(keep8/U.dv)+' '+U.u+'.')+'</p>';
     }else $('icKeep').innerHTML=head+'<div class="ic-two"><div class="w"><span>You can withdraw</span><b>$0</b><small>a month</small></div><div class="r"><span>Reinvest</span><b>$0</b><small>a month</small></div></div><p>Add funds and amounts in Your mix, and this splits each payout into what you can spend and what to put back so your balance keeps growing.</p>';
   }
   /* Melius Money link: the app lives on this same site, so both read the same browser storage */
@@ -3110,12 +3117,13 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     var head='<div class="ic-ph"><div><p class="eyebrow">Where this could go</p><h2>Your mix over '+st.yrs+' years</h2></div>'+
       '<div class="ic-pctl"><div><span class="ic-pl">Years</span>'+segs('yrs',[[5,'5'],[10,'10'],[15,'15'],[20,'20']],st.yrs)+'</div>'+
       '<div><span class="ic-pl">Your monthly costs</span><label class="ic-amt ic-need"><span>$</span><input type="number" inputmode="decimal" min="0" step="100" data-need value="'+(needV()||'')+'" placeholder="7000" aria-label="Your monthly costs"></label></div>'+
+      '<div><span class="ic-pl">Cash buffer</span>'+segs('buf',[[0,'None'],[6,'6 months'],[12,'12 months']],+st.buf||0)+'</div>'+
       '<div><span class="ic-pl">Each year you take out</span>'+segs('take',[['all','All payouts'],['safe','The safe amount'],['fixed','Reinvest a set amount'],['none','Nothing']],st.take)+'</div>'+(st.take==='fixed'?'<div><span class="ic-pl">Reinvest each month</span><label class="ic-amt ic-need"><span>$</span><input type="number" inputmode="decimal" min="0" step="100" data-rin value="'+(+st.rin||'')+'" placeholder="4000" aria-label="Amount to reinvest each month"></label></div>':'')+'</div></div>'+
       '<div class="ic-fv" role="tablist" aria-label="Views">'+[['over','Over time'],['mkts','Every market'],['cmp','Compare'],['chk','Payout check']].map(function(v){return '<button type="button" role="tab" data-fv="'+v[0]+'" aria-selected="'+(st.fv===v[0])+'">'+v[1]+'</button>'}).join('')+'</div>';
     if(!(tot>0)){el.innerHTML=head+'<p class="ic-pe">Add funds and amounts in Your mix to see a projection.</p>';return}
     var past=fs.reduce(function(s,f){return s+f.a*f.lr},0)/tot;
     var mk=st.mkt, mkLabel={rec:'each fund’s own record',bull:'a bull market (+30% a year)',base:'a base market (+12% a year)',bear:'a bear year first (−25%), then +12% a year'}[mk]||'';
-    function r(f,k){if(mk==='bull')return 30;if(mk==='base')return 12;if(mk==='bear')return k===0?-25:12;return f.lr}
+    function r(f,k){if(mk==='bull')return fr(f.t,30);if(mk==='base')return fr(f.t,12);if(mk==='bear')return fr(f.t,k===0?-25:12);return f.lr}
     var run=simulate(fs,r,st.yrs),bal=[tot].concat(run.map(function(x){return x.bal})),inc=run.map(function(x){return x.pay}),taken=run.reduce(function(s2,x){return s2+x.take},0);
     var end=bal[bal.length-1],incEnd=inc[inc.length-1],chg=end/tot-1;
     var tiles=[['Past total return','<b>'+past.toFixed(1)+'%</b><small>a year, price change plus payouts, weighted by your amounts</small>'],
@@ -3139,13 +3147,15 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   /* ---- scenarios, mix compare, payout check ---- */
   function fsOf(sel,order){return order.map(function(t){if(/\.U$/.test(t))mkU(t.slice(0,-2));return BY[t]?{t:t,a:+sel[t]||0,y:info(t).y/100,yg:info(t).yg,lr:longRun(BY[t])}:null}).filter(function(f){return f&&f.a>0})}
   /* one run: ret(f,k) is the yearly total return in %, cut(k) scales payouts; takes out per st.take */
-  function simulate(fs,ret,yrs,cut){var B=fs.map(function(f){return f.a}),out=[];
-    for(var k=0;k<yrs;k++){var c=cut?cut(k):1,pays=fs.map(function(f,i){return B[i]*f.y*c}),P=pays.reduce(function(s,v){return s+v},0),R=Math.min(P,(+st.rin||0)*12),bal=0,T=0;
-      fs.forEach(function(f,i){var b=B[i],rr=ret(f,k)/100,pay=pays[i],take=st.take==='all'?pay:st.take==='none'?0:st.take==='fixed'?pay-(P>0?R*pay/P:0):Math.max(0,Math.min(pay,b*((1+rr)/(1+INFL/100)-1)));
+  function simulate(fs,ret,yrs,cut,mkt){var B=fs.map(function(f){return f.a}),out=[],bf=Math.min(1,(+st.buf||0)/12);
+    for(var k=0;k<yrs;k++){var c=cut?cut(k):1,down=c<1,pays=fs.map(function(f,i){return B[i]*f.y*c}),P=pays.reduce(function(s,v){return s+v},0),R=Math.min(P,(+st.rin||0)*12),bal=0,T=0;
+      fs.forEach(function(f,i){var b=B[i],rr=(mkt?fr(f.t,ret(f,k)):ret(f,k))/100,pay=pays[i],take=st.take==='all'?pay:st.take==='none'?0:st.take==='fixed'?pay-(P>0?R*pay/P:0):Math.max(0,Math.min(pay,b*((1+rr)/(1+INFL/100)-1)));
+        if(down&&bf>0)take*=1-bf;
         T+=take;B[i]=Math.max(0,b*(1+rr)-take);bal+=B[i]});
-      out.push({bal:bal,pay:P,take:T})}
+      out.push({bal:bal,pay:P,take:T,buf:down&&(bf>0||T<1)})}
     return out}
-  var SC=[['Strong','18% a year',function(){return 18}],['Average','12% a year',function(){return 12}],['Weak','8% a year',function(){return 8}],['Crash in year 2','−30%, payouts cut 30%',function(f,k){return k===1?-30:12},function(k){return k===1?0.7:1}]];
+  var SC=[['Strong','market +18% a year',function(){return 18}],['Average','market +12% a year',function(){return 12}],['Weak','market +8% a year',function(){return 8}],['Crash in year 2','market −30%, payouts cut 30%',function(f,k){return k===1?-30:12},function(k){return k===1?0.7:1}]];
+  function lowOf(r){var v=r.filter(function(x){return !x.buf}).map(function(x){return x.take/12});return {low:v.length?Math.min.apply(null,v):0,buf:r.some(function(x){return x.buf})}}
   function takeTxt(){return st.take==='all'?'every payout taken out':st.take==='none'?'every payout reinvested':st.take==='fixed'?money(+st.rin||0)+' a month reinvested, the rest taken out':'the safe amount taken out'}
   function needV(){if(+st.need>0)return +st.need;var A=appS();return A&&A.goal&&+A.goal.need>0?+A.goal.need:0}
   function scen(el){var keep=0;var fs=fsOf(st.sel,st.order),tot=fs.reduce(function(s,f){return s+f.a},0),need=needV();
@@ -3153,17 +3163,17 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     var put=function(h){var o=keep&&el.querySelector('.ic-sout');if(o)o.innerHTML=h;else el.innerHTML=head+'<div class="ic-sout">'+h+'</div>'};
     if(!(tot>0)){put('<p class="ic-pe">Add funds and amounts in Your mix to compare markets.</p>');return}
     var Y=st.yrs,cols=[1,3,5,Y].filter(function(v,i,a){return v<=Y&&a.indexOf(v)===i});
-    var rows=SC.map(function(s){var r=simulate(fs,s[2],Y,s[3]),fr='';
+    var rows=SC.map(function(s){var r=simulate(fs,s[2],Y,s[3],1),fr='';
       if(need>0){var hit=-1;for(var k=0;k<r.length;k++)if(r[k].pay/12>=need){hit=k;break}fr=hit===0?'<b class="ok">Year 1</b>':hit>0?'<b class="ok">Year '+(hit+1)+'</b>':'<b class="no">Not in '+Y+' years</b>'}
-      var low=Math.min.apply(null,r.map(function(x){return x.take/12}));
-      return '<tr><th scope="row">'+s[0]+'<small>'+s[1]+'</small></th>'+cols.map(function(c){var x=r[c-1];return '<td><b>'+money(x.bal)+'</b><small>spend '+money(x.take/12)+'/mo</small></td>'}).join('')+
-        (need>0?'<td>'+fr+'<small>'+(low>=need?'Spending covers your costs every year':'Spending dips to '+money(low)+' a month')+'</small></td>':'')+'</tr>'}).join('');
+      var lo=lowOf(r),low=lo.low;
+      return '<tr><th scope="row">'+s[0]+'<small>'+s[1]+'</small></th>'+cols.map(function(c){var x=r[c-1];return '<td><b>'+money(x.bal)+'</b><small>'+(x.buf&&x.take<1?'on your cash buffer':'spend '+money(x.take/12)+'/mo')+'</small></td>'}).join('')+
+        (need>0?'<td>'+fr+'<small>'+(low>=need?'Spending covers your costs':'Spending dips to '+money(low)+' a month')+(lo.buf?' · crash year on your cash buffer':'')+'</small></td>':'')+'</tr>'}).join('');
     put('<div class="ic-sw2"><table class="ic-sct"><thead><tr><th scope="col">Market</th>'+cols.map(function(c){return '<th scope="col">Year '+c+'</th>'}).join('')+(need>0?'<th scope="col">Payouts cover your costs</th>':'')+'</tr></thead><tbody>'+rows+'</tbody></table></div>'+
-      '<p class="ic-pn">Each cell shows the balance, then what’s left to spend each month, with '+takeTxt()+'. The yearly returns are total returns, price change plus payouts, for every fund. '+(need>0?'Freedom means payouts that cover your costs, '+money(need)+' a month. Keep a cash buffer for down years, so in a downturn you can live on it and reinvest every payout. ':'Add your monthly costs to see when payouts cover them. ')+'Before tax. A what-if, not a forecast.</p>');
+      '<p class="ic-pn">Each cell shows the balance, then what’s left to spend each month, with '+takeTxt()+(+st.buf?' and a '+st.buf+'-month cash buffer for the crash':'')+'. Each fund turns the market return into its own: DayMAX funds get 1.25× the market with their upside uncapped, covered-call funds give up half of any gain above 10% a year, and leveraged funds pay about 1.25% a year to borrow and fall harder. '+(need>0?'Freedom means payouts that cover your costs, '+money(need)+' a month. Keep a cash buffer for down years, so in a downturn you can live on it and reinvest every payout. ':'Add your monthly costs to see when payouts cover them. ')+'Before tax. A what-if, not a forecast.</p>');
   }
   function mixStats(sel,order){var fs=fsOf(sel,order),tot=0,yr=0,yg=0,tr=0;fs.forEach(function(f){tot+=f.a;yr+=f.a*f.y;yg+=f.a*f.yg/100;tr+=f.a*f.lr[0]/100});
-    if(!(tot>0))return null;var a=simulate(fs,SC[1][2],st.yrs),c=simulate(fs,SC[3][2],st.yrs,SC[3][3]);
-    return {fs:fs,tot:tot,mo:yr/12,y:yg/tot*100,tr:tr/tot*100,aB:a[a.length-1].bal,aS:a[a.length-1].take/12,cB:c[c.length-1].bal,cL:Math.min.apply(null,c.map(function(x){return x.take/12}))}}
+    if(!(tot>0))return null;var a=simulate(fs,SC[1][2],st.yrs,null,1),c=simulate(fs,SC[3][2],st.yrs,SC[3][3],1),lo=lowOf(c);
+    return {fs:fs,tot:tot,mo:yr/12,y:yg/tot*100,tr:tr/tot*100,aB:a[a.length-1].bal,aS:a[a.length-1].take/12,cB:c[c.length-1].bal,cL:lo.low,cBuf:lo.buf}}
   function cmpList(){if(!st.cmps){st.cmps=[];if(st.cmp&&st.cmp.order&&st.cmp.order.length)st.cmps.push({name:'Saved mix',sel:st.cmp.sel,order:st.cmp.order});delete st.cmp}return st.cmps}
   function cmp(el){var L=cmpList(),B=mixStats(st.sel,st.order),cols=L.map(function(m){return {n:m.name,S:mixStats(m.sel,m.order)}}).filter(function(c){return c.S});
     var full=L.length>=3;
@@ -3174,7 +3184,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     var R=[['Funds',function(S){return esc(nm(S))}],['Invested',function(S){return money(S.tot)}],['Payouts',function(S){return money(S.mo)+' a month'}],['Yield',function(S){return S.y.toFixed(1)+'%'}],['Past total return',function(S){return S.tr.toFixed(1)+'% a year'}],
       ['Payout above its record',function(S){var g=S.y-S.tr,yg=S.fs.some(function(f){return /1-year|assumed|since 202[5-9]/.test(f.lr[1])});return (g>0?'<span class="no">'+g.toFixed(1)+' points</span>':'<span class="ok">None</span>')+(yg?'<small>Based on a very short record</small>':'')}],
       ['Average market, year '+st.yrs,function(S){return money(S.aB)+'<small>'+money(S.aS)+' a month to spend</small>'}],
-      ['Crash in year 2, year '+st.yrs,function(S){return money(S.cB)+'<small>spending dips to '+money(S.cL)+' a month</small>'}]];
+      ['Crash in year 2, year '+st.yrs,function(S){return money(S.cB)+'<small>spending dips to '+money(S.cL)+' a month'+(S.cBuf?', crash year on your cash buffer':'')+'</small>'}]];
     var hd='<tr><th></th>'+all2.map(function(c,k){return '<th scope="col">'+esc(c.n)+(c.cur?'':'<span class="ic-cact"><button type="button" data-cmp="load" data-ci="'+k+'">Load</button><button type="button" data-cmp="rm" data-ci="'+k+'" aria-label="Remove '+esc(c.n)+'">Remove</button></span>')+'</th>'}).join('')+'</tr>';
     el.innerHTML='<div class="ic-sw2"><table class="ic-sct ic-cmpt"><thead>'+hd+'</thead><tbody>'+R.map(function(r){return '<tr><th scope="row">'+r[0]+'</th>'+all2.map(function(c){return '<td'+(c.cur?' class="cur"':'')+'>'+r[1](c.S)+'</td>'}).join('')+'</tr>'}).join('')+'</tbody></table></div>'+
       '<p class="ic-pn">All use '+takeTxt()+'. “Past total return” is each fund’s record, weighted by your amounts; very new funds only have a year or two, so treat theirs with care. Loading a saved mix replaces the one you’re building, so save it first if you want to keep it.</p>'+saveBox;
@@ -3213,12 +3223,12 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     else if(a==='rm'&&L[ci])L.splice(ci,1);
     else if(a==='load'&&L[ci]){var m=L[ci];st.sel={};st.pct={};st.order=m.order.slice();st.order.forEach(function(t){if(/\.U$/.test(t))mkU(t.slice(0,-2));st.sel[t]=m.sel[t]});st.total=0;all()}
     save();proj();try{gtag('event','income_compare',{action:a})}catch(x){}});
-  $('icProj').addEventListener('click',function(e){var b=e.target.closest('[data-yrs],[data-take]');if(!b)return;if(b.dataset.yrs)st.yrs=+b.dataset.yrs;if(b.dataset.take)st.take=b.dataset.take;save();proj();try{gtag('event','income_projection',{years:st.yrs,take:st.take})}catch(x){}});
+  $('icProj').addEventListener('click',function(e){var b=e.target.closest('[data-yrs],[data-take],[data-buf]');if(!b)return;if(b.dataset.yrs)st.yrs=+b.dataset.yrs;if(b.dataset.take)st.take=b.dataset.take;if(b.dataset.buf!=null)st.buf=+b.dataset.buf;save();proj();try{gtag('event','income_projection',{years:st.yrs,take:st.take})}catch(x){}});
   $('icMkt').addEventListener('click',function(e){var ac=e.target.closest('[data-acct]');if(ac){st.acct=ac.dataset.acct;save();mix();calc();try{gtag('event','income_account',{account:st.acct})}catch(x){}return}
     var b=e.target.closest('[data-mk]');if(!b)return;st.mkt=b.dataset.mk;save();st.order.forEach(rowUpdate);calc();try{gtag('event','income_market',{market:st.mkt})}catch(x){}});
   $('icList').addEventListener('click',function(e){var b=e.target.closest('[data-ic]');if(!b)return;var t=b.dataset.ic;if(/\.U$/.test(t))mkU(t.slice(0,-2));
     if(st.sel[t]!=null){delete st.sel[t];delete st.pct[t];st.order=st.order.filter(function(x){return x!==t})}else{st.sel[t]=0;st.order.push(t);try{gtag('event','income_add_fund',{fund:t})}catch(x){}}
-    save();list();mix();calc();if(st.sel[t]!=null){var inp=document.querySelector('[data-amt="'+t+'"]');if(inp&&matchMedia('(min-width:1101px)').matches)inp.focus()}});
+    save();list();mix();calc();if(st.sel[t]!=null){var inp=document.querySelector('[data-amt="'+t+'"]');if(inp&&matchMedia('(min-width:1101px)').matches){try{inp.focus({preventScroll:true})}catch(x){}}}});
   $('icMix').addEventListener('input',function(e){var t=e.target.dataset.amt,q=e.target.dataset.pct;
     if(t){st.sel[t]=Math.max(0,+e.target.value||0)*(isUSD(t)?fx():1);if(st.total>0)st.pct[t]=st.sel[t]/st.total*100;else delete st.pct[t];save();rowUpdate(t);syncPct();calc();return}
     if(q){var v=Math.max(0,Math.min(100,+e.target.value||0));if(!(st.total>0)){var S=sum();if(S>0){st.total=S;st.order.forEach(function(x){st.pct[x]=(+st.sel[x]||0)/S*100})}}
