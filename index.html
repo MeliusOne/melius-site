@@ -1272,7 +1272,9 @@ main{min-height:calc(100vh - 260px)}
 .ic-sct small{display:block;font-size:12.5px;font-weight:500;color:var(--muted);margin-top:2px}
 .ic-sct td b{color:var(--ink)}
 .ic-sct .ok{color:#2E8B57}.ic-sct .no{color:var(--danger)}
-.ic-cmpt td{min-width:150px}
+.ic-cmpt td{min-width:150px}.ic-cmpt td.cur{background:var(--band)}
+.ic-cact{display:flex;gap:10px;margin-top:4px}.ic-cact button{font:inherit;font-size:12px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--amber);background:none;border:0;padding:0;cursor:pointer}.ic-cact button:hover{text-decoration:underline}
+.ic-csave{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.ic-cname input{font:inherit;font-size:15px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);width:200px;max-width:100%}
 .ic-need{max-width:170px}
 .ic-vd{display:inline-block;font-size:12.5px;font-weight:700;padding:4px 10px;border-radius:999px;white-space:nowrap}
 .ic-vd.ok{background:rgba(46,139,87,.12);color:#2E8B57}.ic-vd.mid{background:rgba(168,128,63,.15);color:var(--amber)}.ic-vd.no{background:rgba(163,51,42,.12);color:var(--danger)}.ic-vd.wait{background:var(--soft);color:var(--muted)}
@@ -3161,18 +3163,20 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   function mixStats(sel,order){var fs=fsOf(sel,order),tot=0,yr=0,yg=0,tr=0;fs.forEach(function(f){tot+=f.a;yr+=f.a*f.y;yg+=f.a*f.yg/100;tr+=f.a*f.lr[0]/100});
     if(!(tot>0))return null;var a=simulate(fs,SC[1][2],st.yrs),c=simulate(fs,SC[3][2],st.yrs,SC[3][3]);
     return {fs:fs,tot:tot,mo:yr/12,y:yg/tot*100,tr:tr/tot*100,aB:a[a.length-1].bal,aS:a[a.length-1].take/12,cB:c[c.length-1].bal,cL:Math.min.apply(null,c.map(function(x){return x.take/12}))}}
-  function cmp(el){var B=mixStats(st.sel,st.order),A=st.cmp?mixStats(st.cmp.sel,st.cmp.order):null;
-    var head='';
-    if(!A){el.innerHTML=head+'<p class="ic-pn">Keep this mix, then change the funds or amounts above. The two show side by side: income, how much of the payout is earned, and how each holds up in an average market and a crash.</p><div class="ic-pacts">'+(B?'<button type="button" class="btn" data-cmp="keep">Keep this mix to compare</button>':'<span class="ic-pe">Add funds and amounts first.</span>')+'</div>';return}
-    function nm(S){return S?S.fs.map(function(f){return f.t+' '+Math.round(f.a/S.tot*100)+'%'}).join(', '):'–'}
-    function v(S,fn){return S?fn(S):'–'}
+  function cmpList(){if(!st.cmps){st.cmps=[];if(st.cmp&&st.cmp.order&&st.cmp.order.length)st.cmps.push({name:'Saved mix',sel:st.cmp.sel,order:st.cmp.order});delete st.cmp}return st.cmps}
+  function cmp(el){var L=cmpList(),B=mixStats(st.sel,st.order),cols=L.map(function(m){return {n:m.name,S:mixStats(m.sel,m.order)}}).filter(function(c){return c.S});
+    var full=L.length>=3;
+    var saveBox=B?(full?'<p class="ic-pe">You can keep up to 3 mixes. Remove one to save this mix.</p>':'<div class="ic-csave"><label class="ic-cname"><span class="sr">Name this mix</span><input type="text" maxlength="24" data-cname placeholder="Mix '+(L.length+1)+'" aria-label="Name this mix"></label><button type="button" class="btn" data-cmp="keep">Save this mix</button></div>'):'<span class="ic-pe">Add funds and amounts first.</span>';
+    if(!cols.length){el.innerHTML='<p class="ic-pn">Save this mix, then change the funds or amounts above. You can keep up to 3 mixes and see them side by side with the one you’re building: income, how much of the payout is earned, and how each holds up in an average market and a crash.</p>'+saveBox;return}
+    function nm(S){return S.fs.map(function(f){return f.t+' '+Math.round(f.a/S.tot*100)+'%'}).join(', ')}
+    var all2=cols.concat(B?[{n:'This mix',S:B,cur:1}]:[]);
     var R=[['Funds',function(S){return esc(nm(S))}],['Invested',function(S){return money(S.tot)}],['Payouts',function(S){return money(S.mo)+' a month'}],['Yield',function(S){return S.y.toFixed(1)+'%'}],['Past total return',function(S){return S.tr.toFixed(1)+'% a year'}],
       ['Payout above its record',function(S){var g=S.y-S.tr,yg=S.fs.some(function(f){return /1-year|assumed|since 202[5-9]/.test(f.lr[1])});return (g>0?'<span class="no">'+g.toFixed(1)+' points</span>':'<span class="ok">None</span>')+(yg?'<small>Based on a very short record</small>':'')}],
       ['Average market, year '+st.yrs,function(S){return money(S.aB)+'<small>'+money(S.aS)+' a month to spend</small>'}],
       ['Crash in year 2, year '+st.yrs,function(S){return money(S.cB)+'<small>spending dips to '+money(S.cL)+' a month</small>'}]];
-    el.innerHTML=head+'<div class="ic-sw2"><table class="ic-sct ic-cmpt"><thead><tr><th></th><th scope="col">Saved mix</th><th scope="col">This mix</th></tr></thead><tbody>'+R.map(function(r){return '<tr><th scope="row">'+r[0]+'</th><td>'+v(A,r[1])+'</td><td>'+v(B,r[1])+'</td></tr>'}).join('')+'</tbody></table></div>'+
-      '<p class="ic-pn">Both use '+takeTxt()+'. “Past total return” is each fund’s record, weighted by your amounts; very new funds only have a year or two, so treat theirs with care.</p>'+
-      '<div class="ic-pacts"><button type="button" class="btn ghost" data-cmp="load">Load the saved mix</button>'+(B?'<button type="button" class="btn ghost" data-cmp="keep">Save this mix instead</button>':'')+'<button type="button" class="btn ghost" data-cmp="clear">Clear</button></div>';
+    var hd='<tr><th></th>'+all2.map(function(c,k){return '<th scope="col">'+esc(c.n)+(c.cur?'':'<span class="ic-cact"><button type="button" data-cmp="load" data-ci="'+k+'">Load</button><button type="button" data-cmp="rm" data-ci="'+k+'" aria-label="Remove '+esc(c.n)+'">Remove</button></span>')+'</th>'}).join('')+'</tr>';
+    el.innerHTML='<div class="ic-sw2"><table class="ic-sct ic-cmpt"><thead>'+hd+'</thead><tbody>'+R.map(function(r){return '<tr><th scope="row">'+r[0]+'</th>'+all2.map(function(c){return '<td'+(c.cur?' class="cur"':'')+'>'+r[1](c.S)+'</td>'}).join('')+'</tr>'}).join('')+'</tbody></table></div>'+
+      '<p class="ic-pn">All use '+takeTxt()+'. “Past total return” is each fund’s record, weighted by your amounts; very new funds only have a year or two, so treat theirs with care. Loading a saved mix replaces the one you’re building, so save it first if you want to keep it.</p>'+saveBox;
   }
   function trc(el){var fs=fsOf(st.sel,st.order),tot=fs.reduce(function(s,f){return s+f.a},0);
     var head='';
@@ -3203,9 +3207,10 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   $('icProj').addEventListener('input',function(e){var d=e.target.dataset;if(d.rin!=null)st.rin=Math.max(0,+e.target.value||0);else if(d.need!=null)st.need=Math.max(0,+e.target.value||0);else return;save();proj(1)});
   $('icProj').addEventListener('click',function(e){var v=e.target.closest('[data-fv]');if(v){st.fv=v.dataset.fv;save();proj();try{gtag('event','income_view',{view:st.fv})}catch(x){}return}
     var b=e.target.closest('[data-cmp]');if(!b)return;var a=b.dataset.cmp;
-    if(a==='keep'){var o=st.order.filter(function(t){return (+st.sel[t]||0)>0}),sl={};o.forEach(function(t){sl[t]=+st.sel[t]});st.cmp={sel:sl,order:o}}
-    else if(a==='clear')st.cmp=null;
-    else if(a==='load'&&st.cmp){var cur={sel:{},order:st.order.filter(function(t){return (+st.sel[t]||0)>0})};cur.order.forEach(function(t){cur.sel[t]=+st.sel[t]});st.sel={};st.pct={};st.order=st.cmp.order.slice();st.order.forEach(function(t){if(/\.U$/.test(t))mkU(t.slice(0,-2));st.sel[t]=st.cmp.sel[t]});st.total=0;st.cmp=cur.order.length?cur:null;all()}
+    var L=cmpList(),ci=+b.dataset.ci;
+    if(a==='keep'&&L.length<3){var o=st.order.filter(function(t){return (+st.sel[t]||0)>0}),sl={};o.forEach(function(t){sl[t]=+st.sel[t]});if(o.length){var ni=document.querySelector('[data-cname]'),nm=(ni&&ni.value.trim())||('Mix '+(L.length+1));L.push({name:nm.slice(0,24),sel:sl,order:o})}}
+    else if(a==='rm'&&L[ci])L.splice(ci,1);
+    else if(a==='load'&&L[ci]){var m=L[ci];st.sel={};st.pct={};st.order=m.order.slice();st.order.forEach(function(t){if(/\.U$/.test(t))mkU(t.slice(0,-2));st.sel[t]=m.sel[t]});st.total=0;all()}
     save();proj();try{gtag('event','income_compare',{action:a})}catch(x){}});
   $('icProj').addEventListener('click',function(e){var b=e.target.closest('[data-yrs],[data-take]');if(!b)return;if(b.dataset.yrs)st.yrs=+b.dataset.yrs;if(b.dataset.take)st.take=b.dataset.take;save();proj();try{gtag('event','income_projection',{years:st.yrs,take:st.take})}catch(x){}});
   $('icMkt').addEventListener('click',function(e){var ac=e.target.closest('[data-acct]');if(ac){st.acct=ac.dataset.acct;save();mix();calc();try{gtag('event','income_account',{account:st.acct})}catch(x){}return}
