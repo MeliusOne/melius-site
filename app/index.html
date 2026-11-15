@@ -922,8 +922,8 @@ function summary(){
 /* ---------- shell ---------- */
 var cur='today';
 var R={today:renderToday,spend:renderSpend,goals:renderGoals,plan:renderPlan};
-function show(v){cur=v;track('app_tab',{tab:v});[].forEach.call(document.querySelectorAll('.tab'),function(t){t.setAttribute('aria-selected',t.dataset.v===v)});
-  Object.keys(R).forEach(function(k){$('v-'+k).hidden=k!==v});R[v]();$('exTag').hidden=!S.example;try{$('scroller').scrollTop=0}catch(e){}}
+function show(v){var same=v===cur;cur=v;track('app_tab',{tab:v});[].forEach.call(document.querySelectorAll('.tab'),function(t){t.setAttribute('aria-selected',t.dataset.v===v)});
+  Object.keys(R).forEach(function(k){$('v-'+k).hidden=k!==v});R[v]();$('exTag').hidden=!S.example;if(!same)try{$('scroller').scrollTop=0}catch(e){}}
 function changed(mine){if(mine)S.example=false;syncPush();save();flashSaved();$('exTag').hidden=!S.example}
 var undoBuf=null;
 function toast(t,undo){var el=$('toast');el.innerHTML=esc(t)+(undo?' <button class="undo" data-act="undo">Undo</button>':'');el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(function(){el.hidden=true;if(undo)undoBuf=null},undo?6000:1800)}
