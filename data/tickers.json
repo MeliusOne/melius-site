@@ -65,6 +65,11 @@
   "f": "Monthly"
  },
  {
+  "t": "IMAX",
+  "y": "IMAX.TO",
+  "f": "Monthly"
+ },
+ {
   "t": "QMAX",
   "y": "QMAX.TO",
   "f": "Monthly"
