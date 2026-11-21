@@ -1463,7 +1463,6 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       <li><a href="#funds" data-nav="funds">Funds</a></li>
       <li><a href="#income" data-nav="income">Income</a></li>
       <li><a href="#tools" data-nav="tools">Melius Money</a></li>
-      <li data-coach="hide" data-pl="hide"><a href="#accounts" class="navref">Where I invest</a></li>
       <li data-coach="hide" data-pl="hide"><a class="btn navbtn" href="#book" data-nav="book">Book a free session</a></li>
       <li class="m-only-nav"><button type="button" class="v-toggle">Hide Bible verses</button></li>
     </ul></nav>
@@ -1627,7 +1626,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     </form>
   </div></div></section>
 
-  <section class="accounts" id="accounts" data-coach="hide"><div class="wrap">
+  <section class="accounts" id="accounts" hidden><div class="wrap">
     <p class="eyebrow">My picks, not a requirement</p>
     <h2>Where I invest, and where I connect</h2>
     <p class="lede" style="margin-top:12px">For investing, any Canadian brokerage works; I use Wealthsimple. For community, I use Blossom. Both are referral links, and signing up through them may give us both a bonus.</p>
@@ -2445,7 +2444,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
   function route(){
     var h=decodeURIComponent((location.hash||'#home').slice(1))||'home';
     var target=document.getElementById(h), pg=null;
-    if(!window.COACH_ON){var cb={coaching:1,book:1};var cp=target&&(target.classList.contains('page')?target:target.closest('.page'));if((cp&&cb[cp.id])||h==='accounts'){target=null;h='home'}}
+    if(!window.COACH_ON){var cb={coaching:1,book:1};var cp=target&&(target.classList.contains('page')?target:target.closest('.page'));if(cp&&cb[cp.id]){target=null;h='home'}}if(h==='accounts'){target=null;h='home'}
     if(window.PRELAUNCH){var blk={coaching:1,learn:1,book:1};var tp=target&&(target.classList.contains('page')?target:target.closest('.page'));if(tp&&blk[tp.id]){target=null;h='home'}}
     if(target&&target.classList.contains('page')) pg=target;
     else if(target) pg=target.closest('.page');
