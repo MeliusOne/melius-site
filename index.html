@@ -3209,6 +3209,9 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
     else el.innerHTML='<span class="ic-dot" aria-hidden="true"></span><span>Yields as of each fund’s date in the fund directory (checked '+esc(typeof FD_CHECKED!=='undefined'?FD_CHECKED:'recently')+').</span>';
   }
   function all(){list();mix();calc();fresh()}
+  /* used by Ask Melius: read a fund, or load a mix into the calculator */
+  window.MI={fund:function(t){if(!BY[t])return null;var i=info(t),lr=longRun(BY[t]),v=vdOf(t);return {n:BY[t].n,y:+i.yg||0,freq:'pays '+String(BY[t].f||'monthly').toLowerCase(),lev:!!BY[t].lev,tr:lr[1]==='assumed'?null:+lr[0],trl:lr[1],vd:v[1]}},
+    load:function(map){var o=Object.keys(map).filter(function(t){return BY[t]});if(!o.length)return;st.sel={};st.pct={};st.order=o;var tot=0;o.forEach(function(t){st.sel[t]=Math.round(map[t]*100)/100;tot+=st.sel[t]});st.total=Math.round(tot);save();all();tab('income');save();if(location.hash!=='#income')location.hash='#income'}};
   $('icQ').addEventListener('input',list);
   document.querySelectorAll('#icTabs [data-tab],#icMini').forEach(function(b){b.addEventListener('click',function(){tab(b.dataset.tab);save();var pg=$('income');if(pg){var lk=document.documentElement.classList.contains('ic-lock')&&document.body.scrollHeight>document.body.clientHeight,sc=lk?document.body:window,y0=lk?document.body.scrollTop:window.scrollY;sc.scrollTo({top:Math.max(0,pg.getBoundingClientRect().top+y0-130),behavior:'smooth'})}try{gtag('event','income_tab',{tab:b.dataset.tab})}catch(x){}})});
   tab(st.tab||(st.order.length?'income':'mix'));
@@ -3307,6 +3310,87 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
 </script>
 <script>
 (function(){document.querySelectorAll('.lv-mods,.strats,.fsteps,.wgrid').forEach(function(g){var n=g.children.length;if(n<2)return;var h=document.createElement('p');h.className='swipe-hint';h.textContent='Swipe to see all '+n+' →';g.parentNode.insertBefore(h,g)})})();
+</script>
+<!-- Ask Melius: pre-written answers, no AI. Teaches and fills the calculator; never recommends funds. -->
+<style>
+.ma-btn{position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:60;display:none;align-items:center;gap:8px;font:inherit;font-weight:700;font-size:15px;color:var(--accent-ink);background:var(--accent);border:0;border-radius:999px;padding:12px 18px 12px 14px;box-shadow:0 10px 28px -10px rgba(20,33,61,.5);cursor:pointer}
+.ma-btn svg{width:20px;height:20px}
+html.ma-on .ma-btn{display:inline-flex}
+html.ic-lock .ma-btn{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+.ma-panel{position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:61;width:min(400px,calc(100vw - 32px));height:min(600px,calc(100vh - 120px));display:flex;flex-direction:column;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:20px;box-shadow:0 24px 60px -20px rgba(0,0,0,.45);overflow:hidden}
+.ma-panel[hidden]{display:none}
+.ma-hd{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--band)}
+.ma-hd b{font-family:var(--display);font-size:20px;font-weight:500;display:block;line-height:1.1}
+.ma-hd small{color:var(--muted);font-size:12.5px}
+.ma-x{margin-left:auto;font:inherit;font-size:22px;line-height:1;background:none;border:0;color:var(--muted);cursor:pointer;padding:4px 8px}
+.ma-log{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;overscroll-behavior:contain}
+.ma-m{max-width:88%;padding:11px 14px;border-radius:16px;font-size:14.5px;line-height:1.55}
+.ma-m p{margin:0 0 8px}.ma-m p:last-child{margin:0}.ma-m ul{margin:6px 0;padding-left:18px}
+.ma-a{align-self:flex-start;background:var(--band);border:1px solid var(--line);border-bottom-left-radius:6px}
+.ma-u{align-self:flex-end;background:var(--accent);color:var(--accent-ink);border-bottom-right-radius:6px}
+.ma-a a,.ma-a button.ma-link{color:var(--amber);font-weight:700;text-decoration:none;background:none;border:0;padding:0;font:inherit;cursor:pointer}
+.ma-chips{display:flex;flex-wrap:wrap;gap:6px}
+.ma-chip{font:inherit;font-size:13px;font-weight:600;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 11px;cursor:pointer;text-align:left}
+.ma-chip:hover{border-color:var(--amber)}
+.ma-form{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}
+.ma-form input{flex:1;min-width:0;font:inherit;font-size:15px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink)}
+.ma-form button{font:inherit;font-weight:700;color:var(--accent-ink);background:var(--accent);border:0;border-radius:12px;padding:0 14px;cursor:pointer}
+.ma-ft{padding:0 14px 10px;font-size:11.5px;color:var(--muted)}
+@media (max-width:520px){.ma-panel{right:8px;left:8px;width:auto;bottom:calc(8px + env(safe-area-inset-bottom,0px));height:calc(100vh - 90px)}.ma-btn span{display:none}.ma-btn{padding:14px}}
+</style>
+<button type="button" class="ma-btn" id="maBtn" aria-haspopup="dialog" aria-controls="maPanel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span>Ask Melius</span></button>
+<div class="ma-panel" id="maPanel" role="dialog" aria-label="Ask Melius" hidden>
+  <div class="ma-hd"><div><b>Ask Melius</b><small>Plain answers about income investing</small></div><button type="button" class="ma-x" id="maX" aria-label="Close">×</button></div>
+  <div class="ma-log" id="maLog" aria-live="polite"></div>
+  <form class="ma-form" id="maForm" autocomplete="off"><input id="maIn" placeholder="Ask, or try “$500k in CDAY and SDAY”" aria-label="Your question"><button type="submit">Ask</button></form>
+  <p class="ma-ft">Education only, not advice. Answers are written in advance, not by AI.</p>
+</div>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)},log=$('maLog'),opened=false;
+  var KB=[
+    {q:'What is a freedom number?',k:['freedom number','freedom','retire','how much do i need','enough'],a:'<p>Your <b>freedom number</b> is how much you need invested for the payouts to cover your monthly expenses.</p><p><b>Monthly expenses × 12 ÷ yield.</b> $5,000 a month at 10% → <b>$600,000</b>. Plan with 10%; if your funds pay more, treat the extra as buffer.</p><p>Keep a cash buffer for down years, so in a downturn you can live on it and reinvest every payout.</p>',go:['#home','Find yours on the home page']},
+    {q:'What is a covered call ETF?',k:['covered call','covered-call','call option','sell calls','how do they pay'],a:'<p>A covered-call ETF owns stocks and <b>sells call options</b> on them. Buyers pay a premium for the right to buy the stocks at a set price. That premium is paid out to you.</p><p>The trade-off: in a strong rally, some of the upside goes to the option buyer.</p>'},
+    {q:'How do DayMAX funds work?',k:['daymax','0dte','same-day','same day','cday','sday','qday','overnight'],a:'<p>Hamilton’s DayMAX funds (CDAY, SDAY, QDAY) hold a basket of quality stocks, borrow about <b>25% more</b>, and sell <b>same-day calls</b> on about a quarter of the fund.</p><ul><li>The calls expire at the close, so overnight gains are kept.</li><li>Most of the upside stays uncapped.</li><li>The leverage means bigger falls in a crash.</li></ul><p>They launched in July 2025, so they haven’t been through a bear market yet.</p>'},
+    {q:'Yield vs total return?',k:['total return','yield vs','vs yield','nav erosion','erosion','price falling','price drop'],a:'<p><b>Yield</b> is what a fund pays you. <b>Total return</b> is what it actually earns: payouts plus the change in price.</p><p>If a fund pays more than it earns, the gap comes out of the unit price, and future payouts shrink. Check the <b>Payout check</b> in the income calculator.</p>'},
+    {q:'What is return of capital?',k:['return of capital','roc','acb','adjusted cost'],a:'<p><b>Return of capital (ROC)</b> is part of a payout that isn’t taxed right away. Instead, it lowers your <b>adjusted cost base</b>, so you pay more capital-gains tax when you sell.</p><p>ROC isn’t automatically bad, but a fund that pays mostly ROC for years while its price falls is returning your own money.</p>'},
+    {q:'What if payouts get cut?',k:['cut','payout cut','dividend cut','reduce payout','distribution cut'],a:'<p>Payouts can drop in a bad market, often within a quarter or two. In 2009, 804 companies cut dividends.</p><p>Protect yourself with a <b>cash buffer</b> (10–12 months of costs), and don’t plan your life on the highest yield. The calculator’s <b>Every market</b> view shows a crash with payouts cut 30%.</p>'},
+    {q:'How big should my cash buffer be?',k:['buffer','emergency fund','cushion','cash reserve'],a:'<p>Two different things:</p><ul><li><b>Emergency fund:</b> one month of your budget, for life’s surprises (Freedom Step 2).</li><li><b>Downturn buffer:</b> once you live on payouts, enough to cover the bills through a bear market. Bear markets have lasted about 10 months on average.</li></ul><p>With a buffer, you reinvest every payout during a crash instead of selling low.</p>'},
+    {q:'What does leverage do?',k:['leverage','leveraged','margin','borrow','1.25'],a:'<p>A leveraged fund borrows to hold more than it owns, often <b>1.25×</b>. Payouts and gains are bigger, and so are losses: a 30% market drop can mean about a 37% fall, plus borrowing costs.</p><p>Many of your income funds use it. The fund directory marks each one with a <b>Leverage</b> tag.</p>'},
+    {q:'Which account should I use?',k:['tfsa','rrsp','fhsa','account','tax','non-registered','withholding','taxes'],a:'<p>Usually <b>TFSA first</b>: payouts and growth are tax-free.</p><ul><li><b>RRSP:</b> tax deduction now, taxed when you withdraw.</li><li><b>Non-registered:</b> payouts taxed each year (ROC lowers your cost base).</li><li><b>U.S.-listed funds</b> lose 15% of payouts to U.S. tax in a TFSA. Canadian-listed versions avoid most of that.</li></ul><p>For your own situation, check with an accountant.</p>'},
+    {q:'What happens in a crash?',k:['crash','bear market','downturn','recession','market falls'],a:'<p>Prices fall, payouts often get cut, and leveraged funds fall the most. The danger is selling or spending every payout while prices are low.</p><p>A plan made in advance: live on your buffer, <b>reinvest every payout</b>, don’t sell, no margin. Try the <b>Every market</b> view with a 12-month buffer to see the difference.</p>'},
+    {q:'What are the Freedom Steps?',k:['freedom steps','steps','where do i start','start','beginner','step'],a:'<ol style="margin:0;padding-left:18px"><li>Know your numbers</li><li>One-month emergency fund</li><li>Attack your debt (everything but the mortgage)</li><li>Invest for income</li><li>Freedom: payouts cover your costs</li></ol><p style="margin-top:8px">Melius Money walks you through them, free.</p>',go:['/app/','Open Melius Money']},
+    {q:'How do I compare mixes?',k:['compare','mix','save mix','mixes'],a:'<p>In the income calculator, open <b>Future → Compare</b>. Name your mix and tap <b>Save this mix</b>, then change the funds. You can keep up to 3 and see them side by side with the one you’re building.</p>',go:['#income','Open the calculator']}
+  ];
+  var REFUSE=/\b(should i (buy|sell|invest)|which (fund|etf)s? (should|to)|what should i buy|best (fund|etf)|recommend|pick for me|tell me what to buy)\b/i;
+  function el(h,c){var d=document.createElement('div');d.className='ma-m '+c;d.innerHTML=h;log.appendChild(d);log.scrollTop=log.scrollHeight;return d}
+  function chips(list){var d=document.createElement('div');d.className='ma-chips';list.forEach(function(x){var b=document.createElement('button');b.type='button';b.className='ma-chip';b.textContent=x;b.onclick=function(){ask(x)};d.appendChild(b)});log.appendChild(d);log.scrollTop=log.scrollHeight}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function money(n){return '$'+Math.round(n).toLocaleString('en-CA')}
+  function tickers(t){if(typeof FUNDS==='undefined')return [];var by={};FUNDS.forEach(function(f){by[f.t]=f});var out=[];(t.toUpperCase().match(/\b[A-Z]{2,5}(\.U)?\b/g)||[]).forEach(function(x){if(by[x]&&out.indexOf(x)<0)out.push(x)});return out}
+  function amount(t){var m=t.replace(/,/g,'').match(/\$?\s*(\d+(?:\.\d+)?)\s*(k|m|thousand|million)?\b/i);if(!m)return 0;var v=+m[1],u=(m[2]||'').toLowerCase();if(u==='k'||u==='thousand')v*=1e3;if(u==='m'||u==='million')v*=1e6;return v>=1000?v:0}
+  function fundCard(t){var MI=window.MI,f=MI?MI.fund(t):null;if(!f)return '';
+    return '<p><b>'+esc(t)+'</b>: '+esc(f.n)+'</p><ul><li>Pays about <b>'+f.y.toFixed(1)+'%</b>, '+esc(f.freq)+'</li><li>'+(f.lev?'<b>Uses leverage</b>':'No leverage')+'</li><li>Total return record: '+(f.tr==null?'none yet':f.tr.toFixed(1)+'% a year ('+esc(f.trl)+')')+'</li><li>Payout check: <b>'+esc(f.vd)+'</b></li></ul>'}
+  function answer(t){
+    var tk=tickers(t),amt=amount(t);
+    if(REFUSE.test(t))return {h:'<p>I can’t pick funds for you. That would be personal advice, and only a registered adviser can give it.</p><p>What I can do is help you <b>test</b> ideas: tell me an amount and some funds, like “$500k in CDAY and SDAY,” and I’ll load them into the calculator so you can see payouts, a crash, and how each holds up.</p>',c:['How do I compare mixes?','Yield vs total return?']};
+    if(tk.length&&amt&&window.MI){var per=amt/tk.length,map={};tk.forEach(function(x){map[x]=per});window.MI.load(map);
+      return {h:'<p>Loaded <b>'+money(amt)+'</b> split evenly across <b>'+tk.join(', ')+'</b> ('+money(per)+' each) into the income calculator.</p><p>Look at <b>Income</b> for payouts, and <b>Future → Every market</b> for how it holds up in a crash.</p>',c:['What happens in a crash?','How do I compare mixes?']}}
+    if(tk.length){var h=tk.slice(0,3).map(fundCard).join('');if(h)return {h:h+'<p>Want to test it? Try “$100k in '+tk[0]+'”.</p>',c:['Yield vs total return?','What does leverage do?']}}
+    var s=t.toLowerCase(),best=null,bs=0;KB.forEach(function(e){var sc=0;e.k.forEach(function(k){if(s.indexOf(k)>-1)sc+=k.length});if(sc>bs){bs=sc;best=e}});
+    if(best)return {h:best.a+(best.go?'<p><a href="'+best.go[0]+'" class="ma-go">'+best.go[1]+' →</a></p>':''),c:KB.filter(function(e){return e!==best}).slice(0,12).sort(function(){return Math.random()-.5}).slice(0,2).map(function(e){return e.q})};
+    return {h:'<p>I don’t have a written answer for that yet. I’m a simple guide with prepared answers, not a full AI. Try one of these, or ask about a fund by its ticker.</p>',c:['What is a freedom number?','How do DayMAX funds work?','What is return of capital?']};
+  }
+  function ask(t){t=(t||'').trim();if(!t)return;el(esc(t),'ma-u');var r=answer(t);setTimeout(function(){el(r.h,'ma-a');if(r.c&&r.c.length)chips(r.c)},220);try{gtag('event','assistant_ask',{q:t.slice(0,60)})}catch(x){}}
+  function open(){$('maPanel').hidden=false;$('maBtn').setAttribute('aria-expanded','true');if(!opened){opened=true;el('<p>Hi! Ask me anything about income investing and I’ll explain it in plain words. I can also load funds into the calculator for you to test.</p><p>What would you like to know?</p>','ma-a');chips(['What is a freedom number?','How do DayMAX funds work?','Yield vs total return?','$500k in CDAY and SDAY'])}setTimeout(function(){try{$('maIn').focus({preventScroll:true})}catch(x){}},50)}
+  function close(){$('maPanel').hidden=true;$('maBtn').setAttribute('aria-expanded','false');$('maBtn').focus({preventScroll:true})}
+  $('maBtn').onclick=open;$('maX').onclick=close;
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('maPanel').hidden)close()});
+  $('maForm').addEventListener('submit',function(e){e.preventDefault();var i=$('maIn');ask(i.value);i.value=''});
+  log.addEventListener('click',function(e){var a=e.target.closest('.ma-go');if(a&&a.getAttribute('href').charAt(0)==='#'&&window.innerWidth<=520)close()});
+  function where(){var h=location.hash||'#home',on=/^#(income|funds)\b/.test(h);document.documentElement.classList.toggle('ma-on',on);if(!on&&!$('maPanel').hidden)close()}
+  addEventListener('hashchange',where);where();
+})();
 </script>
 </body>
 </html>
