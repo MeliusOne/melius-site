@@ -1021,6 +1021,66 @@ html:not(.prelaunch) .pl-keep{display:none!important}
 .faith-themes q{font-family:var(--display);font-style:italic;font-size:19px;line-height:1.35;color:var(--ink);quotes:'“' '”'}
 .faith-themes small{font-weight:700;color:var(--amber);font-size:13px}
 @media (max-width:820px){.faith-grid{grid-template-columns:1fr;gap:24px}}
+
+/* ===== Lean site (Nov 2026) ===== */
+.old-v{display:none!important}
+.nx-wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.nx-hero{background:var(--seal);color:#F7F5F0;padding-block:84px 76px}
+.nx-hero .nx-wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.nx-h1{font-family:var(--display);font-weight:500;font-size:clamp(40px,5.6vw,66px);line-height:1.04;margin:0 0 18px;letter-spacing:-.015em;color:inherit;text-wrap:balance}
+.nx-hero p.nx-sub{font-size:19px;color:#C3CBD8;margin:0 0 30px;max-width:30ch}
+.nx-acts{display:flex;gap:12px;flex-wrap:wrap}
+.nx-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:700;text-decoration:none;font-size:15px;border:0;cursor:pointer;font-family:inherit}
+.nx-btn.gold{background:#C9A35E;color:#14213D}.nx-btn.line{border:1.5px solid currentColor;color:inherit;background:none}.nx-btn.navy{background:var(--seal);color:#fff}
+.nx-dial{background:rgba(255,255,255,.06);border:1px solid rgba(201,163,94,.35);border-radius:22px;padding:28px}
+.nx-dial small{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#C9A35E;font-weight:700}
+.nx-dial .q{margin:12px 0 4px;color:#C3CBD8}.nx-dial .v{font-family:var(--display);font-size:30px}
+.nx-dial input{width:100%;accent-color:#C9A35E;margin:14px 0 22px}
+.nx-dial .n{font-family:var(--display);font-size:54px;line-height:1;color:#C9A35E}
+.nx-dial .s{font-size:14px;color:#C3CBD8;margin-top:8px}
+.nx-sec{padding-block:76px}.nx-sec.nx-band{background:var(--surface);border-block:1px solid var(--line)}
+.nx-eye{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:700;margin:0 0 10px}
+.nx-h2{font-family:var(--display);font-weight:500;font-size:clamp(30px,3.6vw,42px);line-height:1.1;margin:0 0 34px;color:var(--ink);text-wrap:balance}
+.nx-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;list-style:none;margin:0;padding:0}
+.nx-steps li{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px 18px}
+.nx-num{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--seal);color:#C9A35E;font-family:var(--display);font-size:18px;margin-bottom:14px}
+.nx-steps span{font-weight:700;font-size:16px;line-height:1.3;display:block;color:var(--ink)}
+.nx-tools{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.nx-tool{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:26px;text-decoration:none;display:grid;gap:8px;align-content:start;color:var(--ink);text-align:left;font:inherit;cursor:pointer}
+.nx-tool:hover{border-color:var(--amber)}
+.nx-tool h3{font-family:var(--display);font-weight:500;font-size:24px;margin:0}.nx-tool p{margin:0;color:var(--muted)}.nx-tool .go{color:var(--amber);font-weight:700;margin-top:8px}
+.nx-tool .tag{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)}
+.nx-coach{display:grid;grid-template-columns:auto 1fr auto;gap:36px;align-items:center}
+.nx-coach img{width:150px;height:150px;border-radius:50%;object-fit:cover}
+.nx-coach .nx-h2{margin:0 0 8px}.nx-coach p{margin:0;color:var(--muted);font-size:17px}
+.nx-price{text-align:right}.nx-price b{display:block;font-family:var(--display);font-size:44px;font-weight:500;color:var(--ink)}.nx-price span{display:block;color:var(--muted);font-size:14px;margin-bottom:14px}
+.nx-phead{padding-block:64px 8px}.nx-phead .nx-h1{font-size:clamp(36px,4.6vw,54px);color:var(--ink)}.nx-phead p{font-size:19px;color:var(--muted);margin:0;max-width:46ch}
+.nx-fs{display:grid;gap:14px}
+.nx-fs details{background:var(--surface);border:1px solid var(--line);border-radius:18px}
+.nx-fs summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:44px 1fr auto;gap:16px;align-items:center;padding:22px 24px}
+.nx-fs summary::-webkit-details-marker{display:none}
+.nx-fs summary .nx-num{margin:0;width:40px;height:40px;font-size:20px}
+.nx-fs h3{margin:0;font-family:var(--display);font-weight:500;font-size:24px;color:var(--ink)}.nx-fs summary span.d{color:var(--muted);font-size:15px;display:block}
+.nx-fs summary i{font-style:normal;color:var(--amber);font-weight:700;font-size:14px}
+.nx-fs details[open] summary i{visibility:hidden}
+.nx-fs .more{padding:0 24px 22px 84px;color:var(--muted);margin:0}.nx-fs .more a{color:var(--amber);font-weight:700;text-decoration:none}
+.nx-course{margin-top:28px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;background:var(--seal);color:#F7F5F0;border-radius:22px;padding:30px}
+.nx-course h3{font-family:var(--display);font-weight:500;font-size:28px;margin:0 0 6px}.nx-course p{margin:0;color:#C3CBD8}.nx-course .nx-eye{color:#C9A35E}
+.nx-course .pr{font-family:var(--display);font-size:36px;color:#C9A35E;margin-right:8px}
+.nx-how{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;list-style:none;padding:0;margin:0}
+.nx-how li{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px}.nx-how b{font-family:var(--display);font-size:22px;font-weight:500;display:block;margin-bottom:6px;color:var(--ink)}.nx-how span{color:var(--muted)}
+.nx-mods{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}.nx-mods li{background:var(--band);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-weight:600;font-size:14px;color:var(--ink)}
+.nx-offer{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:start}
+.nx-card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:30px}
+.nx-card.dark{background:var(--seal);color:#F7F5F0;border:0}.nx-card.dark .nx-eye{color:#C9A35E}
+.nx-card.dark .pr b{display:block;font-family:var(--display);font-size:48px;font-weight:500;color:#C9A35E;line-height:1}.nx-card.dark .pr span{display:block;color:#C3CBD8;font-size:14px;margin:6px 0 18px}
+.nx-faq details{border-bottom:1px solid var(--line);padding:16px 0}.nx-faq summary{cursor:pointer;font-weight:700;color:var(--ink)}.nx-faq p{margin:8px 0 0;color:var(--muted)}
+.nx-ab{display:grid;grid-template-columns:240px 1fr;gap:44px;align-items:center}.nx-ab img{width:240px;height:240px;border-radius:50%;object-fit:cover}
+.nx-les{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
+.nx-les li{display:grid;grid-template-columns:48px 1fr;gap:14px;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.nx-les b{font-family:var(--display);font-size:30px;color:var(--amber);font-weight:500;line-height:1}.nx-les h3{margin:0;font-family:var(--display);font-weight:500;font-size:22px;color:var(--ink)}
+.nx-quote{font-family:var(--display);font-style:italic;font-size:clamp(24px,3vw,32px);line-height:1.3;max-width:30ch;margin:0;color:var(--ink)}
+@media (max-width:880px){.nx-hero .nx-wrap,.nx-tools,.nx-how,.nx-offer,.nx-course{grid-template-columns:1fr}.nx-hero{padding-block:56px}.nx-steps{grid-template-columns:1fr 1fr}.nx-coach{grid-template-columns:1fr;text-align:center;justify-items:center}.nx-price{text-align:center}.nx-ab{grid-template-columns:1fr}.nx-ab img{width:160px;height:160px}.nx-fs .more{padding-left:24px}.nx-sec{padding-block:56px}}
 /* About, free-tools version */
 .ab-hero{--ab:#14213D;--ab-ink:#F7F5F0;--ab-mute:#C3CBD8;--ab-gold:#C9A35E;background:var(--ab);color:var(--ab-ink);padding-block:84px 80px;position:relative;overflow:hidden}
 .ab-hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;border:1px solid rgba(201,163,94,.22);box-shadow:0 0 0 60px rgba(201,163,94,.04),0 0 0 140px rgba(201,163,94,.03);pointer-events:none}
@@ -1457,13 +1517,11 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mainnav"><span></span><span></span><span></span></button>
     <nav aria-label="Main" id="mainnav"><ul>
       <li><a href="#home" data-nav="home">Home</a></li>
-      <li><a href="#about" data-nav="about">About</a></li>
-      <li data-coach="hide" data-pl="hide"><a href="#coaching" data-nav="coaching">Coaching</a></li>
+      <li><a href="#tools" data-nav="tools">Tools</a></li>
       <li data-pl="hide"><a href="#learn" data-nav="learn">Freedom Steps</a></li>
-      <li><a href="#funds" data-nav="funds">Funds</a></li>
-      <li><a href="#income" data-nav="income">Income</a></li>
-      <li><a href="#tools" data-nav="tools">Melius Money</a></li>
-      <li data-coach="hide" data-pl="hide"><a class="btn navbtn" href="#book" data-nav="book">Book a free session</a></li>
+      <li data-coach="hide" data-pl="hide"><a href="#coaching" data-nav="coaching">Coaching</a></li>
+      <li><a href="#about" data-nav="about">About</a></li>
+      <li data-coach="hide" data-pl="hide"><a class="btn navbtn" href="#book" data-nav="book">Book a free call</a></li>
       <li class="m-only-nav"><button type="button" class="v-toggle">Hide Bible verses</button></li>
     </ul></nav>
   </div>
@@ -1548,6 +1606,28 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     </article>
   </div></section>
   <section class="pl-keep hm-motto"><div class="wrap"><p class="pl-motto" lang="la">Dum vivas, fac melius.<small>As long as you live, do better.</small></p></div></section>
+  <section class="nx-hero"><div class="nx-wrap">
+    <div><h1 class="nx-h1">Live on your investments, one step at a time.</h1>
+    <p class="nx-sub">Free tools and honest coaching to get your money working for you.</p>
+    <div class="nx-acts"><a class="nx-btn gold" href="#tools">Try the free tools</a><a class="nx-btn line" href="#book">Book a free call</a></div></div>
+    <div class="nx-dial"><small>Your freedom number</small>
+      <div class="q">My family spends each month</div><div class="v" id="nxEx">$5,000</div>
+      <input type="range" min="2000" max="15000" step="250" value="5000" id="nxSl" aria-label="Monthly spending">
+      <div class="n" id="nxFn">$600,000</div><div class="s">invested at 10% pays your month. Work becomes a choice.</div></div>
+  </div></section>
+  <section class="nx-sec"><div class="nx-wrap"><p class="nx-eye">The path</p><h2 class="nx-h2">Five steps to freedom</h2>
+    <ol class="nx-steps"><li><b class="nx-num">1</b><span>Know your number</span></li><li><b class="nx-num">2</b><span>Keep a one-month cushion</span></li><li><b class="nx-num">3</b><span>Clear your debt</span></li><li><b class="nx-num">4</b><span>Invest for income</span></li><li><b class="nx-num">5</b><span>Live on the payouts</span></li></ol>
+    <p style="margin:22px 0 0"><a class="nx-tool-link" href="#learn" style="color:var(--amber);font-weight:700;text-decoration:none">See how each step works →</a></p></div></section>
+  <section class="nx-sec nx-band"><div class="nx-wrap"><p class="nx-eye">Free tools</p><h2 class="nx-h2">See your numbers, not just read about them</h2>
+    <div class="nx-tools">
+      <a class="nx-tool" href="/app/"><h3>Melius Money</h3><p>Plan every payday and your freedom date.</p><span class="go">Open the app →</span></a>
+      <a class="nx-tool" href="#income"><h3>Income calculator</h3><p>What your funds would pay, in any market.</p><span class="go">Try it →</span></a>
+      <button type="button" class="nx-tool" data-ask><h3>Ask Melius</h3><p>Plain answers to income-investing questions.</p><span class="go">Ask a question →</span></button>
+    </div></div></section>
+  <section class="nx-sec"><div class="nx-wrap nx-coach"><img src="headshot-plain.jpg" alt="Obi Oji" width="150" height="150" loading="lazy">
+    <div><p class="nx-eye">1:1 coaching with Obi</p><h2 class="nx-h2">Walk the steps with someone beside you</h2><p>Six private sessions, built around your own numbers.</p></div>
+    <div class="nx-price"><b>$997</b><span>or 3 payments of $333</span><a class="nx-btn navy" href="#book">Book a free call</a></div></div></section>
+<div class="old-v" hidden>
   <section class="hero-band" aria-label="Introduction">
     <div class="wrap">
       <div class="hero">
@@ -1615,6 +1695,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
   </div></section>
 
 
+</div>
   <section class="updates" id="updates"><div class="wrap"><div class="up-card">
     <div class="up-txt"><p class="eyebrow">Get updates</p><h2>New tools, lessons and reads</h2><p>An email when something new is ready, about once a month. No spam, and unsubscribe any time.</p></div>
     <form class="up-form" name="updates" method="POST" data-netlify="true" netlify-honeypot="company" id="upForm">
@@ -1637,6 +1718,15 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
   </div></section>
 </div>
 <div class="page" id="about" data-page="about">
+  <section class="nx-sec"><div class="nx-wrap nx-ab"><img src="headshot-plain.jpg" alt="Obi Oji" width="240" height="240"><div><p class="nx-eye">About</p><h1 class="nx-h1" style="color:var(--ink);font-size:clamp(36px,4.6vw,54px);margin:0 0 14px">Hi, I’m Obi.</h1><p style="font-size:19px;color:var(--muted);margin:0;max-width:48ch">Husband, dad of four and a Christian in Kitchener. I got plenty wrong with money before I got some right. Melius One is what I wish I’d had at the start.</p></div></div></section>
+  <section class="nx-sec nx-band"><div class="nx-wrap"><p class="nx-eye">What I learned the expensive way</p><h2 class="nx-h2">So you can learn it the cheap way</h2><ol class="nx-les">
+    <li><b>1</b><h3>A salary buys your time. Only assets buy it back.</h3></li>
+    <li><b>2</b><h3>A strategy without rules is just a gamble.</h3></li>
+    <li><b>3</b><h3>Knowing when to stop is a skill.</h3></li>
+    <li><b>4</b><h3>Luck is not a plan. Discipline is.</h3></li>
+    <li><b>5</b><h3>Order matters more than speed.</h3></li></ol></div></section>
+  <section class="nx-sec"><div class="nx-wrap"><p class="nx-eye">The name</p><p class="nx-quote"><i lang="la">Melius</i> means better. <i>One</i> is one step at a time.</p><p style="color:var(--muted);margin:14px 0 0">Money is a tool. Christ is the treasure.</p></div></section>
+<div class="old-v" hidden>
   <!-- ABOUT, free-tools version (shown when coaching is off). The coaching version follows, hidden. -->
   <section class="ab-hero">
     <div class="wrap ab-hero-in">
@@ -1841,7 +1931,23 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
   </section>
   <section data-coach="hide" class="next-wrap"><div class="wrap"><a class="next" href="#coaching"><span class="eyebrow">Next</span><span class="next-t">How the coaching works</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section>
 </div>
+</div>
 <div class="page" id="coaching" data-page="coaching">
+  <div class="nx-wrap nx-phead"><p class="nx-eye">1:1 coaching</p><h1 class="nx-h1">Walk the steps with someone beside you</h1><p>Six private sessions with Obi, built around your own numbers.</p></div>
+  <section class="nx-sec"><div class="nx-wrap nx-offer">
+    <div class="nx-card"><h2 class="nx-h2" style="margin-bottom:18px">What we cover</h2><ul class="nx-mods"><li>Money foundations</li><li>The right accounts</li><li>Income investing</li><li>Options for income</li><li>LEAPS (optional)</li><li>Your plan</li></ul>
+      <p style="color:var(--muted);margin:22px 0 0">Online, about an hour each, one to two weeks apart.</p></div>
+    <div class="nx-card dark"><p class="nx-eye">Private coaching</p><div class="pr"><b>$997</b><span>or 3 payments of $333</span></div><a class="nx-btn gold" href="#book">Book a free 30-minute call</a><p style="font-size:14px;color:#C3CBD8;margin:16px 0 0">Not useful after the first session? Full refund within 7 days.</p></div>
+  </div></section>
+  <section class="nx-sec nx-band"><div class="nx-wrap"><h2 class="nx-h2">How it works</h2><ol class="nx-how"><li><b>1. Free call</b><span>30 minutes to see where you are.</span></li><li><b>2. Six sessions</b><span>One step at a time, with your accounts on screen.</span></li><li><b>3. Your plan</b><span>A written plan you can follow on your own.</span></li></ol></div></section>
+  <section class="nx-sec"><div class="nx-wrap nx-faq"><h2 class="nx-h2">Questions</h2>
+    <details><summary>Is this financial advice?</summary><p>No. I teach how investing works so you can make your own decisions. I don’t manage money or tell you what to buy.</p></details>
+    <details><summary>Do I need a lot of money to start?</summary><p>No. Many people start with nothing invested yet.</p></details>
+    <details><summary>Do you teach options?</summary><p>Yes: covered calls, cash-secured puts and the wheel. LEAPS is optional.</p></details>
+    <details><summary>Online or in person?</summary><p>Online on Google Meet. In person in Kitchener–Waterloo can be arranged.</p></details>
+    <details><summary>How can I pay?</summary><p>Card or e-Transfer, in full or in three payments.</p></details>
+  </div></section>
+<div class="old-v" hidden>
   <section id="how">
     <div class="wrap">
       <p class="eyebrow">Ways to work with me</p>
@@ -1997,7 +2103,19 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
   </section>
   <section class="next-wrap"><div class="wrap"><a class="next" href="#learn"><span class="eyebrow">Next</span><span class="next-t">Learn what school never taught you about money</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section>
 </div>
+</div>
 <div class="page" id="learn" data-page="learn">
+  <div class="nx-wrap nx-phead"><p class="nx-eye">The path</p><h1 class="nx-h1">Five steps to freedom</h1><p>In order. Each one makes the next one easier.</p></div>
+  <section class="nx-sec"><div class="nx-wrap"><div class="nx-fs">
+      <details><summary><b class="nx-num">1</b><div><h3>Know your number</h3><span class="d">What your family truly needs each month.</span></div><i>More</i></summary><p class="more">Give every dollar a job, every payday. <a href="/app/">Plan in Melius Money →</a></p></details>
+      <details><summary><b class="nx-num">2</b><div><h3>Keep a one-month cushion</h3><span class="d">One month of your budget, in cash.</span></div><i>More</i></summary><p class="more">So a surprise bill never becomes debt. <a href="/app/">Set it in Melius Money →</a></p></details>
+      <details><summary><b class="nx-num">3</b><div><h3>Clear your debt</h3><span class="d">Everything except the mortgage.</span></div><i>More</i></summary><p class="more">Snowball or avalanche, with a date each debt is gone. <a href="/app/">See your debt-free date →</a></p></details>
+      <details><summary><b class="nx-num">4</b><div><h3>Invest for income</h3><span class="d">Covered-call funds that pay you monthly.</span></div><i>More</i></summary><p class="more">TFSA first. Reinvest every payout until you’re free. <a href="#income">Try the income calculator →</a></p></details>
+      <details><summary><b class="nx-num">5</b><div><h3>Live on the payouts</h3><span class="d">When payouts cover your month, work is a choice.</span></div><i>More</i></summary><p class="more">Keep a cash buffer, so a bad year never forces you to sell. <a href="#home">Find your freedom number →</a></p></details>
+    </div>
+    <div class="nx-course"><div><p class="nx-eye">The Freedom Steps course</p><h3>All five steps, at your own pace</h3><p>Short video lessons and worksheets for every step.</p></div><div><span class="pr">$147</span><a class="nx-btn gold" href="/freedom-steps/">Join the list</a></div></div>
+  </div></section>
+<div class="old-v" hidden>
   <section class="lv-hero">
     <div class="wrap lv-hero-row">
       <div class="stack">
@@ -2097,7 +2215,18 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
 
   <section data-coach="hide" class="next-wrap"><div class="wrap"><a class="next" href="#book"><span class="eyebrow">Ready?</span><span class="next-t">Book your free intro session</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section><section data-coach="show" class="next-wrap"><div class="wrap"><a class="next" href="#tools"><span class="eyebrow">Ready?</span><span class="next-t">Set up your free Melius Money plan</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section>
 </div>
+</div>
 <div class="page" id="tools" data-page="tools">
+  <div class="nx-wrap nx-phead"><p class="nx-eye">Free tools</p><h1 class="nx-h1">Your money, in numbers</h1><p>Everything here is free. Your numbers stay on your device.</p></div>
+  <section class="nx-sec"><div class="nx-wrap nx-tools">
+    <a class="nx-tool" href="/app/"><span class="tag">Plan</span><h3>Melius Money</h3><p>Plan every payday, clear debt and see your freedom date.</p><span class="go">Open the app →</span></a>
+    <a class="nx-tool" href="#income"><span class="tag">Income</span><h3>Income calculator</h3><p>What your funds would pay, and how they hold up in a crash.</p><span class="go">Try it →</span></a>
+    <a class="nx-tool" href="#funds"><span class="tag">Research</span><h3>Fund directory</h3><p>Canadian income ETFs: yields, leverage and real returns.</p><span class="go">Browse funds →</span></a>
+    <a class="nx-tool" href="/app/learn/"><span class="tag">Learn</span><h3>Melius Learn</h3><p>Two-minute lessons on how money and investing work.</p><span class="go">Start a lesson →</span></a>
+    <a class="nx-tool" href="/app/kids/"><span class="tag">Kids</span><h3>Money Quest</h3><p>A money game for children, with a family jar system.</p><span class="go">Play →</span></a>
+    <button type="button" class="nx-tool" data-ask><span class="tag">Ask</span><h3>Ask Melius</h3><p>Plain answers to income-investing questions.</p><span class="go">Ask a question →</span></button>
+  </div></section>
+<div class="old-v" hidden>
   <section class="tl-head ap-hero">
     <div class="wrap"><div class="ap-row">
       <div class="stack ap-copy">
@@ -2186,8 +2315,6 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       <p class="hp"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
       <div class="field"><label for="g-name">First name</label><input id="g-name" name="name" autocomplete="given-name" required></div>
       <div class="field"><label for="g-email">Email</label><input id="g-email" name="email" type="email" autocomplete="email" required></div>
-      <label data-coach="hide" class="chk"><input type="checkbox" name="circle" value="yes"> <span>Add me to the waitlist for the <b>Melius Circle</b>, my private WhatsApp community</span></label>
-      <label data-coach="hide" class="chk"><input type="checkbox" name="cohort" value="yes"> <span>Tell me when the next <b>Freedom Steps Cohort</b> opens</span></label>
       <div><button class="btn" id="g-submit" type="submit">Send me the guide</button></div>
       <p class="status" id="g-status" role="status"></p>
       <p class="note">You’ll also get my free weekly email on markets, saving, investing and money habits. Unsubscribe any time.</p>
@@ -2196,6 +2323,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
 
   <section class="tool-note-wrap"><div class="wrap"><p class="tool-note"><b>For demonstration and education only.</b> Not investment, tax or legal advice. The app and the budget template give estimates to help you plan; your own situation may need professional advice.</p></div></section>
   <section data-coach="hide" class="next-wrap" data-pl="hide"><div class="wrap"><a class="next" href="#book"><span class="eyebrow">Ready for the next step?</span><span class="next-t">Book a free 30-minute intro session</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section><section data-coach="show" class="next-wrap"><div class="wrap"><a class="next" href="#income"><span class="eyebrow">Next</span><span class="next-t">See what your funds could pay you</span><span class="next-arrow" aria-hidden="true">→</span></a></div></section>
+</div>
 </div>
 <div class="page" id="funds" data-page="funds">
   <section class="fd-head">
@@ -2331,7 +2459,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     <p data-coach="hide">You can reschedule any session for free with at least 24 hours’ notice. A session missed without notice, or cancelled with less than 24 hours’ notice, counts as used, unless it’s an emergency.</p>
     <h3 data-coach="hide">Refunds</h3>
     <p data-coach="hide"><b>Payment plans:</b> card payments and monthly payment plans are processed by a secure third-party payment service, which holds your card details and collects any instalments. Pay-in-full prices apply to Interac e-Transfer.</p>
-    <p data-coach="hide"><b>Satisfaction guarantee:</b> if your first private session, or your first cohort week, isn’t useful, ask within 7 days of it and the full amount is refunded. After that, unused private sessions are refunded in full when you ask within 30 days of purchase. A cohort seat can be moved to the next cohort at no cost before week 3. Monthly check-ins and the Melius Circle can be cancelled at any time and stop at the end of the month already paid.</p>
+    <p data-coach="hide"><b>Satisfaction guarantee:</b> if your first session isn’t useful, ask within 7 days of it and the full amount is refunded. After that, unused sessions are refunded in full when you ask within 30 days of purchase.</p>
     <h3>Education only</h3>
     <p data-coach="hide">Everything on this site and in sessions is general financial education, not investment, tax or legal advice. Melius One Consulting does not manage money or trade for clients. Investing involves risk, including the loss of money; options and leveraged funds can lose value quickly. Past payouts and returns do not guarantee future results. Some links on this site are referral links, which may earn a bonus for both of us.</p><p data-coach="show">Everything on this site is general financial education, not investment, tax or legal advice. I don’t manage money or trade for anyone. Investing involves risk, including the loss of money; options and leveraged funds can lose value quickly. Past payouts and returns do not guarantee future results.</p>
     <p class="note">Last updated October 2026.</p>
@@ -2450,12 +2578,12 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     else if(target) pg=target.closest('.page');
     if(!pg){pg=document.getElementById('home');target=null;}
     pagesEls.forEach(function(p){p.classList.toggle('on',p===pg);});
-    navLinks.forEach(function(a){a.classList.toggle('active',a.getAttribute('data-nav')===pg.id);});
+    var navId=(pg.id==='funds'||pg.id==='income')?'tools':pg.id;navLinks.forEach(function(a){a.classList.toggle('active',a.getAttribute('data-nav')===navId);});
     fixCharts(pg);
     document.documentElement.classList.remove('ic-kb');document.documentElement.classList.toggle('ic-lock',pg.id==='income');
     if(target&&target!==pg){setTimeout(function(){target.scrollIntoView({behavior:reduce?'auto':'smooth'});},60);} else {window.scrollTo(0,0);document.body.scrollTop=0;}
     onScroll();
-    var names={home:'',about:'About · ',coaching:'Coaching · ',learn:'Freedom Steps · ',funds:'Fund directory · ',income:'Income calculator · ',tools:'Melius Money · ',book:'Book a session · ',policies:'Policies · '}; var BN=window.COACH_ON?'Melius One Consulting':'Melius One';document.title=pg.id==='home'?(window.PRELAUNCH?BN+' | Free money tools':window.COACH_ON?'Melius One Consulting | Obi Oji, Financial Education Coach in Kitchener, Ontario':'Melius One | Free money tools for families in Canada'):(names[pg.id]||'')+BN;
+    var names={home:'',about:'About · ',coaching:'Coaching · ',learn:'Freedom Steps · ',funds:'Fund directory · ',income:'Income calculator · ',tools:'Free tools · ',book:'Book a session · ',policies:'Policies · '}; var BN=window.COACH_ON?'Melius One Consulting':'Melius One';document.title=pg.id==='home'?(window.PRELAUNCH?BN+' | Free money tools':window.COACH_ON?'Melius One Consulting | Obi Oji, Financial Education Coach in Kitchener, Ontario':'Melius One | Free money tools for families in Canada'):(names[pg.id]||'')+BN;
     if(pg.id!==lastPg){lastPg=pg.id;try{gtag('event','page_view',{page_title:document.title,page_location:location.origin+'/'+(pg.id==='home'?'':pg.id)});}catch(e){}}
   }
   var lastPg=null;
@@ -3283,8 +3411,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   function hdr(){var h=document.querySelector('header.top');if(h)root.style.setProperty('--hdr',h.offsetHeight+'px')}
   hdr();addEventListener('resize',hdr);addEventListener('load',hdr);
   var NC=!window.COACH_ON;var SUB={about:[],
-    coaching:[['how','Pricing'],['apply','Apply'],['circle','Melius Circle'],['curriculum','Curriculum'],['faq','Questions']],
-    learn:[['why','The why'],['steps','The steps'],['invest','Step 4, up close']].concat(NC?[]:[['modules','Modules']])};
+    coaching:[],learn:[]};
   Object.keys(SUB).forEach(function(pid){var pg=document.getElementById(pid);if(!pg)return;
     var items=SUB[pid].filter(function(x){return document.getElementById(x[0])});if(items.length<2)return;
     pg.classList.add('has-sub');
@@ -3387,9 +3514,11 @@ html.ic-lock .ma-btn{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('maPanel').hidden)close()});
   $('maForm').addEventListener('submit',function(e){e.preventDefault();var i=$('maIn');ask(i.value);i.value=''});
   log.addEventListener('click',function(e){var a=e.target.closest('.ma-go');if(a&&a.getAttribute('href').charAt(0)==='#'&&window.innerWidth<=520)close()});
-  function where(){var h=location.hash||'#home',on=/^#(income|funds)\b/.test(h);document.documentElement.classList.toggle('ma-on',on);if(!on&&!$('maPanel').hidden)close()}
+  function where(){var h=location.hash||'#home',on=/^#(income|funds|tools)\b/.test(h);document.documentElement.classList.toggle('ma-on',on);if(!on&&!$('maPanel').hidden)close()}
   addEventListener('hashchange',where);where();
+  document.addEventListener('click',function(e){if(e.target.closest('[data-ask]')){e.preventDefault();open()}});
 })();
 </script>
+<script>(function(){var s=document.getElementById('nxSl');if(!s)return;function u(){var m=+s.value;document.getElementById('nxEx').textContent='$'+m.toLocaleString('en-CA');document.getElementById('nxFn').textContent='$'+Math.round(m*12/0.10).toLocaleString('en-CA')}s.addEventListener('input',u);u()})();</script>
 </body>
 </html>
