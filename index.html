@@ -20,7 +20,7 @@
 -->
 <script>document.documentElement.classList.add("js");try{if(localStorage.getItem("melius-verses")!=="on")document.documentElement.classList.add("no-verses")}catch(e){document.documentElement.classList.add("no-verses")}
 /* PRE-LAUNCH MODE: true shows the "coming soon" home page and hides About, Coaching, Learn and booking. Set to false at launch. */
-window.PRELAUNCH=true;if(window.PRELAUNCH)document.documentElement.classList.add("prelaunch");
+window.PRELAUNCH=false;if(window.PRELAUNCH)document.documentElement.classList.add("prelaunch");
 /* COACHING: false hides coaching, prices, booking, referral links and the Melius Circle, and shows the free-tools wording instead. Set to true when coaching opens. */
 window.COACHING=true;
 /* While the site is off (PRELAUNCH), coaching stays hidden and the free-tools wording shows, whatever COACHING says. */
@@ -1066,7 +1066,7 @@ html:not(.prelaunch) .pl-keep{display:none!important}
 .ab-next{--ab:#14213D;--ab-ink:#F7F5F0;--ab-mute:#C3CBD8;--ab-gold:#C9A35E;background:var(--ab);color:var(--ab-ink)}
 .ab-next .eyebrow{color:var(--ab-gold);margin:0}
 .ab-next h2{color:var(--ab-ink);margin:10px 0 0;max-width:22ch;text-wrap:balance}
-.abn-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:30px}
+.abn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:30px}
 .abn{position:relative;display:grid;gap:8px;align-content:start;text-decoration:none;color:var(--ab-ink);background:rgba(247,245,240,.05);border:1px solid rgba(201,163,94,.35);border-radius:18px;padding:22px 22px 24px;transition:border-color .2s,transform .2s}
 .abn:hover{border-color:var(--ab-gold);transform:translateY(-2px)}
 .abn-t{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ab-gold)}
@@ -1555,7 +1555,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
       <div class="stack">
         <p data-coach="hide" class="eyebrow">Financial education services · Kitchener, Ontario</p><p data-coach="show" class="eyebrow">Free money tools · Kitchener, Ontario</p>
         <h1>Get your money in order. Then make it pay you.</h1>
-        <p data-coach="hide" class="lede">One-on-one coaching for families in Canada, whether you’re new here or just tired of money running out before the month does. Plan every dollar, keep a one-month emergency fund, clear every debt but the mortgage, then learn how income investing works, one clear step at a time, with your own accounts in front of you.</p><p data-coach="show" class="lede">Free tools for families in Canada, whether you’re new here or just tired of money running out before the month does. Plan every dollar, keep a one-month emergency fund, clear every debt but the mortgage, then learn how income investing works, one clear step at a time.</p>
+        <p data-coach="hide" class="lede">One-on-one coaching for families in Canada, whether you’re just starting out or tired of money running out before the month does. Plan every dollar, keep a one-month emergency fund, clear every debt but the mortgage, then learn how income investing works, one clear step at a time, with your own accounts in front of you.</p><p data-coach="show" class="lede">Free tools for families in Canada, whether you’re just starting out or tired of money running out before the month does. Plan every dollar, keep a one-month emergency fund, clear every debt but the mortgage, then learn how income investing works, one clear step at a time.</p>
         <div class="cta">
           <a data-coach="hide" class="btn solid" href="#book">Book a free intro session</a><a data-coach="show" class="btn solid" href="#tools">Open Melius Money, free</a>
           <a class="btn ghost" href="#steps">See the Freedom Steps</a>
@@ -1639,7 +1639,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
 </div>
 <div class="page" id="about" data-page="about">
   <!-- ABOUT, free-tools version (shown when coaching is off). The coaching version follows, hidden. -->
-  <section class="ab-hero" data-coach="show">
+  <section class="ab-hero">
     <div class="wrap ab-hero-in">
       <p class="eyebrow">About Melius One</p>
       <h1 class="ab-h1">Most of us were taught how to earn money. Almost no one taught us how to make it work for us.</h1>
@@ -1648,7 +1648,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     </div>
   </section>
 
-  <section id="ab-ask" class="band" data-coach="show">
+  <section id="ab-ask" class="band">
     <div class="wrap">
       <p class="eyebrow">Four questions</p>
       <h2>Sit with these for a minute</h2>
@@ -1663,7 +1663,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     </div>
   </section>
 
-  <section id="ab-name" data-coach="show">
+  <section id="ab-name">
     <div class="wrap">
       <div class="nm-grid">
         <div class="nm-txt">
@@ -1682,7 +1682,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     </div>
   </section>
 
-  <section id="ab-me" class="band" data-coach="show">
+  <section id="ab-me" class="band">
     <div class="wrap ab-me">
       <div class="photo ab-photo" id="photo2">
         <img src="headshot-plain.jpg" alt="Obi Oji" onerror="this.remove();document.getElementById('photo2').classList.add('noimg')">
@@ -1697,7 +1697,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     </div>
   </section>
 
-  <section id="ab-lessons" data-coach="show">
+  <section id="ab-lessons">
     <div class="wrap">
       <p class="eyebrow">The wrong turns</p>
       <h2>What I learned the expensive way</h2>
@@ -1712,7 +1712,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     </div>
   </section>
 
-  <section id="ab-faith" class="band" data-coach="show">
+  <section id="ab-faith" class="band">
     <div class="wrap ab-faith">
       <p class="eyebrow">Faith and money</p>
       <h2>Money is a tool. Christ is the treasure.</h2>
@@ -1721,20 +1721,22 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     </div>
   </section>
 
-  <section id="ab-next" class="ab-next" data-coach="show">
+  <section id="ab-next" class="ab-next">
     <div class="wrap">
       <p class="eyebrow">Your next step</p>
       <h2>Don’t just finish reading. Take one small step today.</h2>
       <div class="abn-grid">
-        <a class="abn" href="#whichstep"><span class="abn-t">1 minute</span><b>Find which step you’re on</b><span class="abn-d">Five quick questions show where to start.</span><span class="abn-go" aria-hidden="true">→</span></a>
-        <a class="abn" href="#fnum"><span class="abn-t">2 minutes</span><b>Find your freedom number</b><span class="abn-d">See what “enough” costs, in real dollars.</span><span class="abn-go" aria-hidden="true">→</span></a>
+        <a class="abn pl-keep" href="#whichstep"><span class="abn-t">1 minute</span><b>Find which step you’re on</b><span class="abn-d">Five quick questions show where to start.</span><span class="abn-go" aria-hidden="true">→</span></a>
+        <a class="abn pl-keep" href="#fnum"><span class="abn-t">2 minutes</span><b>Find your freedom number</b><span class="abn-d">See what “enough” costs, in real dollars.</span><span class="abn-go" aria-hidden="true">→</span></a>
+        <a class="abn" href="#learn" data-coach="hide"><span class="abn-t">5 minutes</span><b>See the Freedom Steps</b><span class="abn-d">The five steps, in order, from paycheque to passive income.</span><span class="abn-go" aria-hidden="true">→</span></a>
+        <a class="abn" href="#book" data-coach="hide"><span class="abn-t">20 minutes</span><b>Talk it through with me</b><span class="abn-d">A free intro session, one to one, about where you are and what to do next.</span><span class="abn-go" aria-hidden="true">→</span></a>
         <a class="abn" href="#tools"><span class="abn-t">10 minutes</span><b>Plan your next payday</b><span class="abn-d">Give every dollar a job in Melius Money. Free.</span><span class="abn-go" aria-hidden="true">→</span></a>
       </div>
       <p class="ab-motto" lang="la">Dum vivas, fac melius.<small>As long as you live, do better.</small></p>
     </div>
   </section>
 
-  <section id="coach" data-coach="hide">
+  <section id="coach" hidden>
     <div class="wrap">
       <div class="about">
         <div class="photo" id="photo">
@@ -1763,7 +1765,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     </div>
   </section>
 
-  <section id="story" class="band" data-coach="hide">
+  <section id="story" class="band" hidden>
     <div class="wrap">
       <p class="eyebrow">My story</p>
       <h2>How I got here</h2>
@@ -1792,7 +1794,7 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     </div>
   </section>
 
-  <section id="faith" data-coach="hide">
+  <section id="faith" hidden>
     <div class="wrap">
       <p class="eyebrow">Faith and money</p>
       <h2>Money is a tool. Christ is the treasure.</h2>
@@ -1812,9 +1814,9 @@ html.no-verses .faith-grid{grid-template-columns:1fr}html.no-verses .faith-txt{m
     </div>
   </section>
 
-  <section class="ab-link" data-coach="hide"><div class="wrap"><a class="ab-card" href="#tools"><span class="eyebrow">Free budget app</span><b>Make every dollar better</b><span>Try the free Melius Money app: your spending plan, debt-free date and freedom number →</span></a></div></section>
+  <section class="ab-link" hidden><div class="wrap"><a class="ab-card" href="#tools"><span class="eyebrow">Free budget app</span><b>Make every dollar better</b><span>Try the free Melius Money app: your spending plan, debt-free date and freedom number →</span></a></div></section>
 
-  <section id="portfolio" data-coach="hide">
+  <section id="portfolio" hidden>
     <div class="wrap">
       <p class="eyebrow">My portfolio</p>
       <h2>How I invest my own money</h2>
@@ -3283,7 +3285,7 @@ mountWord(document.getElementById('ws'),{wrap:'wrap',track:function(n){try{gtag(
   var root=document.documentElement;
   function hdr(){var h=document.querySelector('header.top');if(h)root.style.setProperty('--hdr',h.offsetHeight+'px')}
   hdr();addEventListener('resize',hdr);addEventListener('load',hdr);
-  var NC=!window.COACH_ON;var SUB={about:NC?[]:[['coach','Your coach'],['story','My story'],['faith','Faith'],['portfolio','How I invest']],
+  var NC=!window.COACH_ON;var SUB={about:[],
     coaching:[['how','Pricing'],['apply','Apply'],['circle','Melius Circle'],['curriculum','Curriculum'],['faq','Questions']],
     learn:[['why','The why'],['steps','The steps'],['invest','Step 4, up close']].concat(NC?[]:[['modules','Modules']])};
   Object.keys(SUB).forEach(function(pid){var pg=document.getElementById(pid);if(!pg)return;
