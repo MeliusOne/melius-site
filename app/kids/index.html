@@ -6,15 +6,15 @@
 <title>Money Quest</title>
 <meta name="description" content="A free money game for kids: learn saving, investing, real estate, Bitcoin, DeFi, AI and how the world works, two minutes a day.">
 <meta name="theme-color" content="#FFF6E5">
-<link rel="icon" href="../icon-m1-192.png">
-<link rel="apple-touch-icon" href="../apple-touch-icon-m1.png">
+<link rel="icon" href="../icon-m1-192.png?v=4">
+<link rel="apple-touch-icon" href="../apple-touch-icon-m1.png?v=4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800;900&display=swap">
 <style>
-:root{--bg:#FFF6E5;--surface:#FFFFFF;--band:#FFF0D6;--ink:#1E2A44;--muted:#5E6A80;--line:#EADFC8;--brand:#1D3557;--gold:#E0A93B;--gold-d:#B8862A;--good:#2E9B5F;--good-soft:#DFF5E8;--bad:#D2443A;--bad-soft:#FCE4E1;--lock:#CFC6B4;--sky:#DDF1FF;--shadow:0 6px 0 rgba(30,42,68,.08);--display:'Fredoka','Nunito',system-ui,sans-serif;--body:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1A2B;--surface:#17253B;--band:#1C2D47;--ink:#F1F4FA;--muted:#A9B5CA;--line:#2A3D5C;--brand:#E0A93B;--gold:#F0BC4E;--gold-d:#B8862A;--good:#5FD394;--good-soft:#173A2B;--bad:#F07A70;--bad-soft:#3F1F1D;--lock:#3A4C6A;--sky:#16304D;--shadow:0 6px 0 rgba(0,0,0,.3);color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0F1A2B;--surface:#17253B;--band:#1C2D47;--ink:#F1F4FA;--muted:#A9B5CA;--line:#2A3D5C;--brand:#E0A93B;--gold:#F0BC4E;--gold-d:#B8862A;--good:#5FD394;--good-soft:#173A2B;--bad:#F07A70;--bad-soft:#3F1F1D;--lock:#3A4C6A;--sky:#16304D;--shadow:0 6px 0 rgba(0,0,0,.3);color-scheme:dark}
+:root{--bg:#FFF6E5;--surface:#FFFFFF;--band:#FFF0D6;--ink:#1E2A44;--muted:#5E6A80;--line:#EADFC8;--brand:#0F1110;--gold:#E0A93B;--gold-d:#B8862A;--good:#2E9B5F;--good-soft:#DFF5E8;--bad:#D2443A;--bad-soft:#FCE4E1;--lock:#CFC6B4;--sky:#DDF1FF;--shadow:0 6px 0 rgba(30,42,68,.08);--display:'Fredoka','Nunito',system-ui,sans-serif;--body:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1110;--surface:#171A18;--band:#1E2320;--ink:#F1F4FA;--muted:#9AA39C;--line:#2B312C;--brand:#C8F169;--gold:#F0BC4E;--gold-d:#B8862A;--good:#5FD394;--good-soft:#173A2B;--bad:#F07A70;--bad-soft:#3F1F1D;--lock:#343A35;--sky:#1C2A22;--shadow:0 6px 0 rgba(0,0,0,.3);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1110;--surface:#171A18;--band:#1E2320;--ink:#F1F4FA;--muted:#9AA39C;--line:#2B312C;--brand:#C8F169;--gold:#F0BC4E;--gold-d:#B8862A;--good:#5FD394;--good-soft:#173A2B;--bad:#F07A70;--bad-soft:#3F1F1D;--lock:#343A35;--sky:#1C2A22;--shadow:0 6px 0 rgba(0,0,0,.3);color-scheme:dark}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-tap-highlight-color:transparent}
@@ -514,7 +514,7 @@ function badgeSvg(c,ic,off){return '<svg viewBox="0 0 64 64" aria-hidden="true">
 function badgeView(){var st=streak(),best=S.best||0,perfect=Object.keys(S.done).some(function(k){return S.done[k].stars===3}),n=Object.keys(S.done).length;
   var B=[['First lesson','#2E9B5F','play',n>0],['Perfect lesson','#E0A93B','star',perfect],['3-day streak','#F07A2A','check',Math.max(st,best)>=3],['7-day streak','#D2443A','check',Math.max(st,best)>=7]];
   WORLDS.forEach(function(w){B.push([w.t,w.c,w.ic,wDone(w)===w.L.length])});
-  GUARDS.forEach(function(g){var ws=WORLDS.filter(function(w){return w.g===g.id});B.push([g.t,'#1D3557','star',ws.every(function(w){return wDone(w)===w.L.length})])});
+  GUARDS.forEach(function(g){var ws=WORLDS.filter(function(w){return w.g===g.id});B.push([g.t,'#3D6A00','star',ws.every(function(w){return wDone(w)===w.L.length})])});
   var got=B.filter(function(b){return b[3]}).length;
   var terms=[];WORLDS.forEach(function(w){w.L.forEach(function(l){if(S.done[l.id])l.terms.forEach(function(t){terms.push([t,w.t])})})});
   $('main').innerHTML='<h1 class="sec-h">Your badges</h1><p class="sec-p">'+got+' of '+B.length+' earned. Finish every lesson in a world to earn its badge.</p><div class="bgrid">'+B.map(function(b){return '<div class="bdg'+(b[3]?'':' off')+'">'+badgeSvg(b[1],b[2])+'<b>'+esc(b[0])+'</b>'+(b[3]?'':'<small>Locked</small>')+'</div>'}).join('')+'</div>'+

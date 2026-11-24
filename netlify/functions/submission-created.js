@@ -35,7 +35,7 @@ function confirmation(kind, first) {
       : 'Six private 60-minute sessions built around your own accounts, numbers and goals, with a written summary after each one, and messages between sessions for 90 days.<br><br><b>$997</b> by card or Interac e-Transfer, or 3 payments of $333.') +
     p('If your first ' + (cohort ? 'cohort week' : 'session') + ' isn’t useful, ask within 7 days and the full amount is refunded.') +
     h('While you wait') +
-    p(`Set up your free <a href="${SITE}/app/" style="color:#14213D">Melius Money</a> plan: your income, bills, debts and spending. It takes about 10 minutes, and it makes our first session far more useful.`) +
+    p(`Set up your free <a href="${SITE}/app/" style="color:#3D6A00">Melius Money</a> plan: your income, bills, debts and spending. It takes about 10 minutes, and it makes our first session far more useful.`) +
     button(`${SITE}/app/`, 'Open Melius Money') +
     p('Questions before then? Just reply to this email.') +
     p('Talk soon,');
