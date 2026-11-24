@@ -12,42 +12,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="Melius Money: make every dollar better. A free app for your spending plan, debt payoff and freedom number, by Melius One Consulting.">
-<link rel="manifest" href="manifest-v4.webmanifest">
-<link rel="icon" href="icon-m1-192.png?v=4">
-<link rel="apple-touch-icon" href="apple-touch-icon-m1.png?v=4">
+<link rel="manifest" href="manifest-v3.webmanifest">
+<link rel="icon" href="icon-m1-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon-m1.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Melius Money">
-<meta name="theme-color" content="#0F1110">
+<meta name="theme-color" content="#14213D">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}/* iPhone zooms into any box under 16px and stays zoomed; keep form text at 16px on phones */
 @media (max-width:760px){input:not([type=range]):not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px!important}}
 </style>
 <title>Melius Money</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Manrope:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: one phone-width column, a hero "safe to spend" card, and a fixed bottom tab bar. Melius One brand: ink and lime. */
+/* Layout: one phone-width column, a hero "safe to spend" card, and a fixed bottom tab bar. Melius One brand: navy ink, gold accent. */
 :root{
-  --bg:#F3F4EF; --surface:#FFFFFF; --band:#F7F8F4; --ink:#0F1110; --muted:#565E58; --line:#DADDD3;
-  --accent:#0F1110; --accent-ink:#F3F5F1; --on-gold:#FFFFFF; --gold:#3D6A00; --gold-soft:#EDF5D8;
-  --good:#2E7D5B; --good-soft:#E3F2EA; --warn:#A86A12; --warn-soft:#FBEFD9; --bad:#B3261E; --bad-soft:#F8E3E0;
-  --c1:#0F1110; --c2:#8DB83A; --c3:#2E7D5B; --c4:#A3ACA5;
-  --hero-bg:#0F1110; --hero-ink:#F3F5F1; --hero-num:#C8F169; --hero-line:transparent; --hero-btn:#C8F169; --hero-btn-ink:#0F1110;
-  --display:'Inter Tight','Inter',system-ui,sans-serif;
-  --body:'Inter',system-ui,'Segoe UI',Arial,sans-serif;
+  --bg:#F4F2EC; --surface:#FFFFFF; --band:#F9F7F2; --ink:#14213D; --muted:#5A6474; --line:#E3DED3;
+  --accent:#1D3557; --accent-ink:#FFFFFF; --gold:#A8803F; --gold-soft:#F3EBDC;
+  --good:#2E7D5B; --good-soft:#E3F2EA; --warn:#A86A12; --warn-soft:#FBEFD9; --bad:#A3332A; --bad-soft:#F8E3E0;
+  --c1:#1D3557; --c2:#A8803F; --c3:#2E7D5B; --c4:#8FA3BF;
+  --hero-bg:#1D3557; --hero-ink:#FFFFFF; --hero-num:#FFFFFF; --hero-line:transparent; --hero-btn:#FFFFFF; --hero-btn-ink:#1D3557;
+  --display:'Newsreader',Georgia,'Times New Roman',serif;
+  --body:'Manrope','Segoe UI',Arial,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0F1110; --surface:#171A18; --band:#131614; --ink:#F3F5F1; --muted:#9AA39C; --line:#262B27;
-  --accent:#C8F169; --accent-ink:#0F1110; --on-gold:#0F1110; --gold:#C8F169; --gold-soft:#222A17;
-  --good:#6CC79C; --good-soft:#15302A; --warn:#E2AE5A; --warn-soft:#33281A; --bad:#F28B82; --bad-soft:#3A1E1E;
-  --c1:#C8F169; --c2:#6CC79C; --c3:#E8EDE0; --c4:#4A524C;
-  --hero-bg:#191C1A; --hero-ink:#F3F5F1; --hero-num:#C8F169; --hero-line:#262B27; --hero-btn:#C8F169; --hero-btn-ink:#0F1110; color-scheme:dark}}
+  --bg:#0B1220; --surface:#142036; --band:#111B2E; --ink:#EEF1F6; --muted:#A9B3C4; --line:#26344D;
+  --accent:#C9A76B; --accent-ink:#0E1626; --gold:#C9A76B; --gold-soft:#2B2719;
+  --good:#6CC79C; --good-soft:#15302A; --warn:#E2AE5A; --warn-soft:#33281A; --bad:#E5776C; --bad-soft:#3A1E1E;
+  --c1:#8FB0DA; --c2:#C9A76B; --c3:#6CC79C; --c4:#56657E;
+  --hero-bg:#182844; --hero-ink:#EEF1F6; --hero-num:#E3C58E; --hero-line:#3A4D70; --hero-btn:#C9A76B; --hero-btn-ink:#0E1626; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0F1110; --surface:#171A18; --band:#131614; --ink:#F3F5F1; --muted:#9AA39C; --line:#262B27;
-  --accent:#C8F169; --accent-ink:#0F1110; --on-gold:#0F1110; --gold:#C8F169; --gold-soft:#222A17;
-  --good:#6CC79C; --good-soft:#15302A; --warn:#E2AE5A; --warn-soft:#33281A; --bad:#F28B82; --bad-soft:#3A1E1E;
-  --c1:#C8F169; --c2:#6CC79C; --c3:#E8EDE0; --c4:#4A524C;
-  --hero-bg:#191C1A; --hero-ink:#F3F5F1; --hero-num:#C8F169; --hero-line:#262B27; --hero-btn:#C8F169; --hero-btn-ink:#0F1110; color-scheme:dark}
+  --bg:#0B1220; --surface:#142036; --band:#111B2E; --ink:#EEF1F6; --muted:#A9B3C4; --line:#26344D;
+  --accent:#C9A76B; --accent-ink:#0E1626; --gold:#C9A76B; --gold-soft:#2B2719;
+  --good:#6CC79C; --good-soft:#15302A; --warn:#E2AE5A; --warn-soft:#33281A; --bad:#E5776C; --bad-soft:#3A1E1E;
+  --c1:#8FB0DA; --c2:#C9A76B; --c3:#6CC79C; --c4:#56657E;
+  --hero-bg:#182844; --hero-ink:#EEF1F6; --hero-num:#E3C58E; --hero-line:#3A4D70; --hero-btn:#C9A76B; --hero-btn-ink:#0E1626; color-scheme:dark}
 *{box-sizing:border-box}
 html,body{height:100%;overflow:hidden}
 .scroller{position:fixed;inset:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;padding-top:env(safe-area-inset-top,0px)}
@@ -83,7 +83,7 @@ h1,h2,h3{margin:0;text-wrap:balance}
 .pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;border-radius:99px;padding:4px 10px;align-self:flex-start}
 .pill.good{background:var(--good-soft);color:var(--good)} .pill.warn{background:var(--warn-soft);color:var(--warn)} .pill.bad{background:var(--bad-soft);color:var(--bad)}
 .pill::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
-.btn{font:inherit;font-weight:700;border:0;border-radius:14px;padding:14px 18px;cursor:pointer;background:var(--gold);color:var(--on-gold);font-size:16px}
+.btn{font:inherit;font-weight:700;border:0;border-radius:14px;padding:14px 18px;cursor:pointer;background:var(--gold);color:#fff;font-size:16px}
 .hero .btn{background:var(--hero-btn);color:var(--hero-btn-ink)}
 .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
 .btn.sm{white-space:nowrap;padding:9px 14px;font-size:14px;border-radius:11px}
@@ -127,7 +127,7 @@ h1,h2,h3{margin:0;text-wrap:balance}
 .fs-open .fs-chev{transform:rotate(180deg);color:var(--gold)}
 .fs-done .fs-n{background:var(--good);border-color:var(--good);color:var(--surface)}
 .fs-done b{color:var(--muted)}
-.fs-now .fs-n{background:var(--gold);border-color:var(--gold);color:var(--on-gold)}
+.fs-now .fs-n{background:var(--gold);border-color:var(--gold);color:#fff}
 .fs-t .fs-here{color:var(--gold);font-weight:700;margin-bottom:2px}
 .fs-now{background:var(--gold-soft);margin:0 -18px;padding-left:18px!important;padding-right:18px!important;border-radius:12px}
 .home-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--muted);text-decoration:none;margin-bottom:10px}
@@ -238,7 +238,7 @@ textarea{font:inherit;font-size:13px;width:100%;min-height:150px;border:1px soli
 .pstep .pn{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;background:var(--band);color:var(--ink);flex:none}
 .pstep.ok .pn{background:var(--good,#2E7D5B);color:#fff}
 .pstep.on{background:var(--gold-soft);color:var(--ink);border-color:var(--gold)}
-.pstep.on .pn{background:var(--gold);color:var(--on-gold)}
+.pstep.on .pn{background:var(--gold);color:#fff}
 .pstep:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .psteps-hint{margin:2px 6px 4px}
 .pgrid{display:flex;flex-direction:column;gap:14px;min-width:0}
@@ -299,10 +299,6 @@ textarea{font:inherit;font-size:13px;width:100%;min-height:150px;border:1px soli
 .imp-row.off{opacity:.55}
 .imp-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}
 @media (min-width:600px){.imp-row{grid-template-columns:30px minmax(0,1fr) 180px 90px;grid-template-areas:'k d s n'}.imp-row .num{text-align:right}}
-
-/* Look 3 type */
-h1,h2,h3{font-weight:800;letter-spacing:-.025em}
-.brand b{font-weight:700;letter-spacing:-.02em}
 </style>
 </head>
 <body>
@@ -312,7 +308,7 @@ h1,h2,h3{font-weight:800;letter-spacing:-.025em}
 <div class="scroller" id="scroller"><div class="app">
   <a class="home-link m-only" href="https://meliusoneconsulting.com/" data-track="app_back_to_site">← Back to Melius One</a>
   <header class="top">
-    <div class="brand"><svg class="seal" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#0F1110"/><path d="M13 49h10V39h10V29L48 14M37 14h11v11" fill="none" stroke="#C8F169" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Melius Money</b><small>Make every dollar better</small></span></div>
+    <div class="brand"><svg class="seal" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#14213D"/><circle cx="50" cy="50" r="42" fill="none" stroke="#C9A35E" stroke-width="2"/><text x="44" y="69" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-size="54" font-weight="500" fill="#FFFFFF">M</text><text x="73" y="44" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-size="24" font-weight="600" fill="#C9A35E">1</text></svg><span><b>Melius Money</b><small>Make every dollar better</small></span></div>
     <span class="top-tags"><span class="saved" id="savedTag" aria-live="polite"></span><span class="ex" id="exTag">Example household</span></span>
   </header>
 

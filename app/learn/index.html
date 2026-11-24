@@ -5,17 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Melius Learn</title>
 <meta name="description" content="Learn income investing in Canada, two minutes a day.">
-<meta name="theme-color" content="#0F1110">
+<meta name="theme-color" content="#14213D">
 <meta name="robots" content="noindex">
-<link rel="icon" href="../icon-m1-192.png?v=4">
-<link rel="apple-touch-icon" href="../apple-touch-icon-m1.png?v=4">
+<link rel="icon" href="../icon-m1-192.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon-m1.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Manrope:wght@400;500;600;700;800&display=swap">
 <style>
-:root{--on-gold:#FFFFFF;--bg:#F3F4EF;--surface:#FFFFFF;--band:#F7F8F4;--ink:#0F1110;--muted:#565E58;--line:#DADDD3;--accent:#0F1110;--accent-ink:#F3F5F1;--gold:#4E7D0A;--gold-soft:#EDF5D8;--good:#2E7D5B;--good-soft:#E3F2EA;--bad:#B3261E;--bad-soft:#F8E3E0;--lock:#C9CDC2;--hero:#0F1110;--hero-ink:#F3F5F1;--hero-mute:#A3ACA5;--shadow:0 10px 28px rgba(15,17,16,.10);--display:'Inter Tight','Inter',system-ui,sans-serif;--body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;--lime:#C8F169;--lime-deep:#7FA62E;--gold-deep:#33550A;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1110;--surface:#171A18;--band:#131614;--ink:#F3F5F1;--muted:#9AA39C;--line:#262B27;--accent:#C8F169;--accent-ink:#0F1110;--gold:#C8F169;--gold-soft:#222A17;--good:#6CC79C;--good-soft:#15302A;--bad:#F28B82;--bad-soft:#3A1D1B;--lock:#343A35;--hero:#191C1A;--hero-ink:#F3F5F1;--hero-mute:#9AA39C;--shadow:0 10px 28px rgba(0,0,0,.35);--gold-deep:#7FA62E;--on-gold:#0F1110;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0F1110;--surface:#171A18;--band:#131614;--ink:#F3F5F1;--muted:#9AA39C;--line:#262B27;--accent:#C8F169;--accent-ink:#0F1110;--gold:#C8F169;--gold-soft:#222A17;--good:#6CC79C;--good-soft:#15302A;--bad:#F28B82;--bad-soft:#3A1D1B;--lock:#343A35;--hero:#191C1A;--hero-ink:#F3F5F1;--hero-mute:#9AA39C;--shadow:0 10px 28px rgba(0,0,0,.35);--gold-deep:#7FA62E;--on-gold:#0F1110;color-scheme:dark}
+:root{--bg:#F4F2EC;--surface:#FFFFFF;--band:#F9F7F2;--ink:#14213D;--muted:#5A6474;--line:#E3DED3;--accent:#1D3557;--accent-ink:#FFFFFF;--gold:#A8803F;--gold-soft:#F3EBDC;--good:#2E7D5B;--good-soft:#E3F2EA;--bad:#A3332A;--bad-soft:#F8E3E0;--lock:#C9C3B6;--hero:#14213D;--hero-ink:#F7F5F0;--hero-mute:#B9C2D3;--shadow:0 10px 28px rgba(20,33,61,.12);--display:'Newsreader',Georgia,'Times New Roman',serif;--body:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B1220;--surface:#142036;--band:#111B2E;--ink:#EEF1F6;--muted:#A9B3C4;--line:#26344D;--accent:#C9A76B;--accent-ink:#0E1626;--gold:#C9A76B;--gold-soft:#2B2719;--good:#6CC79C;--good-soft:#15302A;--bad:#E5776C;--bad-soft:#3A1D1B;--lock:#35445E;--hero:#142036;--hero-ink:#EEF1F6;--hero-mute:#A9B3C4;--shadow:0 10px 28px rgba(0,0,0,.35);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0B1220;--surface:#142036;--band:#111B2E;--ink:#EEF1F6;--muted:#A9B3C4;--line:#26344D;--accent:#C9A76B;--accent-ink:#0E1626;--gold:#C9A76B;--gold-soft:#2B2719;--good:#6CC79C;--good-soft:#15302A;--bad:#E5776C;--bad-soft:#3A1D1B;--lock:#35445E;--hero:#142036;--hero-ink:#EEF1F6;--hero-mute:#A9B3C4;--shadow:0 10px 28px rgba(0,0,0,.35);color-scheme:dark}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-tap-highlight-color:transparent}
@@ -28,7 +28,7 @@ button{font:inherit;color:inherit}
 .top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
 .top .wrap{display:flex;align-items:center;gap:12px;height:58px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);margin-right:auto;min-width:0}
-.brand img{width:32px;height:32px;border-radius:9px}
+.brand img{width:32px;height:32px;border-radius:50%}
 .brand b{font-family:var(--display);font-weight:600;font-size:20px;white-space:nowrap}
 .chip{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:15px;font-variant-numeric:tabular-nums;padding:6px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
 .chip svg{width:18px;height:18px}
@@ -47,12 +47,12 @@ main{padding-block:20px calc(110px + env(safe-area-inset-bottom,0px))}
 .ring svg{width:72px;height:72px;transform:rotate(-90deg)}
 .ring circle{fill:none;stroke-width:7}
 .ring .bgc{stroke:rgba(255,255,255,.14)}
-.ring .fgc{stroke:var(--lime);stroke-linecap:round;transition:stroke-dashoffset .8s cubic-bezier(.2,.7,.2,1)}
+.ring .fgc{stroke:#C9A76B;stroke-linecap:round;transition:stroke-dashoffset .8s cubic-bezier(.2,.7,.2,1)}
 .ring span{position:absolute;inset:0;display:grid;place-items:center;font-weight:800;font-size:15px}
 .today h1{margin:0;font-family:var(--display);font-weight:500;font-size:23px;line-height:1.2;text-wrap:balance}
 .today p{margin:4px 0 0;color:var(--hero-mute);font-size:14px}
-.today .go{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:8px;height:50px;border:0;border-radius:14px;background:var(--lime);color:#0F1110;font-weight:800;font-size:16px;cursor:pointer;box-shadow:0 4px 0 #8E6F3A}
-.today .go:active{transform:translateY(3px);box-shadow:0 1px 0 var(--lime-deep)}
+.today .go{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:8px;height:50px;border:0;border-radius:14px;background:#C9A76B;color:#14213D;font-weight:800;font-size:16px;cursor:pointer;box-shadow:0 4px 0 #8E6F3A}
+.today .go:active{transform:translateY(3px);box-shadow:0 1px 0 #8E6F3A}
 
 /* units and path */
 .unit{margin-top:28px}
@@ -74,7 +74,7 @@ main{padding-block:20px calc(110px + env(safe-area-inset-bottom,0px))}
 .node button{position:relative;width:74px;height:70px;border-radius:50%;border:0;cursor:pointer;display:grid;place-items:center;background:var(--lock);color:#fff;box-shadow:0 6px 0 rgba(0,0,0,.14)}
 .node button svg{width:30px;height:30px}
 .node button:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.14)}
-.node.done button{background:var(--gold);color:var(--on-gold);box-shadow:0 6px 0 var(--gold-deep)}
+.node.done button{background:var(--gold);box-shadow:0 6px 0 #7B5D2C}
 .node.cur button{background:var(--accent);color:var(--accent-ink);box-shadow:0 6px 0 rgba(0,0,0,.28)}
 .node.cur button::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:3px solid var(--accent);opacity:.35;animation:pulse 1.8s ease-out infinite}
 @keyframes pulse{0%{transform:scale(.92);opacity:.5}100%{transform:scale(1.18);opacity:0}}
@@ -164,12 +164,12 @@ main{padding-block:20px calc(110px + env(safe-area-inset-bottom,0px))}
 .lft.ok .cta{background:var(--good);color:#fff}
 .lft.no .cta{background:var(--bad);color:#fff}
 .cta.ghost{background:none;color:var(--accent);box-shadow:none;margin-top:6px}
-:root[data-theme="dark"] .lft.ok .cta,:root[data-theme="dark"] .lft.no .cta{color:#0F1110}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lft.ok .cta,:root:not([data-theme="light"]) .lft.no .cta{color:#0F1110}}
+:root[data-theme="dark"] .lft.ok .cta,:root[data-theme="dark"] .lft.no .cta{color:#0B1220}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lft.ok .cta,:root:not([data-theme="light"]) .lft.no .cta{color:#0B1220}}
 
 /* done screen */
 .done{text-align:center;padding-top:24px}
-.done .medal{width:110px;height:110px;margin:0 auto 18px;border-radius:50%;background:var(--gold);display:grid;place-items:center;color:var(--on-gold);box-shadow:0 8px 0 var(--gold-deep);animation:pop .6s cubic-bezier(.2,1.6,.4,1)}
+.done .medal{width:110px;height:110px;margin:0 auto 18px;border-radius:50%;background:var(--gold);display:grid;place-items:center;color:#fff;box-shadow:0 8px 0 #7B5D2C;animation:pop .6s cubic-bezier(.2,1.6,.4,1)}
 .done .medal svg{width:54px;height:54px}
 @keyframes pop{0%{transform:scale(.3);opacity:0}100%{transform:none;opacity:1}}
 .done h2{font-size:30px;margin-bottom:6px}
@@ -191,15 +191,11 @@ main{padding-block:20px calc(110px + env(safe-area-inset-bottom,0px))}
 .sheet h3{margin:0 0 6px;font-size:19px}
 .sheet p{margin:0 0 16px;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-
-/* Look 3 type */
-h1,h2,h3{font-weight:800;letter-spacing:-.025em}
-.brand b{font-weight:700;letter-spacing:-.02em}
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap">
-  <a class="brand" href="/app/" aria-label="Back to Melius Money"><img src="../icon-m1-192.png?v=4" alt=""><b>Melius Learn</b></a>
+  <a class="brand" href="/app/" aria-label="Back to Melius Money"><img src="../icon-m1-192.png" alt=""><b>Melius Learn</b></a>
   <span class="chip flame" id="streak" title="Day streak"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c1 3.5-1.5 5-1.5 8 0 1.4 1 2.5 2.3 2.5 1.6 0 2.4-1.4 2.2-3.2C17.7 11 19 13.4 19 16a7 7 0 0 1-14 0c0-4.6 4.2-7 7-14z"/></svg><span>0</span></span>
   <span class="chip xp" id="xp" title="Melius points" aria-label="Melius points"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg><span>0</span></span>
 </div></header>
